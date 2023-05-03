@@ -53,3 +53,26 @@ img {
 }
 
 /* #endregion re-set styles */
+
+/* #region - variables */
+:root {
+    /* colors */
+    --darkNeutral: #050404;
+
+    --lightText: #fff3e4;
+    --miTtext: #c49c56;
+    --midAccent: #5e1418;
+    --darkAccent: #2f080a;
+    /* fonts */
+    --headingFont: 'Limelight', cursive;
+    --mainFont: 'Merriweather', serif;
+}
+/* #endregion - variables */
+
+h1 {
+    font-family: var(--headingFont);
+}
+
+h2 {
+    font-family: var(--mainFont);
+}
