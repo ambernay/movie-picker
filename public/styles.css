@@ -194,13 +194,18 @@ li:hover .overview {
 /* #endregion - gallery */
 
 /* #region - form */
+/* default hide form */
+.hide {
+    display: none !important;
+}
+
 .form-section{
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 9;
+    z-index: 8;
 }
 
 form {
@@ -211,11 +216,6 @@ form {
 
 button {
     width: 100px;
-}
-/* hover-reveal */
-figure:hover {
-    display: none;
-
 }
 /* #endregion - form */
 

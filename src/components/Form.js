@@ -1,4 +1,4 @@
-function Form({ setNewURL, setIsFormSubmitted }) {
+function Form({ setNewURL, setIsFormSubmitted, isDropdownHovered }) {
 
     const baseURL = 'https://api.themoviedb.org/3';
     const url = new URL(baseURL + "/discover/movie");
@@ -10,6 +10,8 @@ function Form({ setNewURL, setIsFormSubmitted }) {
         "api_key": "0a093f521e98a991f4e4cc2a12460255"
     })
 
+    const elClass = isDropdownHovered ? "form-section" : "hide-element"
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setNewURL(url);
@@ -17,7 +19,7 @@ function Form({ setNewURL, setIsFormSubmitted }) {
     }
 
     return (
-        <section className="form-section">
+        <section className={elClass}>
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
                     <button>Get Movies</button>
