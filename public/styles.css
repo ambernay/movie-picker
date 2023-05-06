@@ -127,6 +127,15 @@ header {
     width: 1.5rem;
 }
 
+.arrow-up {
+    transform: rotate(180deg);
+}
+
+/* hover */
+figure:hover {
+    color: tomato;
+}
+
 /* #endregion - header */
 
 /* #region - gallery */
@@ -174,6 +183,7 @@ ul li .info-container {
 }
 
 .overview {
+    display: none;
     visibility: collapse;
     background: antiquewhite;
     position: absolute;
@@ -185,10 +195,12 @@ ul li .info-container {
     transform: translateY(101%);
     transition: transform 0.4s ease-in;
     padding: inherit;
+    overflow: scroll;
 }
 
 li:hover .overview {
     transform: translateY(0);
+    display: block;
     visibility: visible;
 }
 /* #endregion - gallery */
@@ -209,12 +221,17 @@ li:hover .overview {
 }
 
 form {
+    display: flex;
     background: rgba(0,0,0,0.8);
     width: 100%;
     height: calc( 100vh - var(--headerHeight));
+    justify-content: center;
+    align-items: flex-end;
 }
 
 button {
+    background: black;
+    color: antiquewhite;
     width: 100px;
 }
 /* #endregion - form */

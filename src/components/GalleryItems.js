@@ -1,7 +1,8 @@
 function GalleryItems({ movieTitle, overview, imagePath }) {
+
     return (
         <li>
-            <img src={imagePath} alt={"alt"} />
+            <img src={imagePath} alt={movieTitle} />
             <div className="info-container">
                 <h3>{movieTitle}</h3>
             </div>

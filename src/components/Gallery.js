@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isSubmitted, newURL } ) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL } ) {
 
     const apiKey = 'api_key=0a093f521e98a991f4e4cc2a12460255';
     const baseURL = 'https://api.themoviedb.org/3';
     const defaultURL = 'https://api.themoviedb.org/3/trending/movie/day?' + apiKey;
 
-    const url = isSubmitted ? newURL : defaultURL;
+    const url = isFormSubmitted ? newURL : defaultURL;
 
     useEffect(() => {
         fetch(url)
@@ -18,7 +18,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isSubmitted, newURL } ) 
                 console.log(data.results);
                 setMoviesToDisplay(data.results);
             })
-    }, []);
+    }, [newURL]);
 
     return (
         <main>
@@ -27,14 +27,18 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isSubmitted, newURL } ) 
                     <ul>
                         {moviesToDisplay.map((movie) => {
                             const imageURL = 'https://image.tmdb.org/t/p/w500';
-                            {/* console.log(moviesToDisplay.indexOf(movie)); */}
+
+                            const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
+
                             if (moviesToDisplay.indexOf(movie) < 12){
                                 return (
                                     <GalleryItems
                                         key={movie.id}
                                         movieTitle={movie.title}
-                                        overview={movie.overview}
-                                        imagePath={imageURL + movie.poster_path}
+                                        overview={
+                                            movie.overview ||
+                                            "No description available"}
+                                        imagePath={imagePath}
                                     />
                                 )
                             }

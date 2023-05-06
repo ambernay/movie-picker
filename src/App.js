@@ -9,12 +9,13 @@ function App() {
     const [movies, setMovies] = useState([]);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [newURL, setNewURL] = useState('');
-    const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+    const [isDropdownClicked, setIsDropdownClicked] = useState(false);
 
     return (
     <>
         <Header
-            setIsDropdownHovered = {setIsDropdownHovered}
+            isDropdownClicked = {isDropdownClicked}
+            setIsDropdownClicked = {setIsDropdownClicked}
         />
         <Gallery
             newURL = {newURL}
@@ -22,11 +23,16 @@ function App() {
             moviesToDisplay = {movies}
             isFormSubmitted = {isFormSubmitted}
         />
-        <Form
-            setNewURL = {setNewURL}
-            setIsFormSubmitted = {setIsFormSubmitted}
-            isDropdownHovered = {isDropdownHovered}
-        />
+        {
+            isDropdownClicked ?
+            <Form
+                setNewURL={setNewURL}
+                setIsFormSubmitted={setIsFormSubmitted}
+                setIsDropdownClicked={setIsDropdownClicked}
+            />
+            :null
+        }
+
         <Footer />
     </>
     );

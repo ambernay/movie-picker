@@ -1,5 +1,6 @@
-function Form({ setNewURL, setIsFormSubmitted, isDropdownHovered }) {
+function Form({ setNewURL, setIsFormSubmitted, setIsDropdownClicked }) {
 
+    const apiKey = '0a093f521e98a991f4e4cc2a12460255';
     const baseURL = 'https://api.themoviedb.org/3';
     const url = new URL(baseURL + "/discover/movie");
 
@@ -7,19 +8,18 @@ function Form({ setNewURL, setIsFormSubmitted, isDropdownHovered }) {
         "with_genres": 18,
         "sort_by": "vote_average.desc",
         "vote_count.gte": 10,
-        "api_key": "0a093f521e98a991f4e4cc2a12460255"
+        "api_key": apiKey
     })
-
-    const elClass = isDropdownHovered ? "form-section" : "hide-element"
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setNewURL(url);
         setIsFormSubmitted(true);
+        setIsDropdownClicked(false);
     }
 
     return (
-        <section className={elClass}>
+        <section className="form-section">
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
                     <button>Get Movies</button>
