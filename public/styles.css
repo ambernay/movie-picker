@@ -61,7 +61,7 @@ img {
     --darkNeutral: #050404;
 
     --lightText: #fff3e4;
-    --miTtext: #c49c56;
+    --midText: #c49c56;
     --midAccent: #5e1418;
     --darkAccent: #2f080a;
     /* fonts */
@@ -69,12 +69,17 @@ img {
     --mainFont: 'Merriweather', serif;
     /* sizes */
     --movieWidth: 265px;
-    --headerHeight: 80px;
-    --middleVPH: calc(100vh - 190px);
+    --headerHeight: 70px;
+    --middleVPH: calc(100vh - 180px);
+    --paddingGap: 30px;
 }
 /* #endregion - variables */
 
  /* #region - fonts and sizes */
+ h1 {
+    font-size: 2.2rem;
+ }
+
  h1, h3, h4 {
      font-family: var(--headingFont);
  }
@@ -96,11 +101,12 @@ img {
 /* #region - header */
 header {
     display: flex;
-    background: antiquewhite;
+    background: var(--lightText);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: var(--headerHeight);
     padding: 10px 0;
     z-index: 10;
 }
@@ -122,7 +128,7 @@ header {
 }
 
 .heading-container svg {
-    fill: black;
+    fill: var(--darkAccent);
     align-self: center;
     width: 1.5rem;
 }
@@ -140,8 +146,10 @@ figure:hover {
 
 /* #region - gallery */
 main {
-    margin: var(--headerHeight) 0;
-    padding: 30px 0;
+    background: tomato;
+    margin-top: var(--headerHeight);
+    margin-bottom: 45px;
+    padding: var(--paddingGap) 0;
 }
 
 .gallery-container {
@@ -153,19 +161,19 @@ ul {
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
-    column-gap: 30px;
-    row-gap: 30px;
+    column-gap: var(--paddingGap);
+    row-gap: var(--headerHeight);
     justify-content: space-between;
 }
 
 ul li {
     display: flex;
     position: relative;
-    background: antiquewhite;
+    background: var(--lightText);
     flex-direction: column;
+    flex: 1 1 22%;
     min-width: 224px;
     width: var(--movieWidth);
-    height: var(--middleVPH);
     padding: 10px;
 }
 
@@ -185,7 +193,7 @@ ul li .info-container {
 .overview {
     display: none;
     visibility: collapse;
-    background: antiquewhite;
+    background: var(--lightText);
     position: absolute;
     left: 0;
     right: 0;
@@ -206,11 +214,6 @@ li:hover .overview {
 /* #endregion - gallery */
 
 /* #region - form */
-/* default hide form */
-.hide {
-    display: none !important;
-}
-
 .form-section{
     display: flex;
     position: fixed;
@@ -230,8 +233,8 @@ form {
 }
 
 button {
-    background: black;
-    color: antiquewhite;
+    background: var(--darkAccent);
+    color: var(--lightText);
     width: 100px;
 }
 /* #endregion - form */
@@ -244,13 +247,13 @@ footer {
     left:0;
     height: 50px;
     width: 100%;
-    background: black;
+    background: var(--darkAccent);
     justify-content: center;
     align-items: center;
 
 }
 
 footer p {
-    color: antiquewhite;
+    color: var(--midText);
 }
 /* #endregion - footer */
