@@ -1,10 +1,10 @@
-function Header({ isDropdownClicked, setIsDropdownClicked } ){
+function Header({ isDropdownVisible, setIsDropdownVisible } ){
 
     const handleDropdown = () => {
-        !isDropdownClicked ? setIsDropdownClicked(true) : setIsDropdownClicked(false);
+        !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
     }
 
-    let arrowClass = isDropdownClicked ? "arrow-up" : "arrow-down";
+    let arrowClass = isDropdownVisible ? "arrow-up" : "arrow-down";
 
     return(
         <header>

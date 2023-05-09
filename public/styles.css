@@ -61,7 +61,7 @@ img {
     --darkNeutral: #050404;
 
     --lightText: #fff3e4;
-    --midText: #c49c56;
+    --midText: #e6b86a;
     --midAccent: #5e1418;
     --darkAccent: #2f080a;
     /* fonts */
@@ -80,11 +80,11 @@ img {
     font-size: 2.2rem;
  }
 
- h1, h3, h4 {
+ h1, h3, h4, legend, button {
      font-family: var(--headingFont);
  }
 
- h2, p {
+ h2, p, input, label {
      font-family: var(--mainFont);
  }
 
@@ -147,7 +147,7 @@ figure:hover {
 /* #region - gallery */
 main {
     background: tomato;
-    margin-top: var(--headerHeight);
+    margin-top: calc(var(--headerHeight) + var(--paddingGap));
     margin-bottom: 45px;
     padding: var(--paddingGap) 0;
 }
@@ -175,6 +175,10 @@ ul li {
     min-width: 224px;
     width: var(--movieWidth);
     padding: 10px;
+}
+
+li img {
+    background: var(--midText);
 }
 
 ul li .info-container {
@@ -225,17 +229,60 @@ li:hover .overview {
 
 form {
     display: flex;
+    position: relative;
     background: rgba(0,0,0,0.8);
     width: 100%;
-    height: calc( 100vh - var(--headerHeight));
-    justify-content: center;
-    align-items: flex-end;
+    height: calc( 100vh - (var(--headerHeight) * 2));
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--headerHeight);
+    padding: 5px;
 }
 
 button {
     background: var(--darkAccent);
     color: var(--lightText);
     width: 100px;
+}
+
+/* fieldset */
+fieldset {
+    color: var(--lightText);
+    width: 100%;
+    height: 80%;
+    margin-top: 10px;
+}
+
+input[type="radio"]{
+    accent-color: tomato;
+    margin: 10px;
+}
+
+/* x button */
+.x-div-container {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+}
+
+.lines {
+    height: 30px;
+    width: 5px;
+    background: tomato;
+}
+
+.lines.a {
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.lines.b {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 /* #endregion - form */
 

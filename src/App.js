@@ -9,13 +9,13 @@ function App() {
     const [movies, setMovies] = useState([]);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [newURL, setNewURL] = useState('');
-    const [isDropdownClicked, setIsDropdownClicked] = useState(false);
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
     return (
     <>
         <Header
-            isDropdownClicked = {isDropdownClicked}
-            setIsDropdownClicked = {setIsDropdownClicked}
+            isDropdownVisible = {isDropdownVisible}
+            setIsDropdownVisible = {setIsDropdownVisible}
         />
         <Gallery
             newURL = {newURL}
@@ -24,11 +24,11 @@ function App() {
             isFormSubmitted = {isFormSubmitted}
         />
         {
-            isDropdownClicked ?
+            isDropdownVisible ?
             <Form
                 setNewURL={setNewURL}
                 setIsFormSubmitted={setIsFormSubmitted}
-                setIsDropdownClicked={setIsDropdownClicked}
+                setIsDropdownVisible={setIsDropdownVisible}
             />
             :null
         }

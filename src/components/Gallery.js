@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
 function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL } ) {
@@ -8,15 +8,16 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL 
     const defaultURL = 'https://api.themoviedb.org/3/trending/movie/day?' + apiKey;
 
     const url = isFormSubmitted ? newURL : defaultURL;
-
+    // console.log(url);
     useEffect(() => {
         fetch(url)
             .then(results => {
                 return results.json();
             })
             .then(data => {
-                console.log(data.results);
+                // console.log(data.results);
                 setMoviesToDisplay(data.results);
+                // console.log(moviesToDisplay);
             })
     }, [newURL]);
 
