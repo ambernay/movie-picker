@@ -1,9 +1,16 @@
-function FormButtons() {
+function FormButtons({genres}) {
+
     return(
         <fieldset>
             <legend>Genre:</legend>
-            <label htmlFor="fname">First name:</label>
-            <input type="radio" id="fname" name="fname"></input>
+            {genres.map((genre) => {
+                return (
+                    <div className="radioButtonContainer">
+                        <input type="radio" id={genre.id} name={genre.name}></input>
+                        <label htmlFor={genre.name}>{genre.name}</label>
+                    </div>
+                )
+            })}
         </fieldset>
     )
 }
