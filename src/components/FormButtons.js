@@ -2,10 +2,10 @@ function GenreButtons({genres, key}) {
 
     return(
         <fieldset>
-            <legend>Genre:</legend>
+            <legend id="genre">Genre:</legend>
             {genres.map((genre) => {
                 return (
-                    <div className="radioButtonContainer">
+                    <div className="radioButtonContainer genreButtons">
                         <input type="radio" id={genre.id} value={genre.id} name="genre" key={key}></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>
@@ -19,7 +19,7 @@ function DecadeButtons() {
 
     const decadesObj = {
         "decades": [
-            {"year" : "pre-1930s", "start" : "1884-01-01", "end" : "1929-12-31"},
+            {"year" : "pre-30s", "start" : "1884-01-01", "end" : "1929-12-31"},
             {"year" : "1930s", "start" : "1930-01-01", "end" : "1939-12-31"},
             {"year" : "1940s", "start": "1940-01-01", "end": "1949-12-31" },
             {"year" : "1950s", "start": "1950-01-01", "end": "1959-12-31" },
@@ -34,10 +34,10 @@ function DecadeButtons() {
 
     return (
         <fieldset>
-            <legend>Decade:</legend>
+            <legend id="decade">Decade:</legend>
             {decadesObj.decades.map((decade) => {
                 return (
-                    <div className="radioButtonContainer">
+                    <div className="radioButtonContainer decadeButtons">
                         <input type="radio" id={decade["year"]} name={"decade"} value={[decade["start"], decade["end"]]}></input>
                         <label htmlFor={decade["year"]}>{decade["year"]}</label>
                     </div>

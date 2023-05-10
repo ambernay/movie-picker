@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header.js';
 import Gallery from './components/Gallery.js';
 import Form from './components/Form.js';
@@ -10,6 +10,12 @@ function App() {
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [newURL, setNewURL] = useState('');
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+    // stop background scroll when form is visible
+    useEffect(() => {
+        const bodyEl = document.querySelector('body');
+        isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
+    },[isDropdownVisible])
 
     return (
     <>
@@ -23,16 +29,12 @@ function App() {
             moviesToDisplay = {movies}
             isFormSubmitted = {isFormSubmitted}
         />
-        {
-            isDropdownVisible ?
-            <Form
-                setNewURL={setNewURL}
-                setIsFormSubmitted={setIsFormSubmitted}
-                setIsDropdownVisible={setIsDropdownVisible}
-            />
-            :null
-        }
-
+        <Form
+            setNewURL={setNewURL}
+            isDropdownVisible={isDropdownVisible}
+            setIsFormSubmitted={setIsFormSubmitted}
+            setIsDropdownVisible={setIsDropdownVisible}
+        />
         <Footer />
     </>
     );

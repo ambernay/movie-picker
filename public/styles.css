@@ -12,6 +12,7 @@ html { box-sizing: border-box;}
 html {
     font-size: 125%;
     background: tomato;
+    scroll-behavior: smooth;
 }
 
 .wrapper {
@@ -80,7 +81,7 @@ img {
     font-size: 2.2rem;
  }
 
- h1, h3, h4, legend, button {
+ h1, h3, h4, legend, button, a {
      font-family: var(--headingFont);
  }
 
@@ -92,11 +93,23 @@ img {
     line-height: 1.4rem;
  }
 
+ a {
+    font-size: 1rem;
+ }
+
  p {
     font-size: 0.8rem;
     line-height: 1rem;
  }
  /* #endregion - fonts and sizes */
+
+ .make-display-none {
+    display: none !important;
+ }
+
+ .stop-scroll {
+    overflow: hidden;
+ }
 
 /* #region - header */
 header {
@@ -249,12 +262,60 @@ form {
     align-items: center;
     margin-top: var(--headerHeight);
     padding: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.form-nav {
+    display: flex;
+    width: 95%;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 35px;
+    border-bottom: solid 1px var(--lightText);
+}
+
+.form-nav a{
+    color: var(--midText);
+}
+
+.form-nav a:hover, a:active {
+    color: var(--lightText);
+}
+
+.fieldset-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - ((var(--headerHeight) * 2) + 65px));
+    width: 95%;
+    margin-bottom: 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+legend {
+    color: var(--midText);
+    scroll-margin-top: 30px;
+    scroll-behavior: smooth;
+}
+
+.form-button-container {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
 }
 
 button {
-    background: var(--darkAccent);
-    color: var(--lightText);
-    width: 100px;
+    background: var(--midText);
+    color: var(--darkAccent);
+    width: fit-content;
+    padding: 5px;
+    margin: 8px;
 }
 
 /* fieldset */
@@ -265,13 +326,22 @@ fieldset {
     color: var(--lightText);
     width: 100%;
     height: fit-content;
+    justify-content: flex-start;
     margin-top: 10px;
+    /* overflow: scroll; */
 }
 
 .radioButtonContainer {
     display: flex;
-    flex: 1 0 calc(100% / 6);
     column-gap: 5px;
+}
+
+.genreButtons {
+    flex: 0 0 175px;
+}
+
+.decadeButtons {
+    flex: 0 0 120px;
 }
 
 fieldset label {
@@ -286,8 +356,8 @@ input[type="radio"]{
 /* x button */
 .x-div-container {
     position: absolute;
-    top: 10px;
-    right: 25px;
+    top: 6px;
+    right: 30px;
 }
 
 .lines {
@@ -337,5 +407,9 @@ footer p {
     header figure h2 {
         display: none;
     }
+}
+/* switch form to tabs */
+@media(max-width: 680px) {
+
 }
 /* #endregion - media queries */

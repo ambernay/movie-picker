@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { GenreButtons, DecadeButtons } from './FormButtons.js';
 
-function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible }) {
+function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownVisible }) {
 
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
@@ -25,7 +25,6 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible }) {
     //     "language": "en-US",
     // })
 
-    console.log(genreListURL);
     // get genre list from api
     useEffect(() => {
         fetch(genreListURL)
@@ -62,21 +61,32 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible }) {
         }
     }
 
+    const formClass = isDropdownVisible ? "form-section" : "make-display-none"
+
     return (
-        <section className="form-section">
+        <section className={formClass}>
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
-                    <div onClick={() => setIsDropdownVisible(false)} className="x-div-container">
-                        <div className="lines a"></div>
-                        <div className="lines b"></div>
-                    </div>
+                    <nav className="form-nav">
+                        <a href="#genre">Genres</a>
+                        <a href="#decade">Decade</a>
 
+                        <div onClick={() => setIsDropdownVisible(false)} className="x-div-container">
+                            <div className="lines a"></div>
+                            <div className="lines b"></div>
+                        </div>
+                    </nav>
+
+                    <section className="fieldset-container">
                     <GenreButtons
                         genres = {genreRadioButtons}
                         key={genreRadioButtons.id}
                     />
                     <DecadeButtons />
-                    <button>Get Movies</button>
+                    </section>
+                    <div className="form-button-container">
+                        <button>Get Movies</button>
+                    </div>
                 </form>
             </div>
         </section>
