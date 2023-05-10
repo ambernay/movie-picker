@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import FormButtons from './FormButtons.js';
+import { GenreButtons, DecadeButtons } from './FormButtons.js';
 
 function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible }) {
 
@@ -42,14 +42,19 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible }) {
         e.preventDefault();
         setIsFormSubmitted(true);
         setIsDropdownVisible(false);
-        const selectedGenre = e.target.querySelector('input:checked');
+        const selectedGenre = e.target.querySelector('input[name=genre]:checked');
+        const selectedDecade = e.target.querySelector('input[name=decade]:checked');
 
-        if (selectedGenre) {
+        const selectedDecadeValue = selectedDecade.value.split(',');
+        console.log(selectedDecadeValue[0]);
+
+        if (selectedGenre && selectedDecade) {
             url.search = new URLSearchParams({
-                "with_genres": selectedGenre.id,
+                "with_genres": selectedGenre.value['start'],
                 "api_key": apiKey,
-                "primary_release_date.gte": "1950-01-01",
-                "primary_release_date.lte": "1959-12-31"
+                "primary_release_date.gte": selectedDecadeValue[0],
+                "primary_release_date.lte": selectedDecadeValue[1],
+                "sort_by": "vote_average.desc"
             })
             setNewURL(url);
         }else{
@@ -66,9 +71,11 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible }) {
                         <div className="lines b"></div>
                     </div>
 
-                    <FormButtons
+                    <GenreButtons
                         genres = {genreRadioButtons}
+                        key={genreRadioButtons.id}
                     />
+                    <DecadeButtons />
                     <button>Get Movies</button>
                 </form>
             </div>
