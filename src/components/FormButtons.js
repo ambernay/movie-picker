@@ -34,7 +34,7 @@ function DecadeButtons() {
 
     return (
         <fieldset className="providers">
-            <legend id="decade">Decade:</legend>
+            <legend id="decades">Decade:</legend>
             {decadesObj.decades.map((decade) => {
                 return (
                     <div className="radioButtonContainer decadeButtons" key={decade["year"]}>

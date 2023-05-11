@@ -65,6 +65,7 @@ img {
     --midText: #e6b86a;
     --midAccent: #5e1418;
     --darkAccent: #2f080a;
+    --brightAccent: tomato;
     /* fonts */
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
@@ -111,6 +112,10 @@ img {
     overflow: hidden;
  }
 
+ .disabled {
+    opacity: 0.2;
+ }
+
 /* #region - header */
 header {
     display: flex;
@@ -153,14 +158,18 @@ header {
 
 /* hover */
 header:hover svg{
-    fill: tomato;
+    fill: var(--brightAccent);
+}
+
+.load-button-container figure:hover svg {
+    fill: var(--darkAccent);
 }
 
 /* #endregion - header */
 
 /* #region - gallery */
 main {
-    background: tomato;
+    background: var(--brightAccent);
     margin-top: calc(var(--headerHeight));
     padding: var(--paddingGap) 0;
 }
@@ -353,7 +362,7 @@ fieldset label {
 }
 
 input[type="radio"]{
-    accent-color: var(--midText);
+    accent-color: var(--brightAccent);
     margin: 10px;
 }
 
@@ -367,7 +376,7 @@ input[type="radio"]{
 .lines {
     height: 30px;
     width: 5px;
-    background: tomato;
+    background: var(--brightAccent);
     border-radius: 20px;
 }
 
@@ -388,7 +397,7 @@ input[type="radio"]{
 /* #region - load buttons */
 .load-button-container{
     display: flex;
-    background: tomato;
+    background: var(--brightAccent);
     width: 100%;
     justify-content: space-around;
     align-items: center;

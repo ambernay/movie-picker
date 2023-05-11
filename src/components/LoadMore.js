@@ -1,10 +1,14 @@
 
-function LoadMore({ currentPage, setCurrentPage, newURL}){
+function LoadMore({ currentPage, setCurrentPage}){
 
     const handleButtons = (e) => {
         const buttonClass = e.target.closest('button').className;
 
-        buttonClass === 'back-button' ? setCurrentPage(currentPage) : setCurrentPage(currentPage + 1);
+        if (buttonClass === 'back-button' && currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+        }else if(buttonClass === 'forward-button'){
+            setCurrentPage(currentPage + 1)
+        }
     }
 
     return (

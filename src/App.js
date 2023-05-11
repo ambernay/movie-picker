@@ -31,6 +31,7 @@ function App() {
                 setMoviesToDisplay={setMovies}
                 moviesToDisplay={movies}
                 isFormSubmitted={isFormSubmitted}
+                currentPage={currentPage}
             />
             <LoadMore
                 currentPage={currentPage}

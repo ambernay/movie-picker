@@ -3,9 +3,13 @@ import GalleryItems from './GalleryItems.js';
 
 function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL, currentPage } ) {
 
-    const apiKey = 'api_key=0a093f521e98a991f4e4cc2a12460255';
-    // const baseURL = 'https://api.themoviedb.org/3';
-    const defaultURL = 'https://api.themoviedb.org/3/trending/movie/day?' + apiKey;
+    const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
+    const apiKey = '0a093f521e98a991f4e4cc2a12460255';
+    const params = new URLSearchParams({
+        "api_key": apiKey,
+        "page": currentPage
+    });
+    defaultURL.search = params;
 
     const url = isFormSubmitted ? newURL : defaultURL;
 
@@ -17,7 +21,9 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL,
             .then(data => {
                 setMoviesToDisplay(data.results);
             })
-    }, [url, setMoviesToDisplay, currentPage]);
+            // runs on url or currentPage change and form submission
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [url, isFormSubmitted, currentPage]);
 
     return (
         <>

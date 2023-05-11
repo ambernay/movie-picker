@@ -11,10 +11,6 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
 
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
-    const apiKey = '0a093f521e98a991f4e4cc2a12460255';
-    const baseURL = 'https://api.themoviedb.org/3';
-    const url = new URL(baseURL + "/discover/movie");
-
     const genreListURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
 
     // const genreListURL = new URL ("https://api.themoviedb.org/3/genre/movie/list?");
@@ -52,8 +48,8 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
             setEndDate(selectedDecadeValue[1]);
         }
         // set provider if selectedProvider is not undefined
-        const selectedProvider = e.target.querySelector('input[name=provider]:checked').value ;
-        if (selectedProvider) { setProvider(selectedProvider); }
+        const selectedProvider = e.target.querySelector('input[name=provider]:checked');
+        if (selectedProvider) { setProvider(selectedProvider.value); }
 
         // resets page to 1 - runs only when genre is defined
         if (selectedGenre) {
@@ -64,26 +60,29 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
         }
     }
 
-    useEffect(() => {
-        const makeNewURL = () => {
-            if (startDate) URLSearchParams.append("primary_release_date.gte", startDate);
-            if (endDate) URLSearchParams.append("primary_release_date.lte", endDate);
-            if (provider) URLSearchParams.append("with_watch_providers", provider);
 
-            url.search = new URLSearchParams({
-                "with_genres": genre,
-                "api_key": apiKey,
-                "vote_count.gte": 10,
-                "sort_by": "vote_average.desc",
-                "watch_region": "CA",
-                "language": "en-US",
-                "page": currentPage
-            })
-            console.log(genre, startDate, endDate)
-            setNewURL(url);
-        }
-        makeNewURL();
-    },[isFormSubmitted, currentPage])
+    useEffect(() => {
+        const apiKey = '0a093f521e98a991f4e4cc2a12460255';
+        const baseURL = 'https://api.themoviedb.org/3';
+        const url = new URL(baseURL + "/discover/movie");
+
+        const params = new URLSearchParams({
+            "with_genres": genre,
+            "api_key": apiKey,
+            "vote_count.gte": 10,
+            "sort_by": "vote_average.desc",
+            "watch_region": "CA",
+            "language": "en-US",
+            "page": currentPage
+        })
+        if (startDate) params.append("primary_release_date.gte", startDate);
+        if (endDate) params.append("primary_release_date.lte", endDate);
+        if (provider) params.append("with_watch_providers", provider);
+        console.log('working');
+        url.search = params;
+        setNewURL(url);
+
+    },[isFormSubmitted, currentPage, genre, startDate, endDate, provider, setNewURL])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
@@ -93,8 +92,9 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
                     <nav className="form-nav">
-                        <a href="#genre">Genres</a>
-                        <a href="#decade">Decade</a>
+                        <a href="#genre">Genres<span>*</span></a>
+                        <a href="#decades">Decades</a>
+                        <a href="#providers">Providers</a>
 
                         <div onClick={() => setIsDropdownVisible(false)} className="x-div-container">
                             <div className="lines a"></div>
