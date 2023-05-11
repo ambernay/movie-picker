@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { GenreButtons, DecadeButtons } from './FormButtons.js';
 import ProviderButtons from './ProviderButtons.js';
 
-function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownVisible }) {
+function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
+
+    const [genre, setGenre] = useState();
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [provider, setProvider] = useState();
 
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
@@ -34,29 +39,53 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownV
         e.preventDefault();
         setIsFormSubmitted(true);
         setIsDropdownVisible(false);
-        const selectedGenre = e.target.querySelector('input[name=genre]:checked');
+
+        // genre is required
+        const selectedGenre = e.target.querySelector('input[name=genre]:checked').value;
+        setGenre(selectedGenre);
+
+        // set decade if selectedDecade is not undefined
         const selectedDecade = e.target.querySelector('input[name=decade]:checked');
-        const selectedProvider = e.target.querySelector('input[name=provider]:checked');
+        if (selectedDecade) {
+            const selectedDecadeValue = selectedDecade.value.split(',');
+            setStartDate(selectedDecadeValue[0]);
+            setEndDate(selectedDecadeValue[1]);
+        }
+        // set provider if selectedProvider is not undefined
+        const selectedProvider = e.target.querySelector('input[name=provider]:checked').value ;
+        if (selectedProvider) { setProvider(selectedProvider); }
 
-        const selectedDecadeValue = selectedDecade.value.split(',');
+        // resets page to 1 - runs only when genre is defined
+        if (selectedGenre) {
+            setCurrentPage(1);
 
-        if (selectedGenre && selectedDecade) {
-            url.search = new URLSearchParams({
-                "with_genres": selectedGenre.value,
-                "api_key": apiKey,
-                "primary_release_date.gte": selectedDecadeValue[0],
-                "primary_release_date.lte": selectedDecadeValue[1],
-                "vote_count.gte": 10,
-                "sort_by": "vote_average.desc",
-                "with_watch_providers": selectedProvider.value,
-                "watch_region": "CA"
-            })
-            setNewURL(url);
         }else{
             alert("make a selection");
         }
     }
 
+    useEffect(() => {
+        const makeNewURL = () => {
+            if (startDate) URLSearchParams.append("primary_release_date.gte", startDate);
+            if (endDate) URLSearchParams.append("primary_release_date.lte", endDate);
+            if (provider) URLSearchParams.append("with_watch_providers", provider);
+
+            url.search = new URLSearchParams({
+                "with_genres": genre,
+                "api_key": apiKey,
+                "vote_count.gte": 10,
+                "sort_by": "vote_average.desc",
+                "watch_region": "CA",
+                "language": "en-US",
+                "page": currentPage
+            })
+            console.log(genre, startDate, endDate)
+            setNewURL(url);
+        }
+        makeNewURL();
+    },[isFormSubmitted, currentPage])
+
+    // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
 
     return (

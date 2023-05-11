@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL } ) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL, currentPage } ) {
 
     const apiKey = 'api_key=0a093f521e98a991f4e4cc2a12460255';
     // const baseURL = 'https://api.themoviedb.org/3';
@@ -17,14 +17,14 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL 
             .then(data => {
                 setMoviesToDisplay(data.results);
             })
-    }, [url, setMoviesToDisplay]);
+    }, [url, setMoviesToDisplay, currentPage]);
 
     return (
         <main>
             <div className='wrapper'>
                 <div className="gallery-container">
                     <ul>
-                        {moviesToDisplay.slice(0, 12).map((movie) => {
+                        {moviesToDisplay.map((movie) => {
                             const imageURL = 'https://image.tmdb.org/t/p/w500';
 
                             const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
