@@ -331,6 +331,10 @@ fieldset {
     /* overflow: scroll; */
 }
 
+.providers-fieldset {
+    justify-content: space-between;
+}
+
 .radioButtonContainer {
     display: flex;
     column-gap: 5px;

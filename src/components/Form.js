@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GenreButtons, DecadeButtons } from './FormButtons.js';
+import ProviderButtons from './ProviderButtons.js';
 
 function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownVisible }) {
 
@@ -8,13 +9,6 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownV
     const apiKey = '0a093f521e98a991f4e4cc2a12460255';
     const baseURL = 'https://api.themoviedb.org/3';
     const url = new URL(baseURL + "/discover/movie");
-
-    // url.search = new URLSearchParams({
-    //     "with_genres": 18,
-    //     "sort_by": "vote_average.desc",
-    //     "vote_count.gte": 10,
-    //     "api_key": apiKey
-    // })
 
     const genreListURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
 
@@ -32,7 +26,6 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownV
                 return results.json();
             })
             .then(data => {
-                console.log(data.genres);
                 setGenreRadioButtons(data.genres);
             })
     }, []);
@@ -43,17 +36,20 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownV
         setIsDropdownVisible(false);
         const selectedGenre = e.target.querySelector('input[name=genre]:checked');
         const selectedDecade = e.target.querySelector('input[name=decade]:checked');
+        const selectedProvider = e.target.querySelector('input[name=provider]:checked');
 
         const selectedDecadeValue = selectedDecade.value.split(',');
-        console.log(selectedDecadeValue[0]);
 
         if (selectedGenre && selectedDecade) {
             url.search = new URLSearchParams({
-                "with_genres": selectedGenre.value['start'],
+                "with_genres": selectedGenre.value,
                 "api_key": apiKey,
                 "primary_release_date.gte": selectedDecadeValue[0],
                 "primary_release_date.lte": selectedDecadeValue[1],
-                "sort_by": "vote_average.desc"
+                "vote_count.gte": 10,
+                "sort_by": "vote_average.desc",
+                "with_watch_providers": selectedProvider.value,
+                "watch_region": "CA"
             })
             setNewURL(url);
         }else{
@@ -61,7 +57,7 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownV
         }
     }
 
-    const formClass = isDropdownVisible ? "form-section" : "make-display-none"
+    const formClass = isDropdownVisible ? "form-section" : "make-display-none";
 
     return (
         <section className={formClass}>
@@ -80,9 +76,9 @@ function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible, isDropdownV
                     <section className="fieldset-container">
                     <GenreButtons
                         genres = {genreRadioButtons}
-                        key={genreRadioButtons.id}
                     />
                     <DecadeButtons />
+                    <ProviderButtons />
                     </section>
                     <div className="form-button-container">
                         <button>Get Movies</button>

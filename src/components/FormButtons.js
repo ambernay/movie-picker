@@ -1,12 +1,12 @@
-function GenreButtons({genres, key}) {
+function GenreButtons({genres}) {
 
     return(
         <fieldset>
             <legend id="genre">Genre:</legend>
             {genres.map((genre) => {
                 return (
-                    <div className="radioButtonContainer genreButtons">
-                        <input type="radio" id={genre.id} value={genre.id} name="genre" key={key}></input>
+                    <div className="radioButtonContainer genreButtons" key={genre.id}>
+                        <input type="radio" id={genre.id} value={genre.id} name="genre"></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>
                 )
@@ -33,11 +33,11 @@ function DecadeButtons() {
     ]};
 
     return (
-        <fieldset>
+        <fieldset className="providers">
             <legend id="decade">Decade:</legend>
             {decadesObj.decades.map((decade) => {
                 return (
-                    <div className="radioButtonContainer decadeButtons">
+                    <div className="radioButtonContainer decadeButtons" key={decade["year"]}>
                         <input type="radio" id={decade["year"]} name={"decade"} value={[decade["start"], decade["end"]]}></input>
                         <label htmlFor={decade["year"]}>{decade["year"]}</label>
                     </div>
