@@ -20,7 +20,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL,
     }, [url, setMoviesToDisplay, currentPage]);
 
     return (
-        <main>
+        <>
             <div className='wrapper'>
                 <div className="gallery-container">
                     <ul>
@@ -44,7 +44,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL,
                     </ul>
                 </div>{/* gallery container */}
             </div>{/* wrapper */}
-        </main>
+        </>
     )
 }
 

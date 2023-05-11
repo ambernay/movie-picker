@@ -25,12 +25,20 @@ function App() {
             isDropdownVisible = {isDropdownVisible}
             setIsDropdownVisible = {setIsDropdownVisible}
         />
-        <Gallery
-            newURL = {newURL}
-            setMoviesToDisplay = {setMovies}
-            moviesToDisplay = {movies}
-            isFormSubmitted = {isFormSubmitted}
-        />
+        <main>
+            <Gallery
+                newURL={newURL}
+                setMoviesToDisplay={setMovies}
+                moviesToDisplay={movies}
+                isFormSubmitted={isFormSubmitted}
+            />
+            <LoadMore
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                newURL={newURL}
+            />
+        </main>
+
         <Form
             setNewURL={setNewURL}
             isDropdownVisible={isDropdownVisible}
@@ -40,11 +48,7 @@ function App() {
             isFormSubmitted={isFormSubmitted}
             setCurrentPage={setCurrentPage}
         />
-        <LoadMore
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            newURL = {newURL}
-        />
+
         <Footer />
     </>
     );
