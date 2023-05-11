@@ -15,7 +15,6 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL 
                 return results.json();
             })
             .then(data => {
-                console.log(data.results);
                 setMoviesToDisplay(data.results);
             })
     }, [url, setMoviesToDisplay]);

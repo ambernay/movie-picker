@@ -1,8 +1,6 @@
 
 function ProviderButtons() {
 
-    const imageURL = 'https://image.tmdb.org/t/p/w500';
-
     const providersObj =  {
         "providers": [
             {
