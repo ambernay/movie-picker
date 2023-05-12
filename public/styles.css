@@ -60,7 +60,6 @@ img {
 :root {
     /* colors */
     --darkNeutral: #050404;
-
     --lightText: #fff3e4;
     --midText: #e6b86a;
     --midAccent: #5e1418;
@@ -76,6 +75,7 @@ img {
     --subHeaderHeight: 31px;
     --middleVPH: calc(100vh - 180px);
     --paddingGap: 30px;
+    --formWidth: 95%;
 }
 /* #endregion - variables */
 
@@ -308,7 +308,7 @@ form {
 
 .form-nav {
     display: flex;
-    width: 95%;
+    width: var(--formWidth);
     justify-content: space-evenly;
     align-items: center;
     height: 35px;
@@ -328,7 +328,7 @@ form {
     flex-direction: column;
     align-items: center;
     height: calc(100vh - ((var(--headerHeight) * 2) + 65px));
-    width: 95%;
+    width: var(--formWidth);
     margin-bottom: 50px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -485,6 +485,19 @@ footer p {
     .x-div-container .lines {
         height: 20px;
         width: 3px;
+    }
+
+    .modal {
+        display: flex;
+        height: 25px;
+        width: var(--formWidth);
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .modal p {
+        color: var(--brightAccent);
     }
 }
 

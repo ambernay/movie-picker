@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import GenreButtons from './GenreButtons.js';
 import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
+import FormModal from './FormModal.js';
 
-function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage, setSubHeading }) {
+function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
 
     const [buttonType, setButtonType] = useState('');
 
@@ -15,12 +16,16 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsTrending(false);
-        setIsDropdownVisible(false);
 
         // genre is required
-        const selectedGenre = e.target.querySelector('input[name=genre]:checked').value;
-        setGenre(selectedGenre);
+        const selectedGenre = e.target.querySelector('input[name=genre]:checked');
+        if (selectedGenre) {
+            setGenre(selectedGenre.value);
+            setIsDropdownVisible(false);
+            // resets page to 1 - runs only when genre is defined
+            setCurrentPage(1);
 
+        }
         // set decade if selectedDecade is not undefined
         const selectedDecade = e.target.querySelector('input[name=decade]:checked');
         if (selectedDecade) {
@@ -31,14 +36,6 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         // set provider if selectedProvider is not undefined
         const selectedProvider = e.target.querySelector('input[name=provider]:checked');
         if (selectedProvider) { setProvider(selectedProvider.value); }
-
-        // resets page to 1 - runs only when genre is defined
-        if (selectedGenre) {
-            setCurrentPage(1);
-
-        }else{
-            alert("make a selection");
-        }
     }
 
 
@@ -82,7 +79,8 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                             <div className="lines b"></div>
                         </div>
                     </nav>
-
+                    {/* <FormModal /> */}
+                    {() => { if (!genre){ <FormModal /> }}}
                     <section className="fieldset-container">
                     <GenreButtons
                         buttonType={buttonType}
