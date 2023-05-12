@@ -92,9 +92,9 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
                     <nav className="form-nav">
-                        <a href="#genre">Genres<span>*</span></a>
-                        <a href="#decades">Decades</a>
-                        <a href="#providers">Providers</a>
+                        <a href="#genre">Genre<span>*</span></a>
+                        <a href="#decade">Decade</a>
+                        <a href="#provider">Provider</a>
 
                         <div onClick={() => setIsDropdownVisible(false)} className="x-div-container">
                             <div className="lines a"></div>
