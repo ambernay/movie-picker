@@ -11,7 +11,7 @@ html { box-sizing: border-box;}
 /* #region re-set styles */
 html {
     font-size: 125%;
-    background: tomato;
+    background: var(--darkAccent);
     scroll-behavior: smooth;
 }
 
@@ -65,6 +65,7 @@ img {
     --midText: #e6b86a;
     --midAccent: #5e1418;
     --darkAccent: #2f080a;
+    --brightAccent: tomato;
     /* fonts */
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
@@ -111,10 +112,15 @@ img {
     overflow: hidden;
  }
 
+ .disabled {
+    opacity: 0.2;
+ }
+
 /* #region - header */
 header {
     display: flex;
     background: var(--lightText);
+    border-bottom: 10px solid var(--darkAccent);
     position: fixed;
     top: 0;
     left: 0;
@@ -152,16 +158,19 @@ header {
 
 /* hover */
 header:hover svg{
-    fill: tomato;
+    fill: var(--brightAccent);
+}
+
+.load-button-container figure:hover svg {
+    fill: var(--darkAccent);
 }
 
 /* #endregion - header */
 
 /* #region - gallery */
 main {
-    background: tomato;
-    margin-top: calc(var(--headerHeight) + var(--paddingGap));
-    margin-bottom: 45px;
+    background: var(--brightAccent);
+    margin-top: calc(var(--headerHeight));
     padding: var(--paddingGap) 0;
 }
 
@@ -310,7 +319,7 @@ legend {
     justify-content: center;
 }
 
-button {
+.form-button-container button {
     background: var(--midText);
     color: var(--darkAccent);
     width: fit-content;
@@ -353,7 +362,7 @@ fieldset label {
 }
 
 input[type="radio"]{
-    accent-color: var(--midText);
+    accent-color: var(--brightAccent);
     margin: 10px;
 }
 
@@ -367,7 +376,7 @@ input[type="radio"]{
 .lines {
     height: 30px;
     width: 5px;
-    background: tomato;
+    background: var(--brightAccent);
     border-radius: 20px;
 }
 
@@ -385,12 +394,25 @@ input[type="radio"]{
 }
 /* #endregion - form */
 
+/* #region - load buttons */
+.load-button-container{
+    display: flex;
+    background: var(--brightAccent);
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.load-button-container svg {
+    fill: var(--midText);
+    width: 55px;
+}
+/* #endregion - load buttons */
+
 /* #region - footer */
 footer {
     display: flex;
-    position: fixed;
-    bottom: 0;
-    left:0;
     height: 50px;
     width: 100%;
     background: var(--darkAccent);
