@@ -1,35 +1,16 @@
 import { useState, useEffect } from 'react';
-import { GenreButtons, DecadeButtons } from './FormButtons.js';
+import GenreButtons from './GenreButtons.js';
+import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
 
 function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
+
+    const [buttonType, setButtonType] = useState('');
 
     const [genre, setGenre] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
-
-    const [genreRadioButtons, setGenreRadioButtons] = useState([]);
-
-    const genreListURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
-
-    // const genreListURL = new URL ("https://api.themoviedb.org/3/genre/movie/list?");
-
-    // genreListURL.search = new URLSearchParams({
-    //     "api_key": apiKey,
-    //     "language": "en-US",
-    // })
-
-    // get genre list from api
-    useEffect(() => {
-        fetch(genreListURL)
-            .then(results => {
-                return results.json();
-            })
-            .then(data => {
-                setGenreRadioButtons(data.genres);
-            })
-    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -78,7 +59,7 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
         if (startDate) params.append("primary_release_date.gte", startDate);
         if (endDate) params.append("primary_release_date.lte", endDate);
         if (provider) params.append("with_watch_providers", provider);
-        console.log('working');
+
         url.search = params;
         setNewURL(url);
 
@@ -104,7 +85,8 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
 
                     <section className="fieldset-container">
                     <GenreButtons
-                        genres = {genreRadioButtons}
+                        buttonType={buttonType}
+                        setButtonType={setButtonType}
                     />
                     <DecadeButtons />
                     <ProviderButtons />

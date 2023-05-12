@@ -1,19 +1,4 @@
-function GenreButtons({genres}) {
 
-    return(
-        <fieldset>
-            <legend id="genre">Genre:</legend>
-            {genres.map((genre) => {
-                return (
-                    <div className="radioButtonContainer genreButtons" key={genre.id}>
-                        <input type="radio" id={genre.id} value={genre.id} name="genre"></input>
-                        <label htmlFor={genre.id}>{genre.name}</label>
-                    </div>
-                )
-            })}
-        </fieldset>
-    )
-}
 
 function DecadeButtons() {
 
@@ -47,4 +32,4 @@ function DecadeButtons() {
     )
 }
 
-export {GenreButtons, DecadeButtons};
+export default DecadeButtons;
