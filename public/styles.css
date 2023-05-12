@@ -72,7 +72,8 @@ img {
     /* sizes */
     --movieWidth: 265px;
     --headerHeight: 70px;
-    --mobileHeaderHeight: calc(10vw + 1.5rem);
+    --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
+    --subHeaderHeight: 31px;
     --middleVPH: calc(100vh - 180px);
     --paddingGap: 30px;
 }
@@ -119,9 +120,8 @@ img {
 
 /* #region - header */
 header {
-    display: flex;
+    /* display: flex; */
     background: var(--lightText);
-    border-bottom: 10px solid var(--darkAccent);
     position: fixed;
     top: 0;
     left: 0;
@@ -138,7 +138,7 @@ header {
     flex-wrap: wrap;
 }
 
-.heading-container figure {
+.heading-container figure, .result-heading-container figure {
     display: flex;
     align-self: center;
 }
@@ -156,6 +156,32 @@ header {
 .arrow-up {
     transform: rotate(180deg);
 }
+
+.result-container {
+    display: flex;
+    height: var(--subHeaderHeight);
+    align-items: flex-start;
+    background: var(--darkNeutral);
+    margin-top: 9px;
+}
+
+.result-heading-container {
+    display: flex;
+
+    justify-content: flex-end;
+    padding: 3px 0;
+}
+
+.result-heading-container .result-heading {
+    color: var(--midText);
+    align-self: center;
+}
+
+.result-heading-container figure svg {
+    fill: var(--midText);
+    width: 1.5rem;
+}
+
 
 /* hover */
 header:hover svg{
@@ -175,7 +201,7 @@ header:hover svg{
 /* #region - gallery */
 main {
     background: var(--brightAccent);
-    margin-top: calc(var(--headerHeight));
+    margin-top: var(--headerMargin);
     padding: var(--paddingGap) 0;
 }
 
@@ -274,7 +300,7 @@ form {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: var(--headerHeight);
+    margin-top: var(--headerMargin);
     padding: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -470,12 +496,12 @@ footer p {
 
     /* #endregion - variables */
 
-    header {
-        height: var(--mobileHeaderHeight);
-    }
-
     header h1 {
         font-size: 10vw;
+    }
+
+    .result-heading-container {
+        justify-content:center;
     }
 }
 

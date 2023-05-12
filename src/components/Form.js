@@ -3,7 +3,7 @@ import GenreButtons from './GenreButtons.js';
 import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
 
-function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
+function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage, setSubHeading }) {
 
     const [buttonType, setButtonType] = useState('');
 
@@ -14,7 +14,7 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsFormSubmitted(true);
+        setIsTrending(false);
         setIsDropdownVisible(false);
 
         // genre is required
@@ -63,7 +63,7 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
         url.search = params;
         setNewURL(url);
 
-    },[isFormSubmitted, currentPage, genre, startDate, endDate, provider, setNewURL])
+    },[isTrending, currentPage, genre, startDate, endDate, provider, setNewURL])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL, currentPage } ) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage } ) {
 
     const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
     const apiKey = '0a093f521e98a991f4e4cc2a12460255';
@@ -11,7 +11,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL,
     });
     defaultURL.search = params;
 
-    const url = isFormSubmitted ? newURL : defaultURL;
+    const url = isTrending ? defaultURL : newURL;
 
     useEffect(() => {
         fetch(url)
@@ -23,7 +23,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL,
             })
             // runs on url or currentPage change and form submission
             // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [url, isFormSubmitted, currentPage]);
+    }, [url, isTrending, currentPage]);
 
     return (
         <>
