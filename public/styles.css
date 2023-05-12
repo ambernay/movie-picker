@@ -424,6 +424,19 @@ input[type="radio"]{
     -moz-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+
+.modal {
+    display: flex;
+    height: 25px;
+    width: var(--formWidth);
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.modal p {
+    color: var(--brightAccent);
+}
 /* #endregion - form */
 
 /* #region - load buttons */
@@ -486,19 +499,6 @@ footer p {
     .x-div-container .lines {
         height: 20px;
         width: 3px;
-    }
-
-    .modal {
-        display: flex;
-        height: 25px;
-        width: var(--formWidth);
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-    }
-
-    .modal p {
-        color: var(--brightAccent);
     }
 }
 

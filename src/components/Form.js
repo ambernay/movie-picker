@@ -12,16 +12,18 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
+    const [submitAttempted, setSubmitAttempted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsTrending(false);
+        setSubmitAttempted(true);
 
         // genre is required
         const selectedGenre = e.target.querySelector('input[name=genre]:checked');
         if (selectedGenre) {
             setGenre(selectedGenre.value);
             setIsDropdownVisible(false);
+            setIsTrending(false);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
         }
@@ -36,7 +38,6 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         const selectedProvider = e.target.querySelector('input[name=provider]:checked');
         if (selectedProvider) { setProvider(selectedProvider.value); }
     }
-
 
     useEffect(() => {
         const apiKey = '0a093f521e98a991f4e4cc2a12460255';
@@ -78,16 +79,16 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                             <div className="lines b"></div>
                         </div>
                     </nav>
-                    {/* {() => { if (!genre){ <FormModal /> }}} */}
-                    {() => {
-                        if (!genre) {
-                            return <FormModal />;
-                        }
-                    }}
+
+                    <FormModal
+                        isGenreSelected={genre}
+                        submitAttempted={submitAttempted}
+                    />
                     <section className="fieldset-container">
                     <GenreButtons
                         buttonType={buttonType}
                         setButtonType={setButtonType}
+                        setGenre={setGenre}
                     />
                     <DecadeButtons />
                     <ProviderButtons />

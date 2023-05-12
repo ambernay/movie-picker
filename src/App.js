@@ -35,10 +35,10 @@ function App() {
                 isTrending={isTrending}
                 currentPage={currentPage}
             />
-                {() => {
+                {/* {() => {
                     if(movies.length < 1){
                     console.log("nothin at all")}
-                }}
+                }} */}
             <LoadMore
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function GenreButtons({ buttonType, setButtonType }) {
+function GenreButtons({ buttonType, setButtonType, setGenre }) {
 
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
@@ -33,6 +33,10 @@ function GenreButtons({ buttonType, setButtonType }) {
     // const buttonsToRender = buttonType === "genre" ? genreRadioButtons : buttontype === "decade" ? decadesObj.decades : buttonType === "provider" ? providersObj.providers : null;
     // if(buttonType === 'genre') {console.log(buttonType);}
 
+    const handleChange = (e) => {
+        setGenre(e.target.value)
+    }
+
 
     return (
         <fieldset>
@@ -40,7 +44,7 @@ function GenreButtons({ buttonType, setButtonType }) {
             {genreRadioButtons.map((genre) => {
                 return (
                     <div className="radioButtonContainer genreButtons" key={genre.id}>
-                        <input type="radio" id={genre.id} value={genre.id} name="genre"></input>
+                        <input onChange={handleChange} type="radio" id={genre.id} value={genre.id} name="genre"></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>
                 )
