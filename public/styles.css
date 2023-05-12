@@ -72,7 +72,7 @@ img {
     --movieWidth: 265px;
     --headerHeight: 70px;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
-    --subHeaderHeight: 31px;
+    --subHeaderHeight: 30px;
     --middleVPH: calc(100vh - 180px);
     --paddingGap: 30px;
     --formWidth: 95%;
@@ -201,6 +201,7 @@ header:hover svg{
 /* #region - gallery */
 main {
     background: var(--brightAccent);
+    min-height: calc((100vh + 20px) - (var(--headerHeight) + var(--headerMargin)));
     margin-top: var(--headerMargin);
     padding: var(--paddingGap) 0;
 }

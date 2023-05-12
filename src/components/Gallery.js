@@ -3,6 +3,7 @@ import GalleryItems from './GalleryItems.js';
 
 function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage } ) {
 
+    // default trending url for landing page
     const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
     const apiKey = '0a093f521e98a991f4e4cc2a12460255';
     const params = new URLSearchParams({
@@ -10,7 +11,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
         "page": currentPage
     });
     defaultURL.search = params;
-
+    // use default url on load or if trending selected else use newURL passed in from Form
     const url = isTrending ? defaultURL : newURL;
 
     useEffect(() => {

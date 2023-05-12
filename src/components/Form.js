@@ -24,7 +24,6 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             setIsDropdownVisible(false);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-
         }
         // set decade if selectedDecade is not undefined
         const selectedDecade = e.target.querySelector('input[name=decade]:checked');
@@ -79,8 +78,12 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                             <div className="lines b"></div>
                         </div>
                     </nav>
-                    {/* <FormModal /> */}
-                    {() => { if (!genre){ <FormModal /> }}}
+                    {/* {() => { if (!genre){ <FormModal /> }}} */}
+                    {() => {
+                        if (!genre) {
+                            return <FormModal />;
+                        }
+                    }}
                     <section className="fieldset-container">
                     <GenreButtons
                         buttonType={buttonType}
