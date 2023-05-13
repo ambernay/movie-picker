@@ -188,12 +188,20 @@ header:hover svg{
     fill: var(--brightAccent);
 }
 
+.load-buttons-section {
+    position: relative;
+}
+
 .load-button-container figure:hover svg {
     fill: var(--darkAccent);
 }
 
 .load-button-container h3 {
     text-align: center;
+}
+
+.message-container {
+    display: flex;
 }
 
 /* #endregion - header */

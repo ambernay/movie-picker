@@ -23,8 +23,7 @@ function GenreButtons({ buttonType, setButtonType, setGenre }) {
                 setGenreRadioButtons(data.genres);
             })
         setButtonType("genre");
-        console.log('definitely not looping');
-    }, []);
+    }, [setButtonType]);
 
     // const buttonsToRender = buttonType === "genre" ? genreRadioButtons : null;
 
