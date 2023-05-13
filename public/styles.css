@@ -11,8 +11,7 @@ html { box-sizing: border-box;}
 /* #region re-set styles */
 html {
     font-size: 125%;
-    background: var(--darkAccent);
-    background: aquamarine;
+    background: var(--backgroundColor);
     scroll-behavior: smooth;
 }
 
@@ -60,12 +59,15 @@ img {
 /* #region - variables */
 :root {
     /* colors */
+    --backgroundColor: tomato;
     --darkNeutral: #050404;
-    --lightText: #fff3e4;
-    --midText: #e6b86a;
-    --midAccent: #5e1418;
+    --midAccent: #e6b86a;
+    --midAccentBrighter: rgb(255, 184, 75);
+    --midAccentOpacity: rgba(230, 184, 106, 0.3);
     --darkAccent: #2f080a;
-    --brightAccent: tomato;
+    --lightAccent: #fff3e4;
+    --lightAccentOpacity: rgba(255, 243, 228, 0.3);
+
     /* fonts */
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
@@ -122,7 +124,7 @@ img {
 /* #region - header */
 header {
     /* display: flex; */
-    background: var(--lightText);
+    background: var(--lightAccent);
     position: fixed;
     top: 0;
     left: 0;
@@ -174,29 +176,33 @@ header {
 }
 
 .result-heading-container .result-heading {
-    color: var(--midText);
+    color: var(--midAccent);
     align-self: center;
 }
 
 .result-heading-container figure svg {
-    fill: var(--midText);
+    fill: var(--midAccent);
     width: 1.5rem;
 }
 
 
 /* hover */
 header:hover svg{
-    fill: var(--brightAccent);
+    fill: var(--backgroundColor);
 }
 
 .load-buttons-section {
     position: sticky;
     bottom: 0;
-    background: var(--brightAccent);
+    background: var(--backgroundColor);
 }
 
 .load-button-container figure:hover svg {
-    fill: var(--darkAccent);
+    fill: var(--midAccentBrighter);
+}
+
+.disabled-button {
+    fill: var(--midAccentOpacity) !important;
 }
 
 .load-button-container h3 {
@@ -219,8 +225,8 @@ header:hover svg{
 
 /* #region - gallery */
 main {
-    background: var(--brightAccent);
-    min-height: calc(100vh - (var(--headerHeight) + var(--headerMargin)));
+    background: var(--backgroundColor);
+    min-height: calc((100vh + 1rem) - (var(--headerHeight) + var(--headerMargin)));
     margin-top: var(--headerMargin);
     padding: var(--paddingGap) 0;
 }
@@ -242,7 +248,7 @@ ul {
 ul li {
     display: flex;
     position: relative;
-    background: var(--lightText);
+    background: var(--lightAccent);
     flex-direction: column;
     flex: 1 1 22%;
     min-width: 224px;
@@ -251,7 +257,7 @@ ul li {
 }
 
 li img {
-    background: var(--midText);
+    background: var(--midAccent);
 }
 
 ul li .info-container {
@@ -269,7 +275,7 @@ ul li .info-container {
 
 /* rating */
 .rating {
-    background: var(--midText);
+    background: var(--midAccent);
     color: var(--darkNeutral);
     height: fit-content;
     border-radius: 5px;
@@ -280,7 +286,7 @@ ul li .info-container {
 .overview {
     display: none;
     visibility: collapse;
-    background: var(--lightText);
+    background: var(--lightAccent);
     position: absolute;
     left: 0;
     right: 0;
@@ -332,15 +338,15 @@ form {
     justify-content: space-evenly;
     align-items: center;
     height: 35px;
-    border-bottom: solid 1px var(--lightText);
+    border-bottom: solid 1px var(--lightAccent);
 }
 
 .form-nav a{
-    color: var(--midText);
+    color: var(--midAccent);
 }
 
 .form-nav a:hover, a:active {
-    color: var(--lightText);
+    color: var(--lightAccent);
 }
 
 .fieldset-container {
@@ -355,7 +361,7 @@ form {
 }
 
 legend {
-    color: var(--midText);
+    color: var(--midAccent);
     scroll-margin-top: 30px;
     scroll-behavior: smooth;
 }
@@ -371,7 +377,7 @@ legend {
 }
 
 .form-button-container button {
-    background: var(--midText);
+    background: var(--midAccent);
     color: var(--darkAccent);
     width: fit-content;
     padding: 5px;
@@ -383,7 +389,7 @@ fieldset {
     display: flex;
     flex-wrap: wrap;
     column-gap: 5px;
-    color: var(--lightText);
+    color: var(--lightAccent);
     width: 100%;
     height: fit-content;
     justify-content: flex-start;
@@ -413,7 +419,7 @@ fieldset label {
 }
 
 input[type="radio"]{
-    accent-color: var(--brightAccent);
+    accent-color: var(--backgroundColor);
     margin: 10px;
 }
 
@@ -427,7 +433,7 @@ input[type="radio"]{
 .lines {
     height: 30px;
     width: 5px;
-    background: var(--brightAccent);
+    background: var(--backgroundColor);
     border-radius: 20px;
 }
 
@@ -454,7 +460,7 @@ input[type="radio"]{
 }
 
 .modal p {
-    color: var(--brightAccent);
+    color: var(--backgroundColor);
 }
 /* #endregion - form */
 
@@ -468,7 +474,7 @@ input[type="radio"]{
 }
 
 .load-button-container svg {
-    fill: var(--midText);
+    fill: var(--midAccent);
     width: 50px;
 }
 /* #endregion - load buttons */
@@ -487,7 +493,7 @@ footer {
 }
 
 footer p {
-    color: var(--midText);
+    color: var(--midAccent);
 }
 /* #endregion - footer */
 

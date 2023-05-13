@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage } ) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, totalPages, setTotalPages } ) {
 
     useEffect(() => {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
@@ -24,10 +24,10 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
             })
             .then(data => {
                 setMoviesToDisplay(data.results);
+                setTotalPages(data.total_pages);
             })
-
             // runs on url or currentPage change and form submission
-    }, [newURL, isTrending, currentPage, setMoviesToDisplay]);
+    }, [newURL, isTrending, currentPage, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>
