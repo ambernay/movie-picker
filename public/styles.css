@@ -70,7 +70,7 @@ img {
     --mainFont: 'Merriweather', serif;
     /* sizes */
     --movieWidth: 265px;
-    --headerHeight: 70px;
+    --headerHeight: 69px;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 30px;
     --middleVPH: calc(100vh - 180px);
@@ -160,7 +160,7 @@ header {
 .result-container {
     display: flex;
     height: var(--subHeaderHeight);
-    align-items: flex-start;
+    align-items: center;
     background: var(--darkNeutral);
     margin-top: 9px;
 }
