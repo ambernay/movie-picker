@@ -73,7 +73,6 @@ img {
     --headerHeight: 69px;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 30px;
-    --middleVPH: calc(100vh - 180px);
     --paddingGap: 30px;
     --formWidth: 95%;
 }
@@ -189,7 +188,8 @@ header:hover svg{
 }
 
 .load-buttons-section {
-    position: relative;
+    position: sticky;
+    bottom: 0;
 }
 
 .load-button-container figure:hover svg {
@@ -202,6 +202,14 @@ header:hover svg{
 
 .message-container {
     display: flex;
+    height: calc(100vh - ((var(--headerHeight) * 2) + var(--headerMargin)));
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-container h3 {
+    color: var(--darkNeutral);
 }
 
 /* #endregion - header */
@@ -209,7 +217,7 @@ header:hover svg{
 /* #region - gallery */
 main {
     background: var(--brightAccent);
-    min-height: calc((100vh + 20px) - (var(--headerHeight) + var(--headerMargin)));
+    min-height: calc(100vh - (var(--headerHeight) + var(--headerMargin)));
     margin-top: var(--headerMargin);
     padding: var(--paddingGap) 0;
 }
@@ -303,13 +311,14 @@ li:hover .overview {
 form {
     display: flex;
     position: relative;
-    background: rgba(0,0,0,0.92);
+    background: rgba(5, 4, 4, 0.96);
+    background: rgba(47, 8, 10, 0.95);
     width: 100%;
     height: calc( 100vh - (var(--headerHeight) * 2));
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: var(--headerMargin);
+    margin-top: calc(var(--headerMargin) + 1px);
     padding: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
