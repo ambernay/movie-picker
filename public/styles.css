@@ -311,13 +311,14 @@ li:hover .overview {
 form {
     display: flex;
     position: relative;
-    background: rgba(0,0,0,0.92);
+    background: rgba(5, 4, 4, 0.96);
+    background: rgba(47, 8, 10, 0.95);
     width: 100%;
     height: calc( 100vh - (var(--headerHeight) * 2));
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: var(--headerMargin);
+    margin-top: calc(var(--headerMargin) + 1px);
     padding: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
