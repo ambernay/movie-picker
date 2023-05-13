@@ -8,7 +8,7 @@ import Footer from './components/Footer.js';
 function App() {
 
     const [movies, setMovies] = useState([]);
-    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+    const [isTrending, setIsTrending] = useState(true);
     const [newURL, setNewURL] = useState('');
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -24,29 +24,33 @@ function App() {
         <Header
             isDropdownVisible = {isDropdownVisible}
             setIsDropdownVisible = {setIsDropdownVisible}
+            isTrending = {isTrending}
+            setIsTrending = {setIsTrending}
         />
         <main>
             <Gallery
                 newURL={newURL}
                 setMoviesToDisplay={setMovies}
                 moviesToDisplay={movies}
-                isFormSubmitted={isFormSubmitted}
+                isTrending={isTrending}
                 currentPage={currentPage}
             />
+
             <LoadMore
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 newURL={newURL}
+                moviesArray={movies}
             />
         </main>
 
         <Form
             setNewURL={setNewURL}
             isDropdownVisible={isDropdownVisible}
-            setIsFormSubmitted={setIsFormSubmitted}
+            setIsTrending={setIsTrending}
             setIsDropdownVisible={setIsDropdownVisible}
             currentPage={currentPage}
-            isFormSubmitted={isFormSubmitted}
+            isTrending={isTrending}
             setCurrentPage={setCurrentPage}
         />
 

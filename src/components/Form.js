@@ -1,45 +1,32 @@
 import { useState, useEffect } from 'react';
-import { GenreButtons, DecadeButtons } from './FormButtons.js';
+import GenreButtons from './GenreButtons.js';
+import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
+import FormModal from './FormModal.js';
 
-function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
+function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
+
+    const [buttonType, setButtonType] = useState('');
 
     const [genre, setGenre] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
-
-    const [genreRadioButtons, setGenreRadioButtons] = useState([]);
-
-    const genreListURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
-
-    // const genreListURL = new URL ("https://api.themoviedb.org/3/genre/movie/list?");
-
-    // genreListURL.search = new URLSearchParams({
-    //     "api_key": apiKey,
-    //     "language": "en-US",
-    // })
-
-    // get genre list from api
-    useEffect(() => {
-        fetch(genreListURL)
-            .then(results => {
-                return results.json();
-            })
-            .then(data => {
-                setGenreRadioButtons(data.genres);
-            })
-    }, []);
+    const [submitAttempted, setSubmitAttempted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsFormSubmitted(true);
-        setIsDropdownVisible(false);
+        setSubmitAttempted(true);
 
         // genre is required
-        const selectedGenre = e.target.querySelector('input[name=genre]:checked').value;
-        setGenre(selectedGenre);
-
+        const selectedGenre = e.target.querySelector('input[name=genre]:checked');
+        if (selectedGenre) {
+            setGenre(selectedGenre.value);
+            setIsDropdownVisible(false);
+            setIsTrending(false);
+            // resets page to 1 - runs only when genre is defined
+            setCurrentPage(1);
+        }
         // set decade if selectedDecade is not undefined
         const selectedDecade = e.target.querySelector('input[name=decade]:checked');
         if (selectedDecade) {
@@ -50,16 +37,7 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
         // set provider if selectedProvider is not undefined
         const selectedProvider = e.target.querySelector('input[name=provider]:checked');
         if (selectedProvider) { setProvider(selectedProvider.value); }
-
-        // resets page to 1 - runs only when genre is defined
-        if (selectedGenre) {
-            setCurrentPage(1);
-
-        }else{
-            alert("make a selection");
-        }
     }
-
 
     useEffect(() => {
         const apiKey = '0a093f521e98a991f4e4cc2a12460255';
@@ -78,11 +56,11 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
         if (startDate) params.append("primary_release_date.gte", startDate);
         if (endDate) params.append("primary_release_date.lte", endDate);
         if (provider) params.append("with_watch_providers", provider);
-        console.log('working');
+
         url.search = params;
         setNewURL(url);
 
-    },[isFormSubmitted, currentPage, genre, startDate, endDate, provider, setNewURL])
+    },[isTrending, currentPage, genre, startDate, endDate, provider, setNewURL])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
@@ -102,9 +80,15 @@ function Form({ setNewURL, setIsFormSubmitted, isFormSubmitted, setIsDropdownVis
                         </div>
                     </nav>
 
+                    <FormModal
+                        isGenreSelected={genre}
+                        submitAttempted={submitAttempted}
+                    />
                     <section className="fieldset-container">
                     <GenreButtons
-                        genres = {genreRadioButtons}
+                        buttonType={buttonType}
+                        setButtonType={setButtonType}
+                        setGenre={setGenre}
                     />
                     <DecadeButtons />
                     <ProviderButtons />
