@@ -3,19 +3,20 @@ import GalleryItems from './GalleryItems.js';
 
 function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage } ) {
 
-    // default trending url for landing page
-    const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
-    const apiKey = '0a093f521e98a991f4e4cc2a12460255';
-
-    const params = new URLSearchParams({
-        "api_key": apiKey,
-        "page": currentPage
-    });
-    defaultURL.search = params;
-
     useEffect(() => {
+        const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
+        const apiKey = '0a093f521e98a991f4e4cc2a12460255';
+
         // use default url on load or if trending selected else use newURL passed in from Form
         const url = isTrending ? defaultURL : newURL;
+
+        // default trending url for landing page
+        const params = new URLSearchParams({
+            "api_key": apiKey,
+            "page": currentPage
+        });
+
+        defaultURL.search = params;
 
         fetch(url)
             .then(results => {
@@ -24,23 +25,22 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
             .then(data => {
                 setMoviesToDisplay(data.results);
             })
+
             // runs on url or currentPage change and form submission
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isTrending, currentPage]);
+    }, [newURL, isTrending, currentPage, setMoviesToDisplay]);
 
     return (
         <>
             <div className='wrapper'>
+
+                {/* only renders on empty page */}
+                {(moviesToDisplay.length < 1) ? (
+                    <div className="message-container">
+                        <h3>No results</h3>
+                    </div>
+                ) : null
+                }
                 <div className="gallery-container">
-
-                    {/* only renders on empty page */}
-                    {(moviesToDisplay.length < 1) ? (
-                        <div className="message-container">
-                            <h3>No results</h3>
-                        </div>
-                    ): null
-                    }
-
                     <ul>
                         {moviesToDisplay.map((movie) => {
                             const imageURL = 'https://image.tmdb.org/t/p/w500';

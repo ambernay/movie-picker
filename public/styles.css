@@ -73,7 +73,6 @@ img {
     --headerHeight: 69px;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 30px;
-    --middleVPH: calc(100vh - 180px);
     --paddingGap: 30px;
     --formWidth: 95%;
 }
@@ -189,7 +188,8 @@ header:hover svg{
 }
 
 .load-buttons-section {
-    position: relative;
+    position: sticky;
+    bottom: 0;
 }
 
 .load-button-container figure:hover svg {
@@ -202,6 +202,14 @@ header:hover svg{
 
 .message-container {
     display: flex;
+    height: calc(100vh - ((var(--headerHeight) * 2) + var(--headerMargin)));
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-container h3 {
+    color: var(--darkNeutral);
 }
 
 /* #endregion - header */
@@ -209,7 +217,7 @@ header:hover svg{
 /* #region - gallery */
 main {
     background: var(--brightAccent);
-    min-height: calc((100vh + 20px) - (var(--headerHeight) + var(--headerMargin)));
+    min-height: calc(100vh - (var(--headerHeight) + var(--headerMargin)));
     margin-top: var(--headerMargin);
     padding: var(--paddingGap) 0;
 }
