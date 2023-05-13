@@ -12,10 +12,11 @@ function App() {
     const [newURL, setNewURL] = useState('');
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
-    window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-    }
+    // window.onbeforeunload = function () {
+    //     window.scrollTo(0, 0);
+    // }
 
     // stop background scroll when form is visible
     useEffect(() => {
@@ -38,6 +39,8 @@ function App() {
                 moviesToDisplay={movies}
                 isTrending={isTrending}
                 currentPage={currentPage}
+                totalPages={totalPages}
+                setTotalPages={setTotalPages}
             />
 
             <LoadMore
@@ -45,6 +48,7 @@ function App() {
                 setCurrentPage={setCurrentPage}
                 newURL={newURL}
                 moviesArray={movies}
+                totalPages={totalPages}
             />
         </main>
 

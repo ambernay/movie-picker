@@ -32,7 +32,7 @@ function ProviderButtons() {
 
     return (
         <fieldset className="providers-fieldset">
-            <legend id="providers">Provider:</legend>
+            <legend id="provider">Provider:</legend>
             {providersObj.providers.map((provider) => {
                 return (
                     <div className="radioButtonContainer providerButtons" key={provider.provider_id}>

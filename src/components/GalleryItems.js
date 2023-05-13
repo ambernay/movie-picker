@@ -1,9 +1,5 @@
 function GalleryItems({ movieTitle, overview, imagePath, audienceRating }) {
 
-    window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-    }
-
     return (
         <li>
             <img src={imagePath} alt={movieTitle} />
