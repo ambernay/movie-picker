@@ -35,6 +35,7 @@ select {
     background: none;
     border: none;
     text-decoration: none;
+    outline: none;
 }
 
 h1,
@@ -487,6 +488,10 @@ input[type="radio"]{
 
 .sort-menu select {
     color: var(--midAccent);
+}
+
+.sort-menu:hover select {
+    border-bottom: solid 1px var(--midAccent);
 }
 /* #endregion - form */
 
