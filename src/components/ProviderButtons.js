@@ -23,6 +23,7 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
                         case 337: /* disney */
                         case 230: /* crave */
                             return provider
+                        default:
                     }
                 }
                 // adds an All button
