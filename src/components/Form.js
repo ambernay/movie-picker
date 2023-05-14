@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import GenreButtons from './GenreButtons.js';
 import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
+import SortBy from './SortBy.js';
 import FormModal from './FormModal.js';
 
 function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
@@ -12,6 +13,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const [provider, setProvider] = useState();
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
+    const [sortOption, setSortOption] = useState("vote_average.desc");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +36,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         const params = new URLSearchParams({
             "api_key": apiKey,
             "vote_count.gte": 10,
-            "sort_by": "vote_average.desc",
+            "sort_by": sortOption,
             "watch_region": "CA",
             "language": "en-US",
             "page": currentPage
@@ -48,7 +50,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         url.search = params;
         setNewURL(url);
 
-    },[isTrending, currentPage, genre, startDate, endDate, provider, setNewURL])
+    },[isTrending, currentPage, genre, startDate, endDate, provider, sortOption, setNewURL])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
@@ -88,9 +90,15 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                         setIsValidRequest={setIsValidRequest}
                     />
                     </section>
-                    <div className="form-button-container">
-                        <button>Get Movies</button>
-                    </div>
+                    <section className='form-bottom'>
+                        <div className="form-button-container">
+                            <button>Get Movies</button>
+                        </div>
+                        <SortBy
+                            setSortOption={setSortOption}
+                        />
+                    </section>
+
                 </form>
             </div>
         </section>
