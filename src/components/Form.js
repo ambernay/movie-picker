@@ -1,67 +1,96 @@
 import { useState, useEffect } from 'react';
-import FormButtons from './FormButtons.js';
+import GenreButtons from './GenreButtons.js';
+import DecadeButtons from './DecadeButtons.js';
+import ProviderButtons from './ProviderButtons.js';
+import FormModal from './FormModal.js';
 
-function Form({ setNewURL, setIsFormSubmitted, setIsDropdownVisible }) {
+function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
 
-    const [radioButtonList, setRadioButtonList] = useState([]);
-
-    const apiKey = '0a093f521e98a991f4e4cc2a12460255';
-    const baseURL = 'https://api.themoviedb.org/3';
-    const url = new URL(baseURL + "/discover/movie");
-
-    url.search = new URLSearchParams({
-        "with_genres": 878,
-        "api_key": apiKey,
-        "primary_release_year" : 1950,
-    })
-
-    // url.search = new URLSearchParams({
-    //     "with_genres": 18,
-    //     "sort_by": "vote_average.desc",
-    //     "vote_count.gte": 10,
-    //     "api_key": apiKey
-    // })
-
-    // const genreListURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
-
-    const genreListURL = new URL ("https://api.themoviedb.org/3/genre/movie/list?");
-
-    genreListURL.search = new URLSearchParams({
-        "api_key": apiKey,
-        "language": "en-US",
-    })
-
-    console.log(genreListURL);
-    // get genre list from api
-    useEffect(() => {
-        fetch(genreListURL)
-            .then(results => {
-                return results.json();
-            })
-            .then(data => {
-                console.log(data.results);
-                // setRadioButtonList(data.results);
-                // console.log(radioButtonList);
-            })
-    }, []);
+    const [genre, setGenre] = useState();
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [provider, setProvider] = useState();
+    const [submitAttempted, setSubmitAttempted] = useState(false);
+    const [isValidRequest, setIsValidRequest] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setNewURL(url);
-        setIsFormSubmitted(true);
-        setIsDropdownVisible(false);
+        setSubmitAttempted(true);
+
+        if (genre || startDate || endDate || provider) {
+            setIsDropdownVisible(false);
+            setIsTrending(false);
+            setIsValidRequest(true);
+            // resets page to 1 - runs only when genre is defined
+            setCurrentPage(1);
+        }
     }
 
+    useEffect(() => {
+        const apiKey = '0a093f521e98a991f4e4cc2a12460255';
+        const baseURL = 'https://api.themoviedb.org/3';
+        const url = new URL(baseURL + "/discover/movie");
+
+        const params = new URLSearchParams({
+            "api_key": apiKey,
+            "vote_count.gte": 10,
+            "sort_by": "vote_average.desc",
+            "watch_region": "CA",
+            "language": "en-US",
+            "page": currentPage
+        })
+        // add params only when selected
+        if (startDate) params.append("primary_release_date.gte", startDate);
+        if (endDate) params.append("primary_release_date.lte", endDate);
+        if (provider && provider.id !== "all") params.append("with_watch_providers", provider);
+        if (genre && genre.id !== "all") params.append("with_genres", genre);
+
+        url.search = params;
+        setNewURL(url);
+
+    },[isTrending, currentPage, genre, startDate, endDate, provider, setNewURL])
+
+    // toggles form visiblity
+    const formClass = isDropdownVisible ? "form-section" : "make-display-none";
+
     return (
-        <section className="form-section">
+        <section className={formClass}>
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
-                    <div onClick={() => setIsDropdownVisible(false)} className="x-div-container">
-                        <div className="lines a"></div>
-                        <div className="lines b"></div>
+                    <nav className="form-nav">
+                        <a href="#genre">Genre</a>
+                        <a href="#decade">Decade</a>
+                        <a href="#provider">Provider</a>
+
+                        <div onClick={() => setIsDropdownVisible(false)} className="x-div-container">
+                            <div className="lines a"></div>
+                            <div className="lines b"></div>
+                        </div>
+                    </nav>
+
+                    <FormModal
+                        isGenreSelected={genre}
+                        submitAttempted={submitAttempted}
+                        isValidRequest={isValidRequest}
+                    />
+                    <section className="fieldset-container">
+                    <GenreButtons
+                        setGenre={setGenre}
+                        setIsValidRequest={setIsValidRequest}
+                    />
+                    <DecadeButtons
+                        setStartDate={setStartDate}
+                        setEndDate={setEndDate}
+                        setIsValidRequest={setIsValidRequest}
+                    />
+                    <ProviderButtons
+                        setProvider={setProvider}
+                        setIsValidRequest={setIsValidRequest}
+                    />
+                    </section>
+                    <div className="form-button-container">
+                        <button>Get Movies</button>
                     </div>
-                    <FormButtons />
-                    <button>Get Movies</button>
                 </form>
             </div>
         </section>

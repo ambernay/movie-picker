@@ -1,29 +1,45 @@
 import { useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL } ) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages } ) {
 
-    const apiKey = 'api_key=0a093f521e98a991f4e4cc2a12460255';
-    const baseURL = 'https://api.themoviedb.org/3';
-    const defaultURL = 'https://api.themoviedb.org/3/trending/movie/day?' + apiKey;
-
-    const url = isFormSubmitted ? newURL : defaultURL;
-    // console.log(url);
     useEffect(() => {
+        const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
+        const apiKey = '0a093f521e98a991f4e4cc2a12460255';
+
+        // use default url on load or if trending selected else use newURL passed in from Form
+        const url = isTrending ? defaultURL : newURL;
+
+        // default trending url for landing page
+        const params = new URLSearchParams({
+            "api_key": apiKey,
+            "page": currentPage
+        });
+
+        defaultURL.search = params;
+
         fetch(url)
             .then(results => {
                 return results.json();
             })
             .then(data => {
-                // console.log(data.results);
                 setMoviesToDisplay(data.results);
-                // console.log(moviesToDisplay);
+                setTotalPages(data.total_pages);
             })
-    }, [newURL]);
+            // runs on url or currentPage change and form submission
+    }, [newURL, isTrending, currentPage, setTotalPages, setMoviesToDisplay]);
 
     return (
-        <main>
+        <>
             <div className='wrapper'>
+
+                {/* only renders on empty page */}
+                {(moviesToDisplay.length < 1) ? (
+                    <div className="message-container">
+                        <h3>No results</h3>
+                    </div>
+                ) : null
+                }
                 <div className="gallery-container">
                     <ul>
                         {moviesToDisplay.map((movie) => {
@@ -31,23 +47,22 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isFormSubmitted, newURL 
 
                             const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
 
-                            if (moviesToDisplay.indexOf(movie) < 12){
-                                return (
-                                    <GalleryItems
-                                        key={movie.id}
-                                        movieTitle={movie.title}
-                                        overview={
-                                            movie.overview ||
-                                            "No description available"}
-                                        imagePath={imagePath}
-                                    />
-                                )
-                            }
+                            return (
+                                <GalleryItems
+                                    key={movie.id}
+                                    movieTitle={movie.title}
+                                    overview={
+                                        movie.overview ||
+                                        "No description available"}
+                                    imagePath={imagePath}
+                                    audienceRating={(movie.vote_average).toFixed(1)}
+                                />
+                            )
                         })}
                     </ul>
                 </div>{/* gallery container */}
             </div>{/* wrapper */}
-        </main>
+        </>
     )
 }
 
