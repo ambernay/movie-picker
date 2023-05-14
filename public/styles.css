@@ -256,6 +256,7 @@ ul li {
     background: var(--lightAccent);
     flex-direction: column;
     flex: 1 1 22%;
+    /* max-height: calc((100vh - 2rem) - (var(--headerHeight) + var(--headerMargin))); */
     min-width: 245px;
     width: var(--movieWidth);
     padding: 10px;
@@ -509,6 +510,10 @@ footer p {
     header figure h2 {
         display: none;
     }
+
+    .gallery-container li {
+        min-width: 200px;
+    }
 }
 @media(max-width: 600px) {
    .gallery-container ul {
@@ -562,6 +567,7 @@ footer p {
     main {
         margin-top: calc(var(--headerHeight) +  1rem);
     }
+
     form {
         margin-top: calc(var(--headerMargin) - var(--subHeadingMargin));
     }
@@ -576,4 +582,5 @@ footer p {
         font-size: 0.8rem;
     }
 }
+
 /* #endregion - media queries */
