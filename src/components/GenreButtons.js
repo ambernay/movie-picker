@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function GenreButtons({ setButtonType, setGenre, setIsValidRequest }) {
+function GenreButtons({ setGenre, setIsValidRequest }) {
 
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
@@ -16,15 +16,13 @@ function GenreButtons({ setButtonType, setGenre, setIsValidRequest }) {
                 // adds an All button
                 data.genres.push({ "id": "all", "name": "All" });
                 setGenreRadioButtons(data.genres);
-                console.log(data.genres);
             })
-    }, [setButtonType]);
+    }, [setGenreRadioButtons]);
 
     const handleChange = (e) => {
         setGenre(e.target.value);
         setIsValidRequest(true);
     }
-
 
     return (
         <fieldset>

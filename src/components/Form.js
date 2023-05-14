@@ -6,8 +6,6 @@ import FormModal from './FormModal.js';
 
 function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
 
-    const [buttonType, setButtonType] = useState('');
-
     const [genre, setGenre] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
@@ -41,9 +39,10 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             "language": "en-US",
             "page": currentPage
         })
+        // add params only when selected
         if (startDate) params.append("primary_release_date.gte", startDate);
         if (endDate) params.append("primary_release_date.lte", endDate);
-        if (provider) params.append("with_watch_providers", provider);
+        if (provider && provider.id !== "all") params.append("with_watch_providers", provider);
         if (genre && genre.id !== "all") params.append("with_genres", genre);
 
         url.search = params;
@@ -76,8 +75,6 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     />
                     <section className="fieldset-container">
                     <GenreButtons
-                        buttonType={buttonType}
-                        setButtonType={setButtonType}
                         setGenre={setGenre}
                         setIsValidRequest={setIsValidRequest}
                     />

@@ -431,7 +431,7 @@ input[type="radio"]{
 /* x button */
 .x-div-container {
     position: absolute;
-    top: 6px;
+    top: 3px;
     right: 30px;
 }
 
@@ -457,15 +457,17 @@ input[type="radio"]{
 
 .modal {
     display: flex;
-    height: 25px;
+    background: var(--backgroundColor);
     width: var(--formWidth);
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    padding: 10px;
 }
 
 .modal p {
-    color: var(--backgroundColor);
+    color: var(--darkNeutral);
+    font-size: 1rem;
 }
 /* #endregion - form */
 
