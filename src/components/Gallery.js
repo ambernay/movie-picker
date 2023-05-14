@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, totalPages, setTotalPages } ) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages } ) {
 
     useEffect(() => {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');

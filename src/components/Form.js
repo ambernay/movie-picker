@@ -13,30 +13,19 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
     const [submitAttempted, setSubmitAttempted] = useState(false);
+    const [isValidRequest, setIsValidRequest] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitAttempted(true);
 
-        // genre is required
-        const selectedGenre = e.target.querySelector('input[name=genre]:checked');
-        if (selectedGenre) {
-            setGenre(selectedGenre.value);
+        if (genre || startDate || endDate || provider) {
             setIsDropdownVisible(false);
             setIsTrending(false);
+            setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
         }
-        // set decade if selectedDecade is not undefined
-        const selectedDecade = e.target.querySelector('input[name=decade]:checked');
-        if (selectedDecade) {
-            const selectedDecadeValue = selectedDecade.value.split(',');
-            setStartDate(selectedDecadeValue[0]);
-            setEndDate(selectedDecadeValue[1]);
-        }
-        // set provider if selectedProvider is not undefined
-        const selectedProvider = e.target.querySelector('input[name=provider]:checked');
-        if (selectedProvider) { setProvider(selectedProvider.value); }
     }
 
     useEffect(() => {
@@ -70,7 +59,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
                     <nav className="form-nav">
-                        <a href="#genre">Genre<span>*</span></a>
+                        <a href="#genre">Genre</a>
                         <a href="#decade">Decade</a>
                         <a href="#provider">Provider</a>
 
@@ -83,15 +72,24 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     <FormModal
                         isGenreSelected={genre}
                         submitAttempted={submitAttempted}
+                        isValidRequest={isValidRequest}
                     />
                     <section className="fieldset-container">
                     <GenreButtons
                         buttonType={buttonType}
                         setButtonType={setButtonType}
                         setGenre={setGenre}
+                        setIsValidRequest={setIsValidRequest}
                     />
-                    <DecadeButtons />
-                    <ProviderButtons />
+                    <DecadeButtons
+                        setStartDate={setStartDate}
+                        setEndDate={setEndDate}
+                        setIsValidRequest={setIsValidRequest}
+                    />
+                    <ProviderButtons
+                        setProvider={setProvider}
+                        setIsValidRequest={setIsValidRequest}
+                    />
                     </section>
                     <div className="form-button-container">
                         <button>Get Movies</button>
@@ -101,7 +99,5 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         </section>
     )
 }
-
-// for year range: https://api.themoviedb.org/3/discover/movie?api_key=###&primary_release_date.gte=2020-01-01&primary_release_date.lte=2020-12-31
 
 export default Form;
