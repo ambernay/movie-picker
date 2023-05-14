@@ -34,7 +34,6 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         const url = new URL(baseURL + "/discover/movie");
 
         const params = new URLSearchParams({
-            "with_genres": genre,
             "api_key": apiKey,
             "vote_count.gte": 10,
             "sort_by": "vote_average.desc",
@@ -45,6 +44,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         if (startDate) params.append("primary_release_date.gte", startDate);
         if (endDate) params.append("primary_release_date.lte", endDate);
         if (provider) params.append("with_watch_providers", provider);
+        if (genre && genre.id !== "all") params.append("with_genres", genre);
 
         url.search = params;
         setNewURL(url);
