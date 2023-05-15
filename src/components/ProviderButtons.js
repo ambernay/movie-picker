@@ -13,19 +13,9 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
             })
             .then(data => {
                 // filter api request for specific providers
-                const selectionOfProviders = data.results.filter(makeProvidersList);
-
-                function makeProvidersList(provider) {
-
-                    switch (provider.provider_id) {
-                        case 8: /* netflix */
-                        case 119: /* amazon */
-                        case 337: /* disney */
-                        case 230: /* crave */
-                            return provider
-                        default:
-                    }
-                }
+                const selectionOfProviders = data.results.filter((provider) => {
+                    return [8, 119, 337, 230].includes(provider.provider_id)
+                });
                 // adds an All button
                 selectionOfProviders.push({ "provider_id": "all", "provider_name": "All" });
 
