@@ -25,7 +25,7 @@ function SortBy ({ setSortOption }) {
 
                 {sortMenuObj.sortOptions.map((option) => {
                     return (
-                        <option id={option["sort-by"]} value={option["choice"]}>{option["sort-by"]}</option>
+                        <option key={option["sort-by"]} id={option["sort-by"]} value={option["choice"]}>{option["sort-by"]}</option>
                     )
                 })}
             </select>

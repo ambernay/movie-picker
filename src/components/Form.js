@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import GenreButtons from './GenreButtons.js';
 import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
+import Regions from './Regions.js';
 import SortBy from './SortBy.js';
 import FormModal from './FormModal.js';
 
@@ -11,6 +12,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
+    const [region, setRegion] = useState("CA");
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
     const [sortOption, setSortOption] = useState("vote_average.desc");
@@ -37,7 +39,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             "api_key": apiKey,
             "vote_count.gte": 10,
             "sort_by": sortOption,
-            "watch_region": "CA",
+            "watch_region": region,
             "language": "en-US",
             "page": currentPage
         })
@@ -50,7 +52,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         url.search = params;
         setNewURL(url);
 
-    },[isTrending, currentPage, genre, startDate, endDate, provider, sortOption, setNewURL])
+    },[isTrending, currentPage, genre, startDate, endDate, provider, region, sortOption, setNewURL])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
@@ -69,6 +71,10 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                             <div className="lines b"></div>
                         </div>
                     </nav>
+
+                    <Regions
+                        setRegion={setRegion}
+                    />
 
                     <FormModal
                         isGenreSelected={genre}

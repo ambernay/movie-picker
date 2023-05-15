@@ -400,7 +400,7 @@ fieldset {
     width: 100%;
     height: fit-content;
     justify-content: flex-start;
-    margin-top: 10px;
+    margin-bottom: 10px;
     /* overflow: scroll; */
 }
 
@@ -482,12 +482,14 @@ input[type="radio"]{
 
 .sort-menu {
     background: var(--darkNeutral);
+    height: 0.8rem;
     text-align: end;
     margin: 10px 0;
 }
 
 .sort-menu select {
     color: var(--midAccent);
+    text-align: center;
 }
 
 .sort-menu:hover select {
