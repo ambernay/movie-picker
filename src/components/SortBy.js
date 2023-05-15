@@ -19,7 +19,7 @@ function SortBy ({ setSortOption }) {
 
     return (
         <div className="sort-menu">
-            <label className="sr-only" for="sort">Sort by:</label>
+            <label className="sr-only" htmlFor="sort">Sort by:</label>
 
             <select onChange={handleChange} name="sort" id="sort">
 

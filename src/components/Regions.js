@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function Regions({ region, setRegion }) {
+function Regions({ currentRegion, setCurrentRegion }) {
 
     const [regionList, setRegionList] = useState([]);
 
@@ -17,18 +17,18 @@ function Regions({ region, setRegion }) {
     }, [setRegionList]);
 
     const handleChange = (e) => {
-        setRegion(e.target.value);
-        console.log(document.querySelector("select").value);
+        setCurrentRegion(e.target.value);
     }
 
     return (
         <div className="sort-menu">
-            <label className="sr-only" for="sort">Sort by:</label>
+            <label className="sr-only" htmlFor="sort">Sort by:</label>
 
             <select onChange={handleChange} name="sort" id="sort">
 
                 {regionList.map((region) => {
-                    document.querySelector("select").value = region;
+                    /* sets default to canada */
+                    document.querySelector("select").value = currentRegion;
                     return (
                         <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region["english_name"]}</option>
                     )

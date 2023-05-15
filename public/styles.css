@@ -247,7 +247,7 @@ ul {
     flex-direction: row;
     width: 100%;
     column-gap: var(--paddingGap);
-    row-gap: var(--headerHeight);
+    row-gap: calc(var(--paddingGap) + 1rem);
     justify-content: space-between;
 }
 

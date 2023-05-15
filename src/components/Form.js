@@ -12,7 +12,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
-    const [region, setRegion] = useState("CA");
+    const [currentRegion, setCurrentRegion] = useState("CA");
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
     const [sortOption, setSortOption] = useState("vote_average.desc");
@@ -39,7 +39,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             "api_key": apiKey,
             "vote_count.gte": 10,
             "sort_by": sortOption,
-            "watch_region": region,
+            "watch_region": currentRegion,
             "language": "en-US",
             "page": currentPage
         })
@@ -52,7 +52,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         url.search = params;
         setNewURL(url);
 
-    },[isTrending, currentPage, genre, startDate, endDate, provider, region, sortOption, setNewURL])
+    },[isTrending, currentPage, genre, startDate, endDate, provider, currentRegion, sortOption, setNewURL])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
@@ -73,8 +73,8 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     </nav>
 
                     <Regions
-                        region={region}
-                        setRegion={setRegion}
+                        currentRegion={currentRegion}
+                        setCurrentRegion={setCurrentRegion}
                     />
 
                     <FormModal
