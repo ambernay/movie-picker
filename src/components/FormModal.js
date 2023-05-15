@@ -1,9 +1,9 @@
-function FormModal({ isGenreSelected, submitAttempted } ) {
+function FormModal({ isValidRequest, submitAttempted } ) {
 
-    const modalClass = (!submitAttempted || isGenreSelected) ? "make-display-none" : "modal";
+    const modalClass = (submitAttempted && !isValidRequest) ? "modal" : "make-display-none";
     return(
         <div className={modalClass}>
-            <p>Please select a genre</p>
+            <p>Make a selection</p>
         </div>
     )
 }

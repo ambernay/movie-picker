@@ -30,11 +30,12 @@ ul {
 a,
 button,
 input,
-textarea {
+textarea,
+select {
     background: none;
     border: none;
     text-decoration: none;
-    font-size: 1.2rem;
+    outline: none;
 }
 
 h1,
@@ -90,7 +91,7 @@ img {
      font-family: var(--headingFont);
  }
 
- h2, p, input, label {
+ h2, p, input, label, div, select {
      font-family: var(--mainFont);
  }
 
@@ -102,7 +103,7 @@ img {
     font-size: 1rem;
  }
 
- p {
+ p, select {
     font-size: 0.8rem;
     line-height: 1rem;
  }
@@ -191,9 +192,14 @@ header:hover svg{
 }
 
 .load-buttons-section {
+    display: flex;
     position: sticky;
     bottom: 0;
     background: var(--backgroundColor);
+    box-shadow: 0 0 8px -1px var(--darkAccent);
+    height: 50px;
+    align-items: center;
+    margin-top: var(--headerMargin);
 }
 
 .load-button-container figure:hover svg {
@@ -228,7 +234,7 @@ main {
     background: var(--backgroundColor);
     min-height: calc((100vh + 1rem) - (var(--headerHeight) + var(--headerMargin)));
     margin-top: var(--headerMargin);
-    padding: var(--paddingGap) 0;
+    padding-top: var(--paddingGap);
 }
 
 .gallery-container {
@@ -241,7 +247,7 @@ ul {
     flex-direction: row;
     width: 100%;
     column-gap: var(--paddingGap);
-    row-gap: var(--headerHeight);
+    row-gap: calc(var(--paddingGap) + 1rem);
     justify-content: space-between;
 }
 
@@ -251,7 +257,8 @@ ul li {
     background: var(--lightAccent);
     flex-direction: column;
     flex: 1 1 22%;
-    min-width: 224px;
+    /* max-height: calc((100vh - 2rem) - (var(--headerHeight) + var(--headerMargin))); */
+    min-width: 245px;
     width: var(--movieWidth);
     padding: 10px;
 }
@@ -296,7 +303,7 @@ ul li .info-container {
     transform: translateY(101%);
     transition: transform 0.4s ease-in;
     padding: inherit;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 li:hover .overview {
@@ -326,7 +333,7 @@ form {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: calc(var(--headerMargin));
+    margin-top: calc(var(--headerMargin) - 1px);
     padding: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -355,7 +362,7 @@ form {
     align-items: center;
     height: calc(100vh - ((var(--headerHeight) * 2) + 65px));
     width: var(--formWidth);
-    margin-bottom: 50px;
+    /* margin-bottom: 60px; */
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -393,7 +400,7 @@ fieldset {
     width: 100%;
     height: fit-content;
     justify-content: flex-start;
-    margin-top: 10px;
+    margin-bottom: 10px;
     /* overflow: scroll; */
 }
 
@@ -426,7 +433,7 @@ input[type="radio"]{
 /* x button */
 .x-div-container {
     position: absolute;
-    top: 6px;
+    top: 3px;
     right: 30px;
 }
 
@@ -452,15 +459,41 @@ input[type="radio"]{
 
 .modal {
     display: flex;
-    height: 25px;
+    background: var(--backgroundColor);
     width: var(--formWidth);
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    padding: 10px;
 }
 
 .modal p {
-    color: var(--backgroundColor);
+    color: var(--darkNeutral);
+    font-size: 1rem;
+}
+
+.form-bottom {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 95%;
+    border-top: 1px solid var(--lightAccent);
+}
+
+.sort-menu {
+    background: var(--darkNeutral);
+    height: 0.8rem;
+    text-align: end;
+    margin: 10px 0;
+}
+
+.sort-menu select {
+    color: var(--midAccent);
+    text-align: center;
+}
+
+.sort-menu:hover select {
+    border-bottom: solid 1px var(--midAccent);
 }
 /* #endregion - form */
 
@@ -470,7 +503,6 @@ input[type="radio"]{
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    margin-top: 30px;
 }
 
 .load-button-container svg {
@@ -502,6 +534,10 @@ footer p {
 @media(max-width: 635px) {
     header figure h2 {
         display: none;
+    }
+
+    .gallery-container li {
+        min-width: 200px;
     }
 }
 @media(max-width: 600px) {
@@ -556,6 +592,7 @@ footer p {
     main {
         margin-top: calc(var(--headerHeight) +  1rem);
     }
+
     form {
         margin-top: calc(var(--headerMargin) - var(--subHeadingMargin));
     }
@@ -570,4 +607,5 @@ footer p {
         font-size: 0.8rem;
     }
 }
+
 /* #endregion - media queries */

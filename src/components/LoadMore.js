@@ -19,6 +19,8 @@ function LoadMore({ currentPage, setCurrentPage, moviesArray, totalPages }){
         else if(buttonClass === 'forward-button' && currentPage < totalPages){
             setCurrentPage(currentPage + 1);
         }
+        // scroll back to top when new gallery loads - (offset to wait for page load)
+        setTimeout(() => window.scrollTo(0, 0), 100);
     }
 
     return (

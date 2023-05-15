@@ -1,6 +1,6 @@
 
 
-function DecadeButtons() {
+function DecadeButtons({ setStartDate, setEndDate, setIsValidRequest}) {
 
     const decadesObj = {
         "decades": [
@@ -14,8 +14,16 @@ function DecadeButtons() {
             {"year" : "1990s", "start": "1990-01-01", "end": "1999-12-31" },
             {"year"  : "2000s", "start": "2000-01-01", "end": "2009-12-31" },
             {"year"  : "2010s", "start": "2010-01-01", "end": "2019-12-31" },
-            {"year"  : "2020s", "start": "2020-01-01", "end": "2029-12-31" }
+            {"year"  : "2020s", "start": "2020-01-01", "end": "2029-12-31" },
+            {"year": "All", "start": "1884-01-01", "end": "2029-12-31" }
     ]};
+
+    const handleChange = (e) => {
+        const selectedDecadeValue = e.target.value.split(',');
+        setStartDate(selectedDecadeValue[0]);
+        setEndDate(selectedDecadeValue[1]);
+        setIsValidRequest(true);
+    }
 
     return (
         <fieldset className="providers">
@@ -23,7 +31,7 @@ function DecadeButtons() {
             {decadesObj.decades.map((decade) => {
                 return (
                     <div className="radioButtonContainer decadeButtons" key={decade["year"]}>
-                        <input type="radio" id={decade["year"]} name={"decade"} value={[decade["start"], decade["end"]]}></input>
+                        <input onChange={handleChange} type="radio" id={decade["year"]} name={"decade"} value={[decade["start"], decade["end"]]}></input>
                         <label htmlFor={decade["year"]}>{decade["year"]}</label>
                     </div>
                 )

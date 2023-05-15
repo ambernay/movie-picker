@@ -14,10 +14,6 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
-    // window.onbeforeunload = function () {
-    //     window.scrollTo(0, 0);
-    // }
-
     // stop background scroll when form is visible
     useEffect(() => {
         const bodyEl = document.querySelector('body');
