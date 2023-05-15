@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function Regions({ setRegion }) {
+function Regions({ region, setRegion }) {
 
     const [regionList, setRegionList] = useState([]);
 
@@ -14,7 +14,6 @@ function Regions({ setRegion }) {
             .then(data => {
                 setRegionList(data.results);
             })
-        document.querySelector("select").value = "CA";
     }, [setRegionList]);
 
     const handleChange = (e) => {
@@ -29,7 +28,7 @@ function Regions({ setRegion }) {
             <select onChange={handleChange} name="sort" id="sort">
 
                 {regionList.map((region) => {
-
+                    document.querySelector("select").value = region;
                     return (
                         <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region["english_name"]}</option>
                     )

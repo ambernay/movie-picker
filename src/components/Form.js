@@ -73,6 +73,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     </nav>
 
                     <Regions
+                        region={region}
                         setRegion={setRegion}
                     />
 
