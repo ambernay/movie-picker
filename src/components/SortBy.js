@@ -20,15 +20,16 @@ function SortBy ({ setSortOption }) {
     return (
         <div className="sort-menu">
             <label className="sr-only" htmlFor="sort">Sort by:</label>
+            <span className="hover-animation">
+                <select onChange={handleChange} name="sort" id="sort">
 
-            <select onChange={handleChange} name="sort" id="sort">
-
-                {sortMenuObj.sortOptions.map((option) => {
-                    return (
-                        <option key={option["sort-by"]} id={option["sort-by"]} value={option["choice"]}>{option["sort-by"]}</option>
-                    )
-                })}
-            </select>
+                    {sortMenuObj.sortOptions.map((option) => {
+                        return (
+                            <option key={option["sort-by"]} id={option["sort-by"]} value={option["choice"]}>{option["sort-by"]}</option>
+                        )
+                    })}
+                </select>
+            </span>
         </div>
     )
 }
