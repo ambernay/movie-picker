@@ -5,8 +5,8 @@ function LoadMore({ currentPage, setCurrentPage, moviesArray, totalPages }){
     const buttonContainerClass = (moviesArray.length < 1) ? "make-display-none" : "load-button-container";
 
     //  disables buttons when there are no more available pages
-    let backButton = (currentPage === 1) ? "disabled-button" : ' ';
-    let forwardButton = (currentPage === totalPages) ? "disabled-button" : ' ';
+    let backButton = (currentPage === 1) ? "disabled-button" : '';
+    let forwardButton = (currentPage === totalPages) ? "disabled-button" : '';
 
     const handleButtons = (e) => {
         // get parent button
