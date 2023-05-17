@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function Regions({ setRegion }) {
+function Regions({ currentRegion, setCurrentRegion }) {
 
     const [regionList, setRegionList] = useState([]);
 
@@ -14,27 +14,27 @@ function Regions({ setRegion }) {
             .then(data => {
                 setRegionList(data.results);
             })
-        document.querySelector("select").value = "CA";
     }, [setRegionList]);
 
     const handleChange = (e) => {
-        setRegion(e.target.value);
-        console.log(document.querySelector("select").value);
+        setCurrentRegion(e.target.value);
     }
 
     return (
         <div className="sort-menu">
-            <label className="sr-only" for="sort">Sort by:</label>
+            <label className="sr-only" htmlFor="sort">Sort by:</label>
+            <span className='hover-animation'>
+                <select onChange={handleChange} name="sort" id="sort">
 
-            <select onChange={handleChange} name="sort" id="sort">
-
-                {regionList.map((region) => {
-
-                    return (
-                        <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region["english_name"]}</option>
-                    )
-                })}
-            </select>
+                    {regionList.map((region) => {
+                        /* sets default to canada */
+                        document.querySelector("select").value = currentRegion;
+                        return (
+                            <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region["english_name"]}</option>
+                        )
+                    })}
+                </select>
+            </span>
         </div>
     )
 }
