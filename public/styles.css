@@ -353,6 +353,7 @@ ul li {
 
 li img {
     background: var(--midAccent);
+    height: 84%;
 }
 
 ul li .info-container {
