@@ -15,7 +15,7 @@ function DecadeButtons({ setStartDate, setEndDate, setIsValidRequest}) {
             {"year"  : "2000s", "start": "2000-01-01", "end": "2009-12-31" },
             {"year"  : "2010s", "start": "2010-01-01", "end": "2019-12-31" },
             {"year"  : "2020s", "start": "2020-01-01", "end": "2029-12-31" },
-            {"year": "all-years", "start": "1884-01-01", "end": "2029-12-31" }
+            {"year": "All", "start": "1884-01-01", "end": "2029-12-31" }
     ]};
 
     const handleChange = (e) => {
