@@ -14,7 +14,7 @@ function GenreButtons({ setGenre, setIsValidRequest }) {
             })
             .then(data => {
                 // adds an All button
-                data.genres.push({ "id": "all", "name": "All" });
+                data.genres.push({ "id": "all-genres", "name": "All" });
                 setGenreRadioButtons(data.genres);
             })
     }, [setGenreRadioButtons]);
