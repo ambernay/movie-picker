@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import GenreButtons from './GenreButtons.js';
 import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
@@ -27,10 +27,11 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
+            makeNewURL();
         }
     }
 
-    useEffect(() => {
+    const makeNewURL = () => {
         const apiKey = '0a093f521e98a991f4e4cc2a12460255';
         const baseURL = 'https://api.themoviedb.org/3';
         const url = new URL(baseURL + "/discover/movie");
@@ -51,8 +52,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
 
         url.search = params;
         setNewURL(url);
-
-    },[isTrending, currentPage, genre, startDate, endDate, provider, currentRegion, sortOption, setNewURL])
+    }
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
