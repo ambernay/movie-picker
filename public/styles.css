@@ -63,10 +63,13 @@ img {
     --backgroundColor: tomato;
     --darkNeutral: #050404;
     --midAccent: #e6b86a;
-    --midAccentBrighter: rgb(255, 184, 75);
     --midAccentOpacity: rgba(230, 184, 106, 0.3);
-    --darkAccent: #2f080a;
+    --darkAccent: #720308;
     --lightAccent: #fff3e4;
+
+    /* to be redfined */
+    --gradientBaseVar: #fff3e4;
+    --gradientChangeVar: #88181e;
 
     /* fonts */
     --headingFont: 'Limelight', cursive;
@@ -148,7 +151,84 @@ header {
 
 .heading-container h2 {
     font-size: 1.2rem;
+    color: var(--darkNeutral);
 }
+/* #region - underline animation */
+.hover-animation {
+    display: inline-block;
+    position: relative;
+    color: var(--darkAccent);
+    align-self: center;
+}
+
+.hover-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.hover-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.heading-container .hover-animation::after {
+    background-color: var(--darkAccent);
+}
+
+.sort-menu .hover-animation::after, .result-heading-container .hover-animation::after {
+    background-color: var(--midAccent);
+}
+/* #endregion - underline animation */
+
+/* #region - gradient animation */
+.hover-animation {
+    background: linear-gradient(to right, var(--gradientChangeVar), var(--gradientChangeVar) 50%, var(--gradientBaseVar) 50%);
+    fill: linear-gradient(to right, var(--gradientChangeVar), var(--gradientChangeVar) 50%, var(--gradientBaseVar) 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 0.5s ease;
+    text-decoration: none;
+}
+
+.hover-animation:hover,
+.hover-animation:active {
+    background-position: 0 100%;
+}
+
+.heading-container .hover-animation {
+    /* re-define colors */
+    --gradientBaseVar: var(--darkNeutral);
+    --gradientChangeVar: var(--darkAccent);
+}
+
+.result-heading-container .hover-animation,
+.sort-menu .hover-animation {
+    /* re-define colors */
+    --gradientBaseVar: var(--midAccent);
+    --gradientChangeVar: var(--lightAccent);
+}
+
+.form-button-container button:hover,
+.form-button-container button:active {
+    background: var(--lightAccent);
+}
+
+label:hover,
+label:active {
+    color: var(--midAccent);
+}
+
+/* #endregion - gradient animation */
 
 .heading-container svg {
     fill: var(--darkAccent);
@@ -187,7 +267,13 @@ header {
 
 
 /* hover */
-header:hover svg{
+header:hover h2,
+header:active h2 {
+    color: var(--darkAccent);
+}
+
+header:hover svg,
+header:active svg {
     fill: var(--backgroundColor);
 }
 
@@ -196,14 +282,15 @@ header:hover svg{
     position: sticky;
     bottom: 0;
     background: var(--backgroundColor);
-    box-shadow: 0 0 8px -1px var(--darkAccent);
+    box-shadow: 0 0 3px -1px var(--darkAccent);
     height: 50px;
     align-items: center;
     margin-top: var(--headerMargin);
 }
 
-.load-button-container figure:hover svg {
-    fill: var(--midAccentBrighter);
+.load-button-container figure:hover svg,
+figure:active svg {
+    fill: var(--darkAccent);
 }
 
 .disabled-button {
@@ -213,6 +300,7 @@ header:hover svg{
 
 .load-button-container h3 {
     text-align: center;
+    color: var(--darkAccent);
 }
 
 .message-container {
@@ -267,9 +355,12 @@ li img {
     background: var(--midAccent);
 }
 
+li .placeholder-image {
+    height: 84%;
+}
+
 ul li .info-container {
     display: flex;
-
     overflow: hidden;
     width: 100%;
     max-height: 6rem;
@@ -305,7 +396,8 @@ ul li .info-container {
     transition: max-height 0.5s ease-out;
 }
 
-li:hover .overview {
+li:hover .overview,
+li:active .overview{
     display: block;
     visibility: visible;
     max-height: 500px;
@@ -385,7 +477,7 @@ legend {
 
 .form-button-container button {
     background: var(--midAccent);
-    color: var(--darkAccent);
+    color: var(--darkNeutral);
     width: fit-content;
     padding: 5px;
     margin: var(--subHeadingMargin);
@@ -438,8 +530,8 @@ input[type="radio"]{
 }
 
 .lines {
-    height: 30px;
-    width: 5px;
+    height: 25px;
+    width: 4px;
     background: var(--backgroundColor);
     border-radius: 20px;
 }
@@ -491,10 +583,6 @@ input[type="radio"]{
     color: var(--midAccent);
     text-align: center;
 }
-
-.sort-menu:hover select {
-    border-bottom: solid 1px var(--midAccent);
-}
 /* #endregion - form */
 
 /* #region - load buttons */
@@ -516,7 +604,7 @@ footer {
     display: flex;
     height: 50px;
     width: 100%;
-    background: var(--darkAccent);
+    background: var(--darkNeutral);
     justify-content: center;
     align-items: center;
     text-align: center;
