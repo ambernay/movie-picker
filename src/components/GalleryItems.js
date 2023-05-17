@@ -1,8 +1,10 @@
 function GalleryItems({ movieTitle, overview, imagePath, audienceRating }) {
 
+    let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
+
     return (
         <li>
-            <img src={imagePath} alt={movieTitle} />
+            <img className={imageHeightClass} src={imagePath} alt={movieTitle} />
             <div className="info-container">
                 <h3>{movieTitle}</h3>
                 <p className="rating">{audienceRating}</p>
