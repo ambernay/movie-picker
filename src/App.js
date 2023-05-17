@@ -27,6 +27,7 @@ function App() {
             setIsDropdownVisible = {setIsDropdownVisible}
             isTrending = {isTrending}
             setIsTrending = {setIsTrending}
+            setCurrentPage={setCurrentPage}
         />
         <main>
             <Gallery

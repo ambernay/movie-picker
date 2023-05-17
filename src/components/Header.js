@@ -1,4 +1,4 @@
-function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending } ){
+function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage } ){
 
     const subHeading = isTrending ? "Trending" : "Back to Trending";
     let arrowClass = isDropdownVisible ? "arrow-up" : "arrow-down";
@@ -13,6 +13,7 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
         if (!isTrending) {
             setIsTrending(true);
             setIsDropdownVisible(false);
+            setCurrentPage(1);
         }
     }
 
