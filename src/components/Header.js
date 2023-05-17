@@ -1,10 +1,7 @@
 function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage } ){
 
     const subHeading = isTrending ? "Trending" : "Back to Trending";
-
-    // toggle visibility and orientation of arrow image
     let arrowClass = isDropdownVisible ? "arrow-up" : "arrow-down";
-
     let toggleArrow = isTrending ? "make-display-none" : '';
     let styleClass = !isTrending ? "hover-animation" : '';
 

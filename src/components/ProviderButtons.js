@@ -17,7 +17,7 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
                     return [8, 119, 337, 230].includes(provider.provider_id)
                 });
                 // adds an All button
-                selectionOfProviders.push({ "provider_id": "all-providers", "provider_name": "All" });
+                selectionOfProviders.push({ "provider_id": "all", "provider_name": "All" });
 
                 setProviderRadioButtons(selectionOfProviders);
             })
