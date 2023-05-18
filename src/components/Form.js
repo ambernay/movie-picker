@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GenreButtons from './GenreButtons.js';
 import DecadeButtons from './DecadeButtons.js';
 import ProviderButtons from './ProviderButtons.js';
@@ -52,7 +52,16 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
 
         url.search = params;
         setNewURL(url);
+
+        // scroll back to top when new gallery loads - (offset to wait for page load)
+        setTimeout(() => window.scrollTo(0, 0), 100);
     }
+
+    //  re-renders on page changes
+    useEffect (() => {
+        makeNewURL();
+        // eslint-disable-next-line
+    },[currentPage, isTrending])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";

@@ -1,7 +1,7 @@
 function Footer() {
     return(
         <footer>
-            <p>Created at Juno College  &mdash; Ambernay Trotter &copy; 2023</p>
+            <p>Ambernay Trotter <span className="copyright">&copy;</span>2023 &mdash; Created at Juno College</p>
         </footer>
     )
 }
