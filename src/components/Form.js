@@ -61,7 +61,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     useEffect (() => {
         makeNewURL();
         // eslint-disable-next-line
-    },[currentPage])
+    },[currentPage, isTrending])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
