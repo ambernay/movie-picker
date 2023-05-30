@@ -20,6 +20,8 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
                 selectionOfProviders.push({ "provider_id": "all-providers", "provider_name": "All" });
 
                 setProviderRadioButtons(selectionOfProviders);
+            }).catch(() => {
+                alert("Failed to fetch provider options");
             })
     }, [setProviderRadioButtons]);
 

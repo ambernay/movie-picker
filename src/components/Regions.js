@@ -4,7 +4,7 @@ function Regions({ currentRegion, setCurrentRegion }) {
 
     const [regionList, setRegionList] = useState([]);
 
-    const regionAPI= "https://api.themoviedb.org/3/watch/providers/regions?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
+    const regionAPI = "https://api.themoviedb.org/3/watch/providers/regions?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
 
     useEffect(() => {
         fetch(regionAPI)
@@ -13,6 +13,8 @@ function Regions({ currentRegion, setCurrentRegion }) {
             })
             .then(data => {
                 setRegionList(data.results);
+            }).catch(() => {
+                alert("Failed to fetch regions");
             })
     }, [setRegionList]);
 
@@ -22,9 +24,9 @@ function Regions({ currentRegion, setCurrentRegion }) {
 
     return (
         <div className="sort-menu">
-            <label className="sr-only" htmlFor="sort">Sort by:</label>
+            <label className="sr-only" htmlFor="region">Sort by:</label>
             <span className='hover-animation'>
-                <select onChange={handleChange} name="sort" id="sort">
+                <select onChange={handleChange} name="region" id="region">
 
                     {regionList.map((region) => {
                         /* sets default to canada */

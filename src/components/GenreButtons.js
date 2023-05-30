@@ -16,6 +16,8 @@ function GenreButtons({ setGenre, setIsValidRequest }) {
                 // adds an All button
                 data.genres.push({ "id": "all-genres", "name": "All" });
                 setGenreRadioButtons(data.genres);
+            }).catch(() => {
+                alert("Failed to fetch genres");
             })
     }, [setGenreRadioButtons]);
 
