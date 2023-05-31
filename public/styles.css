@@ -468,7 +468,8 @@ header {
 .hover-animation:hover,
 .hover-animation:active,
 .hover-animation:focus,
-.hover-animation:focus-within {
+.hover-animation:focus-within,
+.heading-container:focus-within .hover-animation {
     background-position: 0 100%;
 }
 
@@ -505,6 +506,10 @@ header {
 }
 
 /* #endregion - gradient animation */
+
+li:focus {
+    outline: none;
+}
 
 .find-movie-button svg {
     fill: var(--darkAccent);
