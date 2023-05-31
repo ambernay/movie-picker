@@ -24,9 +24,9 @@ function Regions({ currentRegion, setCurrentRegion }) {
 
     return (
         <div className="sort-menu">
-            <label className="sr-only" htmlFor="region">Sort by:</label>
+            <label className="sr-only" htmlFor="region" >Sort by:</label>
             <span className='hover-animation'>
-                <select onChange={handleChange} name="region" id="region">
+                <select onChange={handleChange} name="region" id="region" tabIndex='0'>
 
                     {regionList.map((region) => {
                         /* sets default to canada */

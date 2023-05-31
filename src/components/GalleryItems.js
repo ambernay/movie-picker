@@ -8,7 +8,7 @@ function GalleryItems({ movieTitle, overview, imagePath, audienceRating }) {
 
 
     return (
-        <li>
+        <li tabIndex='0'>
             <img className={imageHeightClass} src={imagePath} alt={movieTitle} />
             <div className="info-container">
                 <h3>{truncatedTitle}</h3>

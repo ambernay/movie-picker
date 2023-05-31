@@ -1,5 +1,5 @@
 
-function LoadMore({ currentPage, setCurrentPage, moviesArray, totalPages }){
+function LoadMore({ currentPage, setCurrentPage, moviesArray, totalPages }) {
 
     // removes button section from dom when no result are available
     const buttonContainerClass = (moviesArray.length < 1) ? "make-display-none" : "load-button-container";
@@ -16,7 +16,7 @@ function LoadMore({ currentPage, setCurrentPage, moviesArray, totalPages }){
         if (buttonClass === 'back-button' && currentPage > 1) {
             setCurrentPage(currentPage - 1);
         }
-        else if(buttonClass === 'forward-button' && currentPage < totalPages){
+        else if (buttonClass === 'forward-button' && currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     }

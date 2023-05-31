@@ -1,4 +1,4 @@
-function SortBy ({ setSortOption }) {
+function SortBy({ setSortOption }) {
 
     const sortMenuObj = {
         "sortOptions": [
@@ -17,9 +17,9 @@ function SortBy ({ setSortOption }) {
 
     return (
         <div className="sort-menu">
-            <label className="sr-only" htmlFor="sort">Sort by:</label>
+            <label className="sr-only" htmlFor="sort" >Sort by:</label>
             <span className="hover-animation">
-                <select onChange={handleChange} name="sort" id="sort">
+                <select onChange={handleChange} name="sort" id="sort" tabIndex='0'>
 
                     {sortMenuObj.sortOptions.map((option) => {
                         return (

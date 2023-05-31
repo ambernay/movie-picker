@@ -18,49 +18,49 @@ function App() {
     useEffect(() => {
         const bodyEl = document.querySelector('body');
         isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
-    },[isDropdownVisible])
+    }, [isDropdownVisible])
 
     return (
-    <>
-        <Header
-            isDropdownVisible = {isDropdownVisible}
-            setIsDropdownVisible = {setIsDropdownVisible}
-            isTrending = {isTrending}
-            setIsTrending = {setIsTrending}
-            setCurrentPage={setCurrentPage}
-        />
-        <main>
-            <Gallery
-                newURL={newURL}
-                setMoviesToDisplay={setMovies}
-                moviesToDisplay={movies}
+        <>
+            <Header
+                isDropdownVisible={isDropdownVisible}
+                setIsDropdownVisible={setIsDropdownVisible}
                 isTrending={isTrending}
-                currentPage={currentPage}
-                totalPages={totalPages}
-                setTotalPages={setTotalPages}
-            />
-
-            <LoadMore
-                currentPage={currentPage}
+                setIsTrending={setIsTrending}
                 setCurrentPage={setCurrentPage}
-                newURL={newURL}
-                moviesArray={movies}
-                totalPages={totalPages}
             />
-        </main>
+            <main>
+                <Gallery
+                    newURL={newURL}
+                    setMoviesToDisplay={setMovies}
+                    moviesToDisplay={movies}
+                    isTrending={isTrending}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    setTotalPages={setTotalPages}
+                />
 
-        <Form
-            setNewURL={setNewURL}
-            isDropdownVisible={isDropdownVisible}
-            setIsTrending={setIsTrending}
-            setIsDropdownVisible={setIsDropdownVisible}
-            currentPage={currentPage}
-            isTrending={isTrending}
-            setCurrentPage={setCurrentPage}
-        />
+                <LoadMore
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    newURL={newURL}
+                    moviesArray={movies}
+                    totalPages={totalPages}
+                />
+            </main>
 
-        <Footer />
-    </>
+            <Form
+                setNewURL={setNewURL}
+                isDropdownVisible={isDropdownVisible}
+                setIsTrending={setIsTrending}
+                setIsDropdownVisible={setIsDropdownVisible}
+                currentPage={currentPage}
+                isTrending={isTrending}
+                setCurrentPage={setCurrentPage}
+            />
+
+            <Footer />
+        </>
     );
 }
 
