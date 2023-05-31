@@ -75,10 +75,10 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                         <a href="#decade" tabIndex='0'>Decade</a>
                         <a href="#provider" tabIndex='0'>Provider</a>
 
-                        <div onClick={() => setIsDropdownVisible(false)} className="x-div-container" tabIndex='0'>
+                        <button onClick={() => setIsDropdownVisible(false)} className="x-button">
                             <div className="lines a"></div>
                             <div className="lines b"></div>
-                        </div>
+                        </button>
                     </nav>
 
                     <Regions
@@ -109,8 +109,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     <section className='form-bottom'>
                         <div className="form-button-container"
                         >
-                            <button tabIndex='0'>
-                                Get Movies</button>
+                            <button>Get Movies</button>
                         </div>
                         <SortBy
                             setSortOption={setSortOption}

@@ -405,8 +405,8 @@ header {
     flex-wrap: wrap;
 }
 
-.heading-container figure,
-.result-heading-container figure {
+.find-movie-button figure,
+.trending-button figure {
     display: flex;
     align-self: center;
 }
@@ -446,7 +446,7 @@ header {
 }
 
 .sort-menu .hover-animation::after,
-.result-heading-container .hover-animation::after {
+.trending-button .hover-animation::after {
     background-color: var(--midAccent);
 }
 
@@ -478,16 +478,23 @@ header {
     --gradientChangeVar: var(--darkAccent);
 }
 
-.result-heading-container .hover-animation,
+.trending-button .hover-animation,
 .sort-menu .hover-animation {
     /* re-define colors */
     --gradientBaseVar: var(--midAccent);
     --gradientChangeVar: var(--lightAccent);
 }
 
-.form-button-container button:hover,
-.form-button-container button:active,
-.form-botton-container button:focus-within {
+/* x button */
+.form-nav .x-button:hover .lines,
+.form-nav .x-button:active .lines,
+.form-nav .x-button:focus .lines {
+    background: var(--lightAccent);
+}
+
+.form-bottom button:hover,
+.form-bottom button:active,
+.form-bottom button:focus {
     background: var(--lightAccent);
 }
 
@@ -499,7 +506,7 @@ header {
 
 /* #endregion - gradient animation */
 
-.heading-container svg {
+.find-movie-button svg {
     fill: var(--darkAccent);
     align-self: center;
     width: 1.5rem;
@@ -524,21 +531,21 @@ header {
     padding: 3px 0;
 }
 
-.result-heading-container .result-heading {
+.trending-button .result-heading {
     color: var(--midAccent);
     align-self: center;
 }
 
-.result-heading-container figure svg {
+.trending-button figure svg {
     fill: var(--midAccent);
     width: 1.5rem;
 }
 
 
 /* hover */
-.heading-container:hover h2,
-.heading-container:active h2,
-.heading-container:focus-within h2 {
+.find-movie-button:hover h2,
+.find-movie-button:active h2,
+.find-movie-button:focus h2 {
     color: var(--darkAccent);
 }
 
@@ -548,9 +555,9 @@ header {
     fill: var(--backgroundColor);
 }
 
-.load-button-container figure:hover svg,
-figure:active svg,
-figure:focus svg {
+.load-button-container button:hover svg,
+button:active svg,
+button:focus svg {
     fill: var(--darkAccent);
 }
 
@@ -789,7 +796,7 @@ input[type="radio"] {
 }
 
 /* x button */
-.x-div-container {
+.x-button {
     position: absolute;
     top: 3px;
     right: 30px;
@@ -917,11 +924,11 @@ footer .copyright {
         justify-content: space-between;
     }
 
-    .x-div-container {
+    .x-button {
         right: 20px;
     }
 
-    .x-div-container .lines {
+    .x-button .lines {
         height: 20px;
         width: 3px;
     }
