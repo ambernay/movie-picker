@@ -58,10 +58,10 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     }
 
     //  re-renders on page changes
-    useEffect (() => {
+    useEffect(() => {
         makeNewURL();
         // eslint-disable-next-line
-    },[currentPage, isTrending])
+    }, [currentPage, isTrending])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
@@ -71,11 +71,11 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
                     <nav className="form-nav">
-                        <a href="#genre">Genre</a>
-                        <a href="#decade">Decade</a>
-                        <a href="#provider">Provider</a>
+                        <a href="#genre" tabIndex='0'>Genre</a>
+                        <a href="#decade" tabIndex='0'>Decade</a>
+                        <a href="#provider" tabIndex='0'>Provider</a>
 
-                        <div onClick={() => setIsDropdownVisible(false)} className="x-div-container">
+                        <div onClick={() => setIsDropdownVisible(false)} className="x-div-container" tabIndex='0'>
                             <div className="lines a"></div>
                             <div className="lines b"></div>
                         </div>
@@ -92,23 +92,25 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                         isValidRequest={isValidRequest}
                     />
                     <section className="fieldset-container">
-                    <GenreButtons
-                        setGenre={setGenre}
-                        setIsValidRequest={setIsValidRequest}
-                    />
-                    <DecadeButtons
-                        setStartDate={setStartDate}
-                        setEndDate={setEndDate}
-                        setIsValidRequest={setIsValidRequest}
-                    />
-                    <ProviderButtons
-                        setProvider={setProvider}
-                        setIsValidRequest={setIsValidRequest}
-                    />
+                        <GenreButtons
+                            setGenre={setGenre}
+                            setIsValidRequest={setIsValidRequest}
+                        />
+                        <DecadeButtons
+                            setStartDate={setStartDate}
+                            setEndDate={setEndDate}
+                            setIsValidRequest={setIsValidRequest}
+                        />
+                        <ProviderButtons
+                            setProvider={setProvider}
+                            setIsValidRequest={setIsValidRequest}
+                        />
                     </section>
                     <section className='form-bottom'>
-                        <div className="form-button-container">
-                            <button>Get Movies</button>
+                        <div className="form-button-container"
+                        >
+                            <button tabIndex='0'>
+                                Get Movies</button>
                         </div>
                         <SortBy
                             setSortOption={setSortOption}

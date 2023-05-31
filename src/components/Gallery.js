@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
 function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages }) {
+
+    const [statusMessage, setStatusMessage] = useState('Loading...');
 
     useEffect(() => {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
@@ -25,8 +27,10 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
             .then(data => {
                 setMoviesToDisplay(data.results);
                 setTotalPages(data.total_pages);
+                // message for no results
+                if (data.results < 1) { setStatusMessage('No results') };
             }).catch(() => {
-                alert("Failed to fetch trending");
+                setStatusMessage("Failed to fetch trending");
             })
         // runs on url or currentPage change and form submission
     }, [newURL, isTrending, currentPage, setTotalPages, setMoviesToDisplay]);
@@ -38,7 +42,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                 {/* only renders on empty page */}
                 {(moviesToDisplay.length < 1) ? (
                     <div className="message-container">
-                        <h3>No results</h3>
+                        <h3>{statusMessage}</h3>
                     </div>
                 ) : null
                 }

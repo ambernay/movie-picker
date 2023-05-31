@@ -32,7 +32,7 @@ function GenreButtons({ setGenre, setIsValidRequest }) {
             {genreRadioButtons.map((genre) => {
                 return (
                     <div className="radioButtonContainer genreButtons" key={genre.id}>
-                        <input onChange={handleChange} type="radio" id={genre.id} value={genre.id} name="genre"></input>
+                        <input onChange={handleChange} type="radio" id={genre.id} value={genre.id} name="genre" tabIndex='0'></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>
                 )
