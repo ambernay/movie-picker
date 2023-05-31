@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages }) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages, isDropdownVisible }) {
 
     const [statusMessage, setStatusMessage] = useState('Loading...');
+    // stops background scroll when using tab keys
+    const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/movie/day');
@@ -56,6 +58,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                             return (
                                 <GalleryItems
                                     key={movie.id}
+                                    tabIndex={tabIndex}
                                     movieTitle={movie.title}
                                     overview={
                                         movie.overview ||
