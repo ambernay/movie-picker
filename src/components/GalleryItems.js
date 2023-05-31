@@ -1,4 +1,4 @@
-function GalleryItems({ movieTitle, overview, imagePath, audienceRating }) {
+function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabIndex }) {
 
     let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
 
@@ -8,7 +8,8 @@ function GalleryItems({ movieTitle, overview, imagePath, audienceRating }) {
 
 
     return (
-        <li tabIndex='0'>
+        // tab index default 0 and -1 when dropdown menu is open
+        <li tabIndex={tabIndex}>
             <img className={imageHeightClass} src={imagePath} alt={movieTitle} />
             <div className="info-container">
                 <h3>{truncatedTitle}</h3>
