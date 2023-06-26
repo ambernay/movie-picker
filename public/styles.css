@@ -400,8 +400,8 @@ header {
 
 .heading-container {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: baseline;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
@@ -458,7 +458,9 @@ header {
     fill: linear-gradient(to right, var(--gradientChangeVar), var(--gradientChangeVar) 50%, var(--gradientBaseVar) 50%);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* webkit-text-fill not working in safari */
+    /* -webkit-text-fill-color: transparent; */
+    color: transparent;
     background-size: 200% 100%;
     background-position: 100%;
     transition: background-position 0.5s ease;
@@ -530,7 +532,6 @@ li:focus {
 
 .result-heading-container {
     display: flex;
-
     justify-content: flex-end;
     padding: 3px 0;
 }
@@ -545,6 +546,9 @@ li:focus {
     width: 1.5rem;
 }
 
+.trending-button:hover figure svg {
+    fill: var(--backgroundColor);
+}
 
 /* hover */
 .find-movie-button:hover h2,
@@ -861,6 +865,10 @@ input[type="radio"] {
     text-align: center;
 }
 
+.sort-menu:hover select {
+    color: var(--lightAccent);
+}
+
 /* #endregion - form */
 
 /* #region - load buttons */
@@ -953,7 +961,7 @@ footer .copyright {
     }
 
     header h1 {
-        font-size: 10vw;
+        font-size: 1.6rem;
     }
 
     .result-heading-container {
