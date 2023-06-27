@@ -23,7 +23,7 @@ function Regions({ currentRegion, setCurrentRegion }) {
     }
 
     return (
-        <div className="sort-menu">
+        <div className="dropdown-menu">
             <label className="sr-only" htmlFor="region" >Sort by:</label>
             <span className='hover-animation'>
                 <select onChange={handleChange} name="region" id="region" tabIndex='0'>

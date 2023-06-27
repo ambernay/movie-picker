@@ -324,12 +324,12 @@ img {
     --mainFont: 'Merriweather', serif;
     /* sizes */
     --movieWidth: 265px;
-    --headerHeight: 69px;
+    --headerHeight: 65px;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 30px;
     --paddingGap: 30px;
     --formWidth: 95%;
-    --subHeadingMargin: 8px;
+    --subHeadingMargin: 4px;
 }
 
 /* #endregion - variables */
@@ -400,8 +400,8 @@ header {
 
 .heading-container {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: baseline;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
@@ -445,7 +445,7 @@ header {
     background-color: var(--darkAccent);
 }
 
-.sort-menu .hover-animation::after,
+.dropdown-menu .hover-animation::after,
 .trending-button .hover-animation::after {
     background-color: var(--midAccent);
 }
@@ -458,7 +458,9 @@ header {
     fill: linear-gradient(to right, var(--gradientChangeVar), var(--gradientChangeVar) 50%, var(--gradientBaseVar) 50%);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* webkit-text-fill not working in safari */
+    /* -webkit-text-fill-color: transparent; */
+    color: transparent;
     background-size: 200% 100%;
     background-position: 100%;
     transition: background-position 0.5s ease;
@@ -480,7 +482,7 @@ header {
 }
 
 .trending-button .hover-animation,
-.sort-menu .hover-animation {
+.dropdown-menu .hover-animation {
     /* re-define colors */
     --gradientBaseVar: var(--midAccent);
     --gradientChangeVar: var(--lightAccent);
@@ -530,7 +532,6 @@ li:focus {
 
 .result-heading-container {
     display: flex;
-
     justify-content: flex-end;
     padding: 3px 0;
 }
@@ -545,6 +546,9 @@ li:focus {
     width: 1.5rem;
 }
 
+.trending-button:hover figure svg {
+    fill: var(--backgroundColor);
+}
 
 /* hover */
 .find-movie-button:hover h2,
@@ -726,7 +730,7 @@ a:focus {
 }
 
 .fieldset-container {
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     align-items: center;
     height: calc(100vh - ((var(--headerHeight) * 2) + 65px));
@@ -766,7 +770,7 @@ fieldset {
     flex-wrap: wrap;
     column-gap: 5px;
     color: var(--lightAccent);
-    width: 100%;
+    width: 99%;
     height: fit-content;
     justify-content: flex-start;
     margin-bottom: 10px;
@@ -845,20 +849,24 @@ input[type="radio"] {
     display: flex;
     flex-direction: column;
     height: 100px;
-    width: 95%;
+    width: 94%;
     border-top: 1px solid var(--lightAccent);
 }
 
-.sort-menu {
+.dropdown-menu {
     background: var(--darkNeutral);
     height: 0.8rem;
     text-align: end;
     margin: 10px 0;
 }
 
-.sort-menu select {
+.dropdown-menu select {
     color: var(--midAccent);
     text-align: center;
+}
+
+.dropdown-menu:hover select {
+    color: var(--lightAccent);
 }
 
 /* #endregion - form */
@@ -914,7 +922,13 @@ footer .copyright {
 
 /* #region - media queries */
 
-@media(max-width: 635px) {
+@media(max-width: 650px) {
+
+    .heading-container {
+        align-items: center;
+        justify-content: center;
+    }
+
     header figure h2 {
         display: none;
     }
@@ -953,7 +967,7 @@ footer .copyright {
     }
 
     header h1 {
-        font-size: 10vw;
+        font-size: 1.6rem;
     }
 
     .result-heading-container {
@@ -974,8 +988,25 @@ footer .copyright {
 }
 
 @media(max-width: 335px) {
+
+    header h1 {
+        font-size: 9vw;
+    }
+
     .form-nav a {
         font-size: 0.8rem;
+    }
+}
+
+/* Safari 11+ */
+
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+
+        /* simulate row and column gap in safari */
+        .safari_only {
+            margin: calc(var(--paddingGap) / 2);
+        }
     }
 }
 
