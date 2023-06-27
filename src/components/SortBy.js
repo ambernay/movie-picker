@@ -16,7 +16,7 @@ function SortBy({ setSortOption }) {
     }
 
     return (
-        <div className="sort-menu">
+        <div className="dropdown-menu">
             <label className="sr-only" htmlFor="sort" >Sort by:</label>
             <span className="hover-animation">
                 <select onChange={handleChange} name="sort" id="sort" tabIndex='0'>
