@@ -324,9 +324,9 @@ img {
     --mainFont: 'Merriweather', serif;
     /* sizes */
     --movieWidth: 265px;
-    --headerHeight: 65px;
+    --headerHeight: 3.25rem;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
-    --subHeaderHeight: 30px;
+    --subHeaderHeight: 1.5rem;
     --paddingGap: 30px;
     --formWidth: 95%;
     --subHeadingMargin: 4px;
@@ -700,7 +700,6 @@ form {
     background: rgba(5, 4, 4, 0.96);
     width: 100%;
     height: calc(100vh - (var(--headerHeight) * 2) - 1rem);
-    max-height: calc(100vh - (var(--headerHeight) + var(--headerMargin) - 1rem));
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -979,7 +978,7 @@ footer .copyright {
     }
 
     form {
-        margin-top: calc(var(--headerMargin) - var(--subHeadingMargin));
+        margin-top: calc(var(--headerMargin) - 1.1rem);
     }
 
     footer p {
