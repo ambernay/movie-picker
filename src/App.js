@@ -18,6 +18,7 @@ function App() {
     useEffect(() => {
         const bodyEl = document.querySelector('body');
         isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
+        console.log(movies);
     }, [isDropdownVisible])
 
     return (
