@@ -310,6 +310,7 @@ img {
     /* colors */
     --backgroundColor: tomato;
     --darkNeutral: #050404;
+    --darkNeutralOpacity: rgba(5, 4, 4, 0.3);
     --midAccent: #e6b86a;
     --midAccentOpacity: rgba(230, 184, 106, 0.3);
     --darkAccent: #720308;
@@ -400,8 +401,8 @@ header {
 
 .heading-container {
     display: flex;
-    align-items: baseline;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -409,11 +410,6 @@ header {
 .trending-button figure {
     display: flex;
     align-self: center;
-}
-
-.toggleButton {
-    display: flex;
-    color: white;
 }
 
 .heading-container h2 {
@@ -594,6 +590,73 @@ button:focus svg {
 
 .message-container h3 {
     color: var(--darkNeutral);
+}
+
+.toggleButton {
+    display: flex;
+    color: var(--lightAccent);
+}
+
+/* toggle switch */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--backgroundColor);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--lightAccent);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    /* background-color: var(--backgroundColor); */
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 /* #endregion - header */

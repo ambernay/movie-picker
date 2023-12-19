@@ -45,6 +45,10 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
                                 <figcaption className="sr-only">{arrowClass}</figcaption>
                             </figure>
                         </button>
+                        <label className="switch">
+                            <input type="checkbox" onClick={handleTvMovieToggle} />
+                            <span className="slider round"></span>
+                        </label>
                     </div>
                 </div>{/* wrapper */}
             </section>
@@ -62,7 +66,7 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
                                     </span>
                                 </figure>
                             </button>
-                            <button className='toggleButton' onClick={handleTvMovieToggle}>{tvMovieToggle === 'movie' ? 'Movies' : 'TV'}</button>
+                            <button className='toggleButton'>{tvMovieToggle === 'movie' ? 'Movies' : 'TV'}</button>
                         </div>
                     </div>{/* wrapper */}
                 </div>
