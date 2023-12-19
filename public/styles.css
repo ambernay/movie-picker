@@ -412,6 +412,7 @@ header {
 }
 
 .toggleButton {
+    display: flex;
     color: white;
 }
 

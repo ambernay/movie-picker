@@ -109,7 +109,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     <section className='form-bottom'>
                         <div className="form-button-container"
                         >
-                            <button>Get Movies</button>
+                            <button>{tvMovieToggle === 'movie' ? 'Get Movies' : 'Get Shows'}</button>
                         </div>
                         <SortBy
                             setSortOption={setSortOption}
