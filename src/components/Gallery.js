@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages, isDropdownVisible }) {
+function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages, isDropdownVisible, tvMovieToggle }) {
 
     const [statusMessage, setStatusMessage] = useState('Loading...');
-    const [tvMovieToggle, setTvMovieToggle] = useState('movie');
+
+    // toggles title for tv/movie toggle button
+    let mediaTitle = tvMovieToggle === 'movie' ? 'movie.title' : 'movie.name';
+
     // stops background scroll when using tab keys
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
-        // const tvURL = new URL('https://api.themoviedb.org/3/trending/tv/day');
         const apiKey = '0a093f521e98a991f4e4cc2a12460255';
 
         // use default url on load or if trending selected else use newURL passed in from Form
@@ -31,16 +33,16 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                 return results.json();
             })
             .then(data => {
-                console.log(data);
                 setMoviesToDisplay(data.results);
                 setTotalPages(data.total_pages);
+
                 // message for no results
                 if (data.results < 1) { setStatusMessage('No results') };
             }).catch(() => {
                 setStatusMessage("Failed to fetch trending");
             })
         // runs on url or currentPage change and form submission
-    }, [newURL, isTrending, currentPage, setTotalPages, setMoviesToDisplay]);
+    }, [newURL, isTrending, currentPage, setTotalPages, setMoviesToDisplay, tvMovieToggle]);
 
     return (
         <>
@@ -64,7 +66,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                                 <GalleryItems
                                     key={movie.id}
                                     tabIndex={tabIndex}
-                                    movieTitle={tvMovieToggle === 'movie' ? movie.title : movie.name}
+                                    movieTitle={mediaTitle}
                                     overview={
                                         movie.overview ||
                                         "No description available"}

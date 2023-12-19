@@ -1,5 +1,5 @@
 function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabIndex }) {
-    // console.log(movieTitle);
+
     let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
 
     let rating = audienceRating > 0 ? audienceRating : "N/A";

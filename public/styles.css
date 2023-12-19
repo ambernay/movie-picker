@@ -411,6 +411,10 @@ header {
     align-self: center;
 }
 
+.toggleButton {
+    color: white;
+}
+
 .heading-container h2 {
     font-size: 1.2rem;
     color: var(--darkNeutral);

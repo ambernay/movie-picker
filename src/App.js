@@ -13,12 +13,12 @@ function App() {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [tvMovieToggle, setTvMovieToggle] = useState('movie');
 
     // stop background scroll when form is visible
     useEffect(() => {
         const bodyEl = document.querySelector('body');
         isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
-        console.log(movies);
     }, [isDropdownVisible])
 
     return (
@@ -29,6 +29,8 @@ function App() {
                 isTrending={isTrending}
                 setIsTrending={setIsTrending}
                 setCurrentPage={setCurrentPage}
+                tvMovieToggle={tvMovieToggle}
+                setTvMovieToggle={setTvMovieToggle}
             />
             <main>
                 <Gallery
@@ -40,6 +42,8 @@ function App() {
                     totalPages={totalPages}
                     setTotalPages={setTotalPages}
                     isDropdownVisible={isDropdownVisible}
+                    tvMovieToggle={tvMovieToggle}
+                    setTvMovieToggle={setTvMovieToggle}
                 />
 
                 <LoadMore
@@ -59,6 +63,7 @@ function App() {
                 currentPage={currentPage}
                 isTrending={isTrending}
                 setCurrentPage={setCurrentPage}
+                tvMovieToggle={tvMovieToggle}
             />
 
             <Footer />

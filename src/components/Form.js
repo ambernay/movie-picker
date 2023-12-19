@@ -6,7 +6,7 @@ import Regions from './Regions.js';
 import SortBy from './SortBy.js';
 import FormModal from './FormModal.js';
 
-function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage }) {
+function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage, tvMovieToggle }) {
 
     const [genre, setGenre] = useState();
     const [startDate, setStartDate] = useState();
@@ -34,7 +34,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const makeNewURL = () => {
         const apiKey = '0a093f521e98a991f4e4cc2a12460255';
         const baseURL = 'https://api.themoviedb.org/3';
-        const url = new URL(baseURL + "/discover/movie");
+        const url = new URL(baseURL + "/discover/" + tvMovieToggle);
 
         const params = new URLSearchParams({
             "api_key": apiKey,
@@ -61,7 +61,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     useEffect(() => {
         makeNewURL();
         // eslint-disable-next-line
-    }, [currentPage, isTrending])
+    }, [currentPage, isTrending, tvMovieToggle])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
