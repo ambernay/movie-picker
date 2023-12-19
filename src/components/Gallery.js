@@ -5,9 +5,6 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
 
     const [statusMessage, setStatusMessage] = useState('Loading...');
 
-    // toggles title for tv/movie toggle button
-    let mediaTitle = tvMovieToggle === 'movie' ? 'movie.title' : 'movie.name';
-
     // stops background scroll when using tab keys
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
@@ -61,12 +58,12 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                             const imageURL = 'https://image.tmdb.org/t/p/w500';
 
                             const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
-
+                            {/* console.log(movie.title ? movie.title : movie.name); */ }
                             return (
                                 <GalleryItems
                                     key={movie.id}
                                     tabIndex={tabIndex}
-                                    movieTitle={mediaTitle}
+                                    movieTitle={movie.title ? movie.title : movie.name}
                                     overview={
                                         movie.overview ||
                                         "No description available"}
