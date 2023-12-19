@@ -48,7 +48,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         if (startDate) params.append("primary_release_date.gte", startDate);
         if (endDate) params.append("primary_release_date.lte", endDate);
         if (provider && provider.id !== "all") params.append("with_watch_providers", provider);
-        if (genre && genre.id !== "all") params.append("with_genres", genre);
+        if (genre && genre.id !== "all") { params.append("with_genres", genre); console.log(genre) };
 
         url.search = params;
         setNewURL(url);
@@ -95,6 +95,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                         <GenreButtons
                             setGenre={setGenre}
                             setIsValidRequest={setIsValidRequest}
+                            tvMovieToggle={tvMovieToggle}
                         />
                         <DecadeButtons
                             setStartDate={setStartDate}

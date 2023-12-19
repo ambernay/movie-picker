@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 
-function GenreButtons({ setGenre, setIsValidRequest }) {
+function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
 
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
-    const genreListURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
+    const genreListURL = "https://api.themoviedb.org/3/genre/" + tvMovieToggle + "/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
+    console.log(tvMovieToggle, genreListURL);
 
     // get genre list from api
     useEffect(() => {
@@ -19,7 +20,7 @@ function GenreButtons({ setGenre, setIsValidRequest }) {
             }).catch(() => {
                 alert("Failed to fetch genres");
             })
-    }, [setGenreRadioButtons]);
+    }, [setGenreRadioButtons, tvMovieToggle]);
 
     const handleChange = (e) => {
         setGenre(e.target.value);
