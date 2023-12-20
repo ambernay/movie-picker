@@ -515,6 +515,18 @@ li:focus {
     outline: none;
 }
 
+.header-buttons-container {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.find-movie-button {
+    height: 100%;
+}
+
 .find-movie-button svg {
     fill: var(--darkAccent);
     align-self: center;
@@ -560,9 +572,9 @@ li:focus {
     color: var(--darkAccent);
 }
 
-.heading-container:hover svg,
-.heading-container:active svg,
-.heading-container:focus-within svg {
+.find-movie-button:hover svg,
+.find-movie-button:active svg,
+.find-movie-button:focus-within svg {
     fill: var(--backgroundColor);
 }
 
