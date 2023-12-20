@@ -5,7 +5,6 @@ function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
     const genreListURL = "https://api.themoviedb.org/3/genre/" + tvMovieToggle + "/list?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
-    console.log(tvMovieToggle, genreListURL);
 
     // get genre list from api
     useEffect(() => {

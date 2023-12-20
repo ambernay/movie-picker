@@ -58,12 +58,12 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                             const imageURL = 'https://image.tmdb.org/t/p/w500';
 
                             const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
-                            {/* console.log(movie.title ? movie.title : movie.name); */ }
+
                             return (
                                 <GalleryItems
                                     key={movie.id}
                                     tabIndex={tabIndex}
-                                    movieTitle={movie.title ? movie.title : movie.name}
+                                    movieTitle={movie.title || movie.name}
                                     overview={
                                         movie.overview ||
                                         "No description available"}

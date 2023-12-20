@@ -265,7 +265,7 @@ html {
 
 .wrapper {
     max-width: 1080px;
-    width: 80%;
+    width: var(--wrapperWidth);
     margin: 0 auto;
 }
 
@@ -324,6 +324,7 @@ img {
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
     /* sizes */
+    --wrapperWidth: 80%;
     --movieWidth: 265px;
     --headerHeight: 3.25rem;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
@@ -331,6 +332,7 @@ img {
     --paddingGap: 30px;
     --formWidth: 95%;
     --subHeadingMargin: 4px;
+    --bottomNavHeight: 50px;
 }
 
 /* #endregion - variables */
@@ -764,14 +766,15 @@ li:focus .overview {
 
 form {
     display: flex;
-    position: relative;
+    position: absolute;
+    top: calc(var(--headerMargin) + 0.5px);
+    left: calc((100% - var(--wrapperWidth)) / 2);
+    height: calc(100vh - (var(--headerHeight) + var(--subHeaderHeight) + var(--bottomNavHeight)));
+    width: var(--wrapperWidth);
     background: rgba(5, 4, 4, 0.96);
-    width: 100%;
-    height: calc(100vh - (var(--headerHeight) * 2) - 1rem);
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: calc(var(--headerMargin) - 1px);
     padding: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -828,7 +831,8 @@ legend {
     color: var(--darkNeutral);
     width: fit-content;
     padding: 5px;
-    margin: var(--subHeadingMargin);
+    margin-top: var(--subHeadingMargin);
+    margin-bottom: 25px;
 }
 
 /* fieldset */
@@ -945,9 +949,9 @@ input[type="radio"] {
     bottom: 0;
     background: var(--backgroundColor);
     box-shadow: 0 0 3px -1px var(--darkAccent);
-    height: 50px;
+    height: var(--bottomNavHeight);
     align-items: center;
-    margin-top: var(--headerMargin);
+    /* margin-top: var(--headerMargin); */
 }
 
 .load-button-container {
