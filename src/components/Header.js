@@ -74,7 +74,7 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
                                     </span>
                                 </figure>
                             </button>
-                            <button className='toggleButton'>{tvMovieToggle === 'movie' ? 'Movies' : 'TV'}</button>
+                            <button className='toggle-state-text'>{tvMovieToggle === 'movie' ? 'Movies' : 'TV'}</button>
                         </div>
                     </div>{/* wrapper */}
                 </div>
