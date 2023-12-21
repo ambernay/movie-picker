@@ -1011,7 +1011,7 @@ footer .copyright {
 
 /* #region - media queries */
 
-@media(max-width: 650px) {
+@media(max-width: 740px) {
 
     .heading-container {
         align-items: center;
