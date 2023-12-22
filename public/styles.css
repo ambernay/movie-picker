@@ -611,29 +611,42 @@ button:focus svg {
     color: var(--darkNeutral);
 }
 
+/* toggle switch */
+/* #region - toggle switch */
 .toggle-state-text {
     display: flex;
     color: var(--lightAccent);
 }
 
-/* toggle switch */
-
 .toggle-button-container {
     display: flex;
+    position: relative;
     height: 100%;
     width: 75px;
-    box-shadow: 0px 0px 2px 1px var(--darkAccentOpacity);
+    background-color: var(--darkNeutral);
+    /* box-shadow: 0px 0px 2px 1px var(--darkAccentOpacity); */
     border-radius: 10%;
 }
 
-.toggle-left {
-    border-top-left-radius: 10%;
-    border-bottom-left-radius: 10%;
+.slider {
+    display: flex;
+    position: absolute;
+    background-color: var(--backgroundColor);
+    border-radius: 10%;
+    width: 45%;
+    height: 90%;
+    top: 5%;
+    z-index: 0;
+    transition: left 0.5s linear;
 }
 
-.toggle-right {
-    border-top-right-radius: 10%;
-    border-bottom-right-radius: 10%;
+#movie-option .slider {
+    left: 3%;
+}
+
+#tv-option .slider {
+    /* 100% - ( movie-option-left-pos + slider-width + 1 ) */
+    left: 53%;
 }
 
 .toggle-left,
@@ -645,40 +658,32 @@ button:focus svg {
     align-items: center;
 }
 
-#activated-option {
-    background-color: var(--backgroundColor);
-    background-image: radial-gradient(var(--backgroundColor) 55%, #cc1400);
-    box-shadow: 0px 0px 2px 1px var(--darkAccentOpacity);
-}
-
-#activated-option svg {
-    fill: var(--darkAccent);
-    stroke: var(--darkAccent);
-}
-
-#deactivated-option {
-    background-color: var(--backgroundColor);
-}
-
-#deactivated-option.toggle-left {
-    background-image: linear-gradient(to right, var(--darkNeutral) 0%, #cc1400 2% 10%, #ffbab3 15%, var(--backgroundColor), #cc1400 100%);
-    box-shadow: -2px 0px 4px 1px var(--darkAccentOpacity);
-}
-
-#deactivated-option.toggle-right {
-    background-image: linear-gradient(to left, var(--darkNeutral) 0%, #cc1400 2% 10%, #ffbab3 15%, var(--backgroundColor), #cc1400 100%);
-    box-shadow: 2px 0px 4px 1px var(--darkAccentOpacity);
-}
-
-#deactivated-option svg {
-    fill: var(--darkAccentOpacity);
-    stroke: var(--darkAccentOpacity);
-}
-
 .toggle-button-container svg {
     width: 25px;
+    fill: var(--darkNeutral);
+    stroke: var(--darkNeutral);
+    z-index: 10;
 }
 
+#movie-option .tv-icon svg,
+#tv-option .movie-icon svg {
+    fill: var(--backgroundColor);
+    fill: var(--backgroundColorOpacity);
+    stroke: var(--backgroundColor);
+    stroke: var(--backgroundColorOpacity);
+}
+
+#movie-option.toggle-button-container:hover .slider {
+    /* +7 from starting position */
+    left: 10%;
+}
+
+#tv-option.toggle-button-container:hover .slider {
+    /* -7 from starting position */
+    left: 46%;
+}
+
+/* #endregion - toggle switch */
 /* #endregion - header */
 
 /* #region - gallery */
@@ -1015,7 +1020,7 @@ footer .copyright {
 
     .heading-container {
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     header figure h2 {
