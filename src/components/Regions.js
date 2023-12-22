@@ -24,7 +24,7 @@ function Regions({ currentRegion, setCurrentRegion }) {
 
     return (
         <div className="dropdown-menu">
-            <label className="sr-only" htmlFor="region" >Sort by:</label>
+            <label className="sr-only" htmlFor="region">Choose Region:</label>
             <span className='hover-animation'>
                 <select onChange={handleChange} name="region" id="region" tabIndex='0'>
 

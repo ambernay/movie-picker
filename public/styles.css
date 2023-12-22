@@ -428,6 +428,7 @@ header {
     position: relative;
     color: var(--darkAccent);
     align-self: center;
+    cursor: pointer;
 }
 
 .hover-animation::after {
@@ -505,12 +506,14 @@ header {
 .form-bottom button:active,
 .form-bottom button:focus {
     background: var(--lightAccent);
+    cursor: pointer;
 }
 
-.radioButtonContainer:hover,
-.radioButtonContainer:active,
-.radioButtonContainer:focus-within {
+.radioButtonContainer:hover label,
+.radioButtonContainer:active label,
+.radioButtonContainer:focus-within label {
     color: var(--midAccent);
+    cursor: pointer;
 }
 
 /* #endregion - gradient animation */
@@ -529,6 +532,7 @@ li:focus {
 
 .find-movie-button {
     height: 100%;
+    cursor: pointer;
 }
 
 .find-movie-button svg {
@@ -592,11 +596,17 @@ button:focus svg {
 .disabled-button {
     fill: var(--midAccentOpacity) !important;
     color: var(--midAccentOpacity) !important;
+    cursor: default !important;
 }
 
 .load-button-container h3 {
     text-align: center;
     color: var(--darkAccent);
+}
+
+.forward-button,
+.back-button {
+    cursor: pointer;
 }
 
 .message-container {
@@ -626,6 +636,7 @@ button:focus svg {
     background-color: var(--darkNeutral);
     /* box-shadow: 0px 0px 2px 1px var(--darkAccentOpacity); */
     border-radius: 10%;
+    cursor: pointer;
 }
 
 .slider {
@@ -964,6 +975,7 @@ input[type="radio"] {
 .dropdown-menu select {
     color: var(--midAccent);
     text-align: center;
+    cursor: pointer;
 }
 
 .dropdown-menu:hover select {
