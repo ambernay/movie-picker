@@ -67,13 +67,13 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
                                     </span>
                                 </figure>
                             </button>
-                            {screenSize === 'wideScreen' ?
-                                <h4 className='toggle-state-text'>{tvMovieToggle === 'movie' ? 'Movies' : 'TV'}</h4>
-                                : <ToggleButton
+                            {screenSize === 'narrowScreen' ?
+                                <ToggleButton
                                     tvMovieToggle={tvMovieToggle}
                                     setTvMovieToggle={setTvMovieToggle}
                                     setCurrentPage={setCurrentPage}
                                 />
+                                : null
                             }
 
                         </div>
