@@ -1,6 +1,6 @@
 import ToggleButton from './ToggleButton';
 
-function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, tvMovieToggle, setTvMovieToggle }) {
+function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, tvMovieToggle, setTvMovieToggle, screenSize }) {
 
     const subHeading = isTrending ? "Trending" : "Back to Trending";
 
@@ -40,10 +40,15 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
                                     <figcaption className="sr-only">{arrowClass}</figcaption>
                                 </figure>
                             </button>
-                            <ToggleButton
-                                tvMovieToggle={tvMovieToggle}
-                                setTvMovieToggle={setTvMovieToggle}
-                            />
+                            {screenSize === 'wideScreen' ?
+                                <ToggleButton
+                                    tvMovieToggle={tvMovieToggle}
+                                    setTvMovieToggle={setTvMovieToggle}
+                                    setCurrentPage={setCurrentPage}
+                                />
+                                : null
+                            }
+
                         </div>
                     </div>
                 </div>{/* wrapper */}
@@ -62,7 +67,15 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
                                     </span>
                                 </figure>
                             </button>
-                            <button className='toggle-state-text'>{tvMovieToggle === 'movie' ? 'Movies' : 'TV'}</button>
+                            {screenSize === 'wideScreen' ?
+                                <h4 className='toggle-state-text'>{tvMovieToggle === 'movie' ? 'Movies' : 'TV'}</h4>
+                                : <ToggleButton
+                                    tvMovieToggle={tvMovieToggle}
+                                    setTvMovieToggle={setTvMovieToggle}
+                                    setCurrentPage={setCurrentPage}
+                                />
+                            }
+
                         </div>
                     </div>{/* wrapper */}
                 </div>

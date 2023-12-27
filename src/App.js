@@ -15,6 +15,15 @@ function App() {
     const [totalPages, setTotalPages] = useState(0);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
 
+    // screen size state for for toggle button
+    const [screenSize, setScreenSize] = useState((window.innerWidth <= 370 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen');
+
+    useEffect(() => {
+
+        window.addEventListener('resize', () => setScreenSize((window.innerWidth <= 370 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen'));
+
+    }, []);
+
     // stop background scroll when form is visible
     useEffect(() => {
         const bodyEl = document.querySelector('body');
@@ -31,6 +40,7 @@ function App() {
                 setCurrentPage={setCurrentPage}
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
+                screenSize={screenSize}
             />
             <main>
                 <Gallery
