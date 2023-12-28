@@ -59,7 +59,6 @@ function App() {
                 <LoadMore
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
-                    newURL={newURL}
                     moviesArray={movies}
                     totalPages={totalPages}
                 />

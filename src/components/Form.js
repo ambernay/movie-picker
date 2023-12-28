@@ -61,7 +61,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     useEffect(() => {
         makeNewURL();
         // eslint-disable-next-line
-    }, [currentPage, isTrending])
+    }, [currentPage, isTrending, tvMovieToggle])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
@@ -96,7 +96,6 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                             setGenre={setGenre}
                             setIsValidRequest={setIsValidRequest}
                             tvMovieToggle={tvMovieToggle}
-                            makeNewURL={makeNewURL}
                         />
                         <DecadeButtons
                             setStartDate={setStartDate}

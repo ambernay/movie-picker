@@ -8,22 +8,24 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
     // stops background scroll when using tab keys
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
+    //  #region setting URL
+    const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
+    const apiKey = '0a093f521e98a991f4e4cc2a12460255';
+
+    // use default url on load or if trending selected else use newURL passed in from Form
+    const url = isTrending ? defaultURL : newURL;
+
+    // default trending url for landing page
+    const params = new URLSearchParams({
+        "api_key": apiKey,
+        "language": "en-US",
+        "page": currentPage
+    });
+
+    defaultURL.search = params;
+    // #endregion
+
     useEffect(() => {
-        const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
-        const apiKey = '0a093f521e98a991f4e4cc2a12460255';
-
-        // use default url on load or if trending selected else use newURL passed in from Form
-        const url = isTrending ? defaultURL : newURL;
-
-        // default trending url for landing page
-        const params = new URLSearchParams({
-            "api_key": apiKey,
-            "language": "en-US",
-            "page": currentPage
-
-        });
-
-        defaultURL.search = params;
 
         fetch(url)
             .then(results => {
@@ -39,7 +41,7 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                 setStatusMessage("Failed to fetch trending");
             })
         // runs on url or currentPage change and form submission
-    }, [newURL, isTrending, currentPage, setTotalPages, setMoviesToDisplay, tvMovieToggle]);
+    }, [url, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>
