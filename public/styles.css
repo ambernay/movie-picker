@@ -651,12 +651,12 @@ button:active svg {
 }
 
 #movie-option .slider {
-    left: 5%;
+    left: 6%;
 }
 
 #tv-option .slider {
     /* 100% - ( movie-option-left-pos + slider-width + 1 ) */
-    left: 52%;
+    left: 53%;
 }
 
 .toggle-left,
@@ -684,9 +684,7 @@ button:active svg {
 
 #movie-option .tv-icon svg,
 #tv-option .movie-icon svg {
-    fill: var(--backgroundColor);
     fill: var(--backgroundColorDesat);
-    stroke: var(--backgroundColor);
     stroke: var(--backgroundColorDesat);
 }
 
