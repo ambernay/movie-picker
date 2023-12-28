@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
+function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle, makeNewURL }) {
 
     const [genreRadioButtons, setGenreRadioButtons] = useState([]);
 
@@ -20,6 +20,7 @@ function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
             }).catch(() => {
                 alert("Failed to fetch genres");
             })
+        makeNewURL();
     }, [setGenreRadioButtons, tvMovieToggle]);
 
     const handleChange = (e) => {
