@@ -309,7 +309,7 @@ img {
 :root {
     /* colors */
     --backgroundColor: tomato;
-    --backgroundColorOpacity: rgba(255, 99, 71, 0.8);
+    --backgroundColorDesat: #d18375;
     --darkNeutral: #050404;
     --darkNeutralOpacity: rgba(5, 4, 4, 0.3);
     --midAccent: #e6b86a;
@@ -588,8 +588,7 @@ li:focus {
 }
 
 .load-button-container button:hover svg,
-button:active svg,
-button:focus svg {
+button:active svg {
     fill: var(--darkAccent);
 }
 
@@ -644,20 +643,20 @@ button:focus svg {
     position: absolute;
     background-color: var(--backgroundColor);
     border-radius: 10%;
-    width: 45%;
-    height: 90%;
-    top: 5%;
+    width: 40%;
+    height: 80%;
+    top: 10%;
     z-index: 0;
     transition: left 0.5s linear;
 }
 
 #movie-option .slider {
-    left: 3%;
+    left: 5%;
 }
 
 #tv-option .slider {
     /* 100% - ( movie-option-left-pos + slider-width + 1 ) */
-    left: 53%;
+    left: 52%;
 }
 
 .toggle-left,
@@ -686,9 +685,9 @@ button:focus svg {
 #movie-option .tv-icon svg,
 #tv-option .movie-icon svg {
     fill: var(--backgroundColor);
-    fill: var(--backgroundColorOpacity);
+    fill: var(--backgroundColorDesat);
     stroke: var(--backgroundColor);
-    stroke: var(--backgroundColorOpacity);
+    stroke: var(--backgroundColorDesat);
 }
 
 #movie-option.toggle-button-container:hover .slider {
@@ -706,8 +705,11 @@ button:focus svg {
 
 /* #region - gallery */
 main {
+    display: flex;
+    flex-direction: column;
     background: var(--backgroundColor);
     min-height: calc((100vh + 1rem) - (var(--headerHeight) + var(--headerMargin)));
+    justify-content: space-between;
     margin-top: var(--headerMargin);
     padding-top: var(--paddingGap);
 }
