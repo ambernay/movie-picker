@@ -4,7 +4,7 @@ function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabInde
 
     let rating = audienceRating > 0 ? audienceRating : "N/A";
 
-    let truncatedTitle = (movieTitle.length > 49) ? (movieTitle.slice(0, 49) + "...") : movieTitle;
+    let truncatedTitle = (movieTitle.length > 35) ? (movieTitle.slice(0, 35) + "...") : movieTitle;
 
 
     return (

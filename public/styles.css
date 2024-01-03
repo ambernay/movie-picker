@@ -318,7 +318,7 @@ img {
     --darkAccentOpacity: rgba(114, 3, 8, 0.5);
     --lightAccent: #fff3e4;
 
-    /* to be redfined */
+    /* to be redefined */
     --gradientBaseVar: #fff3e4;
     --gradientChangeVar: #88181e;
 
@@ -588,8 +588,12 @@ li:focus {
 }
 
 .load-button-container button:hover svg,
-button:active svg {
+button:focus svg {
     fill: var(--darkAccent);
+}
+
+.load-button-container button:active svg {
+    fill: var(--darkAccentOpacity);
 }
 
 .disabled-button {
