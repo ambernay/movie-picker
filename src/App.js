@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header.js';
 import Gallery from './components/Gallery.js';
 import Form from './components/Form.js';
-import LoadMore from './components/LoadMore.js';
 import Footer from './components/Footer.js';
 
 function App() {
@@ -45,6 +44,7 @@ function App() {
                     newURL={newURL}
                     isTrending={isTrending}
                     currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                     isDropdownVisible={isDropdownVisible}
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
@@ -57,8 +57,8 @@ function App() {
                 setIsTrending={setIsTrending}
                 setIsDropdownVisible={setIsDropdownVisible}
                 currentPage={currentPage}
-                isTrending={isTrending}
                 setCurrentPage={setCurrentPage}
+                isTrending={isTrending}
                 tvMovieToggle={tvMovieToggle}
             />
 
