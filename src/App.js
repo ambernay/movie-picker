@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import Header from './components/Header.js';
-import Gallery from './components/Gallery.js';
-import Form from './components/Form.js';
+import Header from './components/HeaderSection/Header.js';
+import Gallery from './components/MainSection/Gallery.js';
+import Form from './components/FormSection/Form.js';
 import Footer from './components/Footer.js';
 
 function App() {
