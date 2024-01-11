@@ -7,12 +7,10 @@ import Footer from './components/Footer.js';
 
 function App() {
 
-    const [movies, setMovies] = useState([]);
     const [isTrending, setIsTrending] = useState(true);
     const [newURL, setNewURL] = useState('');
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
 
     // screen size state for for toggle button
@@ -45,22 +43,11 @@ function App() {
             <main>
                 <Gallery
                     newURL={newURL}
-                    setMoviesToDisplay={setMovies}
-                    moviesToDisplay={movies}
                     isTrending={isTrending}
                     currentPage={currentPage}
-                    totalPages={totalPages}
-                    setTotalPages={setTotalPages}
                     isDropdownVisible={isDropdownVisible}
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
-                />
-
-                <LoadMore
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    moviesArray={movies}
-                    totalPages={totalPages}
                 />
             </main>
 

@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
+import LoadMore from './LoadMore.js';
 
-function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, currentPage, setTotalPages, isDropdownVisible, tvMovieToggle }) {
+function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle }) {
 
+    const [moviesToDisplay, setMoviesToDisplay] = useState([]);
+    const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState('Loading...');
 
     // stops background scroll when using tab keys
@@ -74,6 +77,12 @@ function Gallery({ setMoviesToDisplay, moviesToDisplay, isTrending, newURL, curr
                     </ul>
                 </div>{/* gallery container */}
             </div>{/* wrapper */}
+            <LoadMore
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                moviesArrayLength={moviesToDisplay.length}
+                totalPages={totalPages}
+            />
         </>
     )
 }

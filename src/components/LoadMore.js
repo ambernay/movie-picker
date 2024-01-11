@@ -1,8 +1,8 @@
 
-function LoadMore({ currentPage, setCurrentPage, moviesArray, totalPages }) {
+function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }) {
 
     // removes button section from dom when no result are available
-    const buttonContainerClass = (moviesArray.length < 1) ? "make-display-none" : "load-button-container";
+    const buttonContainerClass = (moviesArrayLength < 1) ? "make-display-none" : "load-button-container";
 
     //  disables buttons when there are no more available pages
     let backButton = (currentPage === 1) ? "disabled-button" : '';
