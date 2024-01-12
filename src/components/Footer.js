@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 function Footer() {
-    return(
+    return (
         <footer>
             <p>Ambernay Trotter <span className="copyright">&copy;</span>2023 &mdash; Created at Juno College</p>
         </footer>
     )
 }
 
-export default Footer;
+export default memo(Footer);

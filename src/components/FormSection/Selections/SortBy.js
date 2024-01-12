@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function SortBy({ setSortOption }) {
 
     const sortMenuObj = {
@@ -32,4 +34,4 @@ function SortBy({ setSortOption }) {
     )
 }
 
-export default SortBy;
+export default memo(SortBy);

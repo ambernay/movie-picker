@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
 
@@ -41,4 +41,4 @@ function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
         </fieldset>
     )
 }
-export default GenreButtons;
+export default memo(GenreButtons);

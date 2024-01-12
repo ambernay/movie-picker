@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 
 function ProviderButtons({ setProvider, setIsValidRequest }) {
 
@@ -47,4 +47,4 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
     )
 }
 
-export default ProviderButtons;
+export default memo(ProviderButtons);

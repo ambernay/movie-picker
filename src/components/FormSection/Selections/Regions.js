@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 function Regions({ currentRegion, setCurrentRegion }) {
 
@@ -16,7 +16,13 @@ function Regions({ currentRegion, setCurrentRegion }) {
             }).catch(() => {
                 alert("Failed to fetch regions");
             })
+
     }, [setRegionList]);
+
+    useEffect(() => {
+        /* sets default to canada */
+        document.querySelector("select").value = currentRegion;
+    })
 
     const handleChange = (e) => {
         setCurrentRegion(e.target.value);
@@ -29,8 +35,6 @@ function Regions({ currentRegion, setCurrentRegion }) {
                 <select onChange={handleChange} name="region" id="region" tabIndex='0'>
 
                     {regionList.map((region) => {
-                        /* sets default to canada */
-                        document.querySelector("select").value = currentRegion;
                         return (
                             <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region["english_name"]}</option>
                         )
@@ -41,4 +45,4 @@ function Regions({ currentRegion, setCurrentRegion }) {
     )
 }
 
-export default Regions;
+export default memo(Regions);

@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function ToggleButton({ tvMovieToggle, setTvMovieToggle, setCurrentPage }) {
 
     const handleTvMovieToggle = () => {
@@ -24,4 +26,4 @@ function ToggleButton({ tvMovieToggle, setTvMovieToggle, setCurrentPage }) {
     )
 };
 
-export default ToggleButton;
+export default memo(ToggleButton);

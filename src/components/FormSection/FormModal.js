@@ -1,11 +1,12 @@
-function FormModal({ isValidRequest, submitAttempted } ) {
+import { memo } from 'react';
+function FormModal({ isValidRequest, submitAttempted }) {
 
     const modalClass = (submitAttempted && !isValidRequest) ? "modal" : "make-display-none";
-    return(
+    return (
         <div className={modalClass}>
             <p>Make a selection</p>
         </div>
     )
 }
 
-export default FormModal;
+export default memo(FormModal);
