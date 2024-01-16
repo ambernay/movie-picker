@@ -1053,6 +1053,10 @@ footer .copyright {
     .header-buttons-container {
         width: 30%;
     }
+
+    .form-button-container button {
+        margin-bottom: 15px;
+    }
 }
 
 @media(max-width: 565px) {
@@ -1097,10 +1101,6 @@ footer .copyright {
 
     main {
         margin-top: calc(var(--headerHeight) + 1rem);
-    }
-
-    form {
-        margin-top: calc(var(--headerMargin) - 1.1rem);
     }
 
     footer p {
