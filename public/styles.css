@@ -1110,7 +1110,7 @@ footer .copyright {
 }
 
 /* for toggle button on portrait mobile */
-@media (max-width: 370px) {
+@media (max-width: 400px) {
 
     .result-heading-container {
         height: 2rem;
