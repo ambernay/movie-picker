@@ -793,7 +793,8 @@ li:active .overview,
 li:focus .overview {
     display: block;
     visibility: visible;
-    max-height: 500px;
+    max-height: 420px;
+    max-height: -webkit-fill-available;
     transition: max-height 0.5s ease-in;
 }
 
