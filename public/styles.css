@@ -328,7 +328,7 @@ img {
     /* sizes */
     --wrapperWidth: 80%;
     --movieWidth: 265px;
-    --headerHeight: 3.25rem;
+    --headerHeight: calc(var(--mainHeaderFont) + 0.8rem);
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 1.5rem;
     --paddingGap: 30px;
@@ -336,13 +336,14 @@ img {
     --subHeadingMargin: 4px;
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
+    --mainHeaderFont: 2.2rem;
 }
 
 /* #endregion - variables */
 
 /* #region - fonts and sizes */
 h1 {
-    font-size: 2.2rem;
+    font-size: var(--mainHeaderFont);
 }
 
 h1,
@@ -399,9 +400,13 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--headerHeight);
+    height: var(--headerMargin);
     padding: 10px 0;
     z-index: 10;
+}
+
+.main-heading {
+    height: var(--headerHeight);
 }
 
 .heading-container {
@@ -647,7 +652,7 @@ button:focus svg {
     position: absolute;
     background-color: var(--backgroundColor);
     border-radius: 10%;
-    width: 40%;
+    width: 43%;
     height: 80%;
     top: 10%;
     z-index: 0;
@@ -655,7 +660,7 @@ button:focus svg {
 }
 
 #movie-option .slider {
-    left: 6%;
+    left: 5%;
 }
 
 #tv-option .slider {
@@ -680,7 +685,7 @@ button:focus svg {
 }
 
 .toggle-button-container svg {
-    width: 85%;
+    height: 85%;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
     z-index: 10;
@@ -694,12 +699,12 @@ button:focus svg {
 
 #movie-option.toggle-button-container:hover .slider {
     /* +7 from starting position */
-    left: 10%;
+    left: 8%;
 }
 
 #tv-option.toggle-button-container:hover .slider {
     /* -7 from starting position */
-    left: 46%;
+    left: 48%;
 }
 
 /* #endregion - toggle switch */
@@ -712,7 +717,7 @@ main {
     background: var(--backgroundColor);
     min-height: calc((100vh + 1rem) - (var(--headerHeight) + var(--headerMargin)));
     justify-content: space-between;
-    margin-top: var(--headerMargin);
+    margin-top: calc(var(--headerMargin) + var(--paddingGap));
     padding-top: var(--paddingGap);
 }
 
@@ -1052,7 +1057,7 @@ footer .copyright {
     }
 
     .header-buttons-container {
-        width: 30%;
+        width: 25%;
     }
 
     .form-button-container button {
@@ -1123,7 +1128,7 @@ footer .copyright {
     }
 
     .toggle-button-container svg {
-        width: 75%;
+        height: 95%;
     }
 }
 
