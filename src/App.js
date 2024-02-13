@@ -44,7 +44,7 @@ function App() {
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
             />
-            <main>
+            <main onClick={handleDropdown}>
                 <Gallery
                     newURL={newURL}
                     isTrending={isTrending}

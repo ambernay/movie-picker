@@ -24,7 +24,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                 <div className="wrapper">
                     <div className="heading-container">
                         <a className="main-title"
-                            onClick={handleDropdown}>Movie Picker</a>
+                            onClick={handleTrendingButton}>Movie Picker</a>
                         <div className="header-buttons-container">
                             <button className="find-movie-button" onClick={handleDropdown} >
                                 <figure>
