@@ -328,7 +328,7 @@ img {
     /* sizes */
     --wrapperWidth: 80%;
     --movieWidth: 265px;
-    --headerHeight: calc(var(--mainHeaderFont) + 0.8rem);
+    --headerHeight: calc(var(--mainHeaderFontSize) + 0.8rem);
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 1.5rem;
     --paddingGap: 30px;
@@ -336,14 +336,14 @@ img {
     --subHeadingMargin: 4px;
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
-    --mainHeaderFont: 2.2rem;
+    --mainHeaderFontSize: 2.2rem;
 }
 
 /* #endregion - variables */
 
 /* #region - fonts and sizes */
-h1 {
-    font-size: var(--mainHeaderFont);
+.main-title {
+    font-size: var(--mainHeaderFontSize);
 }
 
 h1,
@@ -485,6 +485,11 @@ header {
 .hover-animation:focus-within,
 .heading-container:focus-within .hover-animation {
     background-position: 0 100%;
+}
+
+.main-title:hover {
+    color: var(--darkAccent);
+    cursor: pointer;
 }
 
 .heading-container .hover-animation {

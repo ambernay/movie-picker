@@ -1,6 +1,6 @@
 import ToggleButton from './ToggleButton';
 
-function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, tvMovieToggle, setTvMovieToggle, screenSize }) {
+function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, tvMovieToggle, setTvMovieToggle, screenSize }) {
 
     const subHeading = isTrending ? "Trending" : "Back to Trending";
 
@@ -9,10 +9,6 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
 
     let toggleArrow = isTrending ? "make-display-none" : '';
     let styleClass = !isTrending ? "hover-animation" : '';
-
-    const handleDropdown = () => {
-        !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
-    }
 
     const handleTrendingButton = () => {
         if (!isTrending) {
@@ -27,7 +23,8 @@ function Header({ isDropdownVisible, setIsDropdownVisible, isTrending, setIsTren
             <section className="main-heading">
                 <div className="wrapper">
                     <div className="heading-container">
-                        <h1>Movie Picker</h1>
+                        <a className="main-title"
+                            onClick={handleDropdown}>Movie Picker</a>
                         <div className="header-buttons-container">
                             <button className="find-movie-button" onClick={handleDropdown} >
                                 <figure>

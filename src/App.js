@@ -27,9 +27,14 @@ function App() {
         isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
     }, [isDropdownVisible])
 
+    const handleDropdown = () => {
+        !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
+    }
+
     return (
         <>
             <Header
+                handleDropdown={handleDropdown}
                 isDropdownVisible={isDropdownVisible}
                 setIsDropdownVisible={setIsDropdownVisible}
                 isTrending={isTrending}
