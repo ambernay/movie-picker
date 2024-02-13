@@ -23,10 +23,10 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
             <section className="main-heading">
                 <div className="wrapper">
                     <div className="heading-container">
-                        <a className="main-title"
-                            onClick={handleTrendingButton}>Movie Picker</a>
+                        <button type='button' className="main-title"
+                            onClick={handleTrendingButton}>Movie Picker</button>
                         <div className="header-buttons-container">
-                            <button className="find-movie-button" onClick={handleDropdown} >
+                            <button type='button' className="find-movie-button" onClick={handleDropdown} >
                                 <figure>
                                     <span className="hover-animation">
                                         <h2>Find
