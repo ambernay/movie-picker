@@ -18,8 +18,6 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
                 const selectionOfProviders = data.results.filter((provider) => {
                     return [2, 8, 73, 119, 230, 337, 531].includes(provider.provider_id)
                 });
-                // adds an All button
-                selectionOfProviders.push({ "provider_id": "all-providers", "provider_name": "All" });
 
                 setProviderRadioButtons(selectionOfProviders);
             }).catch(() => {
