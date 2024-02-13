@@ -344,6 +344,8 @@ img {
 /* #region - fonts and sizes */
 .main-title {
     font-size: var(--mainHeaderFontSize);
+    color: var(--darkNeutral);
+    padding: 0;
 }
 
 h1,
@@ -543,6 +545,7 @@ li:focus {
 .find-movie-button {
     height: 100%;
     cursor: pointer;
+    padding-right: 10px;
 }
 
 .find-movie-button svg {
@@ -1051,11 +1054,6 @@ footer .copyright {
 
 @media(max-width: 740px) {
 
-    .heading-container {
-        align-items: center;
-        justify-content: space-between;
-    }
-
     header figure h2 {
         display: none;
     }
@@ -1071,7 +1069,7 @@ footer .copyright {
 
 @media(max-width: 565px) {
 
-    header h1 {
+    .main-title {
         font-size: calc(1.5rem + 1vw);
     }
 
