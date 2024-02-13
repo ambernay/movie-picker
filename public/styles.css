@@ -401,7 +401,6 @@ header {
     left: 0;
     width: 100%;
     height: var(--headerMargin);
-    padding: 10px 0;
     z-index: 10;
 }
 
@@ -414,6 +413,7 @@ header {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding: 10px 0;
 }
 
 .find-movie-button figure,
@@ -555,7 +555,6 @@ li:focus {
     height: var(--subHeaderHeight);
     align-items: center;
     background: var(--darkNeutral);
-    margin-top: var(--subHeadingMargin);
 }
 
 .result-heading-container {
@@ -820,7 +819,7 @@ form {
     position: absolute;
     top: calc(var(--headerMargin) + 0.5px);
     left: calc((100% - var(--wrapperWidth)) / 2);
-    height: calc(100vh - (var(--headerHeight) + var(--subHeaderHeight) + var(--bottomNavHeight)));
+    height: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
     width: var(--wrapperWidth);
     background: rgba(5, 4, 4, 0.96);
     flex-direction: column;
