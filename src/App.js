@@ -27,8 +27,9 @@ function App() {
         isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
     }, [isDropdownVisible])
 
-    const handleDropdown = () => {
+    const handleDropdown = (e) => {
         !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
+        e.stopPropagation();
     }
 
     return (
