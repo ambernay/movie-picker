@@ -521,9 +521,9 @@ header {
     cursor: pointer;
 }
 
-.radioButtonContainer:hover label,
-.radioButtonContainer:active label,
-.radioButtonContainer:focus-within label {
+.radio-button-container:hover label,
+.radio-button-container:active label,
+.radio-button-container:focus-within label {
     color: var(--midAccent);
     cursor: pointer;
 }
@@ -904,17 +904,21 @@ fieldset {
     justify-content: space-between;
 }
 
-.radioButtonContainer {
+.radio-button-container {
     display: flex;
     column-gap: 5px;
 }
 
-.genreButtons {
-    flex: 0 0 175px;
+.genre-buttons {
+    flex: 0 0 190px;
 }
 
-.decadeButtons {
+.decade-buttons {
     flex: 0 0 120px;
+}
+
+.provider-buttons {
+    flex: 0 0 135px;
 }
 
 fieldset label {

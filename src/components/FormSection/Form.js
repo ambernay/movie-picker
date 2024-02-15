@@ -6,7 +6,7 @@ import Regions from './Selections/Regions.js';
 import SortBy from './Selections/SortBy.js';
 import FormModal from './FormModal.js';
 
-function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage, tvMovieToggle }) {
+function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
 
     const [genre, setGenre] = useState();
     const [startDate, setStartDate] = useState();

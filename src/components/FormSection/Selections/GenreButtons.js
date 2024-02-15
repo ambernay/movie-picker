@@ -32,7 +32,7 @@ function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
             <legend id="genre">Genre:</legend>
             {genreRadioButtons.map((genre) => {
                 return (
-                    <div className="radioButtonContainer genreButtons" key={genre.id}>
+                    <div className="radio-button-container genre-buttons" key={genre.id}>
                         <input onChange={handleChange} type="radio" id={genre.id} value={genre.id} name="genre" tabIndex='0'></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>

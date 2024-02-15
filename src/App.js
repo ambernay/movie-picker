@@ -30,7 +30,7 @@ function App() {
     const handleDropdown = (e) => {
         e.stopPropagation();
         !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
-        console.log(e.target.tagName === 'MAIN');
+        // console.log(e.target.tagName === 'MAIN');
         return false
     }
 

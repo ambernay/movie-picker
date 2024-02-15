@@ -27,11 +27,11 @@ function DecadeButtons({ setStartDate, setEndDate, setIsValidRequest }) {
     }
 
     return (
-        <fieldset className="providers">
+        <fieldset>
             <legend id="decade">Decade:</legend>
             {decadesObj.decades.map((decade) => {
                 return (
-                    <div className="radioButtonContainer decadeButtons" key={decade["year"]}>
+                    <div className="radio-button-container decade-buttons" key={decade["year"]}>
                         <input onChange={handleChange} type="radio" id={decade["year"]} name={"decade"} value={[decade["start"], decade["end"]]}></input>
                         <label htmlFor={decade["year"]}>{decade["year"]}</label>
                     </div>
