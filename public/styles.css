@@ -819,7 +819,7 @@ li:focus .overview {
 form {
     display: flex;
     position: absolute;
-    top: calc(var(--headerMargin) + 0.5px);
+    top: var(--headerMargin);
     left: calc((100% - var(--wrapperWidth)) / 2);
     height: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
     width: var(--wrapperWidth);
@@ -828,6 +828,7 @@ form {
     justify-content: space-between;
     align-items: center;
     padding: 5px;
+    border-top: solid 1px var(--lightAccent);
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -837,7 +838,7 @@ form {
     width: var(--formWidth);
     justify-content: space-evenly;
     align-items: center;
-    height: 35px;
+    height: 45px;
     border-bottom: solid 1px var(--lightAccent);
 }
 
@@ -933,8 +934,8 @@ input[type="radio"] {
 /* x button */
 .x-button {
     position: absolute;
-    top: 3px;
-    right: 30px;
+    top: 9px;
+    right: 25px;
 }
 
 .lines {
@@ -1073,11 +1074,12 @@ footer .copyright {
 
     .form-nav {
         align-items: flex-end;
-        height: 55px;
+        height: 65px;
         justify-content: space-between;
     }
 
     .x-button {
+        top: 5px;
         right: 20px;
     }
 
