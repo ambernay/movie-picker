@@ -28,8 +28,10 @@ function App() {
     }, [isDropdownVisible])
 
     const handleDropdown = (e) => {
-        !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
         e.stopPropagation();
+        !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
+        console.log(e.target.tagName === 'MAIN');
+        return false
     }
 
     return (
@@ -45,7 +47,7 @@ function App() {
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
             />
-            <main onClick={handleDropdown}>
+            <main>
                 <Gallery
                     newURL={newURL}
                     isTrending={isTrending}
