@@ -1108,11 +1108,8 @@ footer .copyright {
     footer p {
         font-size: 0.6rem;
     }
-}
 
-/* for toggle button on portrait mobile */
-@media (max-width: 400px) {
-
+    /* for toggle button on portrait mobile */
     .result-heading-container {
         height: 100%;
         justify-content: space-between;

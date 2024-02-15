@@ -13,7 +13,7 @@ function App() {
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
 
     // screen size state for for toggle button
-    const [screenSize, setScreenSize] = useState((window.innerWidth <= 400 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen');
+    const [screenSize, setScreenSize] = useState((window.innerWidth <= 430 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen');
 
     useEffect(() => {
 
