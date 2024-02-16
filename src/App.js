@@ -12,13 +12,15 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
 
+    function evaluateScreenSize() {
+        return (window.innerWidth <= 430 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen';
+    }
+
     // screen size state for for toggle button
-    const [screenSize, setScreenSize] = useState((window.innerWidth <= 430 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen');
+    const [screenSize, setScreenSize] = useState(evaluateScreenSize());
 
     useEffect(() => {
-
-        window.addEventListener('resize', () => setScreenSize((window.innerWidth <= 400 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen'));
-
+        window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, []);
 
     // stop background scroll when form is visible
@@ -28,9 +30,7 @@ function App() {
     }, [isDropdownVisible])
 
     const handleDropdown = (e) => {
-        e.stopPropagation();
         !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
-        // console.log(e.target.tagName === 'MAIN');
         return false
     }
 
@@ -47,7 +47,7 @@ function App() {
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
             />
-            <main>
+            <main onClick={handleDropdown}>
                 <Gallery
                     newURL={newURL}
                     isTrending={isTrending}
