@@ -68,6 +68,7 @@ function App() {
                 setCurrentPage={setCurrentPage}
                 isTrending={isTrending}
                 tvMovieToggle={tvMovieToggle}
+                screenSize={screenSize}
             />
 
             <Footer />

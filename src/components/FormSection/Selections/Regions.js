@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from 'react';
 
-function Regions({ currentRegion, setCurrentRegion }) {
+function Regions({ currentRegion, setCurrentRegion, screenSize }) {
 
     const [regionList, setRegionList] = useState([]);
 
@@ -16,17 +16,18 @@ function Regions({ currentRegion, setCurrentRegion }) {
             }).catch(() => {
                 alert("Failed to fetch regions");
             })
-
     }, [setRegionList]);
 
     useEffect(() => {
-        /* sets default to canada */
+        /* default is canada */
         document.querySelector("select").value = currentRegion;
     })
 
     const handleChange = (e) => {
         setCurrentRegion(e.target.value);
     }
+
+    const chooseRegionName = screenSize !== 'narrowScreen' ? "english_name" : "iso_3166_1";
 
     return (
         <div className="dropdown-menu regions">
@@ -36,7 +37,7 @@ function Regions({ currentRegion, setCurrentRegion }) {
 
                     {regionList.map((region) => {
                         return (
-                            <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region["english_name"]}</option>
+                            <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region[chooseRegionName]}</option>
                         )
                     })}
                 </select>

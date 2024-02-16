@@ -1127,6 +1127,14 @@ footer .copyright {
         margin-top: calc(var(--headerHeight) + 1rem);
     }
 
+    /* for when region moves next to x-button on mobile */
+    .dropdown-menu.regions {
+        position: absolute;
+        top: 0.5%;
+        left: 3%;
+        margin: 0;
+    }
+
     footer p {
         font-size: 0.6rem;
     }

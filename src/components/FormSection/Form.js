@@ -71,21 +71,34 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>
                     <nav className="form-nav">
-                        <a href="#genre" tabIndex='0'>Genre</a>
-                        <a href="#decade" tabIndex='0'>Decade</a>
-                        <a href="#provider" tabIndex='0'>Provider</a>
+
+                        {screenSize === 'narrowScreen' ?
+                            <Regions
+                                currentRegion={currentRegion}
+                                setCurrentRegion={setCurrentRegion}
+                                screenSize={screenSize}
+                            />
+                            : null
+                        }
 
                         <button onClick={() => setIsDropdownVisible(false)} className="x-button">
                             <div className="lines a"></div>
                             <div className="lines b"></div>
                         </button>
+
+                        <a href="#genre" tabIndex='0'>Genre</a>
+                        <a href="#decade" tabIndex='0'>Decade</a>
+                        <a href="#provider" tabIndex='0'>Provider</a>
+
                     </nav>
-
-                    <Regions
-                        currentRegion={currentRegion}
-                        setCurrentRegion={setCurrentRegion}
-                    />
-
+                    {screenSize !== 'narrowScreen' ?
+                        <Regions
+                            currentRegion={currentRegion}
+                            setCurrentRegion={setCurrentRegion}
+                            screenSize={screenSize}
+                        />
+                        : null
+                    }
                     <FormModal
                         isGenreSelected={genre}
                         submitAttempted={submitAttempted}
