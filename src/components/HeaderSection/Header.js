@@ -27,7 +27,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                         <button type='button' className="main-title"
                             onClick={handleTrendingButton}>Movie Picker</button>
                         <div className="header-buttons-container">
-                            {screenSize === 'wideScreen' ?
+                            {screenSize !== 'narrowScreen' ?
                                 <FindMovieButton
                                     handleDropdown={handleDropdown}
                                     arrowClass={arrowClass}

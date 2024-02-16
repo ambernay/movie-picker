@@ -332,7 +332,7 @@ img {
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 1.5rem;
     --paddingGap: 30px;
-    --formWidth: 95%;
+    --formWidth: 96%;
     --subHeadingMargin: 4px;
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
@@ -934,8 +934,8 @@ input[type="radio"] {
 /* x button */
 .x-button {
     position: absolute;
-    top: 9px;
-    right: 25px;
+    top: 0.8%;
+    right: 3%;
 }
 
 .lines {
@@ -976,25 +976,41 @@ input[type="radio"] {
 .form-bottom {
     display: flex;
     flex-direction: column;
-    height: 120px;
-    width: 94%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background-color: var(--darkNeutral);
     border-top: 1px solid var(--lightAccent);
 }
 
 .dropdown-menu {
+    display: flex;
     background: var(--darkNeutral);
-    height: 0.8rem;
+    width: var(--formWidth);
     text-align: end;
     margin: 10px 0;
+    background-color: blue;
+}
+
+.dropdown-menu.regions {
+    justify-content: center;
+}
+
+.dropdown-menu.sort-by {
+    justify-content: flex-end;
 }
 
 .dropdown-menu span {
     border: solid 1px var(--lightAccent);
+    width: fit-content;
     padding: 2px;
 }
 
 .dropdown-menu select {
     color: var(--midAccent);
+    width: fit-content;
     text-align: center;
     cursor: pointer;
 }
@@ -1081,11 +1097,6 @@ footer .copyright {
         align-items: flex-end;
         height: 65px;
         justify-content: space-between;
-    }
-
-    .x-button {
-        top: 5px;
-        right: 20px;
     }
 
     .x-button .lines {
