@@ -876,7 +876,8 @@ a:focus {
     justify-content: space-between;
     height: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
     width: var(--formWidth);
-    /* margin-bottom: 60px; */
+    border-top: 1px solid var(--lightAccent);
+    padding-top: 15px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
