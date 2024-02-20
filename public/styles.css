@@ -691,6 +691,8 @@ button:focus svg {
 
 .toggle-button-container svg {
     height: 93%;
+    /* for safari */
+    height: 1.6rem;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
     z-index: 10;
