@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from "react";
 
-function ProviderButtons({ setProvider, setIsValidRequest, screenSize }) {
+function ProviderButtons({ setProvider, setIsValidRequest }) {
 
     const [providerRadioButtons, setProviderRadioButtons] = useState([]);
 

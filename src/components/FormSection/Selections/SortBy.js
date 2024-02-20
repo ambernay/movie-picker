@@ -21,11 +21,11 @@ function SortBy({ setSortOption }) {
         <div className="dropdown-menu sort-by">
             <label className="sr-only" htmlFor="sort" >Sort by:</label>
             <span className="hover-animation">
-                <select onChange={handleChange} name="sort" id="sort" tabIndex='0'>
+                <select onChange={handleChange} name="sort" id="sort" tabIndex='0' onFocus={(e) => e.target.size = '6'} onBlur={(e) => e.target.size = '1'}>
 
                     {sortMenuObj.sortOptions.map((option) => {
                         return (
-                            <option key={option["sort-by"]} id={option["sort-by"]} value={option["choice"]}>{option["sort-by"]}</option>
+                            <option onClick={(e) => e.target.parentElement.blur()} key={option["sort-by"]} id={option["sort-by"]} value={option["choice"]}>{option["sort-by"]}</option>
                         )
                     })}
                 </select>

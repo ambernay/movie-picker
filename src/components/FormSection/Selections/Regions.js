@@ -33,11 +33,13 @@ function Regions({ currentRegion, setCurrentRegion, screenSize }) {
         <div className="dropdown-menu regions">
             <label className="sr-only" htmlFor="region">Choose Region:</label>
             <span className='hover-animation'>
-                <select onChange={handleChange} name="region" id="region" tabIndex='0'>
+                <select onChange={handleChange} name="region" id="region" tabIndex='0' size='1' onFocus={(e) => e.target.size = '2'} onBlur={(e) => e.target.size = '1'}>
 
                     {regionList.map((region) => {
                         return (
-                            <option key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>{region[chooseRegionName]}</option>
+                            <option onClick={(e) => e.target.parentElement.blur()} key={region["iso_3166_1"]} id={region["iso_3166_1"]} value={region["iso_3166_1"]}>
+                                {region[chooseRegionName]}
+                            </option>
                         )
                     })}
                 </select>

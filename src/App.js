@@ -13,7 +13,8 @@ function App() {
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
 
     function evaluateScreenSize() {
-        return (window.innerWidth <= 430 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen';
+        // height has to be lower to allow for search bar pop-up
+        return (window.innerWidth <= 430 && window.innerHeight > 400) ? 'narrowScreen' : 'wideScreen';
     }
 
     // screen size state for for toggle button
@@ -27,11 +28,11 @@ function App() {
     useEffect(() => {
         const bodyEl = document.querySelector('body');
         isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
-    }, [isDropdownVisible])
+    }, [isDropdownVisible]);
 
     const handleDropdown = (e) => {
         !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
-        return false
+        return false;
     }
 
     return (
