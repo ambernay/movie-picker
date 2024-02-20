@@ -1194,8 +1194,12 @@ footer .copyright {
     @supports (-webkit-appearance:none) and (stroke-color:transparent) {
 
         /* simulate row and column gap in safari */
-        .safari_only {
+        li.safari-only {
             margin: calc(var(--paddingGap) / 2);
+        }
+
+        .dropdown-menu span.safari-only {
+            border: none;
         }
     }
 }

@@ -32,7 +32,7 @@ function Regions({ currentRegion, setCurrentRegion, screenSize }) {
     return (
         <div className="dropdown-menu regions">
             <label className="sr-only" htmlFor="region">Choose Region:</label>
-            <span className='hover-animation'>
+            <span className='hover-animation safari-only'>
                 <select onChange={handleChange} name="region" id="region" tabIndex='0' size='1' onFocus={(e) => e.target.size = '2'} onBlur={(e) => e.target.size = '1'}>
 
                     {regionList.map((region) => {
