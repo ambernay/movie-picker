@@ -1,3 +1,11 @@
+/* stops scroll bounce */
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
 /* #region - setup snippets */
 html {
     line-height: 1.15;
@@ -6,7 +14,7 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
 }
 
 article,
@@ -335,6 +343,7 @@ img {
     --formWidth: 96%;
     --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
     --formNavHeight: 45px;
+    --dropdownHeight: 1.5rem;
     --formBottomHeight: 100px;
     --region-dropdown-height: calc(var(--formHeight) - (var(--formNavHeight) + var(--formBottomHeight) + 20px));
     --subHeadingMargin: 4px;
@@ -834,6 +843,7 @@ form {
     justify-content: space-between;
     align-items: center;
     padding: 5px;
+    padding-bottom: var(--formBottomHeight);
     border-top: solid 1px var(--lightAccent);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -859,10 +869,12 @@ a:focus {
 }
 
 .fieldset-container {
-    display: inline-block;
+    /* display was inline-block for some reason */
+    display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - ((var(--headerHeight) * 2) + 65px));
+    justify-content: space-between;
+    height: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
     width: var(--formWidth);
     /* margin-bottom: 60px; */
     overflow-y: scroll;
@@ -994,6 +1006,7 @@ input[type="radio"] {
 .dropdown-menu {
     display: flex;
     background: var(--darkNeutral);
+    height: var(--dropdownHeight);
     width: var(--formWidth);
     text-align: end;
     margin: 10px 0;
@@ -1202,6 +1215,24 @@ footer .copyright {
 
         .dropdown-menu span.safari-only {
             border: none;
+        }
+
+        /* for form because fit-content doen't work befor v15 */
+
+        fieldset {
+            overflow: scroll;
+        }
+
+        .genre-fieldset {
+            min-height: 12rem;
+        }
+
+        .decade-fieldset {
+            min-height: 8rem;
+        }
+
+        .providers-fieldset {
+            min-height: 6rem;
         }
     }
 }

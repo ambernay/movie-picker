@@ -27,7 +27,7 @@ function DecadeButtons({ setStartDate, setEndDate, setIsValidRequest }) {
     }
 
     return (
-        <fieldset>
+        <fieldset className='decade-fieldset'>
             <legend id="decade">Decade:</legend>
             {decadesObj.decades.map((decade) => {
                 return (

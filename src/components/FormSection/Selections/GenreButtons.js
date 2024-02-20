@@ -28,7 +28,7 @@ function GenreButtons({ setGenre, setIsValidRequest, tvMovieToggle }) {
     }
 
     return (
-        <fieldset>
+        <fieldset className='genre-fieldset'>
             <legend id="genre">Genre:</legend>
             {genreRadioButtons.map((genre) => {
                 return (
