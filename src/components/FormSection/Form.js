@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GenreButtons from './Selections/GenreButtons.js';
 import DecadeButtons from './Selections/DecadeButtons.js';
 import ProviderButtons from './Selections/ProviderButtons.js';
-import Regions from './Selections/Regions.js';
+import RegionDropdown from './Selections/RegionDropdown.js';
 import SortBy from './Selections/SortBy.js';
 import FormModal from './FormModal.js';
 
@@ -73,7 +73,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     <nav className="form-nav">
 
                         {screenSize === 'narrowScreen' ?
-                            <Regions
+                            <RegionDropdown
                                 currentRegion={currentRegion}
                                 setCurrentRegion={setCurrentRegion}
                                 screenSize={screenSize}
@@ -92,7 +92,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
 
                     </nav>
                     {screenSize !== 'narrowScreen' ?
-                        <Regions
+                        <RegionDropdown
                             currentRegion={currentRegion}
                             setCurrentRegion={setCurrentRegion}
                             screenSize={screenSize}

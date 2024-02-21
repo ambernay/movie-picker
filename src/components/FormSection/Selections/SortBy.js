@@ -20,8 +20,8 @@ function SortBy({ setSortOption }) {
     return (
         <div className="dropdown-menu sort-by">
             <label className="sr-only" htmlFor="sort" >Sort by:</label>
-            <span className="hover-animation safari-only">
-                <select onChange={handleChange} name="sort" id="sort" tabIndex='0' onFocus={(e) => e.target.size = '6'} onBlur={(e) => e.target.size = '1'}>
+            <span className="dropdow-span hover-animation safari-only">
+                <select onChange={handleChange} name="sort" id="sort" tabIndex='0'>
 
                     {sortMenuObj.sortOptions.map((option) => {
                         return (

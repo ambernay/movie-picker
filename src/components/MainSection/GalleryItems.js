@@ -9,7 +9,7 @@ function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabInde
 
     return (
         // tab index default 0 and -1 when dropdown menu is open
-        <li className="safari-only" tabIndex={tabIndex} onClick={(e) => { e.stopPropagation() }}>
+        <li className="galleryItems safari-only" tabIndex={tabIndex} onClick={(e) => { e.stopPropagation() }}>
             <img className={imageHeightClass} src={imagePath} alt={movieTitle} />
             <div className="info-container">
                 <h3>{truncatedTitle}</h3>
