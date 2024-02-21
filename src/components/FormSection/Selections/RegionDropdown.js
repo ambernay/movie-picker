@@ -22,7 +22,7 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
 
     useEffect(() => {
         /* default is canada */
-        document.querySelector("select").value = currentRegion;
+        // document.querySelector("select").value = currentRegion;
     })
 
     const handleChange = (e) => {
@@ -35,7 +35,12 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
         <CustomDropdown
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            regionList={regionList}
+            listClass={'regionList'}
+            currentSelected={currentRegion}
+            selectList={regionList}
+            itemValue={"iso_3166_1"}
+            itemName={'english_name'}
+            handleChange={handleChange}
         />
     )
 

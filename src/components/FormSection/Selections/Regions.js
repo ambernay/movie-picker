@@ -20,7 +20,7 @@ function Regions({ currentRegion, setCurrentRegion, screenSize }) {
 
     useEffect(() => {
         /* default is canada */
-        document.querySelector("select").value = currentRegion;
+        document.querySelector(".select").value = currentRegion;
     })
 
     const handleChange = (e) => {

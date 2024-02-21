@@ -1045,6 +1045,15 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+.regionList .select-container.visible {
+    height: var(--region-dropdown-height);
+    overflow: scroll;
+}
+
+.regionList .select-container.hidden {
+    display: none;
+}
+
 .dropdown-menu .select li:hover {
     background-color: var(--midAccent);
 }
@@ -1055,11 +1064,6 @@ input[type="radio"] {
 
 /* .dropdown-menu select:focus {
     background-color: var(--darkNeutral);
-
-}
-
-.regions select:focus {
-    height: var(--region-dropdown-height);
 }
 
 .sort-by select:focus {
