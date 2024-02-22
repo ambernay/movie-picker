@@ -23,7 +23,7 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
             }).catch(() => {
                 alert("Failed to fetch regions");
             })
-    }, [setRegionList]);
+    }, [setRegionList, screenSize]);
 
     const handleChange = (e) => {
         setCurrentRegion([e.target.getAttribute('value'), e.target.getAttribute('name')]);

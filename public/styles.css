@@ -342,10 +342,12 @@ img {
     --paddingGap: 30px;
     --formWidth: 96%;
     --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
-    --formNavHeight: 45px;
+    --formNavHeight: 2.25rem;
     --dropdownHeight: 1.5rem;
-    --formBottomHeight: 100px;
-    --region-dropdown-height: calc(var(--formHeight) - (var(--formNavHeight) + var(--formBottomHeight) + 20px));
+    --formBottomHeight: 5rem;
+    --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
+    /* --region-dropdown-height: calc(var(--formHeight) - (var(--formNavHeight) + var(--formBottomHeight) + 20px)); */
+    --region-dropdown-height: calc(var(--formHeight) - (var(--innerform) + 5px));
     --subHeadingMargin: 4px;
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
@@ -534,9 +536,12 @@ header {
     cursor: pointer;
 }
 
-.radio-button-container:hover label,
-.radio-button-container:active label,
-.radio-button-container:focus-within label {
+input:hover,
+label:hover,
+input:active,
+label:active,
+input:focus-within,
+label:focus-within {
     color: var(--midAccent);
     cursor: pointer;
 }
@@ -1013,7 +1018,6 @@ input[type="radio"] {
     height: var(--dropdownHeight);
     width: var(--formWidth);
     justify-content: center;
-    margin: 10px 0;
     padding: 1%;
 }
 
@@ -1023,6 +1027,7 @@ input[type="radio"] {
 
 .dropdown-menu.sort-by {
     align-items: flex-end;
+    margin: 10px 0;
 }
 
 .dropdown-menu .label-container {
@@ -1033,13 +1038,17 @@ input[type="radio"] {
 }
 
 .select-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
     position: absolute;
     background-color: var(--lightAccent);
+    padding: 10px;
     overscroll-behavior: none;
 }
 
 .dropdown-menu.region-list .select-container {
-    top: calc((var(--dropdownHeight) * 3) + 9px);
+    top: calc(var(--formNavHeight) + var(--dropdownHeight) + 5px);
 }
 
 /* list */
@@ -1196,7 +1205,7 @@ footer .copyright {
     }
 
     /* for when region moves next to x-button on mobile */
-    .dropdown-menu.regions {
+    .dropdown-menu.region-list {
         position: absolute;
         top: 0.5%;
         left: 3%;
