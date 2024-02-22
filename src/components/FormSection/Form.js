@@ -12,7 +12,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
-    const [currentRegion, setCurrentRegion] = useState("CA");
+    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
     const [sortOption, setSortOption] = useState("vote_average.desc");
@@ -40,7 +40,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             "api_key": apiKey,
             "vote_count.gte": 10,
             "sort_by": sortOption,
-            "watch_region": currentRegion,
+            "watch_region": currentRegion[0],
             "language": "en-US",
             "page": currentPage
         })
@@ -52,7 +52,6 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
 
         url.search = params;
         setNewURL(url);
-
         // scroll back to top when new gallery loads - (offset to wait for page load)
         setTimeout(() => window.scrollTo(0, 0), 100);
     }

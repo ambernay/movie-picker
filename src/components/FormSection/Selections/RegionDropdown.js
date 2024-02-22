@@ -23,23 +23,28 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
     useEffect(() => {
         /* default is canada */
         // document.querySelector("select").value = currentRegion;
+        console.log(document.querySelector('label').textContent);
     })
 
     const handleChange = (e) => {
-        setCurrentRegion(e.target.value);
+        setCurrentRegion([e.target.getAttribute('value'), e.target.getAttribute('name')]);
+        console.log(e.target.getAttribute('value'), currentRegion);
     }
 
-    const chooseRegionName = screenSize !== 'narrowScreen' ? "english_name" : "iso_3166_1";
+    const chooseRegionLabel = screenSize !== 'narrowScreen' ? "english_name" : "iso_3166_1";
+
+    const chooseSelectedLabel = screenSize !== 'narrowScreen' ? currentRegion[1] : currentRegion[0];
 
     return (
         <CustomDropdown
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             listClass={'regionList'}
-            currentSelected={currentRegion}
+            currentSelectedLabel={chooseSelectedLabel}
             selectList={regionList}
             itemValue={"iso_3166_1"}
             itemName={'english_name'}
+            listHeading={chooseRegionLabel}
             handleChange={handleChange}
         />
     )
