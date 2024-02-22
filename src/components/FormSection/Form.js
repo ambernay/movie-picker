@@ -3,7 +3,7 @@ import GenreButtons from './Selections/GenreButtons.js';
 import DecadeButtons from './Selections/DecadeButtons.js';
 import ProviderButtons from './Selections/ProviderButtons.js';
 import RegionDropdown from './Selections/RegionDropdown.js';
-import SortBy from './Selections/SortBy.js';
+import SortByDropdown from './Selections/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
 function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
@@ -124,7 +124,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                         >
                             <button>{tvMovieToggle === 'movie' ? 'Get Movies' : 'Get Shows'}</button>
                         </div>
-                        <SortBy
+                        <SortByDropdown
                             setSortOption={setSortOption}
                         />
                     </section>

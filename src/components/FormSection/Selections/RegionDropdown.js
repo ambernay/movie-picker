@@ -20,15 +20,8 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
             })
     }, [setRegionList]);
 
-    useEffect(() => {
-        /* default is canada */
-        // document.querySelector("select").value = currentRegion;
-        console.log(document.querySelector('label').textContent);
-    })
-
     const handleChange = (e) => {
         setCurrentRegion([e.target.getAttribute('value'), e.target.getAttribute('name')]);
-        console.log(e.target.getAttribute('value'), currentRegion);
     }
 
     const chooseRegionLabel = screenSize !== 'narrowScreen' ? "english_name" : "iso_3166_1";
@@ -39,7 +32,7 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
         <CustomDropdown
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            listClass={'regionList'}
+            listClass={'region-list'}
             currentSelectedLabel={chooseSelectedLabel}
             selectList={regionList}
             itemValue={"iso_3166_1"}
