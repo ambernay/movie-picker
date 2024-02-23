@@ -32,14 +32,31 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
 
     const chooseRegionLabel = screenSize !== 'narrowScreen' ? "english_name" : "iso_3166_1";
 
-    const chooseSelectedLabel = screenSize !== 'narrowScreen' ? currentRegion[1] : currentRegion[0];
+    const chooseSelectedLabel = () => {
+
+        let selectedLabel = currentRegion[0];
+
+        if (screenSize !== 'narrowScreen') {
+            let fullRegionName = currentRegion[1];
+            let spaceCount = (fullRegionName.split(" ").length - 1);
+
+            if (spaceCount > 1) {
+                let truncatedRegionName = (fullRegionName.slice(0, fullRegionName.lastIndexOf(' ')) + '...');
+
+                selectedLabel = truncatedRegionName;
+            }
+
+            selectedLabel = fullRegionName;
+        }
+        return selectedLabel;
+    }
 
     return (
         <CustomDropdown
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             listClass={'region-list'}
-            currentSelectedLabel={chooseSelectedLabel}
+            currentSelectedLabel={chooseSelectedLabel()}
             selectList={regionList}
             itemValue={"iso_3166_1"}
             itemName={'english_name'}
