@@ -34,7 +34,7 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
 
     const chooseSelectedLabel = () => {
 
-        let selectedLabel = currentRegion[0];
+        let countryCode = currentRegion[0];
 
         if (screenSize !== 'narrowScreen') {
             let fullRegionName = currentRegion[1];
@@ -43,12 +43,11 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
             if (spaceCount > 1) {
                 let truncatedRegionName = (fullRegionName.slice(0, fullRegionName.lastIndexOf(' ')) + '...');
 
-                selectedLabel = truncatedRegionName;
+                return truncatedRegionName;
             }
 
-            selectedLabel = fullRegionName;
-        }
-        return selectedLabel;
+            return fullRegionName;
+        } else { return countryCode; }
     }
 
     return (

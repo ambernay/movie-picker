@@ -14,7 +14,7 @@ export default function App({ isOpen, setIsOpen, listClass, selectList, currentS
 
     return (
         <DropDownContainer className={`dropdown-menu ${listClass}`} onClick={dropdownToggle}>
-            <DropDownHeader className="label-container">                {currentSelectedLabel}
+            <DropDownHeader className={`label-container ${listClass}`}>                {currentSelectedLabel}
             </DropDownHeader>
             <DropDownListContainer
                 className={`select-container ${showOrHide}`}>
