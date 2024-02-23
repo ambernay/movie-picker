@@ -6,9 +6,9 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
     const [isOpen, setIsOpen] = useState(false);
     const [regionList, setRegionList] = useState([]);
 
+
     // sorts by english_name (instead of country code) depending on screen size
     const sortRegionsByName = (a, z) => a.english_name.localeCompare(z.english_name);
-
 
     const regionAPI = "https://api.themoviedb.org/3/watch/providers/regions?api_key=0a093f521e98a991f4e4cc2a12460255&language=en-US";
 
@@ -23,6 +23,7 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
             }).catch(() => {
                 alert("Failed to fetch regions");
             })
+        // screensize as depencency might be an issue...
     }, [setRegionList, screenSize]);
 
     const handleChange = (e) => {
