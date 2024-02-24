@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import GenreButtons from './Selections/GenreButtons.js';
 import DecadeButtons from './Selections/DecadeButtons.js';
 import ProviderButtons from './Selections/ProviderButtons.js';
-import RegionDropdown from './Selections/RegionDropdown.js';
-import SortByDropdown from './Selections/SortByDropdown.js';
+import RegionDropdown from './Dropdowns/RegionDropdown.js';
+import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
 function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
