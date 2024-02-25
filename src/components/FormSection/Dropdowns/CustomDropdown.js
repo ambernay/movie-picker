@@ -1,11 +1,4 @@
 import React from "react";
-import styled from 'styled-components';
-
-const DropDownContainer = styled("div")``;
-const DropDownHeader = styled("label")``;
-const DropDownListContainer = styled("div")``;
-const DropDownList = styled("ul")``;
-const ListItem = styled("li")``;
 
 export default function App({ isOpen, setIsOpen, listClass, selectList, currentSelectedLabel, itemValue, itemName, listHeading, handleChange }) {
 
@@ -13,27 +6,26 @@ export default function App({ isOpen, setIsOpen, listClass, selectList, currentS
     const showOrHide = isOpen ? 'visible' : 'hidden';
 
     return (
-        <DropDownContainer className={`dropdown-menu ${listClass}`} onClick={dropdownToggle}>
-            <DropDownHeader className="label-container">                {currentSelectedLabel}
-            </DropDownHeader>
-            <DropDownListContainer
+        <div className={`dropdown-menu ${listClass}`} onClick={dropdownToggle}>
+            <label className="label-container">                {currentSelectedLabel}
+            </label>
+            <div
                 className={`select-container ${showOrHide}`}>
-                <DropDownList className="select">
+                <ul className="select">
                     {selectList.map((listItem) => {
                         return (
-                            <ListItem
+                            <li
                                 key={listItem[itemValue]}
                                 value={listItem[itemValue]}
                                 name={listItem[itemName]}
                                 onClick={handleChange}
                             >
                                 {listItem[listHeading]}
-                            </ListItem>
+                            </li>
                         )
                     })}
-                </DropDownList>
-            </DropDownListContainer>
-        </DropDownContainer>
-
+                </ul>
+            </div>
+        </div>
     );
 }

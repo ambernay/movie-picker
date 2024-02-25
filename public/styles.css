@@ -474,7 +474,6 @@ header {
     background-color: var(--darkAccent);
 }
 
-.dropdown-menu .hover-animation::after,
 .trending-button .hover-animation::after {
     background-color: var(--midAccent);
 }
