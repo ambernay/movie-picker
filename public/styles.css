@@ -325,6 +325,7 @@ img {
     --darkAccent: #720308;
     --darkAccentOpacity: rgba(114, 3, 8, 0.5);
     --lightAccent: #fff3e4;
+    --eyeIconColor: var(--darkNeutral);
 
     /* to be redefined */
     --gradientBaseVar: #fff3e4;
@@ -811,6 +812,53 @@ ul li .info-container {
     /* overflow transition */
     max-height: 0;
     transition: max-height 0.5s ease-out;
+
+}
+
+.movie-info {
+    display: block;
+    height: inherit;
+    width: inherit;
+}
+
+.watch-providers {
+    background: var(--lightAccent);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 10px;
+    padding: inherit;
+    overflow-y: scroll;
+    /* overflow transition */
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+}
+
+.overview .heading-container {
+    background-color: tomato;
+}
+
+.eye-icon svg {
+    width: 1.5rem;
+    background: none;
+}
+
+.eye-icon svg,
+.eye-icon svg circle {
+
+    fill: var(--eyeIconColor);
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.overview .heading-container:hover,
+.overview .heading-container:active,
+.overview .heading-container:focus {
+    --eyeIconColor: var(--darkAccent);
+    cursor: pointer;
 }
 
 li:hover .overview,
@@ -819,7 +867,8 @@ li:focus .overview {
     display: block;
     visibility: visible;
     max-height: 420px;
-    max-height: -webkit-fill-available;
+    height: -webkit-fill-available;
+    /* max-height: -webkit-fill-available; */
     transition: max-height 0.5s ease-in;
 }
 
