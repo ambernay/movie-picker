@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 
-function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle }) {
+function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion }) {
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -101,6 +101,9 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
                                         "No description available"}
                                     imagePath={imagePath}
                                     audienceRating={(movie.vote_average).toFixed(1)}
+                                    movieID={movie.id}
+                                    tvMovieToggle={tvMovieToggle}
+                                    currentRegion={currentRegion}
                                 />
                             )
                         })}

@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import ProviderIcons from './ProviderIcons.js';
-import Icons from '../Icons.js';
+import { useState, useEffect } from 'react';
+import MovieInfo from './MovieInfo.js';
 
-function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabIndex }) {
+function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion }) {
 
-    const [infoState, setInfoState] = useState('overview');
+    const [streamingOptions, setStreamingOptions] = useState([]);
 
     let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
 
@@ -12,18 +11,25 @@ function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabInde
 
     let truncatedTitle = (movieTitle.length > 35) ? (movieTitle.slice(0, 35) + "...") : movieTitle;
 
-    const handleMovieInfo = () => {
+    // useEffect(() => {
+    //     const movieID = 346698;
+    //     // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
 
-        setInfoState('provider-info');
+    //     const getMovieStreamingOptions = `https://api.themoviedb.org/3/${tvMovieToggle}/${movieID}/watch/providers?api_key=0a093f521e98a991f4e4cc2a12460255`;
 
-    }
+    //     fetch(getMovieStreamingOptions)
+    //         .then(results => {
+    //             return results.json();
+    //         })
+    //         .then(data => {
+    //             setStreamingOptions(data.results);
 
-    const handleMouseLeave = () => {
-        // resets state to overview on mouseout
-        setInfoState('overview');
-        // blurs active element to allow hover out
-        document.activeElement.blur();
-    }
+    //         }).catch(() => {
+    //             alert("Failed to fetch streaming options");
+    //         })
+    // }, [setStreamingOptions, tvMovieToggle]);
+
+    // console.log(streamingOptions);
 
     return (
         // tab index default 0 and -1 when dropdown menu is open
@@ -33,22 +39,9 @@ function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabInde
                 <h3>{truncatedTitle}</h3>
                 <p className="rating">{rating}</p>
             </div>
-            <div className='overview' onMouseLeave={handleMouseLeave}>
-                <div className={infoState === 'overview' ? 'movie-info' : 'hidden'}>
-                    <div className='heading-container' onClick={handleMovieInfo}>
-                        <h4>Overview</h4>
-                        <figure className="eye-icon">
-                            <Icons />
-                            <figcaption className="sr-only">Eye icon: where to watch</figcaption>
-                        </figure>
-                    </div>
-                    <p>{overview}</p>
-                </div>
-                <ProviderIcons
-                    infoState={infoState}
-                />
-            </div>
-
+            <MovieInfo
+                overview={overview}
+            />
         </li>
     )
 }
