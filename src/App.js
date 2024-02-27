@@ -11,6 +11,7 @@ function App() {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
+    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
 
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
@@ -52,6 +53,8 @@ function App() {
                 <Gallery
                     newURL={newURL}
                     isTrending={isTrending}
+                    currentRegion={currentRegion}
+                    setCurrentRegion={setCurrentRegion}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
                     isDropdownVisible={isDropdownVisible}
@@ -65,6 +68,8 @@ function App() {
                 isDropdownVisible={isDropdownVisible}
                 setIsTrending={setIsTrending}
                 setIsDropdownVisible={setIsDropdownVisible}
+                currentRegion={currentRegion}
+                setCurrentRegion={setCurrentRegion}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 isTrending={isTrending}

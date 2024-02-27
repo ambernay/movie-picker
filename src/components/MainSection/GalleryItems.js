@@ -3,7 +3,7 @@ import MovieInfo from './MovieInfo.js';
 
 function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion }) {
 
-    const [streamingOptions, setStreamingOptions] = useState([]);
+    console.log(currentRegion);
 
     let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
 
@@ -41,6 +41,9 @@ function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating
             </div>
             <MovieInfo
                 overview={overview}
+                movieID={movieID}
+                tvMovieToggle={tvMovieToggle}
+                currentRegion={currentRegion}
             />
         </li>
     )

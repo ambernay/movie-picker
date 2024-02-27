@@ -3,7 +3,7 @@ import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 
 function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion }) {
-
+    console.log(currentRegion);
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState('Loading...');
@@ -34,44 +34,15 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
             .then(data => {
                 setMoviesToDisplay(data.results);
                 setTotalPages(data.total_pages);
-                // console.log(data.results);
 
                 // message for no results
                 if (data.results < 1) { setStatusMessage('No results') };
             }).catch(() => {
                 setStatusMessage("Failed to fetch trending");
             })
+
         // runs on url or currentPage change and form submission
     }, [isTrending, newURL, currentPage, tvMovieToggle, setTotalPages, setMoviesToDisplay]);
-
-    // region testing for providerIcons
-    const [streamingOptions, setStreamingOptions] = useState([]);
-
-
-    // const tvID = 1400;
-    // const tvMovieToggle = 'movie';
-
-    // useEffect(() => {
-    //     const movieID = 346698;
-    //     // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
-
-    //     const getMovieStreamingOptions = `https://api.themoviedb.org/3/${tvMovieToggle}/${movieID}/watch/providers?api_key=0a093f521e98a991f4e4cc2a12460255`;
-
-    //     fetch(getMovieStreamingOptions)
-    //         .then(results => {
-    //             return results.json();
-    //         })
-    //         .then(data => {
-    //             setStreamingOptions(data.results);
-
-    //         }).catch(() => {
-    //             alert("Failed to fetch streaming options");
-    //         })
-    // }, [setStreamingOptions, tvMovieToggle]);
-
-    // console.log(streamingOptions);
-
-    // endregion testing for providerIcons
 
     return (
         <>
