@@ -3,7 +3,7 @@ import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 
 function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion }) {
-    console.log(currentRegion);
+
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState('Loading...');

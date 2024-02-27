@@ -3,7 +3,6 @@ import MovieInfo from './MovieInfo.js';
 
 function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion }) {
 
-    console.log(currentRegion);
 
     let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
 

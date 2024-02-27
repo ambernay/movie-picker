@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useState, useEffect } from 'react';
-import Icons from '../Icons.js';
+import { EyeIcon } from '../Icons.js';
 
 function MovieInfo({ overview, movieID, tvMovieToggle, currentRegion }) {
 
@@ -19,13 +19,20 @@ function MovieInfo({ overview, movieID, tvMovieToggle, currentRegion }) {
             })
             .then(data => {
                 setStreamingOptions(data.results[currentRegion[0]] ? data.results[currentRegion[0]] : { flatrate: 'N/A', rent: 'N/A', buy: 'N/A' });
-
             }).catch(() => {
                 alert("Failed to fetch streaming options");
             })
     }, [setStreamingOptions, tvMovieToggle, currentRegion]);
 
-    console.log(streamingOptions);
+    // console.log(streamingOptions);
+    // console.log(streamingOptions.flatrate);
+    const viewingOptions = Object.keys(streamingOptions);
+    // console.log(viewingOptions);
+
+    const providerOptions = Object.keys(viewingOptions);
+    // providerOptions.forEach(console.log('fuckyou'))
+    // console.log(providerOptions);
+
 
     // endregion testing for providerIcons
 
@@ -47,7 +54,7 @@ function MovieInfo({ overview, movieID, tvMovieToggle, currentRegion }) {
                     <div className='heading-container' onClick={handleMovieInfo}>
                         <h4>Overview</h4>
                         <figure className="eye-icon">
-                            <Icons />
+                            <EyeIcon />
                             <figcaption className="sr-only">Eye icon: where to watch</figcaption>
                         </figure>
                     </div>
