@@ -751,11 +751,11 @@ main {
 .gallery-container ul {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
 }
 
 /* only gallery cards */
 .gallery-container .gallery-list-container {
+    flex-direction: row;
     width: 100%;
     column-gap: var(--paddingGap);
     row-gap: calc(var(--paddingGap) + 1rem);
@@ -790,7 +790,6 @@ ul li .info-container {
     justify-content: space-between;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 5;
-
     margin: 5px 0;
 }
 
@@ -876,16 +875,17 @@ li:focus .overview {
 /* #region - where-to-watch */
 
 .viewing-options-list-container {
+    flex-direction: column;
     justify-content: flex-start;
 }
 
 .viewing-options-list-container li {
     flex-direction: column;
     align-items: flex-start;
+    padding: 0 5px 0 0;
 }
 
 .provider-options-list-container {
-    column-gap: 5px;
     justify-content: flex-start;
 }
 

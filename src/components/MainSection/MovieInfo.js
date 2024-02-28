@@ -32,7 +32,7 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
 
     const handleMouseLeave = () => {
         // resets state to overview on mouseout
-        setInfoState('overview');
+        // setInfoState('overview');
         // blurs active element to allow hover out
         document.activeElement.blur();
     }
