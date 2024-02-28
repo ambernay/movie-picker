@@ -56,7 +56,7 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
                 ) : null
                 }
                 <div className="gallery-container">
-                    <ul>
+                    <ul className='gallery-list-container'>
                         {moviesToDisplay.map((movie) => {
                             const imageURL = 'https://image.tmdb.org/t/p/w500';
                             {/* if image not available, use icon */ }
