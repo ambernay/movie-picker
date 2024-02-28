@@ -23,7 +23,7 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
             })
     }, [setviewingOptions, tvMovieToggle, movieID, currentRegion]);
 
-    console.log(viewingOptions);
+    // console.log(viewingOptions);
     // viewingOptions.buy?.map(i => i.logo_path);
 
     const handleMovieInfo = () => {
@@ -52,7 +52,11 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                 </div>
                 <div className={infoState === 'provider-info' ? 'movie-info' : 'hidden'}>
                     {(Object.keys(viewingOptions).length > 1) ?
-                        <h2 className='no-options'>No viewing options for <span>{movieTitle}</span> in your region</h2>
+                        <div className='no-options'>
+                            <h3>No viewing options for</h3>
+                            <h3 className='no-options-movie-title'>{movieTitle}</h3>
+                            <h3>in your region</h3>
+                        </div>
 
                         : <ProviderIconsList
                             movieTitle={movieTitle}

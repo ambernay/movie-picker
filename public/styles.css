@@ -371,6 +371,7 @@ legend,
 button,
 a {
     font-family: var(--headingFont);
+    word-wrap: break-word;
 }
 
 h2,
@@ -892,6 +893,29 @@ li:focus .overview {
 .provider-icons {
     width: 2rem;
     border: solid var(--midAccent) 3px;
+}
+
+.no-options {
+    color: var(--darkNeutral);
+    display: flex;
+    max-height: 420px;
+    height: -webkit-fill-available;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.no-options .no-options-movie-title,
+.no-options h3 {
+    width: 90%;
+    padding: 10px;
+}
+
+.no-options-movie-title {
+    color: var(--darkAccent);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
 }
 
 /* #endregion - where-to-watch */
