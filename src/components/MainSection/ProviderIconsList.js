@@ -11,7 +11,8 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
             <ul className='viewing-options-list-container'>
                 {Object.keys(viewingOptions).map((key) => {
                     const imageURL = 'https://image.tmdb.org/t/p/w500';
-                    const heading = key.charAt(0).toUpperCase() + key.slice(1) + ':';
+                    const filteredKey = key === 'flatrate' ? 'Streaming' : key;
+                    const heading = filteredKey.charAt(0).toUpperCase() + filteredKey.slice(1) + ':';
                     {/* create lists */ }
                     if (key !== 'link') {
                         const optionKey = key + '/' + movieID;
