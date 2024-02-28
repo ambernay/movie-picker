@@ -23,6 +23,7 @@ function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating
                 movieID={movieID}
                 tvMovieToggle={tvMovieToggle}
                 currentRegion={currentRegion}
+                movieTitle={truncatedTitle}
             />
         </li>
     )
