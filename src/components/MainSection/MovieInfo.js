@@ -5,36 +5,25 @@ import { EyeIcon } from '../Icons.js';
 function MovieInfo({ overview, movieID, tvMovieToggle, currentRegion }) {
 
     const [infoState, setInfoState] = useState('overview');
-
-    // region testing for providerIcons
-    const [streamingOptions, setStreamingOptions] = useState([]);
+    const [viewingOptions, setviewingOptions] = useState([]);
 
     useEffect(() => {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
-        const getMovieStreamingOptions = `https://api.themoviedb.org/3/${tvMovieToggle}/${movieID}/watch/providers?api_key=0a093f521e98a991f4e4cc2a12460255`;
+        const getMovieviewingOptions = `https://api.themoviedb.org/3/${tvMovieToggle}/${movieID}/watch/providers?api_key=0a093f521e98a991f4e4cc2a12460255`;
 
-        fetch(getMovieStreamingOptions)
+        fetch(getMovieviewingOptions)
             .then(results => {
                 return results.json();
             })
             .then(data => {
-                setStreamingOptions(data.results[currentRegion[0]] ? data.results[currentRegion[0]] : { flatrate: 'N/A', rent: 'N/A', buy: 'N/A' });
+                setviewingOptions(data.results[currentRegion[0]] ? data.results[currentRegion[0]] : {});
             }).catch(() => {
-                alert("Failed to fetch streaming options");
+                console.log("Failed to fetch streaming options");
             })
-    }, [setStreamingOptions, tvMovieToggle, currentRegion]);
+    }, [setviewingOptions, tvMovieToggle, movieID, currentRegion]);
 
-    // console.log(streamingOptions);
-    // console.log(streamingOptions.flatrate);
-    const viewingOptions = Object.keys(streamingOptions);
     // console.log(viewingOptions);
-
-    const providerOptions = Object.keys(viewingOptions);
-    // providerOptions.forEach(console.log('fuckyou'))
-    // console.log(providerOptions);
-
-
-    // endregion testing for providerIcons
+    // viewingOptions.buy?.map(i => i.logo_path);
 
     const handleMovieInfo = () => {
         setInfoState('provider-info');
@@ -62,16 +51,38 @@ function MovieInfo({ overview, movieID, tvMovieToggle, currentRegion }) {
                 </div>
                 <div className={infoState === 'provider-info' ? 'movie-info' : 'hidden'}>
                     <h4>Where to watch:</h4>
-                    <ul className='options-list-container'>
-                        <li className='option'>Buy:
-                            <div className='option-icons'></div>
-                        </li>
-                        <li className='option'>Rent:
-                            <div className='option-icons'></div>
+                    <ul className='viewing-options-list-container'>
+                        {Object.keys(viewingOptions).map((key, i) => {
+                            const imageURL = 'https://image.tmdb.org/t/p/w500';
+                            if (key !== 'link') {
+                                return (
+                                    <li className='option' key={i}>{key}
+                                        <ul className='provider-options-list-container'>
+                                            {viewingOptions[key]?.map((key) => {
+
+                                                return (
+                                                    <li>
+                                                        <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
+                                                    </li>
+                                                )
+                                            })
+                                            }
+                                        </ul>
+                                    </li>
+                                )
+                            }
+                        })}
+
+                        {/* <li className='option'>Rent:
+                            <div className='option-icons'>
+                                {viewingOptions.rent?.map(i => i.logo_path)}
+                            </div>
                         </li>
                         <li className='option'>Stream:
-                            <div className='option-icons'></div>
-                        </li>
+                            <div className='option-icons'>
+                                {viewingOptions.flatrate?.map(i => i.logo_path)}
+                            </div>
+                        </li> */}
                     </ul>
                 </div>
             </div>
