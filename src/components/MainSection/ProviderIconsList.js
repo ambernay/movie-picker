@@ -3,7 +3,10 @@ import { memo } from 'react';
 function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
     return (
         <>
-            <h4>Where to watch <span>{movieTitle}</span>:</h4>
+            <div className='wheretowatch-heading'>
+                <h5>Where to watch</h5>
+                <h4>{movieTitle}:</h4>
+            </div>
 
             <ul className='viewing-options-list-container'>
                 {Object.keys(viewingOptions).map((key) => {

@@ -23,16 +23,13 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
             })
     }, [setviewingOptions, tvMovieToggle, movieID, currentRegion]);
 
-    // console.log(viewingOptions);
-    // viewingOptions.buy?.map(i => i.logo_path);
-
     const handleMovieInfo = () => {
         setInfoState('provider-info');
     }
 
     const handleMouseLeave = () => {
         // resets state to overview on mouseout
-        // setInfoState('overview');
+        setInfoState('overview');
         // blurs active element to allow hover out
         document.activeElement.blur();
     }
@@ -51,7 +48,7 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                     <p>{overview}</p>
                 </div>
                 <div className={infoState === 'provider-info' ? 'movie-info' : 'hidden'}>
-                    {(Object.keys(viewingOptions).length > 1) ?
+                    {(!Object.keys(viewingOptions).length > 0) ?
                         <div className='no-options'>
                             <h3>No viewing options for</h3>
                             <h3 className='no-options-movie-title'>{movieTitle}</h3>

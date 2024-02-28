@@ -375,6 +375,7 @@ a {
 }
 
 h2,
+h5,
 p,
 input,
 label,
@@ -893,6 +894,14 @@ li:focus .overview {
 .provider-icons {
     width: 2rem;
     border: solid var(--midAccent) 3px;
+}
+
+.wheretowatch-heading h4 {
+    color: var(--darkAccent);
+}
+
+.wheretowatch-heading h5 {
+    color: var(--darkNeutral);
 }
 
 .no-options {
