@@ -17,7 +17,12 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                 return results.json();
             })
             .then(data => {
-                setviewingOptions(data.results[currentRegion[0]] ? data.results[currentRegion[0]] : {});
+                const emptyObject = {
+                    buy_rent: [{ logo_path: 'N/A', provider_id: 'but/rent', provider_name: 'N/A' }],
+                    stream: [{ logo_path: 'N/A', provider_id: 'stream', provider_name: 'N/A' }]
+                }
+
+                setviewingOptions(data.results[currentRegion[0]] ? data.results[currentRegion[0]] : emptyObject);
             }).catch(() => {
                 console.log("Failed to fetch streaming options");
             })
