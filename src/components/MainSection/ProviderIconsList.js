@@ -35,6 +35,43 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
         return key;
     }
 
+    const mergeArrays = (viewingOptions) => {
+        const buyArr = viewingOptions.buy?.map(i => i);
+        const rentArr = viewingOptions.rent?.map(i => i);
+        const hasBuy = Object.keys(viewingOptions).includes('buy');
+        const hasRent = Object.keys(viewingOptions).includes('rent');
+
+        let buyRentArr = [];
+        // console.log(hasBuy, hasRent, isSame);
+
+        // viewingOptions.buy?.map(i => i.logo_path);
+        // console.log(buyArr, rentArr);
+        if (hasBuy && hasRent) {
+            // looping in reverse as to not effect length by removiing items
+            for (let b = buyArr.length - 1; b >= 0; b--) {
+                for (let r = rentArr.length - 1; r >= 0; r--) {
+                    const isSame = JSON.stringify(buyArr[b]) === JSON.stringify(rentArr[r]);
+                    if (isSame) {
+                        buyRentArr.push(buyArr[b]);
+                        buyArr.splice(b, 1);
+                        rentArr.splice(r, 1);
+                    }
+                }
+            }
+            if (buyArr.length > 0) console.log(buyArr);
+            if (rentArr.length > 0) console.log(rentArr);
+            if (buyRentArr.length > 0) console.log(buyRentArr);
+        }
+
+        if (hasBuy && hasRent) {
+            console.log(buyRentArr);
+            // console.log(hasBuy, hasRent, isSame);
+        }
+
+    }
+
+    mergeArrays(viewingOptions);
+
     return (
         <>
             <div className='wheretowatch-heading'>
