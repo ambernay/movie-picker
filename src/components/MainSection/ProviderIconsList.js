@@ -47,13 +47,15 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
             delete mergedViewingOptions.rent;
         }
 
-        return mergedViewingOptions;
+        viewingOptions = { ...viewingOptions, ...mergedViewingOptions };
+
+        return viewingOptions;
     }
 
     const hasBuy = Object.keys(viewingOptions).includes('buy');
     const hasRent = Object.keys(viewingOptions).includes('rent');
 
-    if (hasBuy && hasRent) { viewingOptions = { ...viewingOptions, ...filteredViewingOptions(viewingOptions) }; }
+    viewingOptions = (hasBuy && hasRent) ? viewingOptions = filteredViewingOptions(viewingOptions) : viewingOptions;
 
     delete viewingOptions.link;
 
@@ -65,9 +67,8 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
             </div>
 
             <ul className='viewing-options-list-container'>
-                {Object.keys(viewingOptions).map((key) => {
+                {Object.keys(viewingOptions).sort().map((key) => {
                     const imageURL = 'https://image.tmdb.org/t/p/w500';
-
                     // create lists
                     const optionKey = key + '/' + movieID;
                     return (
