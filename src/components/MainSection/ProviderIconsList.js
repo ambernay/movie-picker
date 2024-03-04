@@ -3,22 +3,6 @@ import { memo } from 'react';
 function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
 
     const filteredKey = (key) => {
-        // if (key === 'flatrate') {
-        //     console.log('Stream:');
-        //     return 'Stream:';
-        // }
-        // else if (key === 'ads') {
-        //     console.log('With Ads:');
-        //     return 'With Ads:';
-        // }
-        // else if ( key === 'buy_rent'){
-
-        // }
-        // else {
-        //     console.log(key.charAt(0).toUpperCase() + key.slice(1) + ':');
-        //     return key.charAt(0).toUpperCase() + key.slice(1) + ':';
-        // }
-
         switch (key) {
             case 'flatrate':
                 key = 'Stream:';
@@ -35,42 +19,43 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
         return key;
     }
 
-    const mergeArrays = (viewingOptions) => {
-        const buyArr = viewingOptions.buy?.map(i => i);
-        const rentArr = viewingOptions.rent?.map(i => i);
-        const hasBuy = Object.keys(viewingOptions).includes('buy');
-        const hasRent = Object.keys(viewingOptions).includes('rent');
+    const filteredViewingOptions = (viewingOptions) => {
+        const buyImages = viewingOptions.buy?.map(i => i.logo_path) || [];
+        const rentImages = viewingOptions.rent?.map(i => i.logo_path) || [];
 
-        let buyRentArr = [];
-        // console.log(hasBuy, hasRent, isSame);
-
-        // viewingOptions.buy?.map(i => i.logo_path);
-        // console.log(buyArr, rentArr);
-        if (hasBuy && hasRent) {
-            // looping in reverse as to not effect length by removiing items
-            for (let b = buyArr.length - 1; b >= 0; b--) {
-                for (let r = rentArr.length - 1; r >= 0; r--) {
-                    const isSame = JSON.stringify(buyArr[b]) === JSON.stringify(rentArr[r]);
-                    if (isSame) {
-                        buyRentArr.push(buyArr[b]);
-                        buyArr.splice(b, 1);
-                        rentArr.splice(r, 1);
-                    }
-                }
-            }
-            if (buyArr.length > 0) console.log(buyArr);
-            if (rentArr.length > 0) console.log(rentArr);
-            if (buyRentArr.length > 0) console.log(buyRentArr);
+        const mergedViewingOptions = {
+            buy: viewingOptions.buy?.filter(i => !rentImages.includes(i.logo_path)) || [],
+            rent: viewingOptions.rent?.filter(i => !buyImages.includes(i.logo_path)) || [],
+            buy_rent: viewingOptions.buy?.filter(i => rentImages.includes(i.logo_path)) || [],
         }
 
-        if (hasBuy && hasRent) {
-            console.log(buyRentArr);
-            // console.log(hasBuy, hasRent, isSame);
+        if (mergedViewingOptions.buy_rent.length > 0) {
+            viewingOptions.buy_rent = mergedViewingOptions.buy_rent;
+            delete viewingOptions.buy;
+            delete viewingOptions.rent;
         }
 
+        if (mergedViewingOptions.buy.length > 0) {
+            viewingOptions.buy = mergedViewingOptions.buy;
+        } else {
+            delete mergedViewingOptions.buy;
+        }
+
+        if (mergedViewingOptions.rent.length > 0) {
+            viewingOptions.rent = mergedViewingOptions.rent;
+        } else {
+            delete mergedViewingOptions.rent;
+        }
+
+        return mergedViewingOptions;
     }
 
-    mergeArrays(viewingOptions);
+    const hasBuy = Object.keys(viewingOptions).includes('buy');
+    const hasRent = Object.keys(viewingOptions).includes('rent');
+
+    if (hasBuy && hasRent) { viewingOptions = { ...viewingOptions, ...filteredViewingOptions(viewingOptions) }; }
+
+    delete viewingOptions.link;
 
     return (
         <>
@@ -83,31 +68,29 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
                 {Object.keys(viewingOptions).map((key) => {
                     const imageURL = 'https://image.tmdb.org/t/p/w500';
 
-                    {/* create lists */ }
-                    if (key !== 'link') {
-                        const optionKey = key + '/' + movieID;
-                        return (
-                            <li className='option' key={optionKey}>{filteredKey(key)}
-                                <ul className='provider-options-list-container'>
-                                    {/* create icons */}
-                                    {viewingOptions[key]?.map((key, i) => {
-                                        const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
+                    // create lists
+                    const optionKey = key + '/' + movieID;
+                    return (
+                        <li className='option' key={optionKey}>{filteredKey(key)}
+                            <ul className='provider-options-list-container'>
+                                {/* create icons */}
+                                {viewingOptions[key]?.map((key, i) => {
+                                    const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
-                                        return (
-                                            <li key={iconKey}>
-                                                {(key.logo_path === 'N/A') ?
-                                                    <h4>{key.logo_path}</h4>
-                                                    :
-                                                    <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
-                                                }
-                                            </li>
-                                        )
-                                    })
-                                    }
-                                </ul>
-                            </li>
-                        )
-                    }
+                                    return (
+                                        <li key={iconKey}>
+                                            {(key.logo_path === 'N/A') ?
+                                                <h4>{key.logo_path}</h4>
+                                                :
+                                                <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
+                                            }
+                                        </li>
+                                    )
+                                })
+                                }
+                            </ul>
+                        </li>
+                    )
                 })}
             </ul>
         </>

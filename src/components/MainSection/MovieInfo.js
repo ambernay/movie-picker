@@ -17,9 +17,10 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                 return results.json();
             })
             .then(data => {
+
                 const emptyObject = {
-                    buy_rent: [{ logo_path: 'N/A', provider_id: 'but/rent', provider_name: 'N/A' }],
-                    stream: [{ logo_path: 'N/A', provider_id: 'stream', provider_name: 'N/A' }]
+                    buy_rent: [{ logo_path: 'N/A', provider_id: 'buy/rent_N/A', provider_name: 'N/A' }],
+                    stream: [{ logo_path: 'N/A', provider_id: 'stream_N/A', provider_name: 'N/A' }]
                 }
 
                 setviewingOptions(data.results[currentRegion[0]] ? data.results[currentRegion[0]] : emptyObject);
@@ -38,7 +39,7 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
         // blurs active element to allow hover out
         document.activeElement.blur();
     }
-
+    // console.log(viewingOptions);
     return (
         <>
             <div className='overview' onMouseLeave={handleMouseLeave}>

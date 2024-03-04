@@ -48,7 +48,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
         if (endDate) params.append("primary_release_date.lte", endDate);
         if (provider && provider.id !== "all") params.append("with_watch_providers", provider);
         if (genre && genre.id !== "all") { params.append("with_genres", genre) };
-        console.log(url);
+
         url.search = params;
         setNewURL(url);
         // scroll back to top when new gallery loads - (offset to wait for page load)
