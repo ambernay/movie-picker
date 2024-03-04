@@ -45,7 +45,7 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
             <div className='overview' onMouseLeave={handleMouseLeave}>
                 <div className={infoState === 'overview' ? 'movie-info' : 'hidden'}>
                     <div className='heading-container' onClick={handleMovieInfo}>
-                        <h4>Overview</h4>
+                        <h4>{movieTitle}</h4>
                         <figure className="eye-icon">
                             <EyeIcon />
                             <figcaption className="sr-only">Eye icon: where to watch</figcaption>

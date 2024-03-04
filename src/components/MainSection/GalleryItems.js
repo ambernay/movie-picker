@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import MovieInfo from './MovieInfo.js';
 
 function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion }) {

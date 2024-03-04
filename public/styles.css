@@ -428,12 +428,15 @@ header {
     height: var(--headerHeight);
 }
 
+.main-heading .heading-container {
+    align-items: center;
+    padding: 10px 0;
+}
+
 .heading-container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 10px 0;
 }
 
 .find-movie-button figure,
@@ -811,8 +814,7 @@ ul li .info-container {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
-    margin-top: 10px;
+    bottom: 10px;
     padding: inherit;
     overflow-y: scroll;
     /* overflow transition */
@@ -842,11 +844,30 @@ ul li .info-container {
 }
 
 .overview .heading-container {
-    background-color: tomato;
+    align-items: flex-start;
+    background-color: var(--midAccent);
+    margin-bottom: 12px;
+    padding: 8px 4px;
+}
+
+.overview .heading-container h4 {
+    width: 80%;
+}
+
+.overview p {
+    margin: 4px;
+}
+
+.eye-icon {
+    position: relative;
+    width: 15%;
 }
 
 .eye-icon svg {
-    width: 1.5rem;
+    position: absolute;
+    top: -5px;
+    width: 30px;
+    height: auto;
     background: none;
 }
 
@@ -859,7 +880,7 @@ ul li .info-container {
 .overview .heading-container:hover,
 .overview .heading-container:active,
 .overview .heading-container:focus {
-    --eyeIconColor: var(--darkAccent);
+    --eyeIconColor: var(--lightAccent);
     cursor: pointer;
 }
 
@@ -868,7 +889,7 @@ li:active .overview,
 li:focus .overview {
     display: block;
     visibility: visible;
-    max-height: 420px;
+    max-height: 435px;
     height: -webkit-fill-available;
     /* max-height: -webkit-fill-available; */
     transition: max-height 0.5s ease-in;
@@ -1180,7 +1201,6 @@ input[type="radio"] {
 }
 
 /* #endregion - dropdown arrows */
-
 /* #endregion - outer label */
 /* #region - main list */
 .select-container {
@@ -1229,20 +1249,6 @@ input[type="radio"] {
 }
 
 /* #endregion - main list */
-/* .dropdown-menu:hover .select {
-        color: var(--lightAccent);
-    } */
-
-/* .dropdown-menu select:focus {
-        background-color: var(--darkNeutral);
-    }
-
-    .sort-by select:focus {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        height: fit-content;
-    } */
 /* #endregion - dropdown menus */
 /* #endregion - form */
 
