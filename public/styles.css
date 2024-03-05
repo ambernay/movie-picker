@@ -353,6 +353,7 @@ img {
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
     --mainHeaderFontSize: 2.2rem;
+    --providerFieldsetPadding: 4px;
 }
 
 /* #endregion - variables */
@@ -843,6 +844,13 @@ ul li .info-container {
     transition: max-height 0.5s ease-out;
 }
 
+.overview .main-provider-fieldset {
+    width: 95%;
+    height: 92%;
+    padding: var(--providerFieldsetPadding);
+    margin: 0 auto;
+}
+
 .overview .heading-container {
     align-items: flex-start;
     background-color: var(--midAccent);
@@ -889,16 +897,36 @@ li:active .overview,
 li:focus .overview {
     display: block;
     visibility: visible;
-    max-height: 435px;
-    height: -webkit-fill-available;
+    max-height: -webkit-fill-available;
+    height: inherit;
     /* max-height: -webkit-fill-available; */
     transition: max-height 0.5s ease-in;
 }
 
 /* #region - where-to-watch */
+.wheretowatch-container {
+    background: var(--darkNeutral);
+    height: 100%;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.wheretowatch-heading {
+    background-color: var(--midAccent);
+    color: var(--darkNeutral);
+    padding: 3px 5px;
+    margin-bottom: 10px;
+}
+
+.main-provider-label {
+    font-family: var(--mainFont);
+    color: var(--lightAccent);
+    font-size: 17px;
+}
 
 .viewing-options-list-container {
     flex-direction: column;
+    width: 100%;
     justify-content: flex-start;
 }
 
@@ -909,20 +937,22 @@ li:focus .overview {
 }
 
 .provider-options-list-container {
-    justify-content: flex-start;
+    justify-content: center;
+}
+
+.provider-list-fieldsets {
+    justify-content: center;
+    margin: 5px calc(var(--providerFieldsetPadding) / 2);
+    padding: var(--providerFieldsetPadding);
+}
+
+.provider-list-fieldsets h4 {
+    color: var(--backgroundColor);
 }
 
 .provider-icons {
     width: 2rem;
-    border: solid var(--midAccent) 3px;
-}
-
-.wheretowatch-heading h4 {
-    color: var(--darkAccent);
-}
-
-.wheretowatch-heading h5 {
-    color: var(--darkNeutral);
+    border: solid var(--lightAccent) 1px;
 }
 
 .no-options {

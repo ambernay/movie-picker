@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react';
 import ProviderIconsList from './ProviderIconsList.js';
 import { EyeIcon } from '../Icons.js';
 
-function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion }) {
+function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion, infoState, setInfoState }) {
 
-    const [infoState, setInfoState] = useState('overview');
     const [viewingOptions, setviewingOptions] = useState([]);
 
     useEffect(() => {
@@ -33,16 +32,9 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
         setInfoState('provider-info');
     }
 
-    const handleMouseLeave = () => {
-        // resets state to overview on mouseout
-        setInfoState('overview');
-        // blurs active element to allow hover out
-        document.activeElement.blur();
-    }
-    // console.log(viewingOptions);
     return (
         <>
-            <div className='overview' onMouseLeave={handleMouseLeave}>
+            <div className='overview'>
                 <div className={infoState === 'overview' ? 'movie-info' : 'hidden'}>
                     <div className='heading-container' onClick={handleMovieInfo}>
                         <h4>{movieTitle}</h4>
