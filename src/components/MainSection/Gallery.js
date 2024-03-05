@@ -59,7 +59,7 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
                     <ul className='gallery-list-container'>
                         {moviesToDisplay.map((movie) => {
                             const imageURL = 'https://image.tmdb.org/t/p/w500';
-                            {/* if image not available, use icon */ }
+                            /* if image not available, use icon */
                             const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
 
                             return (
