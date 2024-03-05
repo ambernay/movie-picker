@@ -25,7 +25,9 @@ function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }
     return (
         <section className="load-buttons-section"
             // prevents click on main background from capturing loadmore
-            onClick={(e) => { e.stopPropagation() }}>
+            onClick={(e) => {
+                e.stopPropagation(); document.querySelector('.gallery-items').scrollIntoView(false);
+            }}>
             <div className="wrapper">
                 <div className={buttonContainerClass}>
                     <button onClick={handleButtons} className="back-button">
