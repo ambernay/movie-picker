@@ -315,45 +315,48 @@ img {
 
 /* #region - variables */
 :root {
-    /* colors */
+    /* #region - colors */
     --backgroundColor: tomato;
     --backgroundColorDesat: #d18375;
     --darkNeutral: #050404;
-    --darkNeutralOpacity: rgba(5, 4, 4, 0.3);
     --midAccent: #e6b86a;
     --midAccentOpacity: rgba(230, 184, 106, 0.3);
     --darkAccent: #720308;
     --darkAccentOpacity: rgba(114, 3, 8, 0.5);
     --lightAccent: #fff3e4;
-    --eyeIconColor: var(--darkNeutral);
-
     /* to be redefined */
+    --eyeIconColor: var(--darkNeutral);
     --gradientBaseVar: #fff3e4;
     --gradientChangeVar: #88181e;
+    /* #endregion - colors */
 
     /* fonts */
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
-    /* sizes */
+    /* #region - sizes */
+    /* main */
     --wrapperWidth: 80%;
     --movieWidth: 265px;
+    --paddingGap: 30px;
+    /* header */
     --headerHeight: calc(var(--mainHeaderFontSize) + 0.8rem);
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeaderHeight: 1.5rem;
-    --paddingGap: 30px;
+    --subHeadingMargin: 4px;
+    --mainHeaderFontSize: 2.2rem;
+    /* form */
     --formWidth: 96%;
     --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
     --formNavHeight: 2.25rem;
     --dropdownHeight: 1.5rem;
     --formBottomHeight: 5rem;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
-    /* --region-dropdown-height: calc(var(--formHeight) - (var(--formNavHeight) + var(--formBottomHeight) + 20px)); */
     --region-dropdown-height: calc(var(--formHeight) - (var(--innerform) + 5px));
-    --subHeadingMargin: 4px;
+    /* other */
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
-    --mainHeaderFontSize: 2.2rem;
     --providerFieldsetPadding: 4px;
+    /* #endregion - sizes */
 }
 
 /* #endregion - variables */
@@ -610,6 +613,27 @@ li:focus {
     fill: var(--backgroundColor);
 }
 
+/* #region - subheading dropdown */
+.trending-button .subheading-dropdown-container {
+    display: flex;
+    align-items: center;
+}
+
+.region-list.header-region {
+    width: 55px;
+    margin-left: 10px;
+}
+
+.region-list.header-region .label-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: none;
+}
+
+/* #endregion - subheading dropdown */
+
+
 /* hover */
 .find-movie-button:hover h2,
 .find-movie-button:active h2,
@@ -768,7 +792,7 @@ main {
     justify-content: center;
 }
 
-.galleryItems {
+.gallery-items {
     display: flex;
     position: relative;
     background: var(--lightAccent);
@@ -1190,19 +1214,23 @@ input[type="radio"] {
 }
 
 .dropdown-menu .label-container {
+    display: flex;
     position: relative;
-    border: solid 1px var(--lightAccent);
+    justify-content: space-between;
     height: 1.5rem;
     text-align: center;
     padding: 2px;
+    border: solid 1px var(--lightAccent);
 }
 
-.dropdown-menu.region-list .label-container {
-    width: calc(270px);
+/* region dropdown in form */
+.dropdown-menu.form-region .label-container {
+    width: 270px;
+    justify-content: center;
 }
 
 .dropdown-menu.sort-by .label-container {
-    width: calc(270px);
+    width: 230px;
 }
 
 /* #region - dropdown arrows */

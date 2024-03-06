@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import CustomDropdown from './CustomDropdown';
 
-function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
+function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screenSize }) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [regionList, setRegionList] = useState([]);
@@ -36,7 +36,7 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
 
         let countryCode = currentRegion[0];
 
-        if (screenSize !== 'narrowScreen') {
+        if ((screenSize !== 'narrowScreen') && (positionClass === 'form-region')) {
             let fullRegionName = currentRegion[1];
             let spaceCount = (fullRegionName.split(" ").length - 1);
 
@@ -54,7 +54,7 @@ function RegionDropdown({ currentRegion, setCurrentRegion, screenSize }) {
         <CustomDropdown
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            listClass={'region-list'}
+            listClass={`region-list ${positionClass}`}
             currentSelectedLabel={chooseSelectedLabel()}
             selectList={regionList}
             itemValue={"iso_3166_1"}

@@ -72,6 +72,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
 
                         {screenSize === 'narrowScreen' ?
                             <RegionDropdown
+                                positionClass={'form-region'}
                                 currentRegion={currentRegion}
                                 setCurrentRegion={setCurrentRegion}
                                 screenSize={screenSize}
@@ -91,6 +92,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                     </nav>
                     {screenSize !== 'narrowScreen' ?
                         <RegionDropdown
+                            positionClass={'form-region'}
                             currentRegion={currentRegion}
                             setCurrentRegion={setCurrentRegion}
                             screenSize={screenSize}

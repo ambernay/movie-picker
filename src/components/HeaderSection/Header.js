@@ -1,8 +1,9 @@
 import ToggleButton from './ToggleButton';
 import FindMovieButton from './FindMovieButton';
+import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
 import { LeftArrowIcon } from '../Icons';
 
-function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, tvMovieToggle, setTvMovieToggle, screenSize }) {
+function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize }) {
 
     const subHeading = isTrending ? "Trending" : "Back to Trending";
 
@@ -56,9 +57,17 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                     <LeftArrowIcon
                                         arrowClass={toggleArrow}
                                     />
-                                    <span className={styleClass}>
-                                        <h4 className="result-heading">{subHeading}</h4>
-                                    </span>
+                                    <div className='subheading-dropdown-container'>
+                                        <span className={styleClass}>
+                                            <h4 className="result-heading">{subHeading}</h4>
+                                        </span>
+                                        <RegionDropdown
+                                            positionClass={'header-region'}
+                                            currentRegion={currentRegion}
+                                            setCurrentRegion={setCurrentRegion}
+                                            screenSize={screenSize}
+                                        />
+                                    </div>
                                 </figure>
                             </button>
                             {screenSize === 'narrowScreen' ?

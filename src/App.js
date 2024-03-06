@@ -25,6 +25,8 @@ function App() {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, []);
 
+
+
     // stop background scroll when form is visible
     useEffect(() => {
         const bodyEl = document.querySelector('body');
@@ -45,6 +47,8 @@ function App() {
                 isTrending={isTrending}
                 setIsTrending={setIsTrending}
                 setCurrentPage={setCurrentPage}
+                currentRegion={currentRegion}
+                setCurrentRegion={setCurrentRegion}
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
