@@ -868,12 +868,18 @@ ul li .info-container {
     transition: max-height 0.5s ease-out;
 }
 
-.overview .main-provider-fieldset {
+/* deleted this element */
+/* .overview .main-provider-fieldset {
     width: 95%;
     height: 92%;
     padding: var(--providerFieldsetPadding);
     margin: 0 auto;
-}
+} */
+/* .main-provider-label {
+    font-family: var(--mainFont);
+    color: var(--lightAccent);
+    font-size: 17px;
+} */
 
 .overview .heading-container {
     align-items: flex-start;
@@ -940,12 +946,6 @@ li:focus .overview {
     color: var(--darkNeutral);
     padding: 3px 5px;
     margin-bottom: 10px;
-}
-
-.main-provider-label {
-    font-family: var(--mainFont);
-    color: var(--lightAccent);
-    font-size: 17px;
 }
 
 .viewing-options-list-container {
