@@ -5,7 +5,7 @@ import { LeftArrowIcon } from '../Icons';
 
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize }) {
 
-    const subHeading = isTrending ? "Trending" : "Back to Trending";
+    // const subHeading = isTrending ? "Trending" : "Back to Trending";
 
     // toggle visibility and orientation of arrow image
     let arrowClass = isDropdownVisible ? "arrow-up" : "arrow-down";
@@ -59,7 +59,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                     />
                                     <div className='subheading-dropdown-container'>
                                         <span className={styleClass}>
-                                            <h4 className="result-heading">{subHeading}</h4>
+                                            <h4 className="result-heading">Trending</h4>
                                         </span>
                                         <RegionDropdown
                                             positionClass={'header-region'}
