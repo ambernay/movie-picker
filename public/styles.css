@@ -352,6 +352,7 @@ img {
     --formBottomHeight: 5rem;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
     --region-dropdown-height: calc(var(--formHeight) - (var(--innerform) + 5px));
+    --sortByListWidth: 230px;
     /* other */
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
@@ -1235,7 +1236,7 @@ input[type="radio"] {
 }
 
 .dropdown-menu.sort-by .label-container {
-    width: 230px;
+    width: var(--sortByListWidth);
 }
 
 /* #region - dropdown arrows */
@@ -1299,6 +1300,7 @@ input[type="radio"] {
     bottom: var(--formBottomHeight);
     right: 3%;
     height: fit-content;
+    width: var(--sortByListWidth);
 }
 
 .region-list .select-container.hidden,

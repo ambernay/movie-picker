@@ -2,15 +2,16 @@ import React from "react";
 
 export default function App({ isOpen, setIsOpen, listClass, selectList, currentSelectedLabel, itemValue, itemName, listHeading, handleChange }) {
 
-    const dropdownToggle = (e) => setIsOpen(!isOpen);
+    const dropdownToggle = () => { setIsOpen(!isOpen) };
     const showOrHide = isOpen ? 'visible' : 'hidden';
 
     return (
-        <div className={`dropdown-menu ${listClass}`} onClick={(e) => { dropdownToggle(); e.stopPropagation() }}>
+        <div className={`dropdown-menu ${listClass}`} onClick={(e) => { dropdownToggle(); e.stopPropagation(); }}>
             <label className="label-container">                {currentSelectedLabel}
             </label>
             <div
-                className={`select-container ${showOrHide}`}>
+                className={`select-container ${showOrHide}`}
+                onMouseLeave={dropdownToggle}>
                 <ul className="select">
                     {selectList.map((listItem) => {
                         return (
