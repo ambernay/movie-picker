@@ -6,7 +6,7 @@ export default function App({ isOpen, setIsOpen, listClass, selectList, currentS
     const showOrHide = isOpen ? 'visible' : 'hidden';
 
     return (
-        <div className={`dropdown-menu ${listClass}`} onClick={(e) => { dropdownToggle(); e.stopPropagation(); }}>
+        <div className={`dropdown-menu ${listClass}`} onClick={(e) => { dropdownToggle(); e.stopPropagation(); }} onBlur={dropdownToggle}>
             <label className="label-container">                {currentSelectedLabel}
             </label>
             <div
