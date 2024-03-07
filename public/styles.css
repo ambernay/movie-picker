@@ -615,7 +615,7 @@ li:focus {
 }
 
 /* #region - subheading dropdown */
-.trending-button .subheading-dropdown-container {
+.trending-button {
     display: flex;
     align-items: center;
 }
@@ -1438,6 +1438,11 @@ footer .copyright {
     /* for header region list */
     .region-list.header-region .select-container {
         margin: 0;
+    }
+
+    .trending-button {
+        width: 60%;
+        justify-content: space-between;
     }
 
     .dropdown-menu.sort-by {

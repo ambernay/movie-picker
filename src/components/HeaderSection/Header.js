@@ -57,18 +57,16 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                     <LeftArrowIcon
                                         arrowClass={toggleArrow}
                                     />
-                                    <div className='subheading-dropdown-container'>
-                                        <span className={styleClass}>
-                                            <h4 className="result-heading">Trending</h4>
-                                        </span>
-                                        <RegionDropdown
-                                            positionClass={'header-region'}
-                                            currentRegion={currentRegion}
-                                            setCurrentRegion={setCurrentRegion}
-                                            screenSize={screenSize}
-                                        />
-                                    </div>
+                                    <span className={styleClass}>
+                                        <h4 className="result-heading">Trending</h4>
+                                    </span>
                                 </figure>
+                                <RegionDropdown
+                                    positionClass={'header-region'}
+                                    currentRegion={currentRegion}
+                                    setCurrentRegion={setCurrentRegion}
+                                    screenSize={screenSize}
+                                />
                             </button>
                             {screenSize === 'narrowScreen' ?
                                 <FindMovieButton

@@ -30,8 +30,6 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
         setCurrentRegion([e.target.getAttribute('value'), e.target.getAttribute('name')]);
     }
 
-    const chooseRegionLabel = screenSize !== 'narrowScreen' ? "english_name" : "iso_3166_1";
-
     const chooseSelectedLabel = () => {
 
         let countryCode = currentRegion[0];
@@ -59,7 +57,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
             selectList={regionList}
             itemValue={"iso_3166_1"}
             itemName={'english_name'}
-            listHeading={chooseRegionLabel}
+            listHeading={"english_name"}
             handleChange={handleChange}
         />
     )
