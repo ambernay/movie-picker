@@ -272,7 +272,7 @@ html {
 }
 
 .wrapper {
-    max-width: 1080px;
+    /* max-width: 1080px; */
     width: var(--wrapperWidth);
     margin: 0 auto;
 }
@@ -350,7 +350,7 @@ img {
     --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
     --formNavHeight: 2.25rem;
     --dropdownHeight: 2.2rem;
-    --formBottomHeight: 5rem;
+    --formBottomHeight: 5.5rem;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
     --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + 5px));
     --regionDropdownWidth: 270px;
@@ -623,7 +623,7 @@ li:focus {
 }
 
 .region-list.header-region {
-    width: 65px;
+    width: 55px;
     margin-left: 10px;
 }
 
@@ -1197,9 +1197,9 @@ input[type="radio"] {
     flex-direction: column;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: calc((100% - var(--formWidth)) / 2);
     height: var(--formBottomHeight);
-    width: 100%;
+    width: var(--formWidth);
     align-items: center;
     background-color: var(--darkNeutral);
     border-top: 1px solid var(--lightAccent);
@@ -1215,7 +1215,6 @@ input[type="radio"] {
     height: var(--dropdownHeight);
     width: var(--formWidth);
     justify-content: center;
-    padding: 1%;
 }
 
 .dropdown-menu.header-region {
@@ -1228,7 +1227,7 @@ input[type="radio"] {
 
 .dropdown-menu.sort-by {
     align-items: flex-end;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .dropdown-menu .label-container {
@@ -1236,7 +1235,7 @@ input[type="radio"] {
     position: relative;
     justify-content: space-between;
     text-align: center;
-    padding: 2px;
+    padding: 3px;
     border: solid 1px var(--lightAccent);
     color: var(--lightAccent);
 }
@@ -1268,12 +1267,12 @@ input[type="radio"] {
 
 .label-container::before {
     border-bottom: var(--size) solid var(--backgroundColor);
-    top: 16%;
+    top: 20%;
 }
 
 .label-container::after {
     border-top: var(--size) solid var(--backgroundColor);
-    bottom: 16%;
+    bottom: 20%;
 }
 
 /* #endregion - dropdown arrows */
