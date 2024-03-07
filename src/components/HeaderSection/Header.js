@@ -27,7 +27,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                 <div className="wrapper">
                     <div className="heading-container">
                         <button type='button' className="main-title"
-                            onClick={handleTrendingButton}>Movie Picker</button>
+                            onClick={(e) => { handleTrendingButton(); e.stopPropagation(); }}>Movie Picker</button>
                         <div className="header-buttons-container">
                             {screenSize !== 'narrowScreen' ?
                                 <FindMovieButton
@@ -61,13 +61,13 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                         <h4 className="result-heading">Trending</h4>
                                     </span>
                                 </figure>
-                                <RegionDropdown
-                                    positionClass={'header-region'}
-                                    currentRegion={currentRegion}
-                                    setCurrentRegion={setCurrentRegion}
-                                    screenSize={screenSize}
-                                />
                             </button>
+                            <RegionDropdown
+                                positionClass={'header-region'}
+                                currentRegion={currentRegion}
+                                setCurrentRegion={setCurrentRegion}
+                                screenSize={screenSize}
+                            />
                             {screenSize === 'narrowScreen' ?
                                 <FindMovieButton
                                     handleDropdown={handleDropdown}
