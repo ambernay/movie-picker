@@ -14,7 +14,6 @@ function SortByDropdown({ setSortOption }) {
         ]
     };
 
-    const [isOpen, setIsOpen] = useState(false);
     const [currentSelectedLabel, setCurrentSelectedLabel] = useState(sortMenuObj.sortOptions[0]['sort-by']);
 
     const handleChange = (e) => {
@@ -24,8 +23,6 @@ function SortByDropdown({ setSortOption }) {
 
     return (
         <CustomDropdown
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
             listClass={'sort-by'}
             currentSelectedLabel={currentSelectedLabel}
             selectList={sortMenuObj.sortOptions}

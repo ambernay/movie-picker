@@ -21,7 +21,7 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
         // default trending url for landing page
         const params = new URLSearchParams({
             "api_key": apiKey,
-            "language": `en-${currentRegion[0]}`,
+            "language": "en-US",
             "page": currentPage
         });
 
@@ -42,7 +42,7 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
             })
 
         // runs on url or currentPage change and form submission
-    }, [isTrending, newURL, currentPage, currentRegion, tvMovieToggle, setTotalPages, setMoviesToDisplay]);
+    }, [isTrending, newURL, currentPage, tvMovieToggle, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>
