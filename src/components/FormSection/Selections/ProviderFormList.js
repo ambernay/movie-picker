@@ -1,14 +1,13 @@
 import { useState, useEffect, memo } from "react";
-import { ProviderButtonsApiCall } from '../../MovieApi';
+import { ProviderListApiCall } from '../../MovieApi';
 
-function ProviderButtons({ setProvider, setIsValidRequest }) {
+function ProviderFormList({ setProvider, setIsValidRequest }) {
 
-    const [providerRadioButtons, setProviderRadioButtons] = useState([]);
+    const [providerFormList, setProviderFormList] = useState([]);
 
     useEffect(() => {
-        console.log(ProviderButtonsApiCall());
-        ProviderButtonsApiCall().then(result => setProviderRadioButtons(result));
-    }, [setProviderRadioButtons]);
+        ProviderListApiCall().then(result => setProviderFormList(result));
+    }, [setProviderFormList]);
 
     const handleChange = (e) => {
         setProvider(e.target.value);
@@ -22,7 +21,7 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
     return (
         <fieldset className="providers-fieldset">
             <legend id="provider">Provider:</legend>
-            {providerRadioButtons.map((provider) => {
+            {providerFormList.map((provider) => {
                 return (
                     <div className="radio-button-container provider-buttons" key={provider.provider_id}>
                         <input onChange={handleChange} type="radio" id={provider.provider_id} value={provider.provider_id} name="provider"></input>
@@ -34,4 +33,4 @@ function ProviderButtons({ setProvider, setIsValidRequest }) {
     )
 }
 
-export default memo(ProviderButtons);
+export default memo(ProviderFormList);

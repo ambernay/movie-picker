@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 
-function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion }) {
+function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement }) {
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -75,6 +75,7 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
                                     movieID={movie.id}
                                     tvMovieToggle={tvMovieToggle}
                                     currentRegion={currentRegion}
+                                    currentActiveElement={currentActiveElement}
                                 />
                             )
                         })}

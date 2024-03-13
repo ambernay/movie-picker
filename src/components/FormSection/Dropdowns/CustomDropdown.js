@@ -5,20 +5,12 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue
 
     const [isOpen, setIsOpen] = useState(false);
 
-    // const dropdownToggle = (e) => {
-    //     setIsOpen(!isOpen);
-    //     // if (!isOpen) e.target.focus();
-
-    // };
-
     const showOrHide = isOpen ? 'visible' : 'hidden';
-
-    // console.log("run customdropdown function");
 
     return (
         <div
             className={`dropdown-menu ${listClass}`}
-            onClick={(e) => { e.stopPropagation(); setIsOpen(!isOpen); console.log('click'); }}
+            onClick={(e) => { e.stopPropagation(); setIsOpen(!isOpen); }}
             onBlur={() => { setIsOpen(false); }}
             tabIndex={0}
         >

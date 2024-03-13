@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import GenreButtons from './Selections/GenreButtons.js';
-import DecadeButtons from './Selections/DecadeButtons.js';
-import ProviderButtons from './Selections/ProviderButtons.js';
+import GenreList from './Selections/GenreList.js';
+import DecadeList from './Selections/DecadeList.js';
+import ProviderFormList from './Selections/ProviderFormList.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
@@ -105,17 +105,17 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
                         isValidRequest={isValidRequest}
                     />
                     <section className="fieldset-container">
-                        <GenreButtons
+                        <GenreList
                             setGenre={setGenre}
                             setIsValidRequest={setIsValidRequest}
                             tvMovieToggle={tvMovieToggle}
                         />
-                        <DecadeButtons
+                        <DecadeList
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
                             setIsValidRequest={setIsValidRequest}
                         />
-                        <ProviderButtons
+                        <ProviderFormList
                             setProvider={setProvider}
                             setIsValidRequest={setIsValidRequest}
                         />

@@ -23,18 +23,17 @@ const RegionApiCall = async () => {
 }
 
 
-let providerButtonsPromise;
-const ProviderButtonsApiCall = async () => {
-    if (!providerButtonsPromise) {
+let providerListPromise;
+const ProviderListApiCall = async () => {
+    if (!providerListPromise) {
         // codes are the same between movie and tv
         const providersList = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&language=en-US`;
 
-        providerButtonsPromise = fetch(providersList)
+        providerListPromise = fetch(providersList)
             .then(results => {
                 return results.json();
             })
             .then(data => {
-                console.log(data);
                 // filter api request for specific providers
                 // appletv:2, netflix:8, tubi:73, amazon:119, crave:230, disney:337,paramount:531
                 const selectionOfProviders = data.results.filter((provider) => {
@@ -46,7 +45,30 @@ const ProviderButtonsApiCall = async () => {
                 alert("Failed to fetch provider options");
             })
     }
-    return providerButtonsPromise;
+    return providerListPromise;
+}
+
+let genreListPromises = {};
+const GenreListApiCall = async (tvOrMovie) => {
+    const key = `${tvOrMovie}`;
+
+    if (!genreListPromises.hasOwnProperty(key)) {
+        const genreListURL = `https://api.themoviedb.org/3/genre/${tvOrMovie}/list?api_key=${apiKey}&language=en-US`;
+
+        genreListPromises[key] = fetch(genreListURL)
+            .then(results => {
+                return results.json();
+            })
+            .then(data => {
+                // adds an All button
+                data.genres.push({ "id": "all-genres", "name": "All" });
+                return data.genres;
+
+            }).catch(() => {
+                alert("Failed to fetch genres");
+            })
+    }
+    return genreListPromises[key];
 }
 
 // const getTrendingPromises = {};
@@ -74,4 +96,4 @@ const ProviderButtonsApiCall = async () => {
 //     return getTrendingPromises[key];
 // }
 
-export { RegionApiCall, ProviderButtonsApiCall }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall }

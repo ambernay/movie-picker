@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import MovieInfo from './MovieInfo.js';
 
-function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion }) {
+function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion, currentActiveElement }) {
 
     const [infoState, setInfoState] = useState('overview');
 
@@ -15,7 +15,7 @@ function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating
         // resets state to overview on mouseout
         setInfoState('overview');
         // blurs active element to allow hover out
-        document.activeElement.blur();
+        if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
     }
 
     return (

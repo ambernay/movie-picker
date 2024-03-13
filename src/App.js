@@ -12,6 +12,7 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
     const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
+    const [currentActiveElement, setCurrentActiveElement] = useState();
 
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
@@ -25,8 +26,6 @@ function App() {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, []);
 
-
-
     // stop background scroll when form is visible
     useEffect(() => {
         const bodyEl = document.querySelector('body');
@@ -34,7 +33,11 @@ function App() {
     }, [isDropdownVisible]);
 
     const handleDropdown = (e) => {
-        !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
+        const headerRegionDropdown = document.querySelector('.header-region');
+
+        (!isDropdownVisible && currentActiveElement !== headerRegionDropdown) ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
+
+        setCurrentActiveElement(document.activeElement);
         return false;
     }
 
@@ -52,6 +55,7 @@ function App() {
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
+                setCurrentActiveElement={setCurrentActiveElement}
             />
             <main onClick={handleDropdown}>
                 <Gallery
@@ -64,6 +68,7 @@ function App() {
                     isDropdownVisible={isDropdownVisible}
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
+                    currentActiveElement={currentActiveElement}
                 />
             </main>
 

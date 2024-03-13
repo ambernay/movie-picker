@@ -2,6 +2,8 @@ import { memo } from 'react';
 
 function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
 
+    console.log(movieTitle, movieID);
+
     const filteredKey = (key) => {
         switch (key) {
             case 'flatrate':
