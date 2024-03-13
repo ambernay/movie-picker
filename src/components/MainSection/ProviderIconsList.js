@@ -2,8 +2,6 @@ import { memo } from 'react';
 
 function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
 
-    console.log(movieTitle, movieID);
-
     const filteredKey = (key) => {
         switch (key) {
             case 'flatrate':
@@ -25,12 +23,13 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
         const buyImages = viewingOptions.buy?.map(i => i.logo_path) || [];
         const rentImages = viewingOptions.rent?.map(i => i.logo_path) || [];
 
+        // if buy and rent have same item merge into buy/rent array
         const mergedViewingOptions = {
             buy: viewingOptions.buy?.filter(i => !rentImages.includes(i.logo_path)) || [],
             rent: viewingOptions.rent?.filter(i => !buyImages.includes(i.logo_path)) || [],
             buy_rent: viewingOptions.buy?.filter(i => rentImages.includes(i.logo_path)) || [],
         }
-
+        // if merged array not empty replace viewing options and delete duplicates
         if (mergedViewingOptions.buy_rent.length > 0) {
             viewingOptions.buy_rent = mergedViewingOptions.buy_rent;
             delete viewingOptions.buy;
@@ -53,10 +52,10 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
 
         return viewingOptions;
     }
-
+    console.log(viewingOptions);
     const hasBuy = Object.keys(viewingOptions).includes('buy');
     const hasRent = Object.keys(viewingOptions).includes('rent');
-
+    // only run filter if both buy and rent are in array
     viewingOptions = (hasBuy && hasRent) ? viewingOptions = filteredViewingOptions(viewingOptions) : viewingOptions;
 
     delete viewingOptions.link;

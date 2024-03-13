@@ -3,7 +3,7 @@ import FindMovieButton from './FindMovieButton';
 import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
 import { LeftArrowIcon } from '../Icons';
 
-function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize, setCurrentActiveElement }) {
+function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize }) {
 
     // const subHeading = isTrending ? "Trending" : "Back to Trending";
 

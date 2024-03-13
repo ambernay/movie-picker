@@ -71,6 +71,30 @@ const GenreListApiCall = async (tvOrMovie) => {
     return genreListPromises[key];
 }
 
+let providerIconPromises;
+const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion) => {
+    if (!providerIconPromises) {
+        // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
+        const getMovieViewingOptions = `https://api.themoviedb.org/3/${tvMovieToggle}/${movieID}/watch/providers?api_key=0a093f521e98a991f4e4cc2a12460255`;
+
+        fetch(getMovieViewingOptions)
+            .then(results => {
+                return results.json();
+            })
+            .then(data => {
+
+                const emptyObject = {
+                    buy_rent: [{ logo_path: 'N/A', provider_id: 'buy/rent_N/A', provider_name: 'N/A' }],
+                    stream: [{ logo_path: 'N/A', provider_id: 'stream_N/A', provider_name: 'N/A' }]
+                }
+                return (data.results[currentRegion[0]] ? data.results[currentRegion[0]] : emptyObject);
+            }).catch(() => {
+                console.log("Failed to fetch streaming options");
+            })
+    }
+    return providerIconPromises;
+}
+
 // const getTrendingPromises = {};
 // const getTrending = (currentPage, tvMovie) => {
 //     const key = `${currentPage}_${movie}_${region}`;
@@ -96,4 +120,4 @@ const GenreListApiCall = async (tvOrMovie) => {
 //     return getTrendingPromises[key];
 // }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall }

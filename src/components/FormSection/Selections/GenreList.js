@@ -3,17 +3,10 @@ import { GenreListApiCall } from '../../MovieApi';
 
 function GenreList({ setGenre, setIsValidRequest, tvMovieToggle }) {
 
-    // const [genreRadioList, setGenreRadioList] = useState([]);
-
-    // // get genre list from api
-    // useEffect(() => {
-    //     GenreListApiCall(tvMovieToggle).then(result => setGenreRadioList(result));
-    // }, [setGenreRadioList, tvMovieToggle]);
-
     const [tvGenreList, setTvGenreList] = useState([]);
     const [movieGenreList, setMovieGenreList] = useState([]);
 
-    // get genre list from api
+    // caching tv and movie genre lists
     useEffect(() => {
         GenreListApiCall('tv').then(result => setTvGenreList(result));
         GenreListApiCall('movie').then(result => setMovieGenreList(result));
