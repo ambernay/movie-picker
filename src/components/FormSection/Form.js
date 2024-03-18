@@ -5,6 +5,7 @@ import ProviderFormList from './Selections/ProviderFormList.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
+import { UserSelectionURL } from '../MovieApi.js';
 
 function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
 
@@ -26,40 +27,11 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-            makeNewURL();
+            setNewURL(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
+            // scroll back to top when new gallery loads - (offset to wait for page load)
+            setTimeout(() => window.scrollTo(0, 0), 100);
         }
     }
-
-    const makeNewURL = () => {
-        const apiKey = '0a093f521e98a991f4e4cc2a12460255';
-        const baseURL = 'https://api.themoviedb.org/3';
-        const url = new URL(baseURL + "/discover/" + tvMovieToggle);
-
-        const params = new URLSearchParams({
-            "api_key": apiKey,
-            "vote_count.gte": 10,
-            "sort_by": sortOption,
-            "watch_region": currentRegion[0],
-            "language": "en-US",
-            "page": currentPage
-        })
-        // add params only when selected
-        if (startDate) params.append("primary_release_date.gte", startDate);
-        if (endDate) params.append("primary_release_date.lte", endDate);
-        if (provider && provider.id !== "all") params.append("with_watch_providers", provider);
-        if (genre && genre.id !== "all") { params.append("with_genres", genre) };
-
-        url.search = params;
-        setNewURL(url);
-        // scroll back to top when new gallery loads - (offset to wait for page load)
-        setTimeout(() => window.scrollTo(0, 0), 100);
-    }
-
-    //  re-renders on page changes
-    useEffect(() => {
-        makeNewURL();
-        // eslint-disable-next-line
-    }, [currentPage, isTrending, tvMovieToggle])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";

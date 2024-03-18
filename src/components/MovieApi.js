@@ -153,4 +153,26 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) => 
     return getMoviePromises;
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }
+const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre) => {
+    const baseURL = 'https://api.themoviedb.org/3';
+    const url = new URL(baseURL + "/discover/" + tvMovieToggle);
+
+    const params = new URLSearchParams({
+        "api_key": apiKey,
+        "vote_count.gte": 10,
+        "sort_by": sortOption,
+        "watch_region": currentRegion[0],
+        "language": "en-US",
+        "page": currentPage
+    })
+    // add params only when selected
+    if (startDate) params.append("primary_release_date.gte", startDate);
+    if (endDate) params.append("primary_release_date.lte", endDate);
+    if (provider && provider.id !== "all") params.append("with_watch_providers", provider);
+    if (genre && genre.id !== "all") { params.append("with_genres", genre) };
+
+    url.search = params;
+    return url;
+}
+
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL }
