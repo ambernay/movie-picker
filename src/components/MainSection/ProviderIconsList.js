@@ -1,6 +1,15 @@
 import { memo } from 'react';
+import { useState, useEffect } from 'react';
+import { ProviderIconsApiCall } from '../MovieApi.js';
 
-function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
+function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, infoState }) {
+
+    const [viewingOptions, setViewingOptions] = useState();
+
+    useEffect(() => {
+        ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion).then(result => setViewingOptions(filteredViewingOptions(result)));
+
+    }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])
 
     const filteredKey = (key) => {
         switch (key) {
@@ -19,81 +28,86 @@ function ProviderIconsList({ movieTitle, movieID, viewingOptions }) {
         return key;
     }
 
-    const filteredViewingOptions = (viewingOptions) => {
-        const buyImages = viewingOptions.buy?.map(i => i.logo_path) || [];
-        const rentImages = viewingOptions.rent?.map(i => i.logo_path) || [];
+    const filteredViewingOptions = (result) => {
+        delete result.link;
+
+        const hasBuy = Object.keys(result).includes('buy');
+        const hasRent = Object.keys(result).includes('rent');
+        if (!hasBuy || !hasRent) { return result; }
+
+        const buyImages = result.buy?.map(i => i.logo_path) || [];
+        const rentImages = result.rent?.map(i => i.logo_path) || [];
 
         // if buy and rent have same item merge into buy/rent array
-        const mergedViewingOptions = {
-            buy: viewingOptions.buy?.filter(i => !rentImages.includes(i.logo_path)) || [],
-            rent: viewingOptions.rent?.filter(i => !buyImages.includes(i.logo_path)) || [],
-            buy_rent: viewingOptions.buy?.filter(i => rentImages.includes(i.logo_path)) || [],
+        const mergedBuyRentArr = {
+            buy: result.buy?.filter(i => !rentImages.includes(i.logo_path)) || [],
+            rent: result.rent?.filter(i => !buyImages.includes(i.logo_path)) || [],
+            buy_rent: result.buy?.filter(i => rentImages.includes(i.logo_path)) || [],
         }
         // if merged array not empty replace viewing options and delete duplicates
-        if (mergedViewingOptions.buy_rent.length > 0) {
-            viewingOptions.buy_rent = mergedViewingOptions.buy_rent;
-            delete viewingOptions.buy;
-            delete viewingOptions.rent;
+        if (mergedBuyRentArr.buy_rent.length > 0) {
+            result.buy_rent = mergedBuyRentArr.buy_rent;
+            delete result.buy;
+            delete result.rent;
         }
 
-        if (mergedViewingOptions.buy.length > 0) {
-            viewingOptions.buy = mergedViewingOptions.buy;
+        if (mergedBuyRentArr.buy.length > 0) {
+            result.buy = mergedBuyRentArr.buy;
         } else {
-            delete mergedViewingOptions.buy;
+            delete mergedBuyRentArr.buy;
         }
 
-        if (mergedViewingOptions.rent.length > 0) {
-            viewingOptions.rent = mergedViewingOptions.rent;
+        if (mergedBuyRentArr.rent.length > 0) {
+            result.rent = mergedBuyRentArr.rent;
         } else {
-            delete mergedViewingOptions.rent;
+            delete mergedBuyRentArr.rent;
         }
 
-        viewingOptions = { ...viewingOptions, ...mergedViewingOptions };
+        result = { ...result, ...mergedBuyRentArr };
 
-        return viewingOptions;
+        return result;
     }
-    console.log(viewingOptions);
-    const hasBuy = Object.keys(viewingOptions).includes('buy');
-    const hasRent = Object.keys(viewingOptions).includes('rent');
-    // only run filter if both buy and rent are in array
-    viewingOptions = (hasBuy && hasRent) ? viewingOptions = filteredViewingOptions(viewingOptions) : viewingOptions;
-
-    delete viewingOptions.link;
 
     return (
-        <div className='wheretowatch-container'>
-            <h4 className='wheretowatch-heading'>{movieTitle}</h4>
-            <ul className='viewing-options-list-container'>
-                {Object.keys(viewingOptions).sort().map((key) => {
-                    const imageURL = 'https://image.tmdb.org/t/p/w500';
-                    // create lists
-                    const optionKey = key + '/' + movieID;
-                    return (
-                        <li className='option' key={optionKey}>
-                            <fieldset className='provider-list-fieldsets'>
-                                <legend>{filteredKey(key)}</legend>
-                                <ul className='provider-options-list-container'>
-                                    {/* create icons */}
-                                    {viewingOptions[key]?.map((key, i) => {
-                                        const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
+        <div className={infoState === 'provider-info' ? 'movie-info' : 'hidden'}>
+            <div className='wheretowatch-container'>
+                <h4 className='wheretowatch-heading'>{movieTitle}</h4>
+                <ul className='viewing-options-list-container'>
+                    {viewingOptions ? Object.keys(viewingOptions).sort().map((key) => {
+                        const imageURL = 'https://image.tmdb.org/t/p/w500';
+                        // create lists
+                        const optionKey = key + '/' + movieID;
+                        return (
+                            <li className='option' key={optionKey}>
+                                <fieldset className='provider-list-fieldsets'>
+                                    <legend>{filteredKey(key)}</legend>
+                                    <ul className='provider-options-list-container'>
+                                        {/* create icons */}
+                                        {viewingOptions[key]?.map((key, i) => {
+                                            const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
-                                        return (
-                                            <li key={iconKey}>
-                                                {(key.logo_path === 'N/A') ?
-                                                    <h4>{key.logo_path}</h4>
-                                                    :
-                                                    <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
-                                                }
-                                            </li>
-                                        )
-                                    })
-                                    }
-                                </ul>
-                            </fieldset>
-                        </li>
-                    )
-                })}
-            </ul>
+                                            return (
+                                                <li key={iconKey}>
+                                                    {(key.logo_path === 'N/A') ?
+                                                        <h4>{key.logo_path}</h4>
+                                                        :
+                                                        <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
+                                                    }
+                                                </li>
+                                            )
+                                        })
+                                        }
+                                    </ul>
+                                </fieldset>
+                            </li>
+                        )
+                    }) :
+                        <div className='loading-container'>
+                            <h4>Loading...</h4>
+                        </div>
+                    }
+                </ul>
+            </div>
         </div>
     )
 }

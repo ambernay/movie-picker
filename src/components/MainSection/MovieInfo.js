@@ -1,17 +1,9 @@
 import { memo } from 'react';
-import { useState, useEffect } from 'react';
+
 import ProviderIconsList from './ProviderIconsList.js';
-import { ProviderIconsApiCall } from '../MovieApi.js';
 import { EyeIcon } from '../Icons.js';
 
 function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion, infoState, setInfoState }) {
-
-    const [viewingOptions, setViewingOptions] = useState({});
-
-    useEffect(() => {
-        ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion).then(result => setViewingOptions(result));
-        console.log(viewingOptions)
-    }, [setViewingOptions, tvMovieToggle, movieID, currentRegion]);
 
     const handleMovieInfo = () => {
         setInfoState('provider-info');
@@ -30,15 +22,17 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                     </div>
                     <p>{overview}</p>
                 </div>
-                <div className={infoState === 'provider-info' ? 'movie-info' : 'hidden'}>
-                    {
-                        <ProviderIconsList
-                            movieTitle={movieTitle}
-                            movieID={movieID}
-                            viewingOptions={viewingOptions}
-                        />
-                    }
-                </div>
+                {infoState === 'provider-info' ?
+                    /* only renders and fetches icons onclick */
+                    <ProviderIconsList
+                        movieTitle={movieTitle}
+                        movieID={movieID}
+                        tvMovieToggle={tvMovieToggle}
+                        currentRegion={currentRegion}
+                        infoState={infoState}
+                    />
+                    : null
+                }
             </div>
         </>
     )

@@ -994,27 +994,15 @@ li:focus .overview {
     border: solid var(--lightAccent) 1px;
 }
 
-.no-options {
-    color: var(--darkNeutral);
+.loading-container {
     display: flex;
-    max-height: 420px;
-    height: -webkit-fill-available;
-    flex-direction: column;
+    height: 6rem;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 
-.no-options .no-options-movie-title,
-.no-options h3 {
-    width: 90%;
-    padding: 10px;
-}
-
-.no-options-movie-title {
-    color: var(--darkAccent);
-    font-size: 1.5rem;
-    line-height: 1.5rem;
+.loading-container h4 {
+    color: var(--backgroundColor);
 }
 
 /* #endregion - where-to-watch */
