@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
+import { TrendingApiCall } from '../MovieApi.js';
 
 function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement }) {
 
@@ -12,34 +13,13 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
-        const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
-        const apiKey = '0a093f521e98a991f4e4cc2a12460255';
-
-        // use default url on load or if trending selected else use newURL passed in from Form
-        const url = isTrending ? defaultURL : newURL;
-
-        // default trending url for landing page
-        const params = new URLSearchParams({
-            "api_key": apiKey,
-            "language": "en-US",
-            "page": currentPage
+        // TrendingApiCall(currentPage, tvMovieToggle, isTrending, newURL).then(result => console.log(result.totalPages));
+        TrendingApiCall(currentPage, tvMovieToggle, isTrending, newURL).then(result => {
+            setTotalPages(result.totalPages);
+            setMoviesToDisplay(result.movieResults);
+            // message for no results
+            if (result.movieResults < 1) { setStatusMessage('No results') };
         });
-
-        defaultURL.search = params;
-
-        fetch(url)
-            .then(results => {
-                return results.json();
-            })
-            .then(data => {
-                setMoviesToDisplay(data.results);
-                setTotalPages(data.total_pages);
-
-                // message for no results
-                if (data.results < 1) { setStatusMessage('No results') };
-            }).catch(() => {
-                setStatusMessage("Failed to fetch trending");
-            })
 
         // runs on url or currentPage change and form submission
     }, [isTrending, newURL, currentPage, tvMovieToggle, setTotalPages, setMoviesToDisplay]);
