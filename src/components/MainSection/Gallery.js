@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
-import { TrendingApiCall } from '../MovieApi.js';
+import { MoviesApiCall } from '../MovieApi.js';
 
 function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement }) {
 
@@ -13,8 +13,8 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
-        // TrendingApiCall(currentPage, tvMovieToggle, isTrending, newURL).then(result => console.log(result.totalPages));
-        TrendingApiCall(currentPage, tvMovieToggle, isTrending, newURL).then(result => {
+
+        MoviesApiCall(currentPage, tvMovieToggle, isTrending, newURL).then(result => {
             setTotalPages(result.totalPages);
             setMoviesToDisplay(result.movieResults);
             // message for no results

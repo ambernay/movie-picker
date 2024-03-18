@@ -121,7 +121,10 @@ const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion) => {
 //     return getTrendingPromises[key];
 // }
 let getTrendingPromises = {};
-const TrendingApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) => {
+let getSelectedPromises = {};
+const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) => {
+    let getMoviePromises = isTrending ? getTrendingPromises : getSelectedPromises;
+
     const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
 
     // use default url on load or if trending selected else use newURL passed in from Form
@@ -135,20 +138,19 @@ const TrendingApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) =
     });
 
     defaultURL.search = params;
-
-    getTrendingPromises = fetch(url)
+    // variable that chooses between 'Trending' and user selections
+    getMoviePromises = fetch(url)
         .then(results => {
             return results.json();
         })
         .then(data => {
-            let ApiResults = { movieResults: data.results, totalPages: data.total_pages }
-            console.log(ApiResults.movieResults);
-            return { movieResults: data.results, totalPages: data.total_pages }
+            let apiResults = { movieResults: data.results, totalPages: data.total_pages }
+            return apiResults
         }).catch(() => {
             // setStatusMessage("Failed to fetch trending");
             console.log('Failed to fetch Trending');
         })
-    return getTrendingPromises;
+    return getMoviePromises;
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, TrendingApiCall }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }

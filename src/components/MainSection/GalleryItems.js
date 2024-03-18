@@ -14,7 +14,7 @@ function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating
     const handleMouseLeave = () => {
         // resets state to overview on mouseout
         setInfoState('overview');
-        console.log(infoState);
+
         // blurs active element to allow hover out
         if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
     }
