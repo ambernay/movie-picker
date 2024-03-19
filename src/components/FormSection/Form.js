@@ -37,7 +37,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
     useEffect(() => {
         setNewURL(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
         // eslint-disable-next-line
-    }, [currentPage, isTrending, tvMovieToggle, currentRegion])
+    }, [currentPage, isTrending, tvMovieToggle, currentRegion, sortOption, startDate, endDate, provider, genre])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";

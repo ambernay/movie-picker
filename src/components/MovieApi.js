@@ -127,7 +127,6 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) => 
     // let key = `${currentPage}${tvMovieToggle}${isTrending}`;
     let key = isTrending ? `Trending_${tvMovieToggle}_${currentPage}` : `${newURL}`;
 
-    console.log(key);
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
 
