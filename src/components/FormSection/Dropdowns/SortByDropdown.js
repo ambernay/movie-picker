@@ -30,6 +30,7 @@ function SortByDropdown({ setSortOption }) {
             itemName={"sort-by"}
             listHeading={'sort-by'}
             handleChange={handleChange}
+            errorMessage={'Failed to load sort options'}
         />
     )
 }

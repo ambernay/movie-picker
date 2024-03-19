@@ -23,14 +23,19 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle }) {
     return (
         <fieldset className='genre-fieldset'>
             <legend id="genre">Genre:</legend>
-            {genreList.map((genre) => {
+            {genreList ? genreList.map((genre) => {
                 return (
                     <div className="radio-button-container genre-buttons" key={genre.id}>
                         <input onChange={handleChange} type="radio" id={genre.id} value={genre.id} name="genre" tabIndex='0'></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>
                 )
-            })}
+            })
+                :
+                <div className="error-message-container">
+                    <h4>Failed to load genres</h4>
+                </div>
+            }
         </fieldset>
     )
 }

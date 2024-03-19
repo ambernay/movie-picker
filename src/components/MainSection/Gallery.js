@@ -14,7 +14,7 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
 
     useEffect(() => {
 
-        MoviesApiCall(currentPage, tvMovieToggle, isTrending, newURL).then(result => {
+        MoviesApiCall(currentPage, tvMovieToggle, isTrending, newURL, setStatusMessage).then(result => {
             setTotalPages(result.totalPages);
             setMoviesToDisplay(result.movieResults);
             // message for no results
@@ -27,40 +27,39 @@ function Gallery({ isTrending, newURL, currentPage, setCurrentPage, isDropdownVi
     return (
         <>
             <div className='wrapper'>
-
                 {/* only renders on empty page */}
-                {(moviesToDisplay.length < 1) ? (
+                {!moviesToDisplay || (moviesToDisplay.length < 1) ? (
                     <div className="message-container">
                         <h3>{statusMessage}</h3>
                     </div>
-                ) : null
-                }
-                <div className="gallery-container">
-                    <ul className='gallery-list-container'>
-                        {moviesToDisplay.map((movie) => {
-                            const imageURL = 'https://image.tmdb.org/t/p/w500';
-                            /* if image not available, use icon */
-                            const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
+                ) :
+                    <div className="gallery-container">
+                        <ul className='gallery-list-container'>
+                            {moviesToDisplay.map((movie) => {
+                                const imageURL = 'https://image.tmdb.org/t/p/w500';
+                                /* if image not available, use icon */
+                                const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
 
-                            return (
-                                <GalleryItems
-                                    key={movie.id}
-                                    tabIndex={tabIndex}
-                                    movieTitle={movie.title || movie.name}
-                                    overview={
-                                        movie.overview ||
-                                        "No description available"}
-                                    imagePath={imagePath}
-                                    audienceRating={(movie.vote_average).toFixed(1)}
-                                    movieID={movie.id}
-                                    tvMovieToggle={tvMovieToggle}
-                                    currentRegion={currentRegion}
-                                    currentActiveElement={currentActiveElement}
-                                />
-                            )
-                        })}
-                    </ul>
-                </div>{/* gallery container */}
+                                return (
+                                    <GalleryItems
+                                        key={movie.id}
+                                        tabIndex={tabIndex}
+                                        movieTitle={movie.title || movie.name}
+                                        overview={
+                                            movie.overview ||
+                                            "No description available"}
+                                        imagePath={imagePath}
+                                        audienceRating={(movie.vote_average).toFixed(1)}
+                                        movieID={movie.id}
+                                        tvMovieToggle={tvMovieToggle}
+                                        currentRegion={currentRegion}
+                                        currentActiveElement={currentActiveElement}
+                                    />
+                                )
+                            })}
+                        </ul>
+                    </div>/* gallery container */
+                }
             </div>{/* wrapper */}
             <LoadMore
                 currentPage={currentPage}

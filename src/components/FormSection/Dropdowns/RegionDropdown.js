@@ -40,6 +40,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
             itemName={'english_name'}
             listHeading={"english_name"}
             handleChange={handleChange}
+            errorMessage={'Failed to load regions'}
         />
     )
 

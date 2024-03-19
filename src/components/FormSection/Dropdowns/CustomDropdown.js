@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 
-function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue, itemName, listHeading, handleChange }) {
+function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue, itemName, listHeading, handleChange, errorMessage }) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -21,22 +21,28 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue
         >
             <label className="label-container">                {currentSelectedLabel}
             </label>
-
             <div className={`select-container ${showOrHide}`}>
-                <ul className="select">
-                    {selectList.map((listItem) => {
-                        return (
-                            <li
-                                key={listItem[itemValue]}
-                                value={listItem[itemValue]}
-                                name={listItem[itemName]}
-                                onClick={handleChange}
-                            >
-                                {listItem[listHeading]}
-                            </li>
-                        )
-                    })}
-                </ul>
+                {selectList ?
+                    <ul className="select">
+                        {selectList.map((listItem) => {
+                            return (
+                                <li
+                                    key={listItem[itemValue]}
+                                    value={listItem[itemValue]}
+                                    name={listItem[itemName]}
+                                    onClick={handleChange}
+                                >
+                                    {listItem[listHeading]}
+                                </li>
+                            )
+                        })}
+                    </ul>
+
+                    :
+                    <div className="error-message-container">
+                        <h4>{errorMessage}</h4>
+                    </div>
+                }
             </div>
         </div>
     );

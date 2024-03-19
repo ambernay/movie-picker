@@ -5,9 +5,10 @@ import { ProviderIconsApiCall } from '../MovieApi.js';
 function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, infoState }) {
 
     const [viewingOptions, setViewingOptions] = useState();
+    const [fetchStatus, setFetchStatus] = useState('Loading...');
 
     useEffect(() => {
-        ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion).then(result => setViewingOptions(filteredViewingOptions(result)));
+        ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => setViewingOptions(filteredViewingOptions(result)));
 
     }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])
 
@@ -102,8 +103,8 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
                             </li>
                         )
                     }) :
-                        <div className='loading-container'>
-                            <h4>Loading...</h4>
+                        <div className='icon-message-container'>
+                            <h4>{fetchStatus}</h4>
                         </div>
                     }
                 </ul>

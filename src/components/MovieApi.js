@@ -41,8 +41,7 @@ const ProviderListApiCall = async () => {
                 });
                 return selectionOfProviders;
             }).catch((err) => {
-                console.error(err);
-                alert("Failed to fetch provider options");
+                console.error("Failed to fetch provider options", err);
             })
     }
     return providerListPromise;
@@ -64,15 +63,15 @@ const GenreListApiCall = async (tvOrMovie) => {
                 data.genres.push({ "id": "all-genres", "name": "All" });
                 return data.genres;
 
-            }).catch(() => {
-                alert("Failed to fetch genres");
+            }).catch((err) => {
+                console.log("Failed to fetch genres", err);
             })
     }
     return genreListPromises[key];
 }
 
 let providerIconPromises = {};
-const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion) => {
+const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion, setFetchStatus) => {
     const key = `${movieID}`;
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
@@ -91,7 +90,8 @@ const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion) => {
                 // return data.results;
                 return (data.results[currentRegion[0]] ? data.results[currentRegion[0]] : emptyObject);
             }).catch((err) => {
-                console.log("Failed to fetch streaming options", err);
+                setFetchStatus('Failed to load viewing options');
+                console.log('Failed to fetch provider icons', err);
             })
     }
     return providerIconPromises[key];
@@ -122,7 +122,7 @@ const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion) => {
 // }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) => {
+const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL, setStatusMessage) => {
 
     // let key = `${currentPage}${tvMovieToggle}${isTrending}`;
     let key = isTrending ? `Trending_${tvMovieToggle}_${currentPage}` : `${newURL}`;
@@ -149,14 +149,16 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) => 
             .then(data => {
                 let apiResults = { movieResults: data.results, totalPages: data.total_pages }
                 return apiResults
-            }).catch(() => {
-                // setStatusMessage("Failed to fetch trending");
-                console.log('Failed to fetch Trending');
+            }).catch((err) => {
+                console.log('Failed to fetch Trending', err);
+                let trendingType = tvMovieToggle === 'movie' ? 'movies' : 'tv shows';
+                setStatusMessage(`Failed to Load Trending ${trendingType}`);
+
             })
     }
     return getMoviePromises[key];
 }
-
+// structuring the url from user selections to be passed into MovieApiCall
 const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre) => {
     const baseURL = 'https://api.themoviedb.org/3';
     const url = new URL(baseURL + "/discover/" + tvMovieToggle);

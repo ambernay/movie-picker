@@ -21,14 +21,19 @@ function ProviderFormList({ setProvider, setIsValidRequest }) {
     return (
         <fieldset className="providers-fieldset">
             <legend id="provider">Provider:</legend>
-            {providerFormList.map((provider) => {
+            {providerFormList ? providerFormList.map((provider) => {
                 return (
                     <div className="radio-button-container provider-buttons" key={provider.provider_id}>
                         <input onChange={handleChange} type="radio" id={provider.provider_id} value={provider.provider_id} name="provider"></input>
                         <label htmlFor={provider.provider_id}>{trimmedName(provider.provider_name)}</label>
                     </div>
                 )
-            })}
+            })
+                :
+                <div className="error-message-container">
+                    <h4>Failed to load streaming options</h4>
+                </div>
+            }
         </fieldset>
     )
 }
