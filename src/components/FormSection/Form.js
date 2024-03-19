@@ -27,11 +27,17 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-            setNewURL(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
+
             // scroll back to top when new gallery loads - (offset to wait for page load)
             setTimeout(() => window.scrollTo(0, 0), 100);
         }
     }
+
+    //  re-renders on page changes
+    useEffect(() => {
+        setNewURL(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
+        // eslint-disable-next-line
+    }, [currentPage, isTrending, tvMovieToggle, currentRegion])
 
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";

@@ -13,7 +13,6 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
     const handleChange = (e) => {
         setCurrentRegion([e.target.getAttribute('value'), e.target.getAttribute('name')]);
     }
-
     const chooseSelectedLabel = () => {
 
         let countryCode = currentRegion[0];

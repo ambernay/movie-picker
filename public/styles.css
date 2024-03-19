@@ -319,6 +319,7 @@ img {
     --backgroundColor: tomato;
     --backgroundColorDesat: #d18375;
     --darkNeutral: #050404;
+    --darkNeutralOpacity: rgba(5, 4, 4, 0.5);
     --midAccent: #e6b86a;
     --midAccentOpacity: rgba(230, 184, 106, 0.3);
     --darkAccent: #720308;
@@ -645,6 +646,15 @@ li:focus {
 
 .region-list.header-region li {
     color: var(--lightAccent);
+}
+
+.empty-modal {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--darkNeutralOpacity);
+    z-index: 1;
 }
 
 /* #endregion - subheading dropdown */
@@ -1308,7 +1318,8 @@ input[type="radio"] {
 
 .region-list .select-container.hidden,
 .sort-by .select-container.hidden,
-.overview .hidden {
+.overview .hidden,
+.hidden {
     display: none;
 }
 

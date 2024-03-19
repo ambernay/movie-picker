@@ -120,37 +120,42 @@ const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion) => {
 
 //     return getTrendingPromises[key];
 // }
-let getTrendingPromises = {};
-let getSelectedPromises = {};
+
+let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL) => {
-    let getMoviePromises = isTrending ? getTrendingPromises : getSelectedPromises;
 
-    const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
+    // let key = `${currentPage}${tvMovieToggle}${isTrending}`;
+    let key = isTrending ? `Trending_${tvMovieToggle}_${currentPage}` : `${newURL}`;
 
-    // use default url on load or if trending selected else use newURL passed in from Form
-    const url = isTrending ? defaultURL : newURL;
+    console.log(key);
+    if (!getMoviePromises.hasOwnProperty(key)) {
+        const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
 
-    // default trending url for landing page
-    const params = new URLSearchParams({
-        "api_key": apiKey,
-        "language": "en-US",
-        "page": currentPage
-    });
+        // use default url on load or if trending selected else use newURL passed in from Form
+        const url = isTrending ? defaultURL : newURL;
 
-    defaultURL.search = params;
-    // variable that chooses between 'Trending' and user selections
-    getMoviePromises = fetch(url)
-        .then(results => {
-            return results.json();
-        })
-        .then(data => {
-            let apiResults = { movieResults: data.results, totalPages: data.total_pages }
-            return apiResults
-        }).catch(() => {
-            // setStatusMessage("Failed to fetch trending");
-            console.log('Failed to fetch Trending');
-        })
-    return getMoviePromises;
+        // default trending url for landing page
+        const params = new URLSearchParams({
+            "api_key": apiKey,
+            "language": "en-US",
+            "page": currentPage
+        });
+
+        defaultURL.search = params;
+
+        getMoviePromises[key] = fetch(url)
+            .then(results => {
+                return results.json();
+            })
+            .then(data => {
+                let apiResults = { movieResults: data.results, totalPages: data.total_pages }
+                return apiResults
+            }).catch(() => {
+                // setStatusMessage("Failed to fetch trending");
+                console.log('Failed to fetch Trending');
+            })
+    }
+    return getMoviePromises[key];
 }
 
 const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre) => {

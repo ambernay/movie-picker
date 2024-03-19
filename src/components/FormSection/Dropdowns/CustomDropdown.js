@@ -7,10 +7,15 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue
 
     const showOrHide = isOpen ? 'visible' : 'hidden';
 
+    const handleDropdownClick = (e) => {
+        e.stopPropagation();
+        setIsOpen(!isOpen);
+    }
+
     return (
         <div
             className={`dropdown-menu ${listClass}`}
-            onClick={(e) => { e.stopPropagation(); setIsOpen(!isOpen); }}
+            onClick={(e) => handleDropdownClick(e)}
             onBlur={() => { setIsOpen(false); }}
             tabIndex={0}
         >
