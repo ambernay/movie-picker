@@ -5,7 +5,7 @@ import ProviderFormList from './Selections/ProviderFormList.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
-import { UserSelectionURL } from '../MovieApi.js';
+import { UserSelectionURL } from '../MovieApiCache.js';
 
 function Form({ setUserSelections, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
 

@@ -102,9 +102,8 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelecti
 
     const userURL = userSelections[0];
     const urlCacheKey = userSelections[1];
-    let key = isTrending ? `Trending_${tvMovieToggle}_${currentPage}` : `${urlCacheKey}`;
+    let key = isTrending ? `Trending/${tvMovieToggle}/${currentPage}` : `${urlCacheKey}`;
     console.log(key);
-
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
 
@@ -140,13 +139,14 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelecti
 const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre) => {
     const baseURL = 'https://api.themoviedb.org/3';
     const url = new URL(baseURL + "/discover/" + tvMovieToggle);
+    const regionCode = currentRegion[0];
     let cacheKey = [`${tvMovieToggle}`];
 
     const params = new URLSearchParams({
         "api_key": apiKey,
         "vote_count.gte": 10,
         "sort_by": sortOption,
-        "watch_region": currentRegion[0],
+        "watch_region": regionCode,
         "language": "en-US",
         "page": currentPage
     })
@@ -158,15 +158,19 @@ const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion,
     }
     if (provider && provider.id !== "all") {
         params.append("with_watch_providers", provider.id);
+        // discard everything after first word
         cacheKey.push((`${provider.value}`).split(' ')[0]);
     }
     if (genre && genre.id !== "all") {
         params.append("with_genres", genre.id);
-        cacheKey.push(`${genre.value}`);
+        // replace spaces with underscores
+        cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
-    cacheKey.push(`${currentPage}`);
+    // split on underscores and discard value before first underscore
+    let sortOptionTitle = (`${sortOption}`).split('_')[1];
+    cacheKey.push(`${sortOptionTitle}/${regionCode}/${currentPage}`);
     url.search = params;
-    return [url, cacheKey.join('_')];
+    return [url, cacheKey.join('/')];
 }
 
 export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL }

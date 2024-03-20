@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from "react";
-import { ProviderListApiCall } from '../../MovieApi';
+import { ProviderListApiCall } from '../../MovieApiCache';
 
 function ProviderFormList({ setProvider, setIsValidRequest }) {
 
