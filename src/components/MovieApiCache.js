@@ -102,8 +102,8 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelecti
 
     const userURL = userSelections[0];
     const urlCacheKey = userSelections[1];
-    let key = isTrending ? `Trending_${tvMovieToggle}_${currentPage}` : `${urlCacheKey}`;
-
+    let key = isTrending ? `Trending/${tvMovieToggle}/${currentPage}` : `${urlCacheKey}`;
+    console.log(key);
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
 
@@ -164,9 +164,10 @@ const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion,
         params.append("with_genres", genre.id);
         cacheKey.push(`${genre.value}`);
     };
-    cacheKey.push(`${regionCode}_${currentPage}`);
+    let sortOptionTitle = (`${sortOption}`).split('_')[1];
+    cacheKey.push(`${sortOptionTitle}/${regionCode}/${currentPage}`);
     url.search = params;
-    return [url, cacheKey.join('_')];
+    return [url, cacheKey.join('/')];
 }
 
 export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL }
