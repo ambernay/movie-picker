@@ -1,6 +1,7 @@
 import ToggleButton from './ToggleButton';
 import FindMovieButton from './FindMovieButton';
 import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
+import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
 
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize }) {
@@ -76,7 +77,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                 />
                                 : null
                             }
-
+                            <SearchBar />
                         </div>
                     </div>{/* wrapper */}
                 </div>
