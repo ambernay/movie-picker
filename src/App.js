@@ -7,31 +7,38 @@ import Footer from './components/Footer.js';
 function App() {
 
     const [isTrending, setIsTrending] = useState(true);
-    const [newURL, setNewURL] = useState('');
+    const [userSelections, setUserSelections] = useState('');
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
+    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
+    const [currentActiveElement, setCurrentActiveElement] = useState();
+
+    function evaluateScreenSize() {
+        // height has to be lower to allow for search bar pop-up
+        return (window.innerWidth <= 430 && window.innerHeight > 400) ? 'narrowScreen' : 'wideScreen';
+    }
 
     // screen size state for for toggle button
-    const [screenSize, setScreenSize] = useState((window.innerWidth <= 400 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen');
+    const [screenSize, setScreenSize] = useState(evaluateScreenSize());
 
     useEffect(() => {
-
-        window.addEventListener('resize', () => setScreenSize((window.innerWidth <= 400 && window.innerHeight > 500) ? 'narrowScreen' : 'wideScreen'));
-
+        window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, []);
 
     // stop background scroll when form is visible
     useEffect(() => {
         const bodyEl = document.querySelector('body');
         isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
-    }, [isDropdownVisible])
+    }, [isDropdownVisible]);
 
     const handleDropdown = (e) => {
-        e.stopPropagation();
-        !isDropdownVisible ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
-        console.log(e.target.tagName === 'MAIN');
-        return false
+        const headerRegionDropdown = document.querySelector('.header-region');
+
+        (!isDropdownVisible && currentActiveElement !== headerRegionDropdown) ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
+
+        setCurrentActiveElement(document.activeElement);
+        return false;
     }
 
     return (
@@ -43,31 +50,40 @@ function App() {
                 isTrending={isTrending}
                 setIsTrending={setIsTrending}
                 setCurrentPage={setCurrentPage}
+                currentRegion={currentRegion}
+                setCurrentRegion={setCurrentRegion}
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
+                setCurrentActiveElement={setCurrentActiveElement}
             />
-            <main>
+            <main onClick={handleDropdown}>
                 <Gallery
-                    newURL={newURL}
+                    userSelections={userSelections}
                     isTrending={isTrending}
+                    currentRegion={currentRegion}
+                    setCurrentRegion={setCurrentRegion}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
                     isDropdownVisible={isDropdownVisible}
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
+                    currentActiveElement={currentActiveElement}
                 />
             </main>
 
             <Form
-                setNewURL={setNewURL}
+                setUserSelections={setUserSelections}
                 isDropdownVisible={isDropdownVisible}
                 setIsTrending={setIsTrending}
                 setIsDropdownVisible={setIsDropdownVisible}
+                currentRegion={currentRegion}
+                setCurrentRegion={setCurrentRegion}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 isTrending={isTrending}
                 tvMovieToggle={tvMovieToggle}
+                screenSize={screenSize}
             />
 
             <Footer />

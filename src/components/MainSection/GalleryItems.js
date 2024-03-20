@@ -1,4 +1,9 @@
-function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabIndex }) {
+import { useState } from 'react';
+import MovieInfo from './MovieInfo.js';
+
+function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion }) {
+
+    const [infoState, setInfoState] = useState('overview');
 
     let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
 
@@ -6,19 +11,31 @@ function GalleryItems({ movieTitle, overview, imagePath, audienceRating, tabInde
 
     let truncatedTitle = (movieTitle.length > 35) ? (movieTitle.slice(0, 35) + "...") : movieTitle;
 
+    const handleMouseLeave = () => {
+        // resets state to overview on mouseout
+        setInfoState('overview');
+
+        // blurs active element to allow hover out
+        if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
+    }
 
     return (
         // tab index default 0 and -1 when dropdown menu is open
-        <li className="safari_only" tabIndex={tabIndex}>
+        <li className="gallery-items safari-only" tabIndex={tabIndex} onClick={(e) => { e.stopPropagation(); }} onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave}>
             <img className={imageHeightClass} src={imagePath} alt={movieTitle} />
             <div className="info-container">
                 <h3>{truncatedTitle}</h3>
                 <p className="rating">{rating}</p>
             </div>
-            <div className="overview">
-                <h4>Overview</h4>
-                <p>{overview}</p>
-            </div>
+            <MovieInfo
+                overview={overview}
+                movieID={movieID}
+                tvMovieToggle={tvMovieToggle}
+                currentRegion={currentRegion}
+                movieTitle={movieTitle}
+                infoState={infoState}
+                setInfoState={setInfoState}
+            />
         </li>
     )
 }
