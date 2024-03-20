@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useState, useEffect } from 'react';
-import { ProviderIconsApiCall } from '../MovieApi.js';
+import { ProviderIconsApiCall } from '../MovieApiCache.js';
 
 function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, infoState }) {
 

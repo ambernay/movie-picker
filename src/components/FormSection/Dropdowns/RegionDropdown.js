@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from 'react';
 import CustomDropdown from './CustomDropdown';
-import { RegionApiCall } from '../../MovieApi';
+import { RegionApiCall } from '../../MovieApiCache';
 
 function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screenSize }) {
 

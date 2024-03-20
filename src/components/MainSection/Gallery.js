@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
-import { MoviesApiCall } from '../MovieApi.js';
+import { MoviesApiCall } from '../MovieApiCache.js';
 
 function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement }) {
 

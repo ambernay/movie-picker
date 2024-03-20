@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from 'react';
-import { GenreListApiCall } from '../../MovieApi';
+import { GenreListApiCall } from '../../MovieApiCache';
 
 function GenreList({ setGenre, setIsValidRequest, tvMovieToggle }) {
 
