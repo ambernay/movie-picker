@@ -14,7 +14,7 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle }) {
     }, [setMovieGenreList, setTvGenreList]);
 
     const handleChange = (e) => {
-        setGenre(e.target.value);
+        setGenre(e.target);
         setIsValidRequest(true);
     }
 
@@ -26,7 +26,7 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle }) {
             {genreList ? genreList.map((genre) => {
                 return (
                     <div className="radio-button-container genre-buttons" key={genre.id}>
-                        <input onChange={handleChange} type="radio" id={genre.id} value={genre.id} name="genre" tabIndex='0'></input>
+                        <input onChange={handleChange} type="radio" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>
                 )

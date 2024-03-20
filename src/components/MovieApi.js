@@ -97,41 +97,19 @@ const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion, setFe
     return providerIconPromises[key];
 }
 
-// const getTrending = (currentPage, tvMovie) => {
-//     const key = `${currentPage}_${movie}_${region}`;
-
-//     if (!getTrendingPromises.keys.includes(key)) {
-//         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
-
-//         // use default url on load or if trending selected else use newURL passed in from Form
-//         const url = isTrending ? defaultURL : newURL;
-
-//         // default trending url for landing page
-//         const params = new URLSearchParams({
-//             "api_key": apiKey,
-//             "language": `en-US`,
-//             "page": currentPage
-//         });
-
-//         defaultURL.search = params;
-
-//         getTrendingPromises[key] = fetch(`moviedb.com/trending/${pageNumber}`);
-//     }
-
-//     return getTrendingPromises[key];
-// }
-
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL, setStatusMessage) => {
+const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelections, setStatusMessage) => {
 
-    // let key = `${currentPage}${tvMovieToggle}${isTrending}`;
-    let key = isTrending ? `Trending_${tvMovieToggle}_${currentPage}` : `${newURL}`;
+    const userURL = userSelections[0];
+    const urlCacheKey = userSelections[1];
+    let key = isTrending ? `Trending_${tvMovieToggle}_${currentPage}` : `${urlCacheKey}`;
+    console.log(key);
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
 
-        // use default url on load or if trending selected else use newURL passed in from Form
-        const url = isTrending ? defaultURL : newURL;
+        // use default url on load or if trending selected else use userSelections passed in from Form
+        const url = isTrending ? defaultURL : userURL;
 
         // default trending url for landing page
         const params = new URLSearchParams({
@@ -162,6 +140,7 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, newURL, set
 const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre) => {
     const baseURL = 'https://api.themoviedb.org/3';
     const url = new URL(baseURL + "/discover/" + tvMovieToggle);
+    let cacheKey = [`${tvMovieToggle}`];
 
     const params = new URLSearchParams({
         "api_key": apiKey,
@@ -172,13 +151,22 @@ const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion,
         "page": currentPage
     })
     // add params only when selected
-    if (startDate) params.append("primary_release_date.gte", startDate);
-    if (endDate) params.append("primary_release_date.lte", endDate);
-    if (provider && provider.id !== "all") params.append("with_watch_providers", provider);
-    if (genre && genre.id !== "all") { params.append("with_genres", genre) };
-
+    if (startDate && endDate) {
+        params.append("primary_release_date.gte", startDate);
+        params.append("primary_release_date.lte", endDate);
+        cacheKey.push((`${startDate}`).split('-')[0]);
+    }
+    if (provider && provider.id !== "all") {
+        params.append("with_watch_providers", provider.id);
+        cacheKey.push((`${provider.value}`).split(' ')[0]);
+    }
+    if (genre && genre.id !== "all") {
+        params.append("with_genres", genre.id);
+        cacheKey.push(`${genre.value}`);
+    };
+    cacheKey.push(`${currentPage}`);
     url.search = params;
-    return url;
+    return [url, cacheKey.join('_')];
 }
 
 export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL }

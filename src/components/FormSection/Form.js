@@ -7,7 +7,7 @@ import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 import { UserSelectionURL } from '../MovieApi.js';
 
-function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
+function Form({ setUserSelections, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
 
     const [genre, setGenre] = useState();
     const [startDate, setStartDate] = useState();
@@ -35,7 +35,7 @@ function Form({ setNewURL, setIsTrending, isTrending, setIsDropdownVisible, isDr
 
     //  re-renders on page changes
     useEffect(() => {
-        setNewURL(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
+        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
         // eslint-disable-next-line
     }, [currentPage, isTrending, tvMovieToggle, currentRegion, sortOption, startDate, endDate, provider, genre])
 
