@@ -158,12 +158,15 @@ const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion,
     }
     if (provider && provider.id !== "all") {
         params.append("with_watch_providers", provider.id);
+        // discard everything after first word
         cacheKey.push((`${provider.value}`).split(' ')[0]);
     }
     if (genre && genre.id !== "all") {
         params.append("with_genres", genre.id);
-        cacheKey.push(`${genre.value}`);
+        // replace spaces with underscores
+        cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
+    // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
     cacheKey.push(`${sortOptionTitle}/${regionCode}/${currentPage}`);
     url.search = params;
