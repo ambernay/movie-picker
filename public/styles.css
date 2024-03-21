@@ -679,10 +679,18 @@ li:focus {
 }
 
 .input-container input {
+    --listItemWidth: 245px;
+    --inputPadding: 4px;
     background: var(--lightAccent);
-    color: var(--midAccent);
+    color: var(--darkNeutral);
     height: 1.5rem;
-    padding: 2px;
+    width: calc(var(--listItemWidth) + var(--inputPadding));
+    padding: var(--inputPadding);
+}
+
+.input-container input::placeholder {
+    color: var(--backgroundColor);
+    font-size: 1rem;
 }
 
 .search-container svg {
