@@ -166,9 +166,11 @@ const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion,
         // replace spaces with underscores
         cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
-    // split on underscores and discard value before first underscore
-    let sortOptionTitle = (`${sortOption}`).split('_')[1];
-    cacheKey.push(`${sortOptionTitle}/${regionCode}/${currentPage}`);
+    // split on underscores and take last value
+    let sortbySplitName = (`${sortOption}`).split('_');
+    let sortbyCacheName = sortbySplitName[sortbySplitName.length - 1]
+
+    cacheKey.push(`${sortbyCacheName}/${regionCode}/${currentPage}`);
     url.search = params;
     return [url, cacheKey.join('/')];
 }
