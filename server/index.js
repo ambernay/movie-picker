@@ -18,7 +18,7 @@ app.get('/api', (req, res) => {
 
 app.get('/getRegion', getRegion);
 app.get('/getProviderList', getProviderList);
-// app.get('/getGenreList', getGenreList);
+app.get('/getGenreList', getGenreList);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

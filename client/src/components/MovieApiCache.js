@@ -20,9 +20,9 @@ const RegionApiCall = async () => {
 let providerListPromise;
 const ProviderListApiCall = async () => {
     if (!providerListPromise) {
-        const providerListAPI = `http://localhost:3001/getProviderList`;
+        const providerListURL = `http://localhost:3001/getProviderList`;
 
-        providerListPromise = fetch(providerListAPI)
+        providerListPromise = fetch(providerListURL)
             .then(results => {
                 return results.json();
             }).catch((err) => {
@@ -37,7 +37,7 @@ const GenreListApiCall = (tvOrMovie) => {
     const key = `${tvOrMovie}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `https://localhost:3001/getGenreList`;
+        const genreListURL = `http://localhost:3001/getGenreList?mediaType=${tvOrMovie}`;
 
         genreListPromises[key] = fetch(genreListURL)
             .then(results => {
