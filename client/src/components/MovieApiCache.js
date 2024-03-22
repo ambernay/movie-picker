@@ -1,22 +1,9 @@
 const apiKey = '0a093f521e98a991f4e4cc2a12460255';
 
-// const getApiKey = async() => {
-//     apiKey = fetch('/api')
-//         .then((res) => res.text())
-//         .then((data) => { setApiKey(data); console.log(data) })
-//         .catch((err) => console.log(err));
-//     return apiKey
-// }
-
-console.log(apiKey);
-
 let regionsPromise;
 const RegionApiCall = async () => {
     if (!regionsPromise) {
-        // sorts by english_name (instead of country code)
-        //const sortRegionsByName = (a, z) => a.english_name.localeCompare(z.english_name);
-
-        const regionAPI = `http://localhost:3001/region`;
+        const regionAPI = `http://localhost:3001/getRegion`;
 
         regionsPromise = fetch(regionAPI)
             .then(results => {
@@ -33,20 +20,11 @@ const RegionApiCall = async () => {
 let providerListPromise;
 const ProviderListApiCall = async () => {
     if (!providerListPromise) {
-        // codes are the same between movie and tv
-        const providersList = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&language=en-US`;
+        const providerListAPI = `http://localhost:3001/getProviderList`;
 
-        providerListPromise = fetch(providersList)
+        providerListPromise = fetch(providerListAPI)
             .then(results => {
                 return results.json();
-            })
-            .then(data => {
-                // filter api request for specific providers
-                // appletv:2, netflix:8, tubi:73, amazon:119, crave:230, disney:337,paramount:531
-                const selectionOfProviders = data.results.filter((provider) => {
-                    return [2, 8, 73, 119, 230, 337, 531].includes(provider.provider_id)
-                });
-                return selectionOfProviders;
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
             })
@@ -55,21 +33,15 @@ const ProviderListApiCall = async () => {
 }
 
 let genreListPromises = {};
-const GenreListApiCall = async (tvOrMovie) => {
+const GenreListApiCall = (tvOrMovie) => {
     const key = `${tvOrMovie}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `https://api.themoviedb.org/3/genre/${tvOrMovie}/list?api_key=${apiKey}&language=en-US`;
+        const genreListURL = `https://localhost:3001/getGenreList`;
 
         genreListPromises[key] = fetch(genreListURL)
             .then(results => {
                 return results.json();
-            })
-            .then(data => {
-                // adds an All button
-                data.genres.push({ "id": "all-genres", "name": "All" });
-                return data.genres;
-
             }).catch((err) => {
                 console.log("Failed to fetch genres", err);
             })

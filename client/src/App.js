@@ -6,15 +6,6 @@ import Footer from './components/Footer.js';
 
 function App() {
 
-    const [apiKey, setApiKey] = useState('');
-    useEffect(() => {
-        fetch('/api')
-            .then((res) => res.text())
-            .then((data) => { setApiKey(data); console.log(data) })
-            .catch((err) => console.log(err));
-    }, []);
-    console.log(apiKey);
-
     const [isTrending, setIsTrending] = useState(true);
     const [userSelections, setUserSelections] = useState('');
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
