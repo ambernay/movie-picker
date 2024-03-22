@@ -1,21 +1,28 @@
 const apiKey = '0a093f521e98a991f4e4cc2a12460255';
 
+// const getApiKey = async() => {
+//     apiKey = fetch('/api')
+//         .then((res) => res.text())
+//         .then((data) => { setApiKey(data); console.log(data) })
+//         .catch((err) => console.log(err));
+//     return apiKey
+// }
+
+console.log(apiKey);
+
 let regionsPromise;
 const RegionApiCall = async () => {
     if (!regionsPromise) {
         // sorts by english_name (instead of country code)
-        const sortRegionsByName = (a, z) => a.english_name.localeCompare(z.english_name);
+        //const sortRegionsByName = (a, z) => a.english_name.localeCompare(z.english_name);
 
-        const regionAPI = `https://api.themoviedb.org/3/watch/providers/regions?api_key=${apiKey}&language=en-US`;
+        const regionAPI = `http://localhost:3001/region`;
 
         regionsPromise = fetch(regionAPI)
             .then(results => {
                 return results.json();
             })
-            .then(data => {
-                // sorts by english_name (instead of country code)
-                return data.results.sort(sortRegionsByName);
-            }).catch((err) => {
+            .catch((err) => {
                 console.error(err);
             })
     }
@@ -103,7 +110,7 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelecti
     const userURL = userSelections[0];
     const urlCacheKey = userSelections[1];
     let key = isTrending ? `Trending/${tvMovieToggle}/${currentPage}` : `${urlCacheKey}`;
-    console.log(key);
+
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
 
