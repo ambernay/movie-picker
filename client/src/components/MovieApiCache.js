@@ -77,8 +77,8 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelecti
     let key = isTrending ? `Trending/${tvMovieToggle}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        // const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
-        const defaultURL = `http://localhost:3001/getGallery?mediaType=${tvOrMovie}&`;
+        const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
+        // const defaultURL = `http://localhost:3001/getGallery?mediaType=${tvOrMovie}&`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
         const url = isTrending ? defaultURL : userURL;
