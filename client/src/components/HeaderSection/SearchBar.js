@@ -1,6 +1,6 @@
 // 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=0a093f521e98a991f4e4cc2a12460255'
 
-import { useState, useRef, useEffect, memo } from 'react';
+import { useState, useRef, memo } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
 function SearchBar() {
