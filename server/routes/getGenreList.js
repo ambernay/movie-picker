@@ -3,11 +3,8 @@ const axios = require('axios');
 
 let genreListPromises = {};
 const getGenreList = (req, res) => {
-    // const key = `${tvOrMovie}`;
     const key = req.query.mediaType;
-    console.log(key);
     if (!genreListPromises.hasOwnProperty(key)) {
-        // const genreListAPI = `https://api.themoviedb.org/3/genre/${tvOrMovie}/list?api_key=${apiKey}&language=en-US`;
         const genreListAPI = `https://api.themoviedb.org/3/genre/${key}/list?api_key=${apiKey}&language=en-US`;
 
         genreListPromises[key] = axios.get(genreListAPI)
@@ -23,7 +20,6 @@ const getGenreList = (req, res) => {
     genreListPromises[key].then((data) => {
         res.json(data)
     });
-    // return genreListPromises[key];
 }
 
 module.exports = { getGenreList }

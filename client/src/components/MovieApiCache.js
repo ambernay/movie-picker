@@ -50,27 +50,20 @@ const GenreListApiCall = (tvOrMovie) => {
 }
 
 let providerIconPromises = {};
-const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion, setFetchStatus) => {
+const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchStatus) => {
+    const regionCode = currentRegion[0];
     const key = `${movieID}`;
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
-        const getMovieViewingOptions = `https://api.themoviedb.org/3/${tvMovieToggle}/${movieID}/watch/providers?api_key=${apiKey}`;
+        const viewingOptionsURL = `http://localhost:3001/getViewingOptions?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
 
-        providerIconPromises[key] = fetch(getMovieViewingOptions)
+        providerIconPromises[key] = fetch(viewingOptionsURL)
             .then(results => {
                 return results.json();
             })
-            .then(data => {
-
-                const emptyObject = {
-                    buy_rent: [{ logo_path: 'N/A', provider_id: 'buy/rent_N/A', provider_name: 'N/A' }],
-                    stream: [{ logo_path: 'N/A', provider_id: 'stream_N/A', provider_name: 'N/A' }]
-                }
-                // return data.results;
-                return (data.results[currentRegion[0]] ? data.results[currentRegion[0]] : emptyObject);
-            }).catch((err) => {
+            .catch((err) => {
                 setFetchStatus('Failed to load viewing options');
-                console.log('Failed to fetch provider icons', err);
+                console.log('Failed to load provider icons', err);
             })
     }
     return providerIconPromises[key];
