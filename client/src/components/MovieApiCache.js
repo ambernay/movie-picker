@@ -3,19 +3,13 @@ const apiKey = '0a093f521e98a991f4e4cc2a12460255';
 let regionsPromise;
 const RegionApiCall = async () => {
     if (!regionsPromise) {
-        // sorts by english_name (instead of country code)
-        const sortRegionsByName = (a, z) => a.english_name.localeCompare(z.english_name);
-
-        const regionAPI = `https://api.themoviedb.org/3/watch/providers/regions?api_key=${apiKey}&language=en-US`;
+        const regionAPI = `http://localhost:3001/getRegion`;
 
         regionsPromise = fetch(regionAPI)
             .then(results => {
                 return results.json();
             })
-            .then(data => {
-                // sorts by english_name (instead of country code)
-                return data.results.sort(sortRegionsByName);
-            }).catch((err) => {
+            .catch((err) => {
                 console.error(err);
             })
     }
@@ -26,20 +20,11 @@ const RegionApiCall = async () => {
 let providerListPromise;
 const ProviderListApiCall = async () => {
     if (!providerListPromise) {
-        // codes are the same between movie and tv
-        const providersList = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&language=en-US`;
+        const providerListURL = `http://localhost:3001/getProviderList`;
 
-        providerListPromise = fetch(providersList)
+        providerListPromise = fetch(providerListURL)
             .then(results => {
                 return results.json();
-            })
-            .then(data => {
-                // filter api request for specific providers
-                // appletv:2, netflix:8, tubi:73, amazon:119, crave:230, disney:337,paramount:531
-                const selectionOfProviders = data.results.filter((provider) => {
-                    return [2, 8, 73, 119, 230, 337, 531].includes(provider.provider_id)
-                });
-                return selectionOfProviders;
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
             })
@@ -48,21 +33,15 @@ const ProviderListApiCall = async () => {
 }
 
 let genreListPromises = {};
-const GenreListApiCall = async (tvOrMovie) => {
+const GenreListApiCall = (tvOrMovie) => {
     const key = `${tvOrMovie}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `https://api.themoviedb.org/3/genre/${tvOrMovie}/list?api_key=${apiKey}&language=en-US`;
+        const genreListURL = `http://localhost:3001/getGenreList?mediaType=${tvOrMovie}`;
 
         genreListPromises[key] = fetch(genreListURL)
             .then(results => {
                 return results.json();
-            })
-            .then(data => {
-                // adds an All button
-                data.genres.push({ "id": "all-genres", "name": "All" });
-                return data.genres;
-
             }).catch((err) => {
                 console.log("Failed to fetch genres", err);
             })
@@ -71,27 +50,20 @@ const GenreListApiCall = async (tvOrMovie) => {
 }
 
 let providerIconPromises = {};
-const ProviderIconsApiCall = async (tvMovieToggle, movieID, currentRegion, setFetchStatus) => {
+const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchStatus) => {
+    const regionCode = currentRegion[0];
     const key = `${movieID}`;
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
-        const getMovieViewingOptions = `https://api.themoviedb.org/3/${tvMovieToggle}/${movieID}/watch/providers?api_key=${apiKey}`;
+        const viewingOptionsURL = `http://localhost:3001/getViewingOptions?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
 
-        providerIconPromises[key] = fetch(getMovieViewingOptions)
+        providerIconPromises[key] = fetch(viewingOptionsURL)
             .then(results => {
                 return results.json();
             })
-            .then(data => {
-
-                const emptyObject = {
-                    buy_rent: [{ logo_path: 'N/A', provider_id: 'buy/rent_N/A', provider_name: 'N/A' }],
-                    stream: [{ logo_path: 'N/A', provider_id: 'stream_N/A', provider_name: 'N/A' }]
-                }
-                // return data.results;
-                return (data.results[currentRegion[0]] ? data.results[currentRegion[0]] : emptyObject);
-            }).catch((err) => {
+            .catch((err) => {
                 setFetchStatus('Failed to load viewing options');
-                console.log('Failed to fetch provider icons', err);
+                console.log('Failed to load provider icons', err);
             })
     }
     return providerIconPromises[key];
@@ -106,6 +78,7 @@ const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelecti
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
+        // const defaultURL = `http://localhost:3001/getGallery?mediaType=${tvOrMovie}&`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
         const url = isTrending ? defaultURL : userURL;
