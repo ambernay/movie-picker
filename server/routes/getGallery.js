@@ -2,39 +2,50 @@ const apiKey = require('./apikey');
 const axios = require('axios');
 
 let getMoviePromises = {};
-const getGallery = (currentPage, tvMovieToggle, isTrending, userSelections, setStatusMessage) => {
+const getGallery = (req, res) => {
 
-    const userURL = userSelections[0];
-    const urlCacheKey = userSelections[1];
-    let key = isTrending ? `Trending/${tvMovieToggle}/${currentPage}` : `${urlCacheKey}`;
+    const key = req.query.key;
+    const tvOrMovie = req.query.mediaType;
+    const currentPage = req.query.page;
+    const language = req.query.language;
+    const isTrending = req.query.isTrending;
+    // const regionCode = req.query.userSelections.watch_region;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
+        const defaultURL = `https://api.themoviedb.org/3/trending/${tvOrMovie}/day?api_key=${apiKey}&language=${language}&page=${currentPage}`;
+
+        const baseURL = 'https://api.themoviedb.org/3';
+        const url = new URL(baseURL + "/discover/" + tvOrMovie);
 
         // use default url on load or if trending selected else use userSelections passed in from Form
-        const url = isTrending ? defaultURL : userURL;
+        // const url = isTrending ? defaultURL : userURL;
+        // const url = defaultURL;
 
         // default trending url for landing page
-        const params = new URLSearchParams({
-            "api_key": apiKey,
-            "language": "en-US",
-            "page": currentPage
-        });
+        // const params = new URLSearchParams({
+        //     "api_key": apiKey,
+        //     "language": language,
+        //     "page": currentPage
+        // });
 
-        defaultURL.search = params;
+        // defaultURL.search = params;
+        // url.search = params;
 
-        getMoviePromises[key] = fetch(url)
-            .then(results => {
-                return results.json();
-            })
-            .then(data => {
-                let apiResults = { movieResults: data.results, totalPages: data.total_pages }
-                return apiResults
+        // const params = new URLSearchParams{
+        //     "api_key": apiKey,
+        //     "vote_count.gte": 10,
+        //     "sort_by": sortOption,
+        //     "watch_region": req.query.userSelections.regionCode,
+        //     "language": "en-US",
+        //     "page": currentPage
+        // }
+
+        getMoviePromises[key] = axios.get(url)
+            .then(response => {
+                let apiResults = { movieResults: response.data.results, totalPages: response.data.total_pages }
+                return apiResults;
             }).catch((err) => {
                 console.log('Failed to fetch Trending', err);
-                let trendingType = tvMovieToggle === 'movie' ? 'movies' : 'tv shows';
-                setStatusMessage(`Failed to Load Trending ${trendingType}`);
-
             })
     }
     getMoviePromises[key].then((data) => {

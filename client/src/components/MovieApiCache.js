@@ -53,6 +53,7 @@ let providerIconPromises = {};
 const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchStatus) => {
     const regionCode = currentRegion[0];
     const key = `${movieID}`;
+
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
         const viewingOptionsURL = `http://localhost:3001/getViewingOptions?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
@@ -70,80 +71,79 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvMovieToggle, isTrending, userSelections, setStatusMessage) => {
+const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, setStatusMessage) => {
 
-    const userURL = userSelections[0];
+    // const userURL = userSelections[0];
     const urlCacheKey = userSelections[1];
-    let key = isTrending ? `Trending/${tvMovieToggle}/${currentPage}` : `${urlCacheKey}`;
+    let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
-        // const defaultURL = `http://localhost:3001/getGallery?mediaType=${tvOrMovie}&`;
+        // const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
+        const defaultURL = `http://localhost:3001/getGallery?istrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
+        const userURL = `http://localhost:3001/getGallery?userSelections=${userSelections[0]}&key=${key}`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
         const url = isTrending ? defaultURL : userURL;
 
         // default trending url for landing page
-        const params = new URLSearchParams({
-            "api_key": apiKey,
-            "language": "en-US",
-            "page": currentPage
-        });
+        // const params = new URLSearchParams({
+        //     "api_key": apiKey,
+        //     "language": "en-US",
+        //     "page": currentPage
+        // });
 
-        defaultURL.search = params;
+        // defaultURL.search = params;
 
         getMoviePromises[key] = fetch(url)
             .then(results => {
                 return results.json();
             })
-            .then(data => {
-                let apiResults = { movieResults: data.results, totalPages: data.total_pages }
-                return apiResults
-            }).catch((err) => {
+            .catch((err) => {
                 console.log('Failed to fetch Trending', err);
-                let trendingType = tvMovieToggle === 'movie' ? 'movies' : 'tv shows';
-                setStatusMessage(`Failed to Load Trending ${trendingType}`);
-
+                let trendingType = tvOrMovie === 'movie' ? 'movies' : 'tv shows';
+                setStatusMessage(`Failed to Load Trending ${trendingType}`)
             })
     }
+    console.log(getMoviePromises[key]);
     return getMoviePromises[key];
 }
+
 // structuring the url from user selections to be passed into MovieApiCall
+let storeUserSelections = {};
 const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre) => {
-    const baseURL = 'https://api.themoviedb.org/3';
-    const url = new URL(baseURL + "/discover/" + tvMovieToggle);
+    // const baseURL = 'https://api.themoviedb.org/3';
+    // const url = new URL(baseURL + "/discover/" + tvMovieToggle);
     const regionCode = currentRegion[0];
     let cacheKey = [`${tvMovieToggle}`];
 
-    const params = new URLSearchParams({
-        "api_key": apiKey,
-        "vote_count.gte": 10,
-        "sort_by": sortOption,
-        "watch_region": regionCode,
+    storeUserSelections = {
+        "voteCount": 10,
+        "sortOption": sortOption,
+        "regionCode": regionCode,
         "language": "en-US",
-        "page": currentPage
-    })
-    // add params only when selected
+        "currentPage": currentPage
+    }
+    // add objects only when selected
     if (startDate && endDate) {
-        params.append("primary_release_date.gte", startDate);
-        params.append("primary_release_date.lte", endDate);
+        storeUserSelections["primary_release_date.gte"] = startDate;
+        storeUserSelections["primary_release_date.lte"] = endDate;
         cacheKey.push((`${startDate}`).split('-')[0]);
     }
     if (provider && provider.id !== "all") {
-        params.append("with_watch_providers", provider.id);
+        storeUserSelections["with_watch_providers"] = provider.id;
         // discard everything after first word
         cacheKey.push((`${provider.value}`).split(' ')[0]);
     }
     if (genre && genre.id !== "all") {
-        params.append("with_genres", genre.id);
+        storeUserSelections["with_genres"] = genre.id;
         // replace spaces with underscores
         cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
     cacheKey.push(`${sortOptionTitle}/${regionCode}/${currentPage}`);
-    url.search = params;
-    return [url, cacheKey.join('/')];
+
+    return [storeUserSelections, cacheKey.join('/')];
 }
 
 export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL }
