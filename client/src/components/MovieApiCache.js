@@ -54,6 +54,8 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
     const regionCode = currentRegion[0];
     const key = `${movieID}`;
 
+    await new Promise({});
+
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
         const viewingOptionsURL = `http://localhost:3001/getViewingOptions?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
@@ -74,27 +76,50 @@ let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, setStatusMessage) => {
 
     // const userURL = userSelections[0];
+    const userParams = userSelections[0];
     const urlCacheKey = userSelections[1];
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        // const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
-        const defaultURL = `http://localhost:3001/getGallery?istrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
-        const userURL = `http://localhost:3001/getGallery?userSelections=${userSelections[0]}&key=${key}`;
+        const defaultURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
+        const userURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
-        const url = isTrending ? defaultURL : userURL;
+        let url = '';
+        if (isTrending) { url = defaultURL; console.log(isTrending, url) }
+        else {
 
-        // default trending url for landing page
-        // const params = new URLSearchParams({
-        //     "api_key": apiKey,
-        //     "language": "en-US",
-        //     "page": currentPage
-        // });
+            fetch('/userParams', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userParams)
+            })
+            url = userURL;
+            // console.log(isTrending, url);
+            // fetch(http://localhost:3001/api/routes/getGallery, {
+            //     method: "POST",
+            //     body: JSON.stringify(userParams),
+            //     headers: {
+            //         "Content-type": "application/json; charset=UTF-8"
+            //     }
+            // })
+            //     .then(response => response.json())
+            //     // .then(response => console.log(JSON.stringify(response)))
+            //     .then((json) => console.log(json));
+        }
 
-        // defaultURL.search = params;
+        console.log(currentPage, isTrending);
 
         getMoviePromises[key] = fetch(url)
+            .then({
+                method: "POST",
+                body: JSON.stringify(userParams),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
             .then(results => {
                 return results.json();
             })
@@ -104,17 +129,15 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
                 setStatusMessage(`Failed to Load Trending ${trendingType}`)
             })
     }
-    console.log(getMoviePromises[key]);
     return getMoviePromises[key];
 }
 
 // structuring the url from user selections to be passed into MovieApiCall
 let storeUserSelections = {};
-const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre) => {
-    // const baseURL = 'https://api.themoviedb.org/3';
-    // const url = new URL(baseURL + "/discover/" + tvMovieToggle);
+const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, startDate, endDate, provider, genre) => {
+
     const regionCode = currentRegion[0];
-    let cacheKey = [`${tvMovieToggle}`];
+    let cacheKey = [`${tvOrMovie}`];
 
     storeUserSelections = {
         "voteCount": 10,
@@ -123,26 +146,34 @@ const UserSelectionURL = (currentPage, tvMovieToggle, sortOption, currentRegion,
         "language": "en-US",
         "currentPage": currentPage
     }
+
+    // storeUserSelections = {
+    //     "vote_count.gte": 10,
+    //     "sort_by": sortOption,
+    //     "watch_region": regionCode,
+    //     "language": "en-US",
+    // }
     // add objects only when selected
     if (startDate && endDate) {
-        storeUserSelections["primary_release_date.gte"] = startDate;
-        storeUserSelections["primary_release_date.lte"] = endDate;
+        storeUserSelections["startDate"] = startDate;
+        storeUserSelections["endDate"] = endDate;
         cacheKey.push((`${startDate}`).split('-')[0]);
     }
     if (provider && provider.id !== "all") {
-        storeUserSelections["with_watch_providers"] = provider.id;
+        storeUserSelections["providerID"] = provider.id;
         // discard everything after first word
         cacheKey.push((`${provider.value}`).split(' ')[0]);
     }
     if (genre && genre.id !== "all") {
-        storeUserSelections["with_genres"] = genre.id;
+        storeUserSelections["genreID"] = genre.id;
         // replace spaces with underscores
         cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
-    cacheKey.push(`${sortOptionTitle}/${regionCode}/${currentPage}`);
-
+    cacheKey.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
+    console.log(storeUserSelections);
+    console.log(cacheKey);
     return [storeUserSelections, cacheKey.join('/')];
 }
 

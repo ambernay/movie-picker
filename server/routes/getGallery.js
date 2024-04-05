@@ -1,5 +1,6 @@
 const apiKey = require('./apikey');
 const axios = require('axios');
+// const userSelections = require(userSelections);
 
 let getMoviePromises = {};
 const getGallery = (req, res) => {
@@ -9,40 +10,66 @@ const getGallery = (req, res) => {
     const currentPage = req.query.page;
     const language = req.query.language;
     const isTrending = req.query.isTrending;
+    // const userSelections = req.query.storeUserSelections;
     // const regionCode = req.query.userSelections.watch_region;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `https://api.themoviedb.org/3/trending/${tvOrMovie}/day?api_key=${apiKey}&language=${language}&page=${currentPage}`;
-
         const baseURL = 'https://api.themoviedb.org/3';
-        const url = new URL(baseURL + "/discover/" + tvOrMovie);
 
-        // use default url on load or if trending selected else use userSelections passed in from Form
-        // const url = isTrending ? defaultURL : userURL;
-        // const url = defaultURL;
+        const defaultURL = `${baseURL}/trending/${tvOrMovie}/day?api_key=${apiKey}&language=${language}&page=${currentPage}`;
 
-        // default trending url for landing page
-        // const params = new URLSearchParams({
-        //     "api_key": apiKey,
-        //     "language": language,
-        //     "page": currentPage
-        // });
+        const userURL = new URL(`${baseURL}/discover/${tvOrMovie}`)
 
-        // defaultURL.search = params;
-        // url.search = params;
+        // const url = isTrending === 'true' ? defaultURL : userURL;
+        let url = '';
 
-        // const params = new URLSearchParams{
-        //     "api_key": apiKey,
-        //     "vote_count.gte": 10,
-        //     "sort_by": sortOption,
-        //     "watch_region": req.query.userSelections.regionCode,
-        //     "language": "en-US",
-        //     "page": currentPage
-        // }
+        if (isTrending === 'false') {
+            // console.log("user selections", userSelections);
+            const params = new URLSearchParams({
+                "api_key": apiKey,
+                "vote_count.gte": 10,
+                "sort_by": "vote_average.desc",
+                "watch_region": "CA",
+                "language": "en-US",
+                "page": 1,
+                "with_genres": "10751",
+                "with_watch_providers": "8",
+                "primary_release_date.gte": "2010-01-01",
+                "primary_release_date.lte": "2019-12-31"
+            })
+
+            // const params = new URLSearchParams({
+            //     "api_key": apiKey,
+            //     "vote_count.gte": userSelections.voteCount,
+            //     "sort_by": userSelections.sortOption,
+            //     "watch_region": userSelections.regionCode,
+            //     "language": userSelections.language,
+            //     "page": userSelections.currentPage
+            // })
+
+            // // add objects only when selected
+            // if (userSelections.startDate && userSelections.endDate) {
+            //     params.append("primary_release_date.gte", userSelections.startDate);
+            //     params.append("primary_release_date.lte", userSelections.endDate);
+            // }
+            // if (userSelections.providerID && userSelections.providerID !== "all") {
+            //     params.append("with_watch_providers", userSelections.providerID);
+            // }
+            // if (userSelections.genreID && userSelections.genreID !== "all") {
+            //     params.append("with_genres", userSelections.genreID);
+            // };
+
+            userURL.search = params;
+            url = userURL;
+
+        } else { url = defaultURL }
 
         getMoviePromises[key] = axios.get(url)
             .then(response => {
+                // console.log(isTrending, url);
+                // console.log("This is the response", response);
                 let apiResults = { movieResults: response.data.results, totalPages: response.data.total_pages }
+                // console.log("This is the apiResults", apiResults);
                 return apiResults;
             }).catch((err) => {
                 console.log('Failed to fetch Trending', err);
