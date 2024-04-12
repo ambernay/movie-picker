@@ -1,6 +1,5 @@
 const apiKey = require('./apikey');
 const axios = require('axios');
-// const userSelections = require(userSelections);
 
 let getMoviePromises = {};
 const getGallery = async (req, res) => {
@@ -10,10 +9,7 @@ const getGallery = async (req, res) => {
     const currentPage = req.query.page;
     const language = req.query.language;
     const isTrending = req.query.isTrending;
-    // const userSelections = await res.locals.userSelections;
-    console.log('decoded', decodeURIComponent(req.query.selectionsQueryString));
     const userSelections = decodeURIComponent(req.query.selectionsQueryString);
-    // const regionCode = req.query.userSelections.watch_region;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const baseURL = 'https://api.themoviedb.org/3';
@@ -27,10 +23,7 @@ const getGallery = async (req, res) => {
 
         getMoviePromises[key] = axios.get(url)
             .then(response => {
-                // console.log(isTrending, url);
-                // console.log("This is the response", response);
                 let apiResults = { movieResults: response.data.results, totalPages: response.data.total_pages }
-                // console.log("This is the apiResults", apiResults);
                 return apiResults;
             }).catch((err) => {
                 console.log('Failed to fetch Trending', err);
