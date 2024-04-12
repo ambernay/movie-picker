@@ -52,7 +52,7 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
     const regionCode = currentRegion[0];
     const key = `${movieID}`;
 
-    await new Promise({});
+    // await new Promise({});
 
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
