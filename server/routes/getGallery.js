@@ -3,14 +3,14 @@ const axios = require('axios');
 // const userSelections = require(userSelections);
 
 let getMoviePromises = {};
-const getGallery = (req, res) => {
+const getGallery = async (req, res) => {
 
     const key = req.query.key;
     const tvOrMovie = req.query.mediaType;
     const currentPage = req.query.page;
     const language = req.query.language;
     const isTrending = req.query.isTrending;
-    // const userSelections = req.query.storeUserSelections;
+    const userSelections = await res.locals.userSelections;
     // const regionCode = req.query.userSelections.watch_region;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
@@ -24,7 +24,11 @@ const getGallery = (req, res) => {
         let url = '';
 
         if (isTrending === 'false') {
-            // console.log("user selections", userSelections);
+            console.log("user selections from gallery", userSelections);
+
+            // axios.get('/userParams')
+            //     .then(response => console.log(response))
+
             const params = new URLSearchParams({
                 "api_key": apiKey,
                 "vote_count.gte": 10,

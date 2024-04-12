@@ -29,15 +29,18 @@ app.use(bodyParser.json());
 const jsonParser = bodyParser.json();
 
 let userSelections = {};
+
+app.locals.userSelections = {};
 app.post("/userParams", jsonParser, function (req, res) {
-    userSelections = req.body;
-    console.log(userSelections);
-    res.send(userSelections);
+    // userSelections = req.body;
+    app.locals.userSelections = req.body;
+    // userSelections = res.locals.userSelctions;
+    // console.log('message from post', app.locals.userSelections);
+    console.log('posted', app.locals.userSelections);
+    // res.send(userSelections);
 });
 
-
-console.log('testing index.js');
-
+console.log('message from index.js', app.locals.userSelections);
 
 // app.post("/api/routes/getGallery", jsonParser, function (req, res) {
 //     const userSelections = req.body;
@@ -59,7 +62,13 @@ app.get('/getRegion', getRegion);
 app.get('/getProviderList', getProviderList);
 app.get('/getGenreList', getGenreList);
 app.get('/getViewingOptions', getViewingOptions);
-app.get('/getGallery', getGallery);
+// app.get('/getGallery', getGallery);
+app.get('/getGallery', (req, res) => {
+
+    console.log('logging from get gallery', app.locals.userSelections);
+    res.send(app.locals.userSelections);
+}, getGallery)
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
