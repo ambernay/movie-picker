@@ -1,5 +1,3 @@
-const apiKey = '0a093f521e98a991f4e4cc2a12460255';
-
 let regionsPromise;
 const RegionApiCall = async () => {
     if (!regionsPromise) {
@@ -75,8 +73,7 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
 let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, setStatusMessage) => {
 
-    const selectionsQueryString = `${userSelections[0]}`;
-    console.log('selections before fetch', selectionsQueryString);
+    const selectionsQueryString = userSelections[0];
     const urlCacheKey = userSelections[1];
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
@@ -85,22 +82,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
         const userURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
-        let url = '';
-        if (isTrending) { url = defaultURL; console.log(isTrending, url) }
-        else {
-
-            // fetch('/userParams', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(userParams)
-            // })
-            url = userURL;
-            console.log(url);
-        }
-
-        console.log(currentPage, isTrending);
+        const url = isTrending ? defaultURL : userURL;
 
         getMoviePromises[key] = fetch(url)
             .then(results => {
@@ -122,38 +104,32 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
     const regionCode = currentRegion[0];
     let cacheKey = [`${tvOrMovie}`];
 
+    // base params
     storeUserSelections = {
-        "voteCount": 10,
-        "sortOption": sortOption,
-        "regionCode": regionCode,
+        "vote_count.gte": 10,
+        "sort_by": sortOption,
+        "watch_region": regionCode,
         "language": "en-US",
-        "currentPage": currentPage
     }
-
-    // storeUserSelections = {
-    //     "vote_count.gte": 10,
-    //     "sort_by": sortOption,
-    //     "watch_region": regionCode,
-    //     "language": "en-US",
-    // }
-    // add objects only when selected
+    // add params to userSelections object only when selected
     if (startDate && endDate) {
-        storeUserSelections["startDate"] = startDate;
-        storeUserSelections["endDate"] = endDate;
+        storeUserSelections["primary_release_date.gte"] = startDate;
+        storeUserSelections["primary_release_date.lte"] = endDate;
         cacheKey.push((`${startDate}`).split('-')[0]);
     }
     if (provider && provider.id !== "all") {
-        storeUserSelections["providerID"] = provider.id;
+        storeUserSelections["with_watch_providers"] = provider.id;
         // discard everything after first word
         cacheKey.push((`${provider.value}`).split(' ')[0]);
     }
     if (genre && genre.id !== "all") {
-        storeUserSelections["genreID"] = genre.id;
+        storeUserSelections["with_genres"] = genre.id;
         // replace spaces with underscores
         cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
 
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
+
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
     cacheKey.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
@@ -166,7 +142,6 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
     const keyValuePairs = keys.map(key => {
         return encodeURIComponent(key) + '=' + encodeURIComponent(storeUserSelections[key]);
     });
-    console.log(`"${keyValuePairs.join('&')}"`);
     return (keyValuePairs.join('&'));
 }
 
