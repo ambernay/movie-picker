@@ -2,39 +2,31 @@ const apiKey = require('./apikey');
 const axios = require('axios');
 
 let getMoviePromises = {};
-const getGallery = (currentPage, tvMovieToggle, isTrending, userSelections, setStatusMessage) => {
+const getGallery = async (req, res) => {
 
-    const userURL = userSelections[0];
-    const urlCacheKey = userSelections[1];
-    let key = isTrending ? `Trending/${tvMovieToggle}/${currentPage}` : `${urlCacheKey}`;
+    const key = req.query.key;
+    const tvOrMovie = req.query.mediaType;
+    const currentPage = req.query.page;
+    const language = req.query.language;
+    const isTrending = req.query.isTrending;
+    const userSelections = decodeURIComponent(req.query.selectionsQueryString);
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = new URL('https://api.themoviedb.org/3/trending/' + tvMovieToggle + '/day');
+        const baseURL = 'https://api.themoviedb.org/3';
 
-        // use default url on load or if trending selected else use userSelections passed in from Form
-        const url = isTrending ? defaultURL : userURL;
+        const defaultURL = `${baseURL}/trending/${tvOrMovie}/day?api_key=${apiKey}&language=${language}&page=${currentPage}`;
 
-        // default trending url for landing page
-        const params = new URLSearchParams({
-            "api_key": apiKey,
-            "language": "en-US",
-            "page": currentPage
-        });
+        const userURL = `${baseURL}/discover/${tvOrMovie}?api_key=${apiKey}&${userSelections}`
 
-        defaultURL.search = params;
+        const url = isTrending === 'true' ? defaultURL : userURL;
+        console.log('server url', url);
 
-        getMoviePromises[key] = fetch(url)
-            .then(results => {
-                return results.json();
-            })
-            .then(data => {
-                let apiResults = { movieResults: data.results, totalPages: data.total_pages }
-                return apiResults
+        getMoviePromises[key] = axios.get(url)
+            .then(response => {
+                let apiResults = { movieResults: response.data.results, totalPages: response.data.total_pages }
+                return apiResults;
             }).catch((err) => {
                 console.log('Failed to fetch Trending', err);
-                let trendingType = tvMovieToggle === 'movie' ? 'movies' : 'tv shows';
-                setStatusMessage(`Failed to Load Trending ${trendingType}`);
-
             })
     }
     getMoviePromises[key].then((data) => {
