@@ -10,7 +10,9 @@ const getGallery = async (req, res) => {
     const currentPage = req.query.page;
     const language = req.query.language;
     const isTrending = req.query.isTrending;
-    const userSelections = await res.locals.userSelections;
+    // const userSelections = await res.locals.userSelections;
+    console.log('decoded', req.query.selectionsQueryString);
+    const userSelections = req.query.selectionsQueryString;
     // const regionCode = req.query.userSelections.watch_region;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
@@ -18,29 +20,27 @@ const getGallery = async (req, res) => {
 
         const defaultURL = `${baseURL}/trending/${tvOrMovie}/day?api_key=${apiKey}&language=${language}&page=${currentPage}`;
 
-        const userURL = new URL(`${baseURL}/discover/${tvOrMovie}`)
+        // const userURL = new URL(`${baseURL}/discover/${tvOrMovie}`)
+        const userURL = `${baseURL}/discover/${tvOrMovie}?api_key=${apiKey}&${userSelections}`
 
         // const url = isTrending === 'true' ? defaultURL : userURL;
         let url = '';
 
         if (isTrending === 'false') {
-            console.log("user selections from gallery", userSelections);
+            console.log("userURL", userSelections, userURL);
 
-            // axios.get('/userParams')
-            //     .then(response => console.log(response))
-
-            const params = new URLSearchParams({
-                "api_key": apiKey,
-                "vote_count.gte": 10,
-                "sort_by": "vote_average.desc",
-                "watch_region": "CA",
-                "language": "en-US",
-                "page": 1,
-                "with_genres": "10751",
-                "with_watch_providers": "8",
-                "primary_release_date.gte": "2010-01-01",
-                "primary_release_date.lte": "2019-12-31"
-            })
+            // const params = new URLSearchParams({
+            //     "api_key": apiKey,
+            //     "vote_count.gte": 10,
+            //     "sort_by": "vote_average.desc",
+            //     "watch_region": "CA",
+            //     "language": "en-US",
+            //     "page": 1,
+            //     "with_genres": "10751",
+            //     "with_watch_providers": "8",
+            //     "primary_release_date.gte": "2010-01-01",
+            //     "primary_release_date.lte": "2019-12-31"
+            // })
 
             // const params = new URLSearchParams({
             //     "api_key": apiKey,
@@ -63,7 +63,7 @@ const getGallery = async (req, res) => {
             //     params.append("with_genres", userSelections.genreID);
             // };
 
-            userURL.search = params;
+            // userURL.search = params;
             url = userURL;
 
         } else { url = defaultURL }
@@ -73,7 +73,7 @@ const getGallery = async (req, res) => {
                 // console.log(isTrending, url);
                 // console.log("This is the response", response);
                 let apiResults = { movieResults: response.data.results, totalPages: response.data.total_pages }
-                // console.log("This is the apiResults", apiResults);
+                console.log("This is the apiResults", apiResults);
                 return apiResults;
             }).catch((err) => {
                 console.log('Failed to fetch Trending', err);

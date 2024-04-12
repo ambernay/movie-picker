@@ -75,51 +75,34 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
 let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, setStatusMessage) => {
 
-    // const userURL = userSelections[0];
-    const userParams = userSelections[0];
+    const selectionsQueryString = `${userSelections[0]}`;
+    console.log('selections before fetch', selectionsQueryString);
     const urlCacheKey = userSelections[1];
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
-        const userURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}`;
+        const userURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
         let url = '';
         if (isTrending) { url = defaultURL; console.log(isTrending, url) }
         else {
 
-            fetch('/userParams', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userParams)
-            })
-            url = userURL;
-            // console.log(isTrending, url);
-            // fetch(http://localhost:3001/api/routes/getGallery, {
-            //     method: "POST",
-            //     body: JSON.stringify(userParams),
+            // fetch('/userParams', {
+            //     method: 'POST',
             //     headers: {
-            //         "Content-type": "application/json; charset=UTF-8"
-            //     }
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(userParams)
             // })
-            //     .then(response => response.json())
-            //     // .then(response => console.log(JSON.stringify(response)))
-            //     .then((json) => console.log(json));
+            url = userURL;
+            console.log(url);
         }
 
         console.log(currentPage, isTrending);
 
         getMoviePromises[key] = fetch(url)
-            .then({
-                method: "POST",
-                body: JSON.stringify(userParams),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            })
             .then(results => {
                 return results.json();
             })
@@ -169,12 +152,22 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
         // replace spaces with underscores
         cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
+
+    const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
     cacheKey.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
-    console.log(storeUserSelections);
-    console.log(cacheKey);
-    return [storeUserSelections, cacheKey.join('/')];
+
+    return [selectionsQueryString, cacheKey.join('/')];
+}
+
+function turnSelectionsObjectToQueryString(storeUserSelections) {
+    const keys = Object.keys(storeUserSelections);
+    const keyValuePairs = keys.map(key => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(storeUserSelections[key]);
+    });
+    console.log(`"${keyValuePairs.join('&')}"`);
+    return (keyValuePairs.join('&'));
 }
 
 export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL }

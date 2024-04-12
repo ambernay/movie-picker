@@ -62,12 +62,7 @@ app.get('/getRegion', getRegion);
 app.get('/getProviderList', getProviderList);
 app.get('/getGenreList', getGenreList);
 app.get('/getViewingOptions', getViewingOptions);
-// app.get('/getGallery', getGallery);
-app.get('/getGallery', (req, res) => {
-
-    console.log('logging from get gallery', app.locals.userSelections);
-    res.send(app.locals.userSelections);
-}, getGallery)
+app.get('/getGallery', getGallery);
 
 
 app.listen(port, () => {
