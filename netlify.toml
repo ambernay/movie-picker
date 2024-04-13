@@ -2,3 +2,6 @@
     publish = '/client'
 
     functions = 'server/'
+
+    [[plugins]]
+        package = "@netlify/plugin-functions-install-core"
