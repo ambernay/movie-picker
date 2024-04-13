@@ -1,7 +1,7 @@
 let regionsPromise;
 const RegionApiCall = async () => {
     if (!regionsPromise) {
-        const regionAPI = `http://localhost:3001/getRegion`;
+        const regionAPI = `/.netlify/functions/getRegion`;
 
         regionsPromise = fetch(regionAPI)
             .then(results => {
@@ -18,7 +18,7 @@ const RegionApiCall = async () => {
 let providerListPromise;
 const ProviderListApiCall = async () => {
     if (!providerListPromise) {
-        const providerListURL = `http://localhost:3001/getProviderList`;
+        const providerListURL = `.netlify/functions/getProviderList`;
 
         providerListPromise = fetch(providerListURL)
             .then(results => {
@@ -35,7 +35,7 @@ const GenreListApiCall = (tvOrMovie) => {
     const key = `${tvOrMovie}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `http://localhost:3001/getGenreList?mediaType=${tvOrMovie}`;
+        const genreListURL = `.netlify/functions/getGenreList?mediaType=${tvOrMovie}`;
 
         genreListPromises[key] = fetch(genreListURL)
             .then(results => {
@@ -54,7 +54,7 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
 
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
-        const viewingOptionsURL = `http://localhost:3001/getViewingOptions?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
+        const viewingOptionsURL = `.netlify/functions/getViewingOptions?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
 
         providerIconPromises[key] = fetch(viewingOptionsURL)
             .then(results => {
@@ -76,8 +76,8 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
-        const userURL = `http://localhost:3001/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}`;
+        const defaultURL = `.netlify/functions/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
+        const userURL = `.netlify/functions/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
         const url = isTrending ? defaultURL : userURL;
