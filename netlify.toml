@@ -1,17 +1,4 @@
 [build]
-    publish = '/client'
+    publish = '/build'
 
     functions = 'server/'
-
-    [[redirects]]
-        from = "/*"
-        to = "/index.html"
-        status = 200
-
-    [[headers]]
-        for = "/*"
-            [headers.values]
-            Access-Control-Allow-Origin = "*"
-
-    [[plugins]]
-        package = "@netlify/plugin-functions-install-core"
