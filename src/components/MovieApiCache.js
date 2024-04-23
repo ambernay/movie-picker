@@ -1,16 +1,17 @@
 let regionsPromise;
 const RegionApiCall = async () => {
     if (!regionsPromise) {
-        const regionAPI = `/.netlify/functions/getRegion`;
+        const regionAPI = `/.netlify/functions/get-regions?`;
 
         regionsPromise = fetch(regionAPI)
-            .then(results => {
-                return results.json();
+            .then(res => {
+                return res.json();
             })
             .catch((err) => {
                 console.error(err);
             })
     }
+    console.log(regionsPromise);
     return regionsPromise;
 }
 
@@ -18,10 +19,10 @@ const RegionApiCall = async () => {
 let providerListPromise;
 const ProviderListApiCall = async () => {
     if (!providerListPromise) {
-        const providerListURL = `.netlify/functions/getProviderList`;
+        const providerListURL = `.netlify/functions/get-provider-list`;
 
         providerListPromise = fetch(providerListURL)
-            .then(results => {
+            .then(res => {
                 return results.json();
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
@@ -35,11 +36,11 @@ const GenreListApiCall = (tvOrMovie) => {
     const key = `${tvOrMovie}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `.netlify/functions/getGenreList?mediaType=${tvOrMovie}`;
+        const genreListURL = `.netlify/functions/get-genre-list?mediaType=${tvOrMovie}`;
 
         genreListPromises[key] = fetch(genreListURL)
-            .then(results => {
-                return results.json();
+            .then(res => {
+                return res.json();
             }).catch((err) => {
                 console.log("Failed to fetch genres", err);
             })
@@ -54,11 +55,11 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
 
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
-        const viewingOptionsURL = `.netlify/functions/getViewingOptions?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
+        const viewingOptionsURL = `.netlify/functions/get-viewing-options?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
 
         providerIconPromises[key] = fetch(viewingOptionsURL)
-            .then(results => {
-                return results.json();
+            .then(res => {
+                return res.json();
             })
             .catch((err) => {
                 setFetchStatus('Failed to load viewing options');
@@ -76,15 +77,16 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `.netlify/functions/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
-        const userURL = `.netlify/functions/getGallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}`;
+        const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
+        const userURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}`;
 
         // use default url on load or if trending selected else use userSelections passed in from Form
         const url = isTrending ? defaultURL : userURL;
 
         getMoviePromises[key] = fetch(url)
-            .then(results => {
-                return results.json();
+            .then(res => {
+                console.log(res);
+                return res.json();
             })
             .catch((err) => {
                 console.log('Failed to fetch Trending', err);
@@ -92,6 +94,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
                 setStatusMessage(`Failed to Load Trending ${trendingType}`)
             })
     }
+    console.log(getMoviePromises[key]);
     return getMoviePromises[key];
 }
 
