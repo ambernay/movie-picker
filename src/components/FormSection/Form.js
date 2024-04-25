@@ -45,7 +45,7 @@ function Form({ setUserSelections, setIsTrending, isTrending, setIsDropdownVisib
     return (
         <section className={formClass}>
             <div className="wrapper">
-                <form onSubmit={handleSubmit}>
+                <form className='form-container' onSubmit={handleSubmit}>
                     <nav className="form-nav">
 
                         {screenSize === 'narrowScreen' ?

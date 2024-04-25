@@ -68,6 +68,23 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
     return providerIconPromises[key];
 }
 
+let getSearchPromises = {};
+const searchApiCall = async (searchValue, setStatusMessage) => {
+    if(!getSearchPromises.hasOwnProperty(searchValue)){
+        const searchURL = `.netlify/functions/get-search-results?searchValue=${searchValue}`;
+    
+        getSearchPromises[searchValue] = fetch(searchURL)
+            .then(res => {
+                return res.json();
+            })
+            .catch((err) => {
+                console.log('Failed to fetch search results', err);
+                setStatusMessage(`Failed to Load results for ${searchValue}`)
+            })    
+    }
+    return getSearchPromises[searchValue];
+}
+
 let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, setStatusMessage) => {
 
@@ -143,4 +160,4 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
     return (keyValuePairs.join('&'));
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL, searchApiCall }

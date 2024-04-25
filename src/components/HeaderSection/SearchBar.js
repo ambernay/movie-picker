@@ -1,11 +1,12 @@
-// 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=0a093f521e98a991f4e4cc2a12460255'
-
-import { useState, useRef, memo } from 'react';
+import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
+import { searchApiCall } from '../MovieApiCache.js';
 
 function SearchBar() {
-    const [newValue, setNewValue] = useState('');
     const [isOpen, setIsOpen] = useState('');
+    const [newValue, setNewValue] = useState('');
+    const [searchValue, setSearchValue] = useState(''); 
+    const [statusMessage, setStatusMessage] = useState('');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
 
@@ -17,6 +18,12 @@ function SearchBar() {
     //     }
     // }, [isOpen]);
 
+    useEffect(() => {
+        searchApiCall(searchValue, setStatusMessage).then(result => {
+            console.log(result);
+        });
+    },[searchValue])
+
     const handleInput = (e) => {
         setNewValue(e.target.value);
         console.log(newValue);
@@ -26,26 +33,32 @@ function SearchBar() {
         searchInput.current.focus();
     }
 
+    const handleSubmit = (e) => {
+        console.log(newValue);
+        setSearchValue(newValue);
+    }
+
     return (
         <div className='search-container' >
             <div className='wrapper'>
                 <div className={'search-icon-container'} onClick={handleIconClick}>
                     <MagnifyerIcon />
                 </div>
-                <div className={inputClass}>
+                <form className={inputClass}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
                         placeholder={'Search by keyword...'}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}
+                        onSubmit={handleSubmit}
                         // onBlur setIsOpen causes infinite loop
                         ref={searchInput}>
                     </input>
                     <button className='search-button' >
                         <MagnifyerIcon />
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     )
