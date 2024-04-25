@@ -11,7 +11,6 @@ const RegionApiCall = async () => {
                 console.error(err);
             })
     }
-    console.log(regionsPromise);
     return regionsPromise;
 }
 
@@ -23,7 +22,7 @@ const ProviderListApiCall = async () => {
 
         providerListPromise = fetch(providerListURL)
             .then(res => {
-                return results.json();
+                return res.json();
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
             })
@@ -85,7 +84,6 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
 
         getMoviePromises[key] = fetch(url)
             .then(res => {
-                console.log(res);
                 return res.json();
             })
             .catch((err) => {
@@ -94,7 +92,6 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
                 setStatusMessage(`Failed to Load Trending ${trendingType}`)
             })
     }
-    console.log(getMoviePromises[key]);
     return getMoviePromises[key];
 }
 

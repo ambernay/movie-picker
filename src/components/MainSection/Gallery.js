@@ -15,7 +15,6 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
     useEffect(() => {
 
         MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, setStatusMessage).then(result => {
-            console.log(result);
             setTotalPages(result.totalPages);
             setMoviesToDisplay(result.movieResults);
             // message for no results

@@ -18,16 +18,6 @@ const handler = async (event) => {
             statusCode: 200,
             body: JSON.stringify(selectionOfProviders)
           }
-            // .then(response => {
-            //     // filter api request for specific providers
-            //     // appletv:2, netflix:8, tubi:73, amazon:119, crave:230, disney:337,paramount:531
-            //     const selectionOfProviders = response.data.results.filter((provider) => {
-            //         return [2, 8, 73, 119, 230, 337, 531].includes(provider.provider_id)
-            //     });
-            //     return selectionOfProviders;
-            // }).catch((err) => {
-            //     console.error("Failed to fetch provider options", err);
-            // })
     }catch(error){
         const { status, statusText, headers, data } = error.response;
         return {
