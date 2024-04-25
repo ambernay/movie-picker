@@ -34,4 +34,14 @@ function EyeIcon() {
     )
 }
 
-export { LeftArrowIcon, RightArrowIcon, UpDownArrowIcon, EyeIcon, FilmIcon, TvIcon }
+function MagnifyerIcon() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0034.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 00327.3 362.6l94.09 94.09a25 25 0 0035.3-35.3zM97.92 222.72a124.8 124.8 0 11124.8 124.8 124.95 124.95 0 01-124.8-124.8z" /></svg>
+    )
+}
+
+function MagnifyerButtonIcon() {
+    <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M256 80a176 176 0 10176 176A176 176 0 00256 80z" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /><path d="M232 160a72 72 0 1072 72 72 72 0 00-72-72z" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M283.64 283.64L336 336" /></svg>
+}
+
+export { LeftArrowIcon, RightArrowIcon, UpDownArrowIcon, EyeIcon, FilmIcon, TvIcon, MagnifyerIcon, MagnifyerButtonIcon }

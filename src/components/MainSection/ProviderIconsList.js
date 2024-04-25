@@ -31,7 +31,7 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
 
     const filteredViewingOptions = (result) => {
         delete result.link;
-
+        console.log(viewingOptions);
         const hasBuy = Object.keys(result).includes('buy');
         const hasRent = Object.keys(result).includes('rent');
         if (!hasBuy || !hasRent) { return result; }
