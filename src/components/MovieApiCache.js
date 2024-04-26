@@ -68,38 +68,26 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
     return providerIconPromises[key];
 }
 
-let getSearchPromises = {};
-const searchApiCall = async (searchValue, setStatusMessage) => {
-    if(!getSearchPromises.hasOwnProperty(searchValue)){
-        const searchURL = `.netlify/functions/get-search-results?searchValue=${searchValue}`;
-    
-        getSearchPromises[searchValue] = fetch(searchURL)
-            .then(res => {
-                return res.json();
-            })
-            .catch((err) => {
-                console.log('Failed to fetch search results', err);
-                setStatusMessage(`Failed to Load results for ${searchValue}`)
-            })    
-    }
-    return getSearchPromises[searchValue];
-}
-
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, setStatusMessage) => {
+const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, searchState, setStatusMessage) => {
 
     const selectionsQueryString = userSelections[0];
     const urlCacheKey = userSelections[1];
+    console.log(userSelections);
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
-        const userURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}`;
+        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}&searchState=${searchState}`;
+        const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
 
-        // use default url on load or if trending selected else use userSelections passed in from Form
-        const url = isTrending ? defaultURL : userURL;
-
-        getMoviePromises[key] = fetch(url)
+        const url = () => {
+            if (isTrending) {return defaultURL}
+            else if (searchState === 'formSearch'){return formURL}
+            else if(searchState === 'searchBar') {return searchBarURL}
+        }
+        console.log(isTrending, key, url());
+        getMoviePromises[key] = fetch(url())
             .then(res => {
                 return res.json();
             })
@@ -112,52 +100,4 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
     return getMoviePromises[key];
 }
 
-// structuring the url from user selections to be passed into MovieApiCall
-let storeUserSelections = {};
-const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, startDate, endDate, provider, genre) => {
-
-    const regionCode = currentRegion[0];
-    let cacheKey = [`${tvOrMovie}`];
-
-    // base params
-    storeUserSelections = {
-        "vote_count.gte": 10,
-        "sort_by": sortOption,
-        "watch_region": regionCode,
-        "language": "en-US",
-    }
-    // add params to userSelections object only when selected
-    if (startDate && endDate) {
-        storeUserSelections["primary_release_date.gte"] = startDate;
-        storeUserSelections["primary_release_date.lte"] = endDate;
-        cacheKey.push((`${startDate}`).split('-')[0]);
-    }
-    if (provider && provider.id !== "all") {
-        storeUserSelections["with_watch_providers"] = provider.id;
-        // discard everything after first word
-        cacheKey.push((`${provider.value}`).split(' ')[0]);
-    }
-    if (genre && genre.id !== "all") {
-        storeUserSelections["with_genres"] = genre.id;
-        // replace spaces with underscores
-        cacheKey.push((`${genre.value}`).split(' ').join('_'));
-    };
-
-    const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
-
-    // split on underscores and discard value before first underscore
-    let sortOptionTitle = (`${sortOption}`).split('_')[1];
-    cacheKey.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
-
-    return [selectionsQueryString, cacheKey.join('/')];
-}
-
-function turnSelectionsObjectToQueryString(storeUserSelections) {
-    const keys = Object.keys(storeUserSelections);
-    const keyValuePairs = keys.map(key => {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(storeUserSelections[key]);
-    });
-    return (keyValuePairs.join('&'));
-}
-
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, UserSelectionURL, searchApiCall }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }

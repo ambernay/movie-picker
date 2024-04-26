@@ -3,7 +3,7 @@ import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 
-function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement }) {
+function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement, searchState }) {
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -14,7 +14,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
 
     useEffect(() => {
 
-        MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, setStatusMessage).then(result => {
+        MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState, setStatusMessage).then(result => {
             setTotalPages(result.totalPages);
             setMoviesToDisplay(result.movieResults);
             // message for no results
@@ -22,7 +22,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
         });
 
         // runs on url or currentPage change and form submission
-    }, [isTrending, userSelections, currentPage, tvMovieToggle, setTotalPages, setMoviesToDisplay]);
+    }, [isTrending, userSelections, currentPage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>

@@ -2,17 +2,24 @@ const axios = require('axios');
 
 const handler = async (event) => {
 
-    const apiKey = process.env.tmdb_key;
-    const {key, isTrending, mediaType, language, page, selectionsQueryString} = event.queryStringParameters;
-
+    const apiKey = `api_key=${process.env.tmdb_key}`;
+    const {key, isTrending, mediaType, language, page, selectionsQueryString, searchValue, searchState} = event.queryStringParameters;
+    console.log(searchValue);
     const baseURL = 'https://api.themoviedb.org/3';
-    const defaultURL = `${baseURL}/trending/${mediaType}/day?api_key=${apiKey}&language=${language}&page=${page}`;
-    const userURL = `${baseURL}/discover/${mediaType}?api_key=${apiKey}&${selectionsQueryString}`
+    const defaultURL = `${baseURL}/trending/${mediaType}/day?${apiKey}&language=${language}&page=${page}`;
+    const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}`;
+    const searchBarURL = `${baseURL}/search/tv?query=${searchValue}&${apiKey}`;
 
-    const url = isTrending === 'true' ? defaultURL : userURL;
-
+    // const url = isTrending === 'true' ? defaultURL : userURL;
+    const url = () => {
+        if (isTrending === 'true') {return defaultURL}
+        // else if (isTrending === 'false') {return formURL}
+        else if (searchState === 'formSearch'){return formURL}
+        else if(searchState === 'searchBar') {return searchBarURL}
+    }
+    console.log('dis da url', url());
     try{
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(url())
         let apiResults = { movieResults: data.results, totalPages: data.total_pages }
       
         return {

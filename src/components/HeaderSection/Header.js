@@ -4,7 +4,7 @@ import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
 import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
 
-function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize }) {
+function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize, setSearchState, setUserSelections }) {
 
     // const subHeading = isTrending ? "Trending" : "Back to Trending";
 
@@ -77,7 +77,11 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                 />
                                 : null
                             }
-                            <SearchBar />
+                            <SearchBar 
+                                setSearchState={setSearchState}
+                                setUserSelections={setUserSelections}
+                                setIsTrending={setIsTrending}
+                            />
                         </div>
                     </div>{/* wrapper */}
                 </div>
