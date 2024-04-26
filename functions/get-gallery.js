@@ -8,7 +8,7 @@ const handler = async (event) => {
     const baseURL = 'https://api.themoviedb.org/3';
     const defaultURL = `${baseURL}/trending/${mediaType}/day?${apiKey}&language=${language}&page=${page}`;
     const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}`;
-    const searchBarURL = `${baseURL}/search/tv?query=${searchValue}&${apiKey}`;
+    const searchBarURL = `${baseURL}/search/${mediaType}?query=${searchValue}&${apiKey}`;
 
     // const url = isTrending === 'true' ? defaultURL : userURL;
     const url = () => {

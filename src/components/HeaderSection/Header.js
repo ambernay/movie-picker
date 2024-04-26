@@ -81,6 +81,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                 setSearchState={setSearchState}
                                 setUserSelections={setUserSelections}
                                 setIsTrending={setIsTrending}
+                                tvMovieToggle={tvMovieToggle}
                             />
                         </div>
                     </div>{/* wrapper */}

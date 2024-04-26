@@ -1,10 +1,9 @@
 import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
-function SearchBar({ setSearchState, setUserSelections, setIsTrending }) {
+function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieToggle }) {
     const [isOpen, setIsOpen] = useState('');
     const [newValue, setNewValue] = useState('');
-    const [searchValue, setSearchValue] = useState('');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
 
@@ -15,7 +14,6 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending }) {
     //         searchInput.current.focus();
     //     }
     // }, [isOpen]);
-
 
     const handleInput = (e) => {
         setNewValue(e.target.value);
@@ -29,7 +27,7 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsTrending(false);
-        setUserSelections([newValue, newValue.split(' ').join('_')]);
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
         setSearchState('searchBar');
     }
 
