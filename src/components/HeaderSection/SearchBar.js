@@ -2,13 +2,14 @@ import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
 function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieToggle }) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [newValue, setNewValue] = useState('');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
 
     const searchInput = useRef(null);
 
+    // sets focus when window opens
     useEffect(() => {
         if (isOpen && searchInput.current) {
             searchInput.current.focus();
@@ -17,7 +18,7 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
 
     // reset userSelections on movie toggle
     useEffect(() => {
-        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
+        if (isOpen) setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
     },[tvMovieToggle])
 
     const handleInput = (e) => {
@@ -41,20 +42,21 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
                 <div className={'search-icon-container'} onClick={handleIconClick}>
                     <MagnifyerIcon />
                 </div>
-                <form className={inputClass} onSubmit={handleSubmit}>
+                <form className={inputClass} onSubmit={handleSubmit} onBlur={e => {if (isOpen) setIsOpen(false)}}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
                         placeholder={`Search ${tvMovieToggle.toUpperCase()} title...`}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}
-                        // onBlur setIsOpen causes infinite loop
+                        onFocus={e => e.target.select()}
                         ref={searchInput}>
                     </input>
                     <button className='search-button' >
                         <MagnifyerIcon />
                     </button>
                 </form>
+                <div className={isOpen ? 'empty-modal' : 'hidden'}></div>
             </div>
         </div>
     )
