@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeList from './Selections/DecadeList.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
-import { UserSelectionURL } from '../MovieApiCache.js';
 
-function Form({ setUserSelections, setIsTrending, isTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize }) {
+function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize, setSearchState }) {
 
     const [genre, setGenre] = useState();
     const [startDate, setStartDate] = useState();
@@ -31,21 +30,64 @@ function Form({ setUserSelections, setIsTrending, isTrending, setIsDropdownVisib
             // scroll back to top when new gallery loads - (offset to wait for page load)
             setTimeout(() => window.scrollTo(0, 0), 100);
         }
+
+        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
+        setSearchState('formSearch');
     }
 
-    //  re-renders on page changes
-    useEffect(() => {
-        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
-        // eslint-disable-next-line
-    }, [currentPage, isTrending, tvMovieToggle, currentRegion, sortOption, startDate, endDate, provider, genre])
+    // structuring the url from user selections to be passed into MovieApiCall
+const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, startDate, endDate, provider, genre) => {
 
+    const regionCode = currentRegion[0];
+    let cacheKey = [`${tvOrMovie}`];
+
+    // base params
+    let storeUserSelections = {
+        "vote_count.gte": 10,
+        "sort_by": sortOption,
+        "watch_region": regionCode,
+        "language": "en-US",
+    }
+    // add params to userSelections object only when selected
+    if (startDate && endDate) {
+        storeUserSelections["primary_release_date.gte"] = startDate;
+        storeUserSelections["primary_release_date.lte"] = endDate;
+        cacheKey.push((`${startDate}`).split('-')[0]);
+    }
+    if (provider && provider.id !== "all") {
+        storeUserSelections["with_watch_providers"] = provider.id;
+        // discard everything after first word
+        cacheKey.push((`${provider.value}`).split(' ')[0]);
+    }
+    if (genre && genre.id !== "all") {
+        storeUserSelections["with_genres"] = genre.id;
+        // replace spaces with underscores
+        cacheKey.push((`${genre.value}`).split(' ').join('_'));
+    };
+
+    const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
+
+    // split on underscores and discard value before first underscore
+    let sortOptionTitle = (`${sortOption}`).split('_')[1];
+    cacheKey.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
+
+    return [selectionsQueryString, cacheKey.join('/')];
+}
+
+function turnSelectionsObjectToQueryString(storeUserSelections) {
+    const keys = Object.keys(storeUserSelections);
+    const keyValuePairs = keys.map(key => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(storeUserSelections[key]);
+    });
+    return (keyValuePairs.join('&'));
+}
     // toggles form visiblity
     const formClass = isDropdownVisible ? "form-section" : "make-display-none";
 
     return (
         <section className={formClass}>
             <div className="wrapper">
-                <form onSubmit={handleSubmit}>
+                <form className='form-container' onSubmit={handleSubmit}>
                     <nav className="form-nav">
 
                         {screenSize === 'narrowScreen' ?

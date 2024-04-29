@@ -360,6 +360,7 @@ img {
     --bottomNavHeight: 50px;
     --switchWidth: 75px;
     --providerFieldsetPadding: 4px;
+    --searchInputHeight: 1.5rem;
     /* #endregion - sizes */
 }
 
@@ -671,7 +672,7 @@ li:focus {
     top: var(--headerMargin);
     right: 0;
     width: 100%;
-    height: 2.5rem;
+    height: calc(var(--searchInputHeight) + 1rem);
     align-items: center;
     justify-content: center;
     background: var(--darkNeutral);
@@ -683,7 +684,7 @@ li:focus {
     --inputPadding: 4px;
     background: var(--lightAccent);
     color: var(--darkNeutral);
-    height: 1.5rem;
+    height: var(--searchInputHeight);
     width: calc(var(--listItemWidth) + var(--inputPadding));
     padding: var(--inputPadding);
 }
@@ -700,14 +701,11 @@ li:focus {
 
 .search-button {
     display: flex;
-    position: absolute;
-    right: calc((100% - var(--wrapperWidth)) / 2);
     justify-content: center;
     align-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--searchInputHeight);
+    height: var(--searchInputHeight);
     background-color: var(--backgroundColor);
-    border-radius: 10%;
     padding: 2px;
 }
 
@@ -1102,7 +1100,7 @@ li:focus .overview {
     z-index: 8;
 }
 
-form {
+.form-container {
     display: flex;
     position: absolute;
     top: var(--headerMargin);

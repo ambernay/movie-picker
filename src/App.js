@@ -13,6 +13,7 @@ function App() {
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
     const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
     const [currentActiveElement, setCurrentActiveElement] = useState();
+    const [searchState, setSearchState] = useState(''); 
 
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
@@ -56,6 +57,8 @@ function App() {
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
                 setCurrentActiveElement={setCurrentActiveElement}
+                setSearchState={setSearchState}
+                setUserSelections={setUserSelections}
             />
             <main onClick={handleDropdown}>
                 <Gallery
@@ -69,6 +72,7 @@ function App() {
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
                     currentActiveElement={currentActiveElement}
+                    searchState={searchState}
                 />
             </main>
 
@@ -81,9 +85,9 @@ function App() {
                 setCurrentRegion={setCurrentRegion}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                isTrending={isTrending}
                 tvMovieToggle={tvMovieToggle}
                 screenSize={screenSize}
+                setSearchState={setSearchState}
             />
 
             <Footer />

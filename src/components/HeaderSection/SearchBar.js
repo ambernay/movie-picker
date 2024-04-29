@@ -1,11 +1,9 @@
-// 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=0a093f521e98a991f4e4cc2a12460255'
-
-import { useState, useRef, memo } from 'react';
+import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
-function SearchBar() {
-    const [newValue, setNewValue] = useState('');
+function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieToggle }) {
     const [isOpen, setIsOpen] = useState('');
+    const [newValue, setNewValue] = useState('');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
 
@@ -17,13 +15,23 @@ function SearchBar() {
     //     }
     // }, [isOpen]);
 
+    useEffect(() => {
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
+    },[tvMovieToggle])
+
     const handleInput = (e) => {
         setNewValue(e.target.value);
-        console.log(newValue);
     }
     const handleIconClick = (e) => {
         setIsOpen(!isOpen);
         searchInput.current.focus();
+    }
+  
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsTrending(false);
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
+        setSearchState('searchBar');
     }
 
     return (
@@ -32,7 +40,7 @@ function SearchBar() {
                 <div className={'search-icon-container'} onClick={handleIconClick}>
                     <MagnifyerIcon />
                 </div>
-                <div className={inputClass}>
+                <form className={inputClass} onSubmit={handleSubmit}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
                         placeholder={'Search by keyword...'}
@@ -45,7 +53,7 @@ function SearchBar() {
                     <button className='search-button' >
                         <MagnifyerIcon />
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     )
