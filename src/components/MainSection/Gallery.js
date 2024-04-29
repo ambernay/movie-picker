@@ -49,7 +49,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
                                             movie.overview ||
                                             "No description available"}
                                         imagePath={imagePath}
-                                        audienceRating={(movie.vote_average).toFixed(1)}
+                                        audienceRating={(movie.vote_average)?.toFixed(1)}
                                         movieID={movie.id}
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}

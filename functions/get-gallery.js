@@ -3,7 +3,7 @@ const axios = require('axios');
 const handler = async (event) => {
 
     const apiKey = `api_key=${process.env.tmdb_key}`;
-    const {key, isTrending, mediaType, language, page, selectionsQueryString, searchValue, searchState} = event.queryStringParameters;
+    const {isTrending, mediaType, language, page, selectionsQueryString, searchValue, searchState} = event.queryStringParameters;
     console.log(searchValue);
     const baseURL = 'https://api.themoviedb.org/3';
     const defaultURL = `${baseURL}/trending/${mediaType}/day?${apiKey}&language=${language}&page=${page}`;

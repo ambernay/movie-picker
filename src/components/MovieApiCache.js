@@ -77,17 +77,16 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US&key=${key}`;
-        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&key=${key}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}&searchState=${searchState}`;
+        const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US`;
+        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}&searchState=${searchState}`;
         const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
 
-        const url = () => {
-            if (isTrending) {return defaultURL}
-            else if (searchState === 'formSearch'){return formURL}
-            else if(searchState === 'searchBar') {return searchBarURL}
-        }
-        console.log(isTrending, key, url());
-        getMoviePromises[key] = fetch(url())
+        let url;
+        if (isTrending) {url = defaultURL}
+        else if (searchState === 'formSearch'){url = formURL}
+        else if(searchState === 'searchBar') {url = searchBarURL}
+
+        getMoviePromises[key] = fetch(url)
             .then(res => {
                 return res.json();
             })

@@ -15,9 +15,12 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
     //     }
     // }, [isOpen]);
 
+    useEffect(() => {
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
+    },[tvMovieToggle])
+
     const handleInput = (e) => {
         setNewValue(e.target.value);
-        console.log(newValue);
     }
     const handleIconClick = (e) => {
         setIsOpen(!isOpen);
