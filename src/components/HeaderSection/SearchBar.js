@@ -62,6 +62,7 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
                         value={newValue}
                         onChange={handleInput}
                         onFocus={handleInputFocus}
+                        onSelect={e => setEmptyModalClass('empty-modal')}
                         ref={searchInput}>
                     </input>
                     <button className='search-button' >
