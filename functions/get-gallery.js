@@ -4,7 +4,7 @@ const handler = async (event) => {
 
     const apiKey = `api_key=${process.env.tmdb_key}`;
     const {isTrending, mediaType, language, page, selectionsQueryString, searchValue, searchState} = event.queryStringParameters;
-    console.log(searchValue);
+   
     const baseURL = 'https://api.themoviedb.org/3';
     const defaultURL = `${baseURL}/trending/${mediaType}/day?${apiKey}&language=${language}&page=${page}`;
     const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}`;
@@ -17,7 +17,7 @@ const handler = async (event) => {
         else if (searchState === 'formSearch'){return formURL}
         else if(searchState === 'searchBar') {return searchBarURL}
     }
-    console.log('dis da url', url());
+
     try{
         const { data } = await axios.get(url())
         let apiResults = { movieResults: data.results, totalPages: data.total_pages }

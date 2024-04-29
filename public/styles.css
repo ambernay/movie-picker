@@ -361,6 +361,7 @@ img {
     --switchWidth: 75px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
+    --searchFormContainerHeight: calc(var(--searchInputHeight) + 1rem)
     /* #endregion - sizes */
 }
 
@@ -651,11 +652,13 @@ li:focus {
 
 .empty-modal {
     position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
+    top: calc((var(--headerMargin) + var(--searchFormContainerHeight)));
+    left: 0;
+    height: calc(100dvh - (var(--headerMargin) + var(--searchFormContainerHeight)));
+    width: 100dvw;
+    background-color: none;
     background-color: var(--darkNeutralOpacity);
-    z-index: 1;
+    z-index: 0;
 }
 
 /* #region - search bar */
@@ -672,11 +675,12 @@ li:focus {
     top: var(--headerMargin);
     right: 0;
     width: 100%;
-    height: calc(var(--searchInputHeight) + 1rem);
+    height: var(--searchFormContainerHeight);
     align-items: center;
     justify-content: center;
     background: var(--darkNeutral);
     border-top: 2px solid var(--lightAccent);
+    z-index: 1;
 }
 
 .input-container input {

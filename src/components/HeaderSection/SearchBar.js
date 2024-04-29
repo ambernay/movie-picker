@@ -2,21 +2,24 @@ import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
 function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieToggle }) {
-    const [isOpen, setIsOpen] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
+    const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
 
     const searchInput = useRef(null);
 
-    // useEffect(() => {
-    //     if (isOpen && searchInput.current) {
-    //         searchInput.current.focus();
-    //     }
-    // }, [isOpen]);
-
+    // sets focus when window opens
     useEffect(() => {
-        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
+        if (isOpen && searchInput.current) {
+            searchInput.current.focus();
+        }
+    }, [isOpen]);
+
+    // reset userSelections on movie toggle
+    useEffect(() => {
+        if (isOpen) setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
     },[tvMovieToggle])
 
     const handleInput = (e) => {
@@ -32,6 +35,17 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
         setIsTrending(false);
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
         setSearchState('searchBar');
+        setEmptyModalClass('hidden');
+    }
+    // displays modal whenever input is focused
+    const handleInputFocus = (e) => {
+        e.target.select();
+        setEmptyModalClass('empty-modal');
+    }
+    // hides modal and input form when modal is clicked
+    const handleModalClick = (e) => {
+        setEmptyModalClass('hidden'); 
+        if(isOpen) setIsOpen(false);
     }
 
     return (
@@ -43,17 +57,22 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
                 <form className={inputClass} onSubmit={handleSubmit}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
-                        placeholder={'Search by keyword...'}
+                        placeholder={`Search ${tvMovieToggle.toUpperCase()} title...`}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}
-                        // onBlur setIsOpen causes infinite loop
+                        onFocus={handleInputFocus}
                         ref={searchInput}>
                     </input>
                     <button className='search-button' >
                         <MagnifyerIcon />
                     </button>
                 </form>
+                <div 
+                className={emptyModalClass}
+                onClick={handleModalClick}
+                >
+                </div>
             </div>
         </div>
     )
