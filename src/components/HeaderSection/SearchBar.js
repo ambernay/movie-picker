@@ -2,19 +2,20 @@ import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
 function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieToggle }) {
-    const [isOpen, setIsOpen] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
 
     const searchInput = useRef(null);
 
-    // useEffect(() => {
-    //     if (isOpen && searchInput.current) {
-    //         searchInput.current.focus();
-    //     }
-    // }, [isOpen]);
+    useEffect(() => {
+        if (isOpen && searchInput.current) {
+            searchInput.current.focus();
+        }
+    }, [isOpen]);
 
+    // reset userSelections on movie toggle
     useEffect(() => {
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
     },[tvMovieToggle])
@@ -43,7 +44,7 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
                 <form className={inputClass} onSubmit={handleSubmit}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
-                        placeholder={'Search by keyword...'}
+                        placeholder={`Search ${tvMovieToggle.toUpperCase()} title...`}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}
