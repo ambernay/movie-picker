@@ -28,6 +28,9 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
     const handleIconClick = (e) => {
         setIsOpen(!isOpen);
         searchInput.current.focus();
+        setEmptyModalClass('hidden');
+        document.querySelector('input').blur();
+        console.log(document.querySelector('input'))
     }
   
     const handleSubmit = (e) => {
