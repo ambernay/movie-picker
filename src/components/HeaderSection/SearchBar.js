@@ -24,7 +24,6 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
 
     const handleInput = (e) => {
         setNewValue(e.target.value);
-        e.target.focus();
     }
     const handleIconClick = (e) => {
         setIsOpen(!isOpen);
