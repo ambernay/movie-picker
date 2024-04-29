@@ -656,8 +656,9 @@ li:focus {
     left: 0;
     height: calc(100dvh - (var(--headerMargin) + var(--searchFormContainerHeight)));
     width: 100dvw;
+    background-color: none;
     background-color: var(--darkNeutralOpacity);
-    z-index: 1;
+    z-index: 0;
 }
 
 /* #region - search bar */
@@ -679,6 +680,7 @@ li:focus {
     justify-content: center;
     background: var(--darkNeutral);
     border-top: 2px solid var(--lightAccent);
+    z-index: 1;
 }
 
 .input-container input {

@@ -2,8 +2,9 @@ import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
 function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieToggle }) {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
+    const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
 
@@ -34,6 +35,17 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
         setIsTrending(false);
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
         setSearchState('searchBar');
+        setEmptyModalClass('hidden');
+    }
+    // displays modal whenever input is focused
+    const handleInputFocus = (e) => {
+        e.target.select();
+        setEmptyModalClass('empty-modal');
+    }
+    // hides modal and input form when modal is clicked
+    const handleModalClick = (e) => {
+        setEmptyModalClass('hidden'); 
+        if(isOpen) setIsOpen(false);
     }
 
     return (
@@ -42,21 +54,25 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
                 <div className={'search-icon-container'} onClick={handleIconClick}>
                     <MagnifyerIcon />
                 </div>
-                <form className={inputClass} onSubmit={handleSubmit} onBlur={e => {if (isOpen) setIsOpen(false)}}>
+                <form className={inputClass} onSubmit={handleSubmit}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
                         placeholder={`Search ${tvMovieToggle.toUpperCase()} title...`}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}
-                        onFocus={e => e.target.select()}
+                        onFocus={handleInputFocus}
                         ref={searchInput}>
                     </input>
                     <button className='search-button' >
                         <MagnifyerIcon />
                     </button>
                 </form>
-                <div className={isOpen ? 'empty-modal' : 'hidden'}></div>
+                <div 
+                className={emptyModalClass}
+                onClick={handleModalClick}
+                >
+                </div>
             </div>
         </div>
     )
