@@ -24,6 +24,7 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
 
     const handleInput = (e) => {
         setNewValue(e.target.value);
+        e.target.focus();
     }
     const handleIconClick = (e) => {
         setIsOpen(!isOpen);
@@ -62,6 +63,7 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
                         value={newValue}
                         onChange={handleInput}
                         onFocus={handleInputFocus}
+                        onSelect={e => setEmptyModalClass('empty-modal')}
                         ref={searchInput}>
                     </input>
                     <button className='search-button' >
