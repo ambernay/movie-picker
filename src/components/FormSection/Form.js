@@ -59,18 +59,19 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
         // discard everything after first word
         cacheKey.push((`${provider.value}`).split(' ')[0]);
     }
-    if (genre && genre.id !== "all") {
+    if (genre && genre.id !== "all-genres") {
+        console.log(genre.id);
         storeUserSelections["with_genres"] = genre.id;
         // replace spaces with underscores
         cacheKey.push((`${genre.value}`).split(' ').join('_'));
     };
-
+    console.log(storeUserSelections);
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
 
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
     cacheKey.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
-
+    console.log(cacheKey.join('/'));
     return [selectionsQueryString, cacheKey.join('/')];
 }
 
