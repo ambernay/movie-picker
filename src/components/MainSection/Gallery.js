@@ -26,7 +26,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
 
     return (
         <>
-            <div className='wrapper'>
+            <div className='wrapper main-wrapper'>
                 {/* only renders on empty page */}
                 {!moviesToDisplay || (moviesToDisplay.length < 1) ? (
                     <div className="message-container">

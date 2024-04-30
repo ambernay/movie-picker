@@ -60,7 +60,6 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
         cacheKey.push((`${provider.value}`).split(' ')[0]);
     }
     if (genre && genre.id !== "all-genres") {
-        console.log(genre.id);
         storeUserSelections["with_genres"] = genre.id;
         // replace spaces with underscores
         cacheKey.push((`${genre.value}`).split(' ').join('_'));

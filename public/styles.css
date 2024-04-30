@@ -337,6 +337,7 @@ img {
     --mainFont: 'Merriweather', serif;
     /* #region - sizes */
     /* main */
+    --mainHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     --wrapperWidth: 80%;
     --movieWidth: 265px;
     --paddingGap: 30px;
@@ -770,8 +771,7 @@ button:focus svg {
 
 .message-container {
     display: flex;
-    height: calc(100vh - ((var(--headerHeight) * 2) + var(--headerMargin)));
-    width: 100%;
+    height: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     align-items: center;
     justify-content: center;
 }
@@ -861,16 +861,27 @@ button:focus svg {
 main {
     display: flex;
     flex-direction: column;
+    position: fixed;
+    top: var(--headerMargin);
+    left: 0;
     background: var(--backgroundColor);
-    min-height: calc((100vh + 1rem) - (var(--headerHeight) + var(--headerMargin)));
+    height: var(--mainHeight);
     justify-content: space-between;
-    margin-top: calc(var(--headerMargin) + var(--paddingGap));
-    padding-top: var(--paddingGap);
+}
+
+.main-wrapper {
+    height: var(--mainHeight);
+    position: fixed;
+    top: inherit;
+    left: calc((100dvh - var(--wrapperWidth)) / 2);
+    overflow: scroll;
 }
 
 .gallery-container {
     display: flex;
     justify-content: center;
+    padding-top: var(--paddingGap);
+    margin-bottom: var(--bottomNavHeight);
 }
 
 /* all gallery uls */
