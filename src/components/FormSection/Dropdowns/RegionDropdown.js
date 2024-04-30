@@ -7,11 +7,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
     const [regionList, setRegionList] = useState([]);
 
     useEffect(() => {
-        try{
-            RegionApiCall().then(result => setRegionList(result));
-        }catch(err){
-            console.log(err);
-        }
+        RegionApiCall().then(result => setRegionList(result));
     }, [setRegionList]);
 
     const handleChange = (e) => {

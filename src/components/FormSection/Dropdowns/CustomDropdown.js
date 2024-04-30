@@ -23,7 +23,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue
                 {currentSelectedLabel}
             </label>
             <div className={`select-container ${showOrHide}`}>
-                {selectList && selectList > 0 ?
+                {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
                             return (
