@@ -14,13 +14,16 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
 
     useEffect(() => {
 
-        MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState, setStatusMessage).then(result => {
-            setTotalPages(result.totalPages);
-            setMoviesToDisplay(result.movieResults);
-            // message for no results
-            if (result.movieResults < 1) { setStatusMessage('No results') };
-        });
-
+            MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState, setStatusMessage).then(result => {
+                setTotalPages(result.totalPages);
+                setMoviesToDisplay(result.movieResults);
+                // message for no results
+                if (!result.movieResults){    
+                    let trendingType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
+                    setStatusMessage(`Failed to Load Trending ${trendingType}`);
+                }
+                else if (result.movieResults < 1) { setStatusMessage('No results') };
+            });
         // runs on url or currentPage change and form submission
     }, [isTrending, userSelections, currentPage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
 
@@ -35,7 +38,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
                 ) :
                     <div className="gallery-container">
                         <ul className='gallery-list-container'>
-                            {moviesToDisplay.map((movie) => {
+                            {moviesToDisplay?.map((movie) => {
                                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                                 /* if image not available, use icon */
                                 const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
@@ -64,7 +67,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
             <LoadMore
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                moviesArrayLength={moviesToDisplay.length}
+                moviesArrayLength={moviesToDisplay?.length}
                 totalPages={totalPages}
             />
         </>

@@ -23,7 +23,7 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle }) {
     return (
         <fieldset className='genre-fieldset'>
             <legend id="genre">Genre:</legend>
-            {genreList ? genreList.map((genre) => {
+            {genreList > 0 ? genreList.map((genre) => {
                 return (
                     <div className="radio-button-container genre-buttons" key={genre.id}>
                         <input onChange={handleChange} type="radio" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>

@@ -38,7 +38,10 @@ function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }
                             <figcaption className="sr-only">back arrow</figcaption>
                         </figure>
                     </button>
-                    <h3 className={forwardButton}>{`${currentPage} / ${totalPages}`}</h3>
+                    {currentPage && totalPages ? 
+                        <h3 className={forwardButton}>{`${currentPage} / ${totalPages}`}</h3> 
+                        : null
+                    }
                     <button onClick={handleButtons} className="forward-button">
                         <figure className='load-arrow-figs'>
                             <RightArrowIcon

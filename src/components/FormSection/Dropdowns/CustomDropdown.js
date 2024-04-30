@@ -19,10 +19,11 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue
             onBlur={() => { setIsOpen(false); }}
             tabIndex={0}
         >
-            <label className="label-container">                {currentSelectedLabel}
+            <label className="label-container">
+                {currentSelectedLabel}
             </label>
             <div className={`select-container ${showOrHide}`}>
-                {selectList ?
+                {selectList && selectList > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
                             return (

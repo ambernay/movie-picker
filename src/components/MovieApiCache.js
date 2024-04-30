@@ -48,7 +48,7 @@ const GenreListApiCall = (tvOrMovie) => {
 }
 
 let providerIconPromises = {};
-const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchStatus) => {
+const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion) => {
     const regionCode = currentRegion[0];
     const key = `${movieID}`;
 
@@ -61,7 +61,6 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
                 return res.json();
             })
             .catch((err) => {
-                setFetchStatus('Failed to load viewing options');
                 console.log('Failed to load provider icons', err);
             })
     }
@@ -69,7 +68,7 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion, setFetchS
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, searchState, setStatusMessage) => {
+const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, searchState) => {
 
     const selectionsQueryString = userSelections[0];
     const urlCacheKey = userSelections[1];
@@ -92,8 +91,6 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
             })
             .catch((err) => {
                 console.log('Failed to fetch Trending', err);
-                let trendingType = tvOrMovie === 'movie' ? 'movies' : 'tv shows';
-                setStatusMessage(`Failed to Load Trending ${trendingType}`)
             })
     }
     return getMoviePromises[key];
