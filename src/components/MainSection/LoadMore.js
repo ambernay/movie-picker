@@ -31,7 +31,7 @@ function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }
             <div className="wrapper">
                 <div className={buttonContainerClass}>
                     <button onClick={handleButtons} className="back-button">
-                        <figure >
+                        <figure className='load-arrow-figs'>
                             <LeftArrowIcon
                                 arrowClass={backButton}
                             />
@@ -40,7 +40,7 @@ function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }
                     </button>
                     <h3 className={forwardButton}>{`${currentPage} / ${totalPages}`}</h3>
                     <button onClick={handleButtons} className="forward-button">
-                        <figure>
+                        <figure className='load-arrow-figs'>
                             <RightArrowIcon
                                 arrowClass={forwardButton}
                             />

@@ -357,7 +357,7 @@ img {
     --regionDropdownWidth: 270px;
     --sortByListWidth: 230px;
     /* other */
-    --bottomNavHeight: 50px;
+    --bottomNavHeight: 2.55rem;
     --switchWidth: 75px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
@@ -667,6 +667,7 @@ li:focus {
     display: flex;
     width: 1.5rem;
     justify-content: flex-end;
+    cursor: pointer;
 }
 
 .input-container {
@@ -711,6 +712,7 @@ li:focus {
     height: var(--searchInputHeight);
     background-color: var(--backgroundColor);
     padding: 2px;
+    cursor: pointer;
 }
 
 .search-button svg {
@@ -759,6 +761,11 @@ button:focus svg {
 .forward-button,
 .back-button {
     cursor: pointer;
+    padding: 0;
+}
+
+.load-arrow-figs {
+    height: var(--bottomNavHeight);
 }
 
 .message-container {
@@ -1410,13 +1417,14 @@ input[type="radio"] {
 /* #region - load buttons */
 .load-buttons-section {
     display: flex;
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    left: 0;
     background: var(--backgroundColor);
     box-shadow: 0 0 3px -1px var(--darkAccent);
     height: var(--bottomNavHeight);
+    width: 100%;
     align-items: center;
-    /* margin-top: var(--headerMargin); */
 }
 
 .load-button-container {
