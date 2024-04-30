@@ -866,14 +866,15 @@ main {
     left: 0;
     background: var(--backgroundColor);
     height: var(--mainHeight);
+    width: 100%;
     justify-content: space-between;
 }
 
 .main-wrapper {
-    height: var(--mainHeight);
     position: fixed;
     top: inherit;
-    left: calc((100dvh - var(--wrapperWidth)) / 2);
+    left: calc((100% - var(--wrapperWidth)) / 2);
+    height: var(--mainHeight);
     overflow: scroll;
 }
 

@@ -34,10 +34,7 @@ function App() {
 
     const handleDropdown = (e) => {
         const headerRegionDropdown = document.querySelector('.header-region');
-
-        (!isDropdownVisible && currentActiveElement !== headerRegionDropdown) ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
-
-        setCurrentActiveElement(document.activeElement);
+        (!isDropdownVisible && document.activeElement !== headerRegionDropdown) ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
         return false;
     }
 
@@ -55,7 +52,6 @@ function App() {
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
-                setCurrentActiveElement={setCurrentActiveElement}
                 setSearchState={setSearchState}
                 setUserSelections={setUserSelections}
             />
