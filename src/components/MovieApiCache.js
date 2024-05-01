@@ -77,8 +77,8 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US`;
-        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
-        const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
+        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
+        const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
 
         let url;
         if (isTrending) {url = defaultURL}

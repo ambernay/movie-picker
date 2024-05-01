@@ -601,9 +601,17 @@ li:focus {
 
 .result-heading-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 3px 0;
+}
+
+.result-heading-container label{
+    position: absolute;
+    top: var(--headerHeight);
+    left: calc(100%/2);
+    color: var(--backgroundColor);
+    margin: 4px;
 }
 
 .trending-button .result-heading {

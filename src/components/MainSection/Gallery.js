@@ -13,21 +13,20 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
-
-            MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState).then(result => {
-                setStatusMessage('Loading...');
-                let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-                // list of user selections for 'no results' message
-                let messageArr = userSelections[2]?.join(' / ');
-                setTotalPages(result.totalPages);
-                setMoviesToDisplay(result.movieResults);
-                // message for no results
-                if (!result.movieResults && isTrending){setStatusMessage(`Failed to Load Trending ${mediaType}`)}
-                else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load:\n\n${messageArr}`)}
-                else if (result.movieResults < 1) {setStatusMessage(`No results for:\n\n${messageArr}`)};
-            });
+        MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState).then(result => {
+            setStatusMessage('Loading...');
+            let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
+            // list of user selections for 'no results' message
+            let messageArr = userSelections[2]?.join(' / ');
+            setTotalPages(result.totalPages);
+            setMoviesToDisplay(result.movieResults);
+            // message for no results
+            if (!result.movieResults && isTrending){setStatusMessage(`Failed to Load Trending ${mediaType}`)}
+            else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load:\n\n${messageArr}`)}
+            else if (result.movieResults < 1) {setStatusMessage(`No results for:\n\n${messageArr}`)};
+        });
         // runs on url or currentPage change and form submission
-    }, [isTrending, userSelections, currentPage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
+    }, [isTrending, userSelections, currentPage, currentRegion, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>

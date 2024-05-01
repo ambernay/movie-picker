@@ -63,12 +63,15 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                     </span>
                                 </figure>
                             </button>
-                            <RegionDropdown
+                            {/* <RegionDropdown
                                 positionClass={'header-region'}
                                 currentRegion={currentRegion}
                                 setCurrentRegion={setCurrentRegion}
                                 screenSize={screenSize}
-                            />
+                            /> */}
+                            <label>
+                                {currentRegion[0]}
+                            </label>
                             {screenSize === 'narrowScreen' ?
                                 <FindMovieButton
                                     handleDropdown={handleDropdown}
