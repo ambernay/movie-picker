@@ -70,14 +70,14 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion) => {
 let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, searchState) => {
 
-    const selectionsQueryString = userSelections[0];
-    const urlCacheKey = userSelections[1];
-    
+    const selectionsQueryString = encodeURIComponent(userSelections[0]);
+    const urlCacheKey = userSelections[1]?.join('/');
+   
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US`;
-        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&selectionsQueryString=${encodeURIComponent(selectionsQueryString)}&searchState=${searchState}`;
+        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
         const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
 
         let url;

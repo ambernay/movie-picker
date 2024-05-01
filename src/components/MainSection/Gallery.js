@@ -14,15 +14,16 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
 
     useEffect(() => {
 
-            MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState, setStatusMessage).then(result => {
+            MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState).then(result => {
+                let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
+                const messageArr = userSelections[2];
+                
                 setTotalPages(result.totalPages);
                 setMoviesToDisplay(result.movieResults);
                 // message for no results
-                if (!result.movieResults){    
-                    let trendingType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-                    setStatusMessage(`Failed to Load Trending ${trendingType}`);
-                }
-                else if (result.movieResults < 1) { setStatusMessage('No results') };
+                if (!result.movieResults && isTrending){setStatusMessage(`Failed to Load Trending ${mediaType}`)}
+                else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load ${messageArr.join(', ')}`)}
+                else if (result.movieResults < 1) { setStatusMessage(`No results for ${messageArr.join(', ')}`)};
             });
         // runs on url or currentPage change and form submission
     }, [isTrending, userSelections, currentPage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);

@@ -1,6 +1,6 @@
 
 import { memo } from 'react';
-function DecadeButtons({ setStartDate, setEndDate, setIsValidRequest }) {
+function DecadeButtons({ setStartDate, setEndDate, setDecade, setIsValidRequest }) {
 
     const decadesObj = {
         "decades": [
@@ -15,7 +15,7 @@ function DecadeButtons({ setStartDate, setEndDate, setIsValidRequest }) {
             { "year": "2000s", "start": "2000-01-01", "end": "2009-12-31" },
             { "year": "2010s", "start": "2010-01-01", "end": "2019-12-31" },
             { "year": "2020s", "start": "2020-01-01", "end": "2029-12-31" },
-            { "year": "All", "start": "1884-01-01", "end": "2029-12-31" }
+            { "year": "all", "start": "1884-01-01", "end": "2029-12-31" }
         ]
     };
 
@@ -23,6 +23,7 @@ function DecadeButtons({ setStartDate, setEndDate, setIsValidRequest }) {
         const selectedDecadeValue = e.target.value.split(',');
         setStartDate(selectedDecadeValue[0]);
         setEndDate(selectedDecadeValue[1]);
+        setDecade(e.target);
         setIsValidRequest(true);
     }
 

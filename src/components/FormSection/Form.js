@@ -9,6 +9,7 @@ import FormModal from './FormModal.js';
 function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize, setSearchState }) {
 
     const [genre, setGenre] = useState();
+    const [decade, setDecade] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
@@ -39,7 +40,8 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, isDropdo
 const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, startDate, endDate, provider, genre) => {
 
     const regionCode = currentRegion[0];
-    let cacheKey = [`${tvOrMovie}`];
+    let cacheKeyArr = [`${tvOrMovie}`];
+    let selectionsForMessage = [];
 
     // base params
     let storeUserSelections = {
@@ -49,28 +51,36 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
         "language": "en-US",
     }
     // add params to userSelections object only when selected
-    if (startDate && endDate) {
+    if (decade && decade.id !== 'all') {
         storeUserSelections["primary_release_date.gte"] = startDate;
         storeUserSelections["primary_release_date.lte"] = endDate;
-        cacheKey.push((`${startDate}`).split('-')[0]);
+        // info for cacheKey and 'no results' message
+        selectionsForMessage.push(decade.id);
+        cacheKeyArr.push(decade.id);
     }
     if (provider && provider.id !== "all") {
         storeUserSelections["with_watch_providers"] = provider.id;
+        // info for cacheKey and 'no results' message
+        selectionsForMessage.push(provider.value);
         // discard everything after first word
-        cacheKey.push((`${provider.value}`).split(' ')[0]);
+        cacheKeyArr.push((`${provider.value}`).split(' ')[0]);
     }
     if (genre && genre.id !== "all-genres") {
         storeUserSelections["with_genres"] = genre.id;
+        // info for cacheKey and 'no results' message
+        // makes genre first index
+        selectionsForMessage.unshift(genre.value); 
         // replace spaces with underscores
-        cacheKey.push((`${genre.value}`).split(' ').join('_'));
+        cacheKeyArr.push((`${genre.value}`).split(' ').join('_'));
     };
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
 
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
-    cacheKey.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
+    selectionsForMessage.push(currentRegion[1]); 
+    cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
 
-    return [selectionsQueryString, cacheKey.join('/')];
+    return [selectionsQueryString, cacheKeyArr, selectionsForMessage];
 }
 
 function turnSelectionsObjectToQueryString(storeUserSelections) {
@@ -132,6 +142,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         <DecadeList
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
+                            setDecade={setDecade}
                             setIsValidRequest={setIsValidRequest}
                         />
                         <ProviderFormList
