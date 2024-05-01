@@ -30,15 +30,15 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
         searchInput.current.focus();
         setEmptyModalClass('hidden');
         document.querySelector('input').blur();
-        console.log(document.querySelector('input'))
     }
   
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsTrending(false);
-        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
         setSearchState('searchBar');
         setEmptyModalClass('hidden');
+        console.log(newValue);
     }
     // displays modal whenever input is focused
     const handleInputFocus = (e) => {

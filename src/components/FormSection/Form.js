@@ -80,7 +80,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
     selectionsForMessage.push(currentRegion[1]); 
     cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
 
-    return [selectionsQueryString, cacheKeyArr, selectionsForMessage];
+    return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
 }
 
 function turnSelectionsObjectToQueryString(storeUserSelections) {

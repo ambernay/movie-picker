@@ -71,7 +71,7 @@ let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, searchState) => {
 
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
-    const urlCacheKey = userSelections[1]?.join('/');
+    const urlCacheKey = userSelections[1];
    
     let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
 
