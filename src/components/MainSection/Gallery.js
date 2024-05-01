@@ -8,6 +8,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState('Loading...');
+    const [messageArr, setMessageArr] = useState();
 
     // stops background scroll when using tab keys
     const tabIndex = isDropdownVisible ? '-1' : '0';
@@ -16,17 +17,17 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
 
             MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState).then(result => {
                 let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-                const messageArr = userSelections[2];
-                
+                setMessageArr(userSelections[2]?.join(' / '));
+                // ${messageArr.join(',\n')
                 setTotalPages(result.totalPages);
                 setMoviesToDisplay(result.movieResults);
                 // message for no results
                 if (!result.movieResults && isTrending){setStatusMessage(`Failed to Load Trending ${mediaType}`)}
-                else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load ${messageArr.join(', ')}`)}
-                else if (result.movieResults < 1) { setStatusMessage(`No results for ${messageArr.join(', ')}`)};
+                else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load:\n`)}
+                else if (result.movieResults < 1) {setStatusMessage(`No results for:\n`)};
             });
         // runs on url or currentPage change and form submission
-    }, [isTrending, userSelections, currentPage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
+    }, [isTrending, userSelections, currentPage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay, setMessageArr]);
 
     return (
         <>
@@ -35,6 +36,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
                 {!moviesToDisplay || (moviesToDisplay.length < 1) ? (
                     <div className="message-container">
                         <h3>{statusMessage}</h3>
+                        <pre>{messageArr}</pre>
                     </div>
                 ) :
                     <div className="gallery-container">
