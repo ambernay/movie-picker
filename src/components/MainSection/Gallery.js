@@ -3,7 +3,7 @@ import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 
-function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement, searchState }) {
+function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, searchState }) {
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -57,7 +57,6 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
                                         movieID={movie.id}
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}
-                                        currentActiveElement={currentActiveElement}
                                     />
                                 )
                             })}

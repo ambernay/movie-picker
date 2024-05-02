@@ -347,6 +347,7 @@ img {
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeadingMargin: 4px;
     --mainHeaderFontSize: 2.2rem;
+    --langLabelWidth: 2.8rem;
     /* form */
     --formWidth: 96%;
     --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
@@ -606,14 +607,6 @@ li:focus {
     padding: 3px 0;
 }
 
-.result-heading-container label{
-    position: absolute;
-    top: var(--headerHeight);
-    left: calc(100%/2);
-    color: var(--backgroundColor);
-    margin: 4px;
-}
-
 .trending-button .result-heading {
     color: var(--midAccent);
     align-self: center;
@@ -641,8 +634,10 @@ li:focus {
 
 .region-list.header-region .label-container {
     display: flex;
+    position: absolute;
+    left: calc(50% - (var(--langLabelWidth)/2));
     justify-content: space-between;
-    width: 100%;
+    width: var(--langLabelWidth);
     border: none;
 }
 

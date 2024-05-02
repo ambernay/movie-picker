@@ -10,7 +10,6 @@ const handler = async (event) => {
     const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}`;
     const searchBarURL = `${baseURL}/search/${mediaType}?query=${searchValue}&${apiKey}`;
 
-    // const url = isTrending === 'true' ? defaultURL : userURL;
     const url = () => {
         if (isTrending === 'true') {return defaultURL}
         // else if (isTrending === 'false') {return formURL}
