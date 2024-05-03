@@ -16,7 +16,7 @@ const handler = async (event) => {
         else if (searchState === 'formSearch'){return formURL}
         else if(searchState === 'searchBar') {return searchBarURL}
     }
-    console.log(url());
+    
     try{
         const { data } = await axios.get(url())
         let apiResults = { movieResults: data.results, totalPages: data.total_pages }

@@ -2,16 +2,15 @@ import { useState, useEffect, memo } from 'react';
 import CustomDropdown from './CustomDropdown';
 import { RegionApiCall } from '../../MovieApiCache';
 
-function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screenSize }) {
+function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, currentLanguage, screenSize }) {
 
     const [regionList, setRegionList] = useState([]);
 
     useEffect(() => {
-        RegionApiCall().then(result => setRegionList(result));
+        RegionApiCall(currentLanguage).then(result => setRegionList(result));
     }, [setRegionList]);
 
     const handleChange = (e) => {
-        console.log([e.target.getAttribute('id'), e.target.getAttribute('value'), e.target.getAttribute('name')]);
         setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('name')]);
     }
     const chooseSelectedLabel = () => {

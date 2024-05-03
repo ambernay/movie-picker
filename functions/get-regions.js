@@ -2,17 +2,18 @@ const axios = require('axios');
 
 const handler = async (event) => {
     const apiKey = process.env.tmdb_key;
+    const {language} = event.queryStringParameters;
 
     // sorts by english_name (instead of country code)
     const sortRegionsByName = (a, z) => a.english_name.localeCompare(z.english_name);
 
-    const regionAPI = `https://api.themoviedb.org/3/watch/providers/regions?api_key=${apiKey}&language=en-US`;
+    const regionAPI = `https://api.themoviedb.org/3/watch/providers/regions?api_key=${apiKey}&language=${language}`;
 
     try{
         const { data } = await axios.get(regionAPI);
         // sorts by english_name (instead of country code)
         const sortedRegionList = data.results.sort(sortRegionsByName);
-        
+        console.log(regionAPI);
         return {
             statusCode: 200,
             body: JSON.stringify(sortedRegionList)

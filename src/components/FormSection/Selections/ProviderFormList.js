@@ -1,12 +1,12 @@
 import { useState, useEffect, memo } from "react";
 import { ProviderListApiCall } from '../../MovieApiCache';
 
-function ProviderFormList({ setProvider, setIsValidRequest }) {
+function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
 
     useEffect(() => {
-        ProviderListApiCall().then(result => setProviderFormList(result));
+        ProviderListApiCall(currentLanguage).then(result => setProviderFormList(result));
     }, [setProviderFormList]);
 
     const handleChange = (e) => {

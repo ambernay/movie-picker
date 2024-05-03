@@ -114,6 +114,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 positionClass={'form-region'}
                                 currentRegion={currentRegion}
                                 setCurrentRegion={setCurrentRegion}
+                                currentLanguage={currentLanguage}
                                 screenSize={screenSize}
                             />
                             : null
@@ -134,6 +135,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             positionClass={'form-region'}
                             currentRegion={currentRegion}
                             setCurrentRegion={setCurrentRegion}
+                            currentLanguage={currentLanguage}
                             screenSize={screenSize}
                         />
                         : null
@@ -148,6 +150,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setGenre={setGenre}
                             setIsValidRequest={setIsValidRequest}
                             tvMovieToggle={tvMovieToggle}
+                            currentLanguage={currentLanguage}
                         />
                         <DecadeList
                             setStartDate={setStartDate}
