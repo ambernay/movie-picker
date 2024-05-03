@@ -89,6 +89,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 tvMovieToggle={tvMovieToggle}
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
                             />
                         </div>
                     </div>{/* wrapper */}

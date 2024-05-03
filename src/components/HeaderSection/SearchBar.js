@@ -2,7 +2,7 @@ import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
 function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
-    tvMovieToggle, currentLanguage, currentPage }) {
+    tvMovieToggle, currentLanguage, currentPage, setCurrentPage }) {
     const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
@@ -38,6 +38,7 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
   
     const handleSubmit = (e) => {
         e.preventDefault();
+        setCurrentPage(1);
         setIsTrending(false);
         // selection query / cache key / result message
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
