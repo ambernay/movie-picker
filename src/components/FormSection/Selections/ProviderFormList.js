@@ -22,10 +22,13 @@ function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage }) {
         <fieldset className="providers-fieldset">
             <legend id="provider">Provider:</legend>
             {providerFormList.length > 0 ? providerFormList.map((provider) => {
+                const imageURL = 'https://image.tmdb.org/t/p/w500';
                 return (
                     <div className="radio-button-container provider-buttons" key={provider.provider_id}>
                         <input onChange={handleChange} type="radio" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
-                        <label htmlFor={provider.provider_id}>{trimmedName(provider.provider_name)}</label>
+                        <label htmlFor={provider.provider_id}>
+                            <img className='provider-icons' src={imageURL + provider.logo_path} alt={provider.provider_name}/>
+                        </label>
                     </div>
                 )
             })
