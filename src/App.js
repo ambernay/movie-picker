@@ -11,7 +11,7 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
     const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
-    const [currentActiveElement, setCurrentActiveElement] = useState();
+    const [currentLanguage, setCurrentLanguage] = useState(["en", "English", "English"]);
     const [searchState, setSearchState] = useState(''); 
 
     function evaluateScreenSize() {
@@ -46,12 +46,14 @@ function App() {
                 setIsDropdownVisible={setIsDropdownVisible}
                 isTrending={isTrending}
                 setIsTrending={setIsTrending}
+                currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                currentRegion={currentRegion}
-                setCurrentRegion={setCurrentRegion}
+                currentLanguage={currentLanguage}
+                setCurrentLanguage={setCurrentLanguage}
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
+                searchState={searchState}
                 setSearchState={setSearchState}
                 setUserSelections={setUserSelections}
             />
@@ -61,12 +63,12 @@ function App() {
                     isTrending={isTrending}
                     currentRegion={currentRegion}
                     setCurrentRegion={setCurrentRegion}
+                    currentLanguage={currentLanguage}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
                     isDropdownVisible={isDropdownVisible}
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
-                    currentActiveElement={currentActiveElement}
                     searchState={searchState}
                 />
             </main>
@@ -78,10 +80,12 @@ function App() {
                 setIsDropdownVisible={setIsDropdownVisible}
                 currentRegion={currentRegion}
                 setCurrentRegion={setCurrentRegion}
+                currentLanguage={currentLanguage}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 tvMovieToggle={tvMovieToggle}
                 screenSize={screenSize}
+                searchState={searchState}
                 setSearchState={setSearchState}
             />
         </>

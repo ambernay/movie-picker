@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeList from './Selections/DecadeList.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
@@ -6,7 +6,9 @@ import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
-function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, isDropdownVisible, currentRegion, setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize, setSearchState }) {
+function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, 
+    isDropdownVisible, currentRegion, currentLanguage, setCurrentRegion, 
+    currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, setSearchState }) {
 
     const [genre, setGenre] = useState();
     const [decade, setDecade] = useState();
@@ -16,6 +18,12 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, isDropdo
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
     const [sortOption, setSortOption] = useState("vote_average.desc");
+
+    // reset userSelections on dependencies on formSearch state
+    useEffect(() => {
+        if (searchState === 'formSearch')
+        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre));
+    },[currentPage, tvMovieToggle, currentLanguage]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,14 +40,16 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, isDropdo
             setTimeout(() => window.scrollTo(0, 0), 100);
         }
 
-        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, startDate, endDate, provider, genre));
+        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre));
         setSearchState('formSearch');
     }
 
     // structuring the url from user selections to be passed into MovieApiCall
-const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, startDate, endDate, provider, genre) => {
+const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre) => {
 
     const regionCode = currentRegion[0];
+    const langCode = currentLanguage[0];
+ 
     let cacheKeyArr = [`${tvOrMovie}`];
     let selectionsForMessage = [];
 
@@ -48,7 +58,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
         "vote_count.gte": 10,
         "sort_by": sortOption,
         "watch_region": regionCode,
-        "language": "en-US",
+        "language": langCode,
     }
     // add params to userSelections object only when selected
     if (decade && decade.id !== 'all') {
@@ -78,7 +88,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, sta
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
     selectionsForMessage.push(currentRegion[1]); 
-    cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${currentPage}`);
+    cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
 
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
 }

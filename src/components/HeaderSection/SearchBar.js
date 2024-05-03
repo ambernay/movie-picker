@@ -1,12 +1,15 @@
 import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
-function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieToggle }) {
+function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
+    tvMovieToggle, currentLanguage, currentPage }) {
     const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
+    const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
+    ${currentPage}`;
 
     const searchInput = useRef(null);
 
@@ -17,10 +20,11 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
         }
     }, [isOpen]);
 
-    // reset userSelections on movie toggle
+    // reset userSelections on dependencies on search
     useEffect(() => {
-        if (isOpen) setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`]);
-    },[tvMovieToggle])
+        if (isOpen && searchState === 'searchBar') 
+        setUserSelections([newValue, searchCacheKey, [newValue]]);
+    },[tvMovieToggle, currentLanguage, currentPage])
 
     const handleInput = (e) => {
         setNewValue(e.target.value);
@@ -35,6 +39,7 @@ function SearchBar({ setSearchState, setUserSelections, setIsTrending, tvMovieTo
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsTrending(false);
+        // selection query / cache key / result message
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
         setSearchState('searchBar');
         setEmptyModalClass('hidden');

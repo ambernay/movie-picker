@@ -1,10 +1,12 @@
 import ToggleButton from './ToggleButton';
 import FindMovieButton from './FindMovieButton';
-import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
+import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
 import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
 
-function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTrending, setIsTrending, setCurrentPage, currentRegion, setCurrentRegion, tvMovieToggle, setTvMovieToggle, screenSize, setSearchState, setUserSelections }) {
+function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
+    isTrending, setIsTrending, currentPage, setCurrentPage, currentLanguage, setCurrentLanguage, 
+    tvMovieToggle, setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
 
     // const subHeading = isTrending ? "Trending" : "Back to Trending";
 
@@ -63,15 +65,14 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                     </span>
                                 </figure>
                             </button>
-                            {/* <RegionDropdown
-                                positionClass={'header-region'}
-                                currentRegion={currentRegion}
-                                setCurrentRegion={setCurrentRegion}
+                            <LanguageDropdown
+                                currentLanguage={currentLanguage}
+                                setCurrentLanguage={setCurrentLanguage}
                                 screenSize={screenSize}
-                            /> */}
-                            <label>
+                            />
+                            {/* <label>
                                 {currentRegion[0]}
-                            </label>
+                            </label> */}
                             {screenSize === 'narrowScreen' ?
                                 <FindMovieButton
                                     handleDropdown={handleDropdown}
@@ -80,11 +81,14 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, isTre
                                 />
                                 : null
                             }
-                            <SearchBar 
+                            <SearchBar
+                                searchState={searchState} 
                                 setSearchState={setSearchState}
                                 setUserSelections={setUserSelections}
                                 setIsTrending={setIsTrending}
                                 tvMovieToggle={tvMovieToggle}
+                                currentLanguage={currentLanguage}
+                                currentPage={currentPage}
                             />
                         </div>
                     </div>{/* wrapper */}

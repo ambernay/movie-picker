@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 
-function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue, itemName, listHeading, handleChange, errorMessage }) {
+function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, itemValue, itemName, listHeading, handleChange, errorMessage }) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -26,9 +26,12 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemValue
                 {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
+                            // let itemValue = (listItem[itemValue] && !listItem[itemValue].includes('?')) ? itemName : itemValue;
+                            // let listHeading = (listItem[listHeading] && !listItem[listHeading].includes('?')) ? itemName : listHeading;
                             return (
                                 <li
-                                    key={listItem[itemValue]}
+                                    key={listItem[itemID]}
+                                    id={listItem[itemID]}
                                     value={listItem[itemValue]}
                                     name={listItem[itemName]}
                                     onClick={handleChange}

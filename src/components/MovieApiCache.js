@@ -1,3 +1,19 @@
+let languagePromise;
+const LanguageApiCall = async () => {
+    if (!languagePromise) {
+        const languageAPI = `/.netlify/functions/get-language-list?`;
+
+        languagePromise = fetch(languageAPI)
+            .then(res => {
+                return res.json();
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
+    return languagePromise;
+}
+
 let regionsPromise;
 const RegionApiCall = async () => {
     if (!regionsPromise) {
@@ -13,7 +29,6 @@ const RegionApiCall = async () => {
     }
     return regionsPromise;
 }
-
 
 let providerListPromise;
 const ProviderListApiCall = async () => {
@@ -68,23 +83,23 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion) => {
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections, searchState) => {
-
+const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage, userSelections, searchState) => {
+    const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
-   
-    let key = isTrending ? `Trending/${tvOrMovie}/${currentPage}` : `${urlCacheKey}`;
+   console.log('urlCacheKey', urlCacheKey);
+    let key = isTrending ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=en-US`;
+        const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
         const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
-        const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
+        const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
 
         let url;
         if (isTrending) {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
         else if(searchState === 'searchBar') {url = searchBarURL}
-
+        console.log(url);
         getMoviePromises[key] = fetch(url)
             .then(res => {
                 return res.json();
@@ -93,7 +108,8 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, userSelections,
                 console.log('Failed to fetch Trending', err);
             })
     }
+    console.log(getMoviePromises[key])
     return getMoviePromises[key];
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }
+export { RegionApiCall, LanguageApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }

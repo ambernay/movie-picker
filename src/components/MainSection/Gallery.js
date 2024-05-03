@@ -3,7 +3,7 @@ import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 
-function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentActiveElement, searchState }) {
+function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentLanguage, searchState }) {
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -13,7 +13,8 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
-        MoviesApiCall(currentPage, tvMovieToggle, isTrending, userSelections, searchState).then(result => {
+        console.log('search', searchBarQuery);
+        MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage, userSelections, searchState).then(result => {
             setStatusMessage('Loading...');
             let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
             // list of user selections for 'no results' message
@@ -25,8 +26,7 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
             else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load:\n\n${messageArr}`)}
             else if (result.movieResults < 1) {setStatusMessage(`No results for:\n\n${messageArr}`)};
         });
-        // runs on url or currentPage change and form submission
-    }, [isTrending, userSelections, currentPage, currentRegion, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
+    }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion, currentLanguage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>
@@ -57,7 +57,6 @@ function Gallery({ isTrending, userSelections, currentPage, setCurrentPage, isDr
                                         movieID={movie.id}
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}
-                                        currentActiveElement={currentActiveElement}
                                     />
                                 )
                             })}
