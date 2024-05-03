@@ -11,7 +11,8 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
     }, [setRegionList]);
 
     const handleChange = (e) => {
-        setCurrentRegion([e.target.getAttribute('value'), e.target.getAttribute('name')]);
+        console.log([e.target.getAttribute('id'), e.target.getAttribute('value'), e.target.getAttribute('name')]);
+        setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('name')]);
     }
     const chooseSelectedLabel = () => {
 
@@ -36,7 +37,8 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
             listClass={`region-list ${positionClass}`}
             currentSelectedLabel={chooseSelectedLabel()}
             selectList={regionList}
-            itemValue={"iso_3166_1"}
+            itemID={"iso_3166_1"}
+            itemValue={'native_name'}
             itemName={'english_name'}
             listHeading={"english_name"}
             handleChange={handleChange}

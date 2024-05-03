@@ -337,6 +337,7 @@ img {
     --mainFont: 'Merriweather', serif;
     /* #region - sizes */
     /* main */
+    --mainHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     --wrapperWidth: 80%;
     --movieWidth: 265px;
     --paddingGap: 30px;
@@ -346,6 +347,7 @@ img {
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeadingMargin: 4px;
     --mainHeaderFontSize: 2.2rem;
+    --langLabelWidth: 2.8rem;
     /* form */
     --formWidth: 96%;
     --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
@@ -357,9 +359,11 @@ img {
     --regionDropdownWidth: 270px;
     --sortByListWidth: 230px;
     /* other */
-    --bottomNavHeight: 50px;
+    --bottomNavHeight: 2.55rem;
     --switchWidth: 75px;
     --providerFieldsetPadding: 4px;
+    --searchInputHeight: 1.5rem;
+    --searchFormContainerHeight: calc(var(--searchInputHeight) + 1rem)
     /* #endregion - sizes */
 }
 
@@ -598,7 +602,7 @@ li:focus {
 
 .result-heading-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 3px 0;
 }
@@ -630,8 +634,10 @@ li:focus {
 
 .region-list.header-region .label-container {
     display: flex;
+    position: absolute;
+    left: calc(50% - (var(--langLabelWidth)/2));
     justify-content: space-between;
-    width: 100%;
+    width: var(--langLabelWidth);
     border: none;
 }
 
@@ -650,11 +656,13 @@ li:focus {
 
 .empty-modal {
     position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
+    top: calc((var(--headerMargin) + var(--searchFormContainerHeight)));
+    left: 0;
+    height: calc(100dvh - (var(--headerMargin) + var(--searchFormContainerHeight)));
+    width: 100dvw;
+    background-color: none;
     background-color: var(--darkNeutralOpacity);
-    z-index: 1;
+    z-index: 0;
 }
 
 /* #region - search bar */
@@ -663,6 +671,7 @@ li:focus {
     display: flex;
     width: 1.5rem;
     justify-content: flex-end;
+    cursor: pointer;
 }
 
 .input-container {
@@ -671,11 +680,12 @@ li:focus {
     top: var(--headerMargin);
     right: 0;
     width: 100%;
-    height: 2.5rem;
+    height: var(--searchFormContainerHeight);
     align-items: center;
     justify-content: center;
     background: var(--darkNeutral);
     border-top: 2px solid var(--lightAccent);
+    z-index: 1;
 }
 
 .input-container input {
@@ -683,7 +693,7 @@ li:focus {
     --inputPadding: 4px;
     background: var(--lightAccent);
     color: var(--darkNeutral);
-    height: 1.5rem;
+    height: var(--searchInputHeight);
     width: calc(var(--listItemWidth) + var(--inputPadding));
     padding: var(--inputPadding);
 }
@@ -700,15 +710,13 @@ li:focus {
 
 .search-button {
     display: flex;
-    position: absolute;
-    right: calc((100% - var(--wrapperWidth)) / 2);
     justify-content: center;
     align-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--searchInputHeight);
+    height: var(--searchInputHeight);
     background-color: var(--backgroundColor);
-    border-radius: 10%;
     padding: 2px;
+    cursor: pointer;
 }
 
 .search-button svg {
@@ -757,17 +765,25 @@ button:focus svg {
 .forward-button,
 .back-button {
     cursor: pointer;
+    padding: 0;
+}
+
+.load-arrow-figs {
+    height: var(--bottomNavHeight);
 }
 
 .message-container {
     display: flex;
-    height: calc(100vh - ((var(--headerHeight) * 2) + var(--headerMargin)));
-    width: 100%;
+    flex-direction: column;
+    height: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     align-items: center;
     justify-content: center;
 }
 
 .message-container h3 {
+    white-space: pre-wrap;
+    line-height: 1.5rem;
+    text-align: center;
     color: var(--darkNeutral);
 }
 
@@ -852,16 +868,34 @@ button:focus svg {
 main {
     display: flex;
     flex-direction: column;
+    position: fixed;
+    top: var(--headerMargin);
+    left: 0;
     background: var(--backgroundColor);
-    min-height: calc((100vh + 1rem) - (var(--headerHeight) + var(--headerMargin)));
+    height: var(--mainHeight);
+    width: 100%;
     justify-content: space-between;
-    margin-top: calc(var(--headerMargin) + var(--paddingGap));
-    padding-top: var(--paddingGap);
+    overflow: scroll;
+    /* hide scrollbar styles*/
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+/* hide scrollbar styles*/
+.main::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+.main-wrapper {
+    position: absolute;
+    top: 0;
+    left: calc((100% - var(--wrapperWidth)) / 2);
 }
 
 .gallery-container {
     display: flex;
     justify-content: center;
+    padding-top: var(--paddingGap);
+    margin-bottom: var(--bottomNavHeight);
 }
 
 /* all gallery uls */
@@ -954,19 +988,6 @@ ul li .info-container {
     max-height: 0;
     transition: max-height 0.5s ease-out;
 }
-
-/* deleted this element */
-/* .overview .main-provider-fieldset {
-    width: 95%;
-    height: 92%;
-    padding: var(--providerFieldsetPadding);
-    margin: 0 auto;
-} */
-/* .main-provider-label {
-    font-family: var(--mainFont);
-    color: var(--lightAccent);
-    font-size: 17px;
-} */
 
 .overview .heading-container {
     align-items: flex-start;
@@ -1102,7 +1123,7 @@ li:focus .overview {
     z-index: 8;
 }
 
-form {
+.form-container {
     display: flex;
     position: absolute;
     top: var(--headerMargin);
@@ -1408,13 +1429,14 @@ input[type="radio"] {
 /* #region - load buttons */
 .load-buttons-section {
     display: flex;
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    left: 0;
     background: var(--backgroundColor);
     box-shadow: 0 0 3px -1px var(--darkAccent);
     height: var(--bottomNavHeight);
+    width: 100%;
     align-items: center;
-    /* margin-top: var(--headerMargin); */
 }
 
 .load-button-container {
@@ -1428,31 +1450,7 @@ input[type="radio"] {
     fill: var(--midAccent);
     width: 50px;
 }
-
 /* #endregion - load buttons */
-
-/* #region - footer */
-footer {
-    display: flex;
-    height: 50px;
-    width: 100%;
-    background: var(--darkNeutral);
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    word-spacing: 3px;
-    padding: 10px;
-}
-
-footer p {
-    color: var(--midAccent);
-}
-
-footer .copyright {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* #endregion - footer */
 
 /* #region - media queries */
 
@@ -1506,11 +1504,6 @@ footer .copyright {
     header h1 {
         font-size: 1.6rem;
     }
-
-    main {
-        margin-top: calc(var(--headerHeight) + 1rem);
-    }
-
     /* for when region moves next to x-button on mobile */
     .region-list.form-region {
         position: absolute;

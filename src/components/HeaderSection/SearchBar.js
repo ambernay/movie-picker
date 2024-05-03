@@ -1,29 +1,59 @@
-// 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=0a093f521e98a991f4e4cc2a12460255'
-
-import { useState, useRef, memo } from 'react';
+import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 
-function SearchBar() {
+function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
+    tvMovieToggle, currentLanguage, currentPage, setCurrentPage }) {
+    const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
-    const [isOpen, setIsOpen] = useState('');
+    const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
     const inputClass = isOpen ? 'input-container' : 'hidden';
+    const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
+    ${currentPage}`;
 
     const searchInput = useRef(null);
 
-    // useEffect(() => {
-    //     if (isOpen && searchInput.current) {
-    //         searchInput.current.focus();
-    //     }
-    // }, [isOpen]);
+    // sets focus when window opens
+    useEffect(() => {
+        if (isOpen && searchInput.current) {
+            searchInput.current.focus();
+        }
+    }, [isOpen]);
+
+    // reset userSelections on dependencies on search
+    useEffect(() => {
+        if (isOpen && searchState === 'searchBar') 
+        setUserSelections([newValue, searchCacheKey, [newValue]]);
+    },[tvMovieToggle, currentLanguage, currentPage])
 
     const handleInput = (e) => {
         setNewValue(e.target.value);
-        console.log(newValue);
     }
     const handleIconClick = (e) => {
         setIsOpen(!isOpen);
         searchInput.current.focus();
+        setEmptyModalClass('hidden');
+        document.querySelector('input').blur();
+    }
+  
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setCurrentPage(1);
+        setIsTrending(false);
+        // selection query / cache key / result message
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
+        setSearchState('searchBar');
+        setEmptyModalClass('hidden');
+    }
+    // displays modal whenever input is focused
+    const handleInputFocus = (e) => {
+        e.target.select();
+        setEmptyModalClass('empty-modal');
+    }
+    // hides modal and input form when modal is clicked
+    const handleModalClick = (e) => {
+        setEmptyModalClass('hidden'); 
+        if(isOpen) setIsOpen(false);
     }
 
     return (
@@ -32,19 +62,25 @@ function SearchBar() {
                 <div className={'search-icon-container'} onClick={handleIconClick}>
                     <MagnifyerIcon />
                 </div>
-                <div className={inputClass}>
+                <form className={inputClass} onSubmit={handleSubmit}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
-                        placeholder={'Search by keyword...'}
+                        placeholder={`Search ${tvMovieToggle.toUpperCase()} title...`}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}
-                        // onBlur setIsOpen causes infinite loop
+                        onFocus={handleInputFocus}
+                        onSelect={e => setEmptyModalClass('empty-modal')}
                         ref={searchInput}>
                     </input>
                     <button className='search-button' >
                         <MagnifyerIcon />
                     </button>
+                </form>
+                <div 
+                className={emptyModalClass}
+                onClick={handleModalClick}
+                >
                 </div>
             </div>
         </div>

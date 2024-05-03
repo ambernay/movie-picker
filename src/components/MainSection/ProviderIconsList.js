@@ -8,7 +8,10 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
     const [fetchStatus, setFetchStatus] = useState('Loading...');
 
     useEffect(() => {
-        ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => setViewingOptions(filteredViewingOptions(result)));
+        ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
+            setViewingOptions(filteredViewingOptions(result));
+            if (!result || result < 1) setFetchStatus('Failed to load viewing options');
+        });
 
     }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])
 
