@@ -11,7 +11,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
         e.stopPropagation();
         setIsOpen(!isOpen);
     }
-    console.log(itemID);
+
     return (
         <div
             className={`dropdown-menu ${listClass}`}

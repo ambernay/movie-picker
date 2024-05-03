@@ -5,8 +5,8 @@ import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
 
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
-    isTrending, setIsTrending, setCurrentPage, currentLanguage, setCurrentLanguage, 
-    tvMovieToggle, setTvMovieToggle, screenSize, setSearchState, setUserSelections }) {
+    isTrending, setIsTrending, currentPage, setCurrentPage, currentLanguage, setCurrentLanguage, 
+    tvMovieToggle, setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
 
     // const subHeading = isTrending ? "Trending" : "Back to Trending";
 
@@ -81,11 +81,14 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 />
                                 : null
                             }
-                            <SearchBar 
+                            <SearchBar
+                                searchState={searchState} 
                                 setSearchState={setSearchState}
                                 setUserSelections={setUserSelections}
                                 setIsTrending={setIsTrending}
                                 tvMovieToggle={tvMovieToggle}
+                                currentLanguage={currentLanguage}
+                                currentPage={currentPage}
                             />
                         </div>
                     </div>{/* wrapper */}

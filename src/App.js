@@ -46,12 +46,14 @@ function App() {
                 setIsDropdownVisible={setIsDropdownVisible}
                 isTrending={isTrending}
                 setIsTrending={setIsTrending}
+                currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 currentLanguage={currentLanguage}
                 setCurrentLanguage={setCurrentLanguage}
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
+                searchState={searchState}
                 setSearchState={setSearchState}
                 setUserSelections={setUserSelections}
             />
@@ -61,6 +63,7 @@ function App() {
                     isTrending={isTrending}
                     currentRegion={currentRegion}
                     setCurrentRegion={setCurrentRegion}
+                    currentLanguage={currentLanguage}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
                     isDropdownVisible={isDropdownVisible}
@@ -77,10 +80,12 @@ function App() {
                 setIsDropdownVisible={setIsDropdownVisible}
                 currentRegion={currentRegion}
                 setCurrentRegion={setCurrentRegion}
+                currentLanguage={currentLanguage}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 tvMovieToggle={tvMovieToggle}
                 screenSize={screenSize}
+                searchState={searchState}
                 setSearchState={setSearchState}
             />
         </>
