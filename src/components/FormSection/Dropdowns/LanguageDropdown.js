@@ -13,7 +13,7 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
         LanguageApiCall().then(result => setLangList(result));
     }, [setLangList]);
 
-    const handleChange = (e) => {console.log(currentLanguage);
+    const handleChange = (e) => {
         setCurrentLanguage([e.target.getAttribute('id'), e.target.getAttribute('value'), e.target.getAttribute('name')]);
     }
 

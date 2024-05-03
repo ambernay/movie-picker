@@ -6,10 +6,13 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
     const [isOpen, setIsOpen] = useState(false);
 
     const showOrHide = isOpen ? 'visible' : 'hidden';
+    const disabledClass = listClass === 'region-list header-region' ?
+    'disabled-label' : null;
 
     const handleDropdownClick = (e) => {
         e.stopPropagation();
-        setIsOpen(!isOpen);
+        // condition disables language dropdown
+        if(listClass !== 'region-list header-region') setIsOpen(!isOpen);
     }
 
     return (
@@ -19,15 +22,14 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
             onBlur={() => { setIsOpen(false); }}
             tabIndex={0}
         >
-            <label className="label-container">
+            <label className={`label-container ${disabledClass}`}>
                 {currentSelectedLabel}
             </label>
             <div className={`select-container ${showOrHide}`}>
                 {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
-                            // let itemValue = (listItem[itemValue] && !listItem[itemValue].includes('?')) ? itemName : itemValue;
-                            // let listHeading = (listItem[listHeading] && !listItem[listHeading].includes('?')) ? itemName : listHeading;
+                            
                             return (
                                 <li
                                     key={listItem[itemID]}

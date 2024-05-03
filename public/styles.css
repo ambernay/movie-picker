@@ -626,6 +626,14 @@ li:focus {
     display: flex;
     align-items: center;
 }
+/* diabled dropdown menu */
+.label-container.disabled-label::before,
+.label-container.disabled-label::after {
+    opacity: 0.4;
+}
+.label-container.disabled-label{
+    cursor: revert;
+}
 
 .region-list.header-region {
     width: 55px;
