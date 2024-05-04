@@ -8,7 +8,7 @@ const handler = async (event) => {
     const sortRegionsByName = (a, z) => a.english_name.localeCompare(z.english_name);
 
     const regionAPI = `https://api.themoviedb.org/3/watch/providers/regions?api_key=${apiKey}&language=${language}`;
-
+    console.log(regionAPI);
     try{
         const { data } = await axios.get(regionAPI);
         // sorts by english_name (instead of country code)

@@ -8,7 +8,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
 
     useEffect(() => {
         RegionApiCall(currentLanguage).then(result => setRegionList(result));
-    }, [setRegionList]);
+    }, [currentLanguage, setRegionList]);
 
     const handleChange = (e) => {
         setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('name')]);
@@ -19,6 +19,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
 
         if ((screenSize !== 'narrowScreen') && (positionClass === 'form-region')) {
             let fullRegionName = currentRegion[1];
+            console.log(fullRegionName);
             let spaceCount = (fullRegionName.split(" ").length - 1);
 
             if (spaceCount > 1) {
