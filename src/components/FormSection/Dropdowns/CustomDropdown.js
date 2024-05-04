@@ -26,6 +26,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
                 {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
+                            const codeClass = listClass === 'region-list header-region' ? 'lang-code-label' : 'hidden';
                             // let itemValue = (listItem[itemValue] && !listItem[itemValue].includes('?')) ? itemName : itemValue;
                             // let listHeading = (listItem[listHeading] && !listItem[listHeading].includes('?')) ? itemName : listHeading;
                             return (
@@ -36,7 +37,8 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
                                     name={listItem[itemName]}
                                     onClick={handleChange}
                                 >
-                                    {listItem[listHeading]}
+                                    <label className={codeClass}>{listItem[itemID].toUpperCase()}</label>
+                                    <label className='dropdown-eadings'>{listItem[listHeading]}</label>
                                 </li>
                             )
                         })}

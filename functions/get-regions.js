@@ -13,7 +13,7 @@ const handler = async (event) => {
         const { data } = await axios.get(regionAPI);
         // sorts by english_name (instead of country code)
         const sortedRegionList = data.results.sort(sortRegionsByName);
-        console.log(regionAPI);
+        
         return {
             statusCode: 200,
             body: JSON.stringify(sortedRegionList)

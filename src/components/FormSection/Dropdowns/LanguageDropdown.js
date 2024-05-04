@@ -43,8 +43,11 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
         ]
     };
 
+    const sortLanguagesByName = (a, z) => a.iso_639_1.localeCompare(z.iso_639_1);
+    const sortedLanguageList = languagesObj.langList.sort(sortLanguagesByName);
+    // console.log(sortedLanguageList);
 
-    const handleChange = (e) => {console.log(currentLanguage);
+    const handleChange = (e) => {
         setCurrentLanguage([e.target.getAttribute('id'), e.target.getAttribute('value'), e.target.getAttribute('name')]);
     }
 
@@ -52,7 +55,7 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
         <CustomDropdown
             listClass={`region-list header-region`}
             currentSelectedLabel={langCode.toUpperCase()}
-            selectList={languagesObj.langList}
+            selectList={sortedLanguageList}
             itemID={"iso_639_1"}
             itemValue={'name'}
             itemName={'english_name'}

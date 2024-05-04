@@ -26,6 +26,7 @@ function SortByDropdown({ setSortOption }) {
             listClass={'sort-by'}
             currentSelectedLabel={currentSelectedLabel}
             selectList={sortMenuObj.sortOptions}
+            itemID={"choice"}
             itemValue={"choice"}
             itemName={"sort-by"}
             listHeading={'sort-by'}
