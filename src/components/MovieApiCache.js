@@ -1,19 +1,3 @@
-let languagePromise;
-const LanguageApiCall = async () => {
-    if (!languagePromise) {
-        const languageAPI = `/.netlify/functions/get-language-list?`;
-
-        languagePromise = fetch(languageAPI)
-            .then(res => {
-                return res.json();
-            })
-            .catch((err) => {
-                console.error(err);
-            })
-    }
-    return languagePromise;
-}
-
 let regionsPromise = {};
 const RegionApiCall = async (currentLanguage) => {
     
@@ -46,7 +30,6 @@ const ProviderListApiCall = async () => {
                 console.error("Failed to fetch provider options", err);
             })
     }
-    console.log(providerListPromise);
     return providerListPromise;
 }
 
@@ -117,4 +100,4 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
     return getMoviePromises[key];
 }
 
-export { RegionApiCall, LanguageApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }
