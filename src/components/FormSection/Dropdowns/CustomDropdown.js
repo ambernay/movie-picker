@@ -20,15 +20,14 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
             tabIndex={0}
         >
             <label className="label-container">
-                {currentSelectedLabel}
+                {currentSelectedLabel.toUpperCase()}
             </label>
             <div className={`select-container ${showOrHide}`}>
                 {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
                             const codeClass = listClass === 'region-list header-region' ? 'lang-code-label' : 'hidden';
-                            // let itemValue = (listItem[itemValue] && !listItem[itemValue].includes('?')) ? itemName : itemValue;
-                            // let listHeading = (listItem[listHeading] && !listItem[listHeading].includes('?')) ? itemName : listHeading;
+                        
                             return (
                                 <li
                                     key={listItem[itemID]}
@@ -38,7 +37,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
                                     onClick={handleChange}
                                 >
                                     <label className={codeClass}>{listItem[itemID].toUpperCase()}</label>
-                                    <label className='dropdown-eadings'>{listItem[listHeading]}</label>
+                                    <label className='dropdown-headings'>{listItem[listHeading]}</label>
                                 </li>
                             )
                         })}

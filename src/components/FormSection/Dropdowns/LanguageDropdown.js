@@ -16,6 +16,7 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
             {"iso_639_1":"pl","english_name":"Polish","name":"Polski"},
             {"iso_639_1":"da","english_name":"Danish","name":"Dansk"},
             {"iso_639_1":"sk","english_name":"Slovak","name":"Slovenčina"},
+            {"iso_639_1":"en","english_name":"English","name":"English"},
             {"iso_639_1":"hu","english_name":"Hungarian","name":"Magyar"},
             {"iso_639_1":"ru","english_name":"Russian","name":"Pусский"},
             {"iso_639_1":"sr","english_name":"Serbian","name":"Srpski"},
@@ -45,16 +46,17 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
 
     const sortLanguagesByName = (a, z) => a.iso_639_1.localeCompare(z.iso_639_1);
     const sortedLanguageList = languagesObj.langList.sort(sortLanguagesByName);
-    // console.log(sortedLanguageList);
 
     const handleChange = (e) => {
-        setCurrentLanguage([e.target.getAttribute('id'), e.target.getAttribute('value'), e.target.getAttribute('name')]);
+        const target = e.target.closest('li');
+        console.log(target);
+        setCurrentLanguage([target.getAttribute('id'), target.getAttribute('value'), target.getAttribute('name')]);
     }
 
     return(
         <CustomDropdown
             listClass={`region-list header-region`}
-            currentSelectedLabel={langCode.toUpperCase()}
+            currentSelectedLabel={langCode}
             selectList={sortedLanguageList}
             itemID={"iso_639_1"}
             itemValue={'name'}

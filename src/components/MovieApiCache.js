@@ -35,7 +35,7 @@ const ProviderListApiCall = async () => {
 
 let genreListPromises = {};
 const GenreListApiCall = (tvOrMovie, currentLanguage) => {
-    const langCode = currentLanguage[0];
+    const langCode = currentLanguage[0].toLowerCase();
     const key = `${tvOrMovie}/${langCode}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {

@@ -7,7 +7,7 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage
 
     // caching genre lists by media type and language
     useEffect(() => {
-        GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {setGenreList(result); console.log(result)});
+        GenreListApiCall(tvMovieToggle, currentLanguage).then(result => setGenreList(result));
     }, [tvMovieToggle, currentLanguage, setGenreList]);
 
     const handleChange = (e) => {
