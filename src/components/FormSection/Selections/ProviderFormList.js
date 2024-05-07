@@ -1,7 +1,7 @@
 import { useState, useEffect, memo } from "react";
 import { ProviderListApiCall } from '../../MovieApiCache';
 
-function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage }) {
+function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sectionLabel }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
 
@@ -20,7 +20,7 @@ function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage }) {
 
     return (
         <fieldset className="providers-fieldset">
-            <legend id="provider">Provider:</legend>
+            <legend id="provider">{sectionLabel}:</legend>
             {providerFormList.length > 0 ? providerFormList.map((provider) => {
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 return (

@@ -1,7 +1,7 @@
 import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
-function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage }) {
+function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel }) {
 
     const [genreList, setGenreList] = useState([]);
 
@@ -17,7 +17,7 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage
 
     return (
         <fieldset className='genre-fieldset'>
-            <legend id="genre">Genre:</legend>
+            <legend id="genre">{sectionLabel}:</legend>
             {genreList.length > 0 ? genreList.map((genre) => {
                 return (
                     <div className="radio-button-container genre-buttons" key={genre.id}>

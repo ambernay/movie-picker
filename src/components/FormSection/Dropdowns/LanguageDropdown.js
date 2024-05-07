@@ -1,11 +1,9 @@
 import React from "react";
-import { useState, useEffect } from 'react';
 import CustomDropdown from './CustomDropdown';
 
 function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
     
     const [langCode, nativeName, englishName] = currentLanguage;
-    // const itemValue = (!'name' || 'name'.includes('?')) ? 'english_name' : 'name';
     
     const languagesObj = {
         "langList": [
@@ -49,7 +47,6 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
 
     const handleChange = (e) => {
         const target = e.target.closest('li');
-        console.log(target);
         setCurrentLanguage([target.getAttribute('id'), target.getAttribute('value'), target.getAttribute('name')]);
     }
 
