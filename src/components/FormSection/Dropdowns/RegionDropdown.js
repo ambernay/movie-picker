@@ -19,7 +19,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
 
         if ((screenSize !== 'narrowScreen') && (positionClass === 'form-region')) {
             let fullRegionName = currentRegion[1];
-            console.log(fullRegionName);
+          
             let spaceCount = (fullRegionName.split(" ").length - 1);
 
             if (spaceCount > 1) {
@@ -40,7 +40,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
             itemID={"iso_3166_1"}
             itemValue={'native_name'}
             itemName={'english_name'}
-            listHeading={"english_name"}
+            listHeading={"native_name"}
             handleChange={handleChange}
             errorMessage={'Failed to load regions'}
         />

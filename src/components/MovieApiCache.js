@@ -2,7 +2,7 @@ let regionsPromise = {};
 const RegionApiCall = async (currentLanguage) => {
     
     const key = currentLanguage[0];
-    console.log(key);
+   
     if (!regionsPromise.hasOwnProperty(key)) {
         const regionAPI = `/.netlify/functions/get-regions?language=${key}`;
 
