@@ -5,7 +5,7 @@ const handler = async (event) => {
 
     try{
         // codes are the same between movie and tv
-        const providerListAPI = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&language=en-US`;
+        const providerListAPI = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&language=de`;
       
         const { data } = await axios.get(providerListAPI);
         //  filter api request for specific providers

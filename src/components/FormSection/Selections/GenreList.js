@@ -1,28 +1,23 @@
 import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
-function GenreList({ setGenre, setIsValidRequest, tvMovieToggle }) {
+function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel }) {
 
-    const [tvGenreList, setTvGenreList] = useState([]);
-    const [movieGenreList, setMovieGenreList] = useState([]);
+    const [genreList, setGenreList] = useState([]);
 
-    // caching tv and movie genre lists
+    // caching genre lists by media type and language
     useEffect(() => {
-        GenreListApiCall('tv').then(result => setTvGenreList(result));
-        GenreListApiCall('movie').then(result => setMovieGenreList(result));
-
-    }, [setMovieGenreList, setTvGenreList]);
+        GenreListApiCall(tvMovieToggle, currentLanguage).then(result => setGenreList(result));
+    }, [tvMovieToggle, currentLanguage, setGenreList]);
 
     const handleChange = (e) => {
         setGenre(e.target);
         setIsValidRequest(true);
     }
 
-    const genreList = tvMovieToggle === 'tv' ? tvGenreList : movieGenreList;
-
     return (
         <fieldset className='genre-fieldset'>
-            <legend id="genre">Genre:</legend>
+            <legend id="genre">{sectionLabel}:</legend>
             {genreList.length > 0 ? genreList.map((genre) => {
                 return (
                     <div className="radio-button-container genre-buttons" key={genre.id}>

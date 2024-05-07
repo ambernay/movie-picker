@@ -1,6 +1,6 @@
 
 import { memo } from 'react';
-function DecadeButtons({ setStartDate, setEndDate, setDecade, setIsValidRequest }) {
+function DecadeButtons({ setStartDate, setEndDate, setDecade, setIsValidRequest, sectionLabel }) {
 
     const decadesObj = {
         "decades": [
@@ -29,7 +29,7 @@ function DecadeButtons({ setStartDate, setEndDate, setDecade, setIsValidRequest 
 
     return (
         <fieldset className='decade-fieldset'>
-            <legend id="decade">Decade:</legend>
+            <legend id="decade">{sectionLabel}:</legend>
             {decadesObj.decades.map((decade) => {
                 return (
                     <div className="radio-button-container decade-buttons" key={decade["year"]}>

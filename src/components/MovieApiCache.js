@@ -1,9 +1,12 @@
-let languagePromise;
-const LanguageApiCall = async () => {
-    if (!languagePromise) {
-        const languageAPI = `/.netlify/functions/get-language-list?`;
+let regionsPromise = {};
+const RegionApiCall = async (currentLanguage) => {
+    
+    const key = currentLanguage[0];
+   
+    if (!regionsPromise.hasOwnProperty(key)) {
+        const regionAPI = `/.netlify/functions/get-regions?language=${key}`;
 
-        languagePromise = fetch(languageAPI)
+        regionsPromise[key] = fetch(regionAPI)
             .then(res => {
                 return res.json();
             })
@@ -11,27 +14,12 @@ const LanguageApiCall = async () => {
                 console.error(err);
             })
     }
-    return languagePromise;
-}
-
-let regionsPromise;
-const RegionApiCall = async () => {
-    if (!regionsPromise) {
-        const regionAPI = `/.netlify/functions/get-regions?`;
-
-        regionsPromise = fetch(regionAPI)
-            .then(res => {
-                return res.json();
-            })
-            .catch((err) => {
-                console.error(err);
-            })
-    }
-    return regionsPromise;
+    return regionsPromise[key];
 }
 
 let providerListPromise;
 const ProviderListApiCall = async () => {
+
     if (!providerListPromise) {
         const providerListURL = `.netlify/functions/get-provider-list`;
 
@@ -46,11 +34,12 @@ const ProviderListApiCall = async () => {
 }
 
 let genreListPromises = {};
-const GenreListApiCall = (tvOrMovie) => {
-    const key = `${tvOrMovie}`;
+const GenreListApiCall = (tvOrMovie, currentLanguage) => {
+    const langCode = currentLanguage[0].toLowerCase();
+    const key = `${tvOrMovie}/${langCode}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `.netlify/functions/get-genre-list?mediaType=${tvOrMovie}`;
+        const genreListURL = `.netlify/functions/get-genre-list?mediaType=${tvOrMovie}&language=${langCode}`;
 
         genreListPromises[key] = fetch(genreListURL)
             .then(res => {
@@ -87,7 +76,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
-   console.log('urlCacheKey', urlCacheKey);
+ 
     let key = isTrending ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
@@ -99,7 +88,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
         if (isTrending) {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
         else if(searchState === 'searchBar') {url = searchBarURL}
-        console.log(url);
+ 
         getMoviePromises[key] = fetch(url)
             .then(res => {
                 return res.json();
@@ -108,8 +97,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
                 console.log('Failed to fetch Trending', err);
             })
     }
-    console.log(getMoviePromises[key])
     return getMoviePromises[key];
 }
 
-export { RegionApiCall, LanguageApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }

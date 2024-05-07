@@ -2,16 +2,15 @@ import { useState, useEffect, memo } from 'react';
 import CustomDropdown from './CustomDropdown';
 import { RegionApiCall } from '../../MovieApiCache';
 
-function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screenSize }) {
+function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, currentLanguage, screenSize }) {
 
     const [regionList, setRegionList] = useState([]);
 
     useEffect(() => {
-        RegionApiCall().then(result => setRegionList(result));
-    }, [setRegionList]);
+        RegionApiCall(currentLanguage).then(result => setRegionList(result));
+    }, [currentLanguage, setRegionList]);
 
     const handleChange = (e) => {
-        console.log([e.target.getAttribute('id'), e.target.getAttribute('value'), e.target.getAttribute('name')]);
         setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('name')]);
     }
     const chooseSelectedLabel = () => {
@@ -20,6 +19,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
 
         if ((screenSize !== 'narrowScreen') && (positionClass === 'form-region')) {
             let fullRegionName = currentRegion[1];
+          
             let spaceCount = (fullRegionName.split(" ").length - 1);
 
             if (spaceCount > 1) {
@@ -40,7 +40,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, screen
             itemID={"iso_3166_1"}
             itemValue={'native_name'}
             itemName={'english_name'}
-            listHeading={"english_name"}
+            listHeading={"native_name"}
             handleChange={handleChange}
             errorMessage={'Failed to load regions'}
         />

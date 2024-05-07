@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeList from './Selections/DecadeList.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
+import { TransObj } from '../StaticObjects.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
@@ -15,15 +16,22 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
+    const [formLabels, setFormLabels] = useState([TransObj[`${currentLanguage[0]}`].genre, TransObj[`${currentLanguage[0]}`].decade, TransObj[`${currentLanguage[0]}`].provider]);
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
     const [sortOption, setSortOption] = useState("vote_average.desc");
+
+    const currentTranslation = TransObj[`${currentLanguage[0]}`]
 
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
         if (searchState === 'formSearch')
         setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre));
     },[currentPage, tvMovieToggle, currentLanguage]);
+
+    useEffect(() => {
+        setFormLabels([currentTranslation.genre, currentTranslation.decade, currentTranslation.provider]);
+    }, [currentLanguage])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -114,6 +122,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 positionClass={'form-region'}
                                 currentRegion={currentRegion}
                                 setCurrentRegion={setCurrentRegion}
+                                currentLanguage={currentLanguage}
                                 screenSize={screenSize}
                             />
                             : null
@@ -124,9 +133,9 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             <div className="lines b"></div>
                         </button>
 
-                        <a href="#genre" tabIndex='0'>Genre</a>
-                        <a href="#decade" tabIndex='0'>Decade</a>
-                        <a href="#provider" tabIndex='0'>Provider</a>
+                        <a href="#genre" tabIndex='0'>{formLabels[0]}</a>
+                        <a href="#decade" tabIndex='0'>{formLabels[1]}</a>
+                        <a href="#provider" tabIndex='0'>{formLabels[2]}</a>
 
                     </nav>
                     {screenSize !== 'narrowScreen' ?
@@ -134,6 +143,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             positionClass={'form-region'}
                             currentRegion={currentRegion}
                             setCurrentRegion={setCurrentRegion}
+                            currentLanguage={currentLanguage}
                             screenSize={screenSize}
                         />
                         : null
@@ -148,16 +158,20 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setGenre={setGenre}
                             setIsValidRequest={setIsValidRequest}
                             tvMovieToggle={tvMovieToggle}
+                            currentLanguage={currentLanguage}
+                            sectionLabel={formLabels[0]}
                         />
                         <DecadeList
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
                             setDecade={setDecade}
                             setIsValidRequest={setIsValidRequest}
+                            sectionLabel={formLabels[1]}
                         />
                         <ProviderFormList
                             setProvider={setProvider}
                             setIsValidRequest={setIsValidRequest}
+                            sectionLabel={formLabels[2]}
                         />
                     </section>
                     <section className='form-bottom'>
