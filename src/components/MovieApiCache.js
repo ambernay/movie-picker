@@ -1,3 +1,5 @@
+import { TransObj } from './StaticObjects.js';
+
 let regionsPromise = {};
 const RegionApiCall = async (currentLanguage) => {
     
@@ -35,11 +37,12 @@ const ProviderListApiCall = async () => {
 
 let genreListPromises = {};
 const GenreListApiCall = (tvOrMovie, currentLanguage) => {
+    const allButtonTrans = TransObj[`${currentLanguage[0]}`]['all'];
     const langCode = currentLanguage[0].toLowerCase();
     const key = `${tvOrMovie}/${langCode}`;
-
+    console.log(allButtonTrans);
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `.netlify/functions/get-genre-list?mediaType=${tvOrMovie}&language=${langCode}`;
+        const genreListURL = `.netlify/functions/get-genre-list?mediaType=${tvOrMovie}&language=${langCode}&translation=${allButtonTrans}`;
 
         genreListPromises[key] = fetch(genreListURL)
             .then(res => {

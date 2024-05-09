@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
+import { TransObj } from '../StaticObjects.js';
 
 function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentLanguage, searchState }) {
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState('Loading...');
+
+    const currentTranslation = TransObj[`${currentLanguage[0]}`];
     
     // stops background scroll when using tab keys
     const tabIndex = isDropdownVisible ? '-1' : '0';
@@ -57,6 +60,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setC
                                         movieID={movie.id}
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}
+                                        currentTranslation={currentTranslation}
                                     />
                                 )
                             })}
@@ -69,6 +73,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setC
                 setCurrentPage={setCurrentPage}
                 moviesArrayLength={moviesToDisplay?.length}
                 totalPages={totalPages}
+                currentTranslation={currentTranslation}
             />
         </>
     )
