@@ -14,7 +14,7 @@ function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle, currentTra
             <figure>
                 <span className="hover-animation">
                     <h2>
-                        <span> {tvMovieToggle === 'movie' ? ` ${currentTranslation.movies}` : ` ${currentTranslation.tv_shows}`} </span>
+                        <span> {tvMovieToggle === 'movie' ? ` ${capFirstChar(currentTranslation.movies)}` : ` ${capFirstChar(currentTranslation.tv_shows)}`} </span>
                     </h2>
                 </span>
                 <UpDownArrowIcon

@@ -7,7 +7,7 @@ const TransObj = {
         "movie": "فيلم",
         "movies": "أفلام",
         "tv":"تلفزيون",
-        "tv-shows":"عرض تلفزيوني",
+        "tv_shows":"عرض تلفزيوني",
         "title":"عنوان",
         "all":"كل شئ",
         "sr-only": {
@@ -30,7 +30,7 @@ const TransObj = {
         "movie":"фільм",
         "movies":"Фільмы",
         "tv":"TV",
-        "tv-shows":"тэлеперадачы",
+        "tv_shows":"тэлеперадачы",
         "title":"назва",
         "all":"усё",
         "sr-only": {
@@ -53,7 +53,7 @@ const TransObj = {
         "movie":"филм",
         "movies":"Филми",
         "tv":"TB",
-        "tv-shows":"сериал",
+        "tv_shows":"сериал",
         "title":"заглавие",
         "all":"Всичко",
         "sr-only": {
@@ -76,7 +76,7 @@ const TransObj = {
         "movie":"filmů",
         "movies":"filmy",
         "tv":"televize",
-        "tv-shows":"TV pořady",
+        "tv_shows":"TV pořady",
         "title":"název",
         "all":"Všechno",
         "sr-only": {
@@ -99,7 +99,7 @@ const TransObj = {
         "movie":"film",
         "movies":"film",
         "tv":"TV",
-        "tv-shows":"TV-serie",
+        "tv_shows":"TV-serie",
         "title":"",
         "all":"Alt",
         "sr-only": {
@@ -122,7 +122,7 @@ const TransObj = {
         "movie":"Film",
         "movies":"Filme",
         "tv":"Serien",
-        "tv-shows":"serie",
+        "tv_shows":"serie",
         "title":"Titel",
         "all":"Alles",
         "sr-only": {
@@ -145,7 +145,7 @@ const TransObj = {
         "movie":"",
         "movies":"Ταινίες",
         "tv":"Τηλεόραση",
-        "tv-shows":"τηλεοπτικές εκπομπές",
+        "tv_shows":"τηλεοπτικές εκπομπές",
         "title":"τίτλος",
         "all":"Τα παντα",
         "sr-only": {
@@ -192,7 +192,7 @@ const TransObj = {
         "movie":"película",
         "movies":"películas",
         "tv":"tele",
-        "tv-shows":"programas de televisión",
+        "tv_shows":"programas de televisión",
         "title":"título",
         "all":"Todo",
         "sr-only": {
@@ -215,7 +215,7 @@ const TransObj = {
         "movie":"elokuva",
         "movies":"elokuvia",
         "tv":"televisio",
-        "tv-shows":"televisio-ohjelmat",
+        "tv_shows":"televisio-ohjelmat",
         "title":"nimi",
         "all":"Kaikki", 
         "sr-only": {
@@ -238,7 +238,7 @@ const TransObj = {
         "movie":"film",
         "movies":"​les films",
         "tv":"la télé",
-        "tv-shows":"émissions de télévision",
+        "tv_shows":"émissions de télévision",
         "title":"titre",
         "all":"Tout",
         "sr-only": {
@@ -261,7 +261,7 @@ const TransObj = {
         "movie":"סרט",
         "movies":"סרטים",
         "tv":"טלוויזיה",
-        "tv-shows":"סדרה",
+        "tv_shows":"סדרה",
         "title":"",
         "all":"הכל", 
         "sr-only": {
@@ -284,7 +284,7 @@ const TransObj = {
         "movie":"film",
         "movies":"Filmek",
         "tv":"Tévé",
-        "tv-shows":"tévéműsor",
+        "tv_shows":"tévéműsor",
         "title":"",
         "all":"Minden", 
         "sr-only": {
@@ -309,7 +309,7 @@ const TransObj = {
         "movie":"film",
         "movies":"film",
         "tv":"televisi",
-        "tv-shows":"serial tv",
+        "tv_shows":"serial tv",
         "title":"Judul",
         "all":"Semuanya", 
         "sr-only": {
@@ -332,7 +332,7 @@ const TransObj = {
         "movie":"film",
         "movies":"films",
         "tv":"Serie TV",
-        "tv-shows":"Serie TV",
+        "tv_shows":"Serie TV",
         "title":"",
         "all":"Qualunque cosa", 
         "sr-only": {
@@ -355,7 +355,7 @@ const TransObj = {
         "movie":"映画",
         "movies":"映画",
         "tv":"テレビ",
-        "tv-shows":"テレビ番組",
+        "tv_shows":"テレビ番組",
         "title":"名",
         "all":"すべて", 
         "sr-only": {
@@ -379,7 +379,7 @@ const TransObj = {
         "movie":"ფილმი",
         "movies":"ფილმები",
         "tv":"TV",
-        "tv-shows":"სერიალი",
+        "tv_shows":"სერიალი",
         "title":"",
         "all":"ყველაფერი", 
         "sr-only": {
@@ -404,7 +404,7 @@ const TransObj = {
         "movie":"영화",
         "movies":"영화",
         "tv":"TV",
-        "tv-shows":"TV 프로그램",
+        "tv_shows":"TV 프로그램",
         "title":"제목",
         "all":"모든 것", 
         "sr-only": {
@@ -428,7 +428,7 @@ const TransObj = {
         "movie":"filmo",
         "movies":"Filmai",
         "tv":"TV",
-        "tv-shows":"tv laidos",
+        "tv_shows":"tv laidos",
         "title":"",
         "all":"Viskas", 
         "sr-only": {
@@ -453,7 +453,7 @@ const TransObj = {
         "movie":"film",
         "movies":"films",
         "tv":"TV",
-        "tv-shows":"tv-serie",
+        "tv_shows":"tv-serie",
         "title":"titel",
         "all":"Alles", 
         "sr-only": {
@@ -478,7 +478,7 @@ const TransObj = {
         "movie":"filmu",
         "movies":"filmy",
         "tv":"TV",
-        "tv-shows":"serialu",
+        "tv_shows":"serialu",
         "title":"tytuł",
         "all":"Wszystko", 
         "sr-only": {
@@ -503,7 +503,7 @@ const TransObj = {
         "movie":"filme",
         "movies":"Filmes",
         "tv":"Na TV",
-        "tv-shows":"série televisiva",
+        "tv_shows":"série televisiva",
         "title":"título",
         "all":"Tudo", 
         "sr-only": {
@@ -527,7 +527,7 @@ const TransObj = {
         "movie":"",
         "movies":"Filme",
         "tv":"Seriale",
-        "tv-shows":"serial sau",
+        "tv_shows":"serial sau",
         "title":"",
         "all":"Tot", 
         "sr-only": {
@@ -552,7 +552,7 @@ const TransObj = {
         "movie":"фильм",
         "movies":"Фильмы",
         "tv":"Сериалы",
-        "tv-shows":"сериал",
+        "tv_shows":"сериал",
         "title":"название",
         "all":"Все", 
         "sr-only": {
@@ -577,7 +577,7 @@ const TransObj = {
         "movie":"film",
         "movies":"Filmy",
         "tv":"TV",
-        "tv-shows":"seriál",
+        "tv_shows":"seriál",
         "title":"titul",
         "all":"Všetko", 
         "sr-only": {
@@ -602,7 +602,7 @@ const TransObj = {
         "movie":"film",
         "movies":"filmi",
         "tv":"TV",
-        "tv-shows":"tv oddaje",
+        "tv_shows":"tv oddaje",
         "title":"naslov",
         "all":"Vse", 
         "sr-only": {
@@ -626,7 +626,7 @@ const TransObj = {
         "movie":"",
         "movies":"Филмови",
         "tv":"ТВ",
-        "tv-shows":"серију",
+        "tv_shows":"серију",
         "title":"",
         "all":"Све", 
         "sr-only": {
@@ -649,7 +649,7 @@ const TransObj = {
         "movie":"",
         "movies":"Filmer",
         "tv":"TV",
-        "tv-shows":"tv-serie",
+        "tv_shows":"tv-serie",
         "title":"",
         "all":"Allt", 
         "sr-only": {
@@ -674,7 +674,7 @@ const TransObj = {
         "movie":"ภาพยนตร์",
         "movies":"ภาพยนตร์",
         "tv":"โทรทัศน์",
-        "tv-shows":"รายการโทรทัศน์",
+        "tv_shows":"รายการโทรทัศน์",
         "title":"ชื่อ",
         "all":"ทุกอย่าง", 
         "sr-only": {
@@ -700,7 +700,7 @@ const TransObj = {
         "movie":"film",
         "movies":"Filmler",
         "tv":"TV",
-        "tv-shows":"dizi",
+        "tv_shows":"dizi",
         "title":"başlığı",
         "all":"Her şey", 
         "sr-only": {
@@ -725,7 +725,7 @@ const TransObj = {
         "movie":"phim",
         "movies":"phim",
         "tv":"TV",
-        "tv-shows":"truyền hình nhiều tập",
+        "tv_shows":"truyền hình nhiều tập",
         "title":"tên",
         "all":"Mọi thứ", 
         "sr-only": {
@@ -749,7 +749,7 @@ const TransObj = {
         "movie":"电影",
         "movies":"电影",
         "tv":"电视",
-        "tv-shows":"剧集",
+        "tv_shows":"剧集",
         "title":"",
         "all":"一切", 
         "sr-only": {
