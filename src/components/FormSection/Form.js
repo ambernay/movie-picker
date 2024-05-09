@@ -16,13 +16,15 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [provider, setProvider] = useState();
-    const [formLabels, setFormLabels] = useState([TransObj[`${currentLanguage[0]}`].genre, TransObj[`${currentLanguage[0]}`].decade, TransObj[`${currentLanguage[0]}`].provider]);
+    const [formLabels, setFormLabels] = useState(TransObj[`${currentLanguage[0]}`]['section_labels']);
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
     const [sortOption, setSortOption] = useState("vote_average.desc");
 
-    const currentTranslation = TransObj[`${currentLanguage[0]}`]
-
+    const currentTranslation = TransObj[`${currentLanguage[0]}`];
+    const formLabelTranslation = currentTranslation['section_labels'];
+    const allTranslation = currentTranslation['all'];
+        
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
         if (searchState === 'formSearch')
@@ -30,8 +32,12 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     },[currentPage, tvMovieToggle, currentLanguage]);
 
     useEffect(() => {
-        setFormLabels([currentTranslation.genre, currentTranslation.decade, currentTranslation.provider]);
+        setFormLabels(formLabelTranslation);
     }, [currentLanguage])
+
+    const capFirstChar = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -133,9 +139,9 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             <div className="lines b"></div>
                         </button>
 
-                        <a href="#genre" tabIndex='0'>{formLabels[0]}</a>
-                        <a href="#decade" tabIndex='0'>{formLabels[1]}</a>
-                        <a href="#provider" tabIndex='0'>{formLabels[2]}</a>
+                        <a href="#genre" tabIndex='0'>{formLabels.genre}</a>
+                        <a href="#decade" tabIndex='0'>{formLabels.decade}</a>
+                        <a href="#provider" tabIndex='0'>{formLabels.provider}</a>
 
                     </nav>
                     {screenSize !== 'narrowScreen' ?
@@ -159,19 +165,19 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setIsValidRequest={setIsValidRequest}
                             tvMovieToggle={tvMovieToggle}
                             currentLanguage={currentLanguage}
-                            sectionLabel={formLabels[0]}
+                            sectionLabel={capFirstChar(formLabels.genre)}
                         />
                         <DecadeList
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
                             setDecade={setDecade}
                             setIsValidRequest={setIsValidRequest}
-                            sectionLabel={formLabels[1]}
+                            sectionLabel={capFirstChar(formLabels.decade)}
                         />
                         <ProviderFormList
                             setProvider={setProvider}
                             setIsValidRequest={setIsValidRequest}
-                            sectionLabel={formLabels[2]}
+                            sectionLabel={capFirstChar(formLabels.provider)}
                         />
                     </section>
                     <section className='form-bottom'>

@@ -1,5 +1,6 @@
 import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
+import { TransObj } from '../StaticObjects.js';
 
 function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
     tvMovieToggle, currentLanguage, currentPage, setCurrentPage }) {
@@ -10,6 +11,8 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
     const inputClass = isOpen ? 'input-container' : 'hidden';
     const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
     ${currentPage}`;
+    const currentTranslation = TransObj[`${currentLanguage[0]}`];
+    const iconDescription = currentTranslation['sr-only'];
 
     const searchInput = useRef(null);
 
@@ -59,13 +62,14 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
     return (
         <div className='search-container' >
             <div className='wrapper'>
-                <div className={'search-icon-container'} onClick={handleIconClick}>
+                <figure className={'search-icon-container'} onClick={handleIconClick}>
                     <MagnifyerIcon />
-                </div>
+                    <figcaption className='sr-only'>{iconDescription.search_bar}</figcaption>
+                </figure>
                 <form className={inputClass} onSubmit={handleSubmit}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
-                        placeholder={`Search ${tvMovieToggle.toUpperCase()} title...`}
+                        placeholder={`${currentTranslation[tvMovieToggle].toUpperCase()} ${currentTranslation.title}...`}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}

@@ -8,7 +8,6 @@ const handler = async (event) => {
     try{
         const { data } = await axios.get(genreListAPI);
         const genres = data.genres;
-        genres.push({ "id": "all-genres", "name": "All" });
 
         return {
             statusCode: 200,
