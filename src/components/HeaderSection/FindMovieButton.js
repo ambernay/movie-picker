@@ -1,20 +1,25 @@
 import { UpDownArrowIcon } from '../Icons'
 
-function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle, currentTranslation }) {
+function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle, currentTranslation, screenSize }) {
     
     const upArrow = currentTranslation['sr-only'].up_arrow;
     const downArrow = currentTranslation['sr-only'].down_arrow;
-
+    const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_shows;
+    const fullHeadingLength = (currentTranslation.find + currentTranslation[`${mediaType}`]).length;
+   
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-   
+
     return (
         <button type='button' className="find-movie-button" onClick={handleDropdown} >
             <figure>
                 <span className="hover-animation">
-                    <h2>
-                        <span> {tvMovieToggle === 'movie' ? ` ${capFirstChar(currentTranslation.movies)}` : ` ${capFirstChar(currentTranslation.tv_shows)}`} </span>
+                    <h2>{(screenSize === 'midScreen' && fullHeadingLength <= 10) 
+                        || (screenSize === 'wideScreen') ? 
+                        capFirstChar(currentTranslation.find) 
+                        : null}
+                        <span> {capFirstChar(mediaType)} </span>
                     </h2>
                 </span>
                 <UpDownArrowIcon
