@@ -348,6 +348,7 @@ img {
     --subHeadingMargin: 4px;
     --mainHeaderFontSize: 2.2rem;
     --langLabelWidth: 2.8rem;
+    --searchIconWidth: 1.5rem;
     /* form */
     --formWidth: 96%;
     --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
@@ -635,7 +636,7 @@ li:focus {
 .region-list.header-region .label-container {
     display: flex;
     position: absolute;
-    left: calc(50% - (var(--langLabelWidth)/2));
+    right: calc(((100% - var(--wrapperWidth)) / 2) + (var(--searchIconWidth) * 1.5));
     justify-content: space-between;
     width: var(--langLabelWidth);
     border: none;
@@ -675,7 +676,7 @@ li:focus {
 
 .search-container {
     display: flex;
-    width: 1.5rem;
+    width: var(--searchIconWidth);
     justify-content: flex-end;
     cursor: pointer;
 }

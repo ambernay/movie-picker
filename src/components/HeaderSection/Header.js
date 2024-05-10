@@ -84,6 +84,8 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                     handleDropdown={handleDropdown}
                                     arrowClass={arrowClass}
                                     tvMovieToggle={tvMovieToggle}
+                                    currentTranslation={currentTranslation}
+                                    screenSize={screenSize}
                                 />
                                 : null
                             }
