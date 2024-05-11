@@ -11,14 +11,15 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
     }, [currentLanguage, setRegionList]);
 
     const handleChange = (e) => {
-        setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('name')]);
+        setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('name'), e.target.getAttribute('value')]);
     }
     const chooseSelectedLabel = () => {
 
         let countryCode = currentRegion[0];
+        console.log(currentRegion);
 
         if ((screenSize !== 'narrowScreen') && (positionClass === 'form-region')) {
-            let fullRegionName = currentRegion[1];
+            let fullRegionName = currentRegion[2];
           
             let spaceCount = (fullRegionName.split(" ").length - 1);
 

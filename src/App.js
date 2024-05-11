@@ -10,7 +10,7 @@ function App() {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
-    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
+    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada", "Canada"]);
     const [currentLanguage, setCurrentLanguage] = useState(["en", "English", "English"]);
     const [searchState, setSearchState] = useState(''); 
 

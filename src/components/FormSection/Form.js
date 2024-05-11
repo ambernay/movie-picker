@@ -173,6 +173,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setDecade={setDecade}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
+                            currentTranslation={currentTranslation}
                         />
                         <ProviderFormList
                             setProvider={setProvider}
@@ -183,7 +184,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                     <section className='form-bottom'>
                         <div className="form-button-container"
                         >
-                            <button>{tvMovieToggle === 'movie' ? 'Get Movies' : 'Get Shows'}</button>
+                            <button>{`${capFirstChar(currentTranslation.search)}`}</button>
                         </div>
                         <SortByDropdown
                             setSortOption={setSortOption}

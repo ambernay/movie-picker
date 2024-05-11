@@ -3,7 +3,7 @@ import { UpDownArrowIcon } from '../Icons'
 function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle, currentTranslation, screenSize }) {
     const upArrow = currentTranslation['sr-only'].up_arrow;
     const downArrow = currentTranslation['sr-only'].down_arrow;
-    const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_shows;
+    const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
     const fullHeadingLength = (currentTranslation.find + currentTranslation[`${mediaType}`]).length;
    
     const capFirstChar = (string) => {

@@ -13,6 +13,7 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
     ${currentPage}`;
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
+    const placeholder = tvMovieToggle === 'movie' ? currentTranslation.movie_title : currentTranslation.tv_series;
 
     const searchInput = useRef(null);
 
@@ -69,7 +70,7 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
                 <form className={inputClass} onSubmit={handleSubmit}>
                     <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
                     <input
-                        placeholder={`${currentTranslation[tvMovieToggle].toUpperCase()} ${currentTranslation.title}...`}
+                        placeholder={`${placeholder}...`}
                         name={'movie search'}
                         value={newValue}
                         onChange={handleInput}
