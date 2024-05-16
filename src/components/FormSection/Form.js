@@ -62,6 +62,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
 const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre) => {
 
     const regionCode = currentRegion[0];
+    const regionNativeName = currentRegion[2];
     const langCode = currentLanguage[0];
  
     let cacheKeyArr = [`${tvOrMovie}`];
@@ -101,7 +102,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, cur
 
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
-    selectionsForMessage.push(currentRegion[1]); 
+    selectionsForMessage.push(regionNativeName); 
     cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
 
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];

@@ -15,10 +15,11 @@ function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) 
     // Filter out undefined sort-bys (some languages don't offer alphabetical sort)
     sortOptions = sortOptions.filter(option => option["sort-by"]);
 
-    const [currentSelectedLabel, setCurrentSelectedLabel] = useState(sortOptions[0]['sort-by']);
+    const [currentSelectedLabel, setCurrentSelectedLabel] = useState('Rating');
     
     useEffect(() => {
-        setCurrentSelectedLabel(sortOptions[0]['sort-by']);
+        sortOptions.length > 0 ? setCurrentSelectedLabel(sortOptions[0]['sort-by'])
+        : setCurrentSelectedLabel('No options');
     },[currentLanguage])
 
     const handleChange = (e) => {
