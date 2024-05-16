@@ -29,7 +29,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
                 {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
-                        
+                            // (listItem['sort-by'] && listItem['sort-by'] !== 'undefined')?
                             return (
                                 <li
                                     key={listItem[itemID]}

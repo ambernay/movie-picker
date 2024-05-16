@@ -16,7 +16,6 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setC
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
-        console.log('search', searchBarQuery);
         MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage, userSelections, searchState).then(result => {
             setStatusMessage('Loading...');
             let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';

@@ -188,6 +188,8 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         </div>
                         <SortByDropdown
                             setSortOption={setSortOption}
+                            currentLanguage={currentLanguage}
+                            currentTranslation={currentTranslation}
                         />
                     </section>
 

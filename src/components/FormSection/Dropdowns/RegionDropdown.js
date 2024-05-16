@@ -16,7 +16,6 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
     const chooseSelectedLabel = () => {
 
         let countryCode = currentRegion[0];
-        console.log(currentRegion);
 
         if ((screenSize !== 'narrowScreen') && (positionClass === 'form-region')) {
             let fullRegionName = currentRegion[2];

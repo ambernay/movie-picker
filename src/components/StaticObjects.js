@@ -13,9 +13,9 @@ const TransObj = {
         "movie_title":"عنوان الفيلم",
         "all":"كل شئ",
         "sort_by": {
-            "rating_des":"التقييم: تنازلي",
+            "rating_desc":"التقييم: تنازلي",
             "rating_asc":"التقييم: تصاعدي",
-            "date_des":"تاريخ الإصدار: تنازلي",
+            "date_desc":"تاريخ الإصدار: تنازلي",
             "date_asc":"تاريخ الإصدار: تصاعدي"
         }, 
         "sr-only": {
@@ -46,9 +46,9 @@ const TransObj = {
         "movie_title":"Назва фільма",
         "all":"усё",
         "sort_by": {
-            "rating_des":"Ацэнка: па змяншэнні",
+            "rating_desc":"Ацэнка: па змяншэнні",
             "rating_asc":"Рэйтынг: па ўзрастанні",
-            "date_des":"Дата выпуску: па змяншэнні",
+            "date_desc":"Дата выпуску: па змяншэнні",
             "date_asc":"Дата выпуску: па ўзрастанні"
         }, 
         "sr-only": {
@@ -79,9 +79,9 @@ const TransObj = {
         "movie_title":"Заглавие на филм",
         "all":"Всичко",
         "sort_by": {
-            "rating_des":"Рейтинг Низходящ",
+            "rating_desc":"Рейтинг Низходящ",
             "rating_asc":"Рейтинг: Възходящ",
-            "date_des":"Дата на издаване в низходящ ред",
+            "date_desc":"Дата на издаване в низходящ ред",
             "date_asc":"Дата на издаване във възходящ ред"
         }, 
         "sr-only": {
@@ -112,11 +112,11 @@ const TransObj = {
         "movie_title":"Název filmu",
         "all":"Všechno",
         "sort_by": {
-            "rating_des":"Hodnocení: Sestupné",
+            "rating_desc":"Hodnocení: Sestupné",
             "rating_asc":"Hodnocení: Vzestupně",
             "A_Z":"Název: A-Z",
             "Z_A":"Název: Z-A",
-            "date_des":"Datum vydání: Sestupně",
+            "date_desc":"Datum vydání: Sestupně",
             "date_asc":"Datum vydání: Vzestupně"
         }, 
         "sr-only": {
@@ -147,11 +147,11 @@ const TransObj = {
         "movie_title":"Název filmu",
         "all":"Alt",
         "sort_by": {
-            "rating_des":"Bedømmelse: Faldende",
+            "rating_desc":"Bedømmelse: Faldende",
             "rating_asc":"Bedømmelse: Stigende",
             "A_Z":"Titel: A-Z",
             "Z_A":"Titel: Z-A",
-            "date_des":"Udgivelsesdato: Faldende",
+            "date_desc":"Udgivelsesdato: Faldende",
             "date_asc":"Udgivelsesdato: Stigende"
         }, 
         "sr-only": {
@@ -182,11 +182,11 @@ const TransObj = {
         "movie_title":"Filmtitel",
         "all":"Alles",
         "sort_by": {
-            "rating_des":"Bewertung: Absteigend",
+            "rating_desc":"Bewertung: Absteigend",
             "rating_asc":"Bewertung: Aufsteigend",
             "A_Z":"Titel: A-Z",
             "Z_A":"Titel: Z-A",
-            "date_des":"Erscheinungsdatum: Absteigend",
+            "date_desc":"Erscheinungsdatum: Absteigend",
             "date_asc":"Erscheinungsdatum: Aufsteigend"
         }, 
         "sr-only": {
@@ -217,9 +217,9 @@ const TransObj = {
         "movie_title":"Τίτλος ταινίας",
         "all":"Τα παντα",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -251,11 +251,11 @@ const TransObj = {
         "movie_title":"Movie title",
         "all":"All",
         "sort_by": {
-            "rating_des":"Rating: high to low",
+            "rating_desc":"Rating: high to low",
             "rating_asc":"Rating low to high",
             "A_Z":"Titles: A-Z",
             "Z_A":"Titles Z-A",
-            "date_des":"Release date: old to new",
+            "date_desc":"Release date: old to new",
             "date_asc":"Release date: new to old"
         }, 
         "sr-only": {
@@ -286,12 +286,12 @@ const TransObj = {
         "movie_title":"Título de la película",
         "all":"Todo",
         "sort_by": {
-            "rating_des":"Clasificación: Descendente",
+            "rating_desc":"Clasificación: Descendente",
             "rating_asc":"Clasificación: Ascendente",
             "A_Z":"Títulos: A-Z",
             "Z_A":"Títulos: Z-A",
-            "date_des":"Fecha de lanzamiento: Descendente",
-            "date_asc":"Release Date: Ascending"
+            "date_desc":"Fecha de lanzamiento: Descendente",
+            "date_asc":"Fecha de lanzamiento: Ascendente"
         }, 
         "sr-only": {
             "back_arrow":"botón de flecha hacia atrás: página anterior",
@@ -321,11 +321,11 @@ const TransObj = {
         "movie_title":"Elokuvan nimi",
         "all":"Kaikki",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -356,11 +356,11 @@ const TransObj = {
         "movie_title":"Titre du film",
         "all":"Tout",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -391,9 +391,9 @@ const TransObj = {
         "movie_title":"שם הסרט",
         "all":"הכל",
         "sort_by": {
-            "rating_des":"דירוג סדר יורד",
+            "rating_desc":"דירוג סדר יורד",
             "rating_asc":"דירוג בסדר עולה",
-            "date_des":"תאריך היציאה בסדר יורד",
+            "date_desc":"תאריך היציאה בסדר יורד",
             "date_asc":"תאריך שחרור בסדר עולה"
         }, 
         "sr-only": {
@@ -424,11 +424,11 @@ const TransObj = {
         "movie_title":"Film cím",
         "all":"Minden",
         "sort_by": {
-            "rating_des":"Értékelés: csökkenő",
+            "rating_desc":"Értékelés: csökkenő",
             "rating_asc":"Értékelés: növekvő",
             "A_Z":"Címek: A-Z",
             "Z_A":"Címek: Z-A",
-            "date_des":"Megjelenés dátuma: csökkenő",
+            "date_desc":"Megjelenés dátuma: csökkenő",
             "date_asc":"Megjelenés dátuma: növekvő"
         }, 
         "sr-only": {
@@ -460,11 +460,11 @@ const TransObj = {
         "movie_title":"Judul film",
         "all":"Semuanya",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -496,11 +496,11 @@ const TransObj = {
         "movie_title":"Titolo del film",
         "all":"Qualunque cosa",
         "sort_by": {
-            "rating_des":"Voto: discendente",
+            "rating_desc":"Voto: discendente",
             "rating_asc":"Voto: ascendente",
             "A_Z":"Titoli: dalla A alla Z",
             "Z_A":"Titoli: dalla Z alla A",
-            "date_des":"Data di uscita: ascendente",
+            "date_desc":"Data di uscita: ascendente",
             "date_asc":"Data di uscita: discendente"
         }, 
         "sr-only": {
@@ -531,9 +531,9 @@ const TransObj = {
         "movie_title":"映画のタイトル",
         "all":"すべて",
         "sort_by": {
-            "rating_des":"評価の降順",
+            "rating_desc":"評価の降順",
             "rating_asc":"評価の昇順",
-            "date_des":"発売日の降順",
+            "date_desc":"発売日の降順",
             "date_asc":"発売日の昇順"
         }, 
         "sr-only": {
@@ -565,9 +565,9 @@ const TransObj = {
         "movie_title":"ფილმის სათაური",
         "all":"ყველაფერი",
         "sort_by": {
-            "rating_des":"რეიტინგი კლებადი",
+            "rating_desc":"რეიტინგი კლებადი",
             "rating_asc":"რეიტინგი აღმავალი",
-            "date_des":"გამოშვების თარიღი დაღმავალი",
+            "date_desc":"გამოშვების თარიღი დაღმავალი",
             "date_asc":"გამოშვების თარიღი აღმავალი"
         }, 
         "sr-only": {
@@ -599,9 +599,9 @@ const TransObj = {
         "movie_title":"영화 제목",
         "all":"모든 것",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -633,11 +633,11 @@ const TransObj = {
         "movie_title":"Filmo pavadinimas",
         "all":"Viskas",
         "sort_by": {
-            "rating_des":"Įvertinimas: didėjantis",
+            "rating_desc":"Įvertinimas: didėjantis",
             "rating_asc":"Įvertinimas: mažėjantis",
             "A_Z":"Pavadinimas: A-Z",
             "Z_A":"Pavadinimas: Z-A",
-            "date_des":"Išleidimo data: mažėjančia tvarka",
+            "date_desc":"Išleidimo data: mažėjančia tvarka",
             "date_asc":"Išleidimo data: didėjančia tvarka"
         }, 
         "sr-only": {
@@ -669,11 +669,11 @@ const TransObj = {
         "movie_title":"Film titel",
         "all":"Alles",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -705,11 +705,11 @@ const TransObj = {
         "movie_title":"Tytuł filmu",
         "all":"Wszystko",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -741,11 +741,11 @@ const TransObj = {
         "movie_title":"Título do filme",
         "all":"Tudo",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -777,11 +777,11 @@ const TransObj = {
         "movie_title":"Titlul filmului",
         "all":"Tot",
         "sort_by": {
-            "rating_des":"Evaluare: Crescator",
+            "rating_desc":"Evaluare: Crescator",
             "rating_asc":"Evaluare: Descrescătoare",
             "A_Z":"Titluri: A-Z",
             "Z_A":"Titluri: Z-A",
-            "date_des":"Data lansării: Ascendent",
+            "date_desc":"Data lansării: Ascendent",
             "date_asc":"Data lansării: Descendent"
         }, 
         "sr-only": {
@@ -813,9 +813,9 @@ const TransObj = {
         "movie_title":"Название фильма",
         "all":"Все",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -847,11 +847,11 @@ const TransObj = {
         "movie_title":"Názov filmu",
         "all":"Všetko",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -883,11 +883,11 @@ const TransObj = {
         "movie_title":"Naslov filma",
         "all":"Vse",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -919,9 +919,9 @@ const TransObj = {
         "movie_title":"Наслов филма",
         "all":"Све",
         "sort_by": {
-            "rating_des":"Оцена: опадајућа",
+            "rating_desc":"Оцена: опадајућа",
             "rating_asc":"Оцена: растућа",
-            "date_des":"Датум изласка: опадајуће",
+            "date_desc":"Датум изласка: опадајуће",
             "date_asc":"Датум изласка: растући"
         }, 
         "sr-only": {
@@ -952,9 +952,9 @@ const TransObj = {
         "movie_title":"filmtitel",
         "all":"Allt",
         "sort_by": {
-            "rating_des":"Betyg: fallande",
+            "rating_desc":"Betyg: fallande",
             "rating_asc":"Betyg: stigande",
-            "date_des":"Releasedatum: fallande",
+            "date_desc":"Releasedatum: fallande",
             "date_asc":"Releasedatum: stigande"
         }, 
         "sr-only": {
@@ -986,9 +986,9 @@ const TransObj = {
         "movie_title":"ชื่อหนัง",
         "all":"ทุกอย่าง",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -1021,11 +1021,11 @@ const TransObj = {
         "movie_title":"Film başlığı",
         "all":"Her şey",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
             "A_Z":"",
             "Z_A":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -1057,9 +1057,9 @@ const TransObj = {
         "movie_title":"Tiêu đề phim",
         "all":"Mọi thứ",
         "sort_by": {
-            "rating_des":"",
+            "rating_desc":"",
             "rating_asc":"",
-            "date_des":"",
+            "date_desc":"",
             "date_asc":""
         }, 
         "sr-only": {
@@ -1091,9 +1091,9 @@ const TransObj = {
         "movie_title":"电影标题",
         "all":"一切",
         "sort_by": {
-            "rating_des":"评分降序",
+            "rating_desc":"评分降序",
             "rating_asc":"评级上升",
-            "date_des":"发布日期降序",
+            "date_desc":"发布日期降序",
             "date_asc":"发布日期升序"
         }, 
         "sr-only": {

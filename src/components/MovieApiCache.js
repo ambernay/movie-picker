@@ -40,7 +40,7 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
     const allButtonTrans = TransObj[`${currentLanguage[0]}`]['all'];
     const langCode = currentLanguage[0].toLowerCase();
     const key = `${tvOrMovie}/${langCode}`;
-    console.log(allButtonTrans);
+
     if (!genreListPromises.hasOwnProperty(key)) {
         const genreListURL = `.netlify/functions/get-genre-list?mediaType=${tvOrMovie}&language=${langCode}&translation=${allButtonTrans}`;
 
