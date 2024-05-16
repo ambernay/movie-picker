@@ -2,10 +2,12 @@ import { useState, useEffect, memo } from 'react';
 import CustomDropdown from './CustomDropdown';
 import { RegionApiCall } from '../../MovieApiCache';
 
-function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, currentLanguage, screenSize }) {
+function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, currentLanguage, screenSize, currentTranslation }) {
 
     const [regionList, setRegionList] = useState([]);
-
+    
+    const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.regions}`
+    
     useEffect(() => {
         RegionApiCall(currentLanguage).then(result => setRegionList(result));
     }, [currentLanguage, setRegionList]);
@@ -43,10 +45,9 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
             itemName={'english_name'}
             listHeading={"native_name"}
             handleChange={handleChange}
-            errorMessage={'Failed to load regions'}
+            errorMessage={failedMessage}
         />
     )
-
 }
 
 export default memo(RegionDropdown);

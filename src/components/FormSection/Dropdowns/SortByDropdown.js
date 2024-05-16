@@ -3,6 +3,8 @@ import CustomDropdown from './CustomDropdown';
 
 function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) {
     const sortOptionsTrans = currentTranslation['sort_by'];
+    const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.sort_options}`
+    console.log(currentTranslation, failedMessage);
 
     let sortOptions = [
         { "sort-by": sortOptionsTrans.rating_desc, "choice": "vote_average.desc" },
@@ -37,7 +39,7 @@ function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) 
             itemName={"sort-by"}
             listHeading={'sort-by'}
             handleChange={handleChange}
-            errorMessage={'Failed to load sort options'}
+            errorMessage={failedMessage}
         />
     )
 }

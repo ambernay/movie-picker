@@ -78,6 +78,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 currentLanguage={currentLanguage}
                                 setCurrentLanguage={setCurrentLanguage}
                                 screenSize={screenSize}
+                                currentTranslation={currentTranslation}
                             />
                             {screenSize === 'narrowScreen' ?
                                 <FindMovieButton

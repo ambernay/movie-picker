@@ -2,7 +2,8 @@ const TransObj = {
     "ar": {
         "english_name":"Arabic",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"النوع","decade":"يعقد","provider":"مزود"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"النوع","decade":"يعقد","provider":"مزود"},
         "trending":"رائج",
         "find":"يجد",
         "search":"ابحث",
@@ -29,13 +30,14 @@ const TransObj = {
             "tv_icon":"التلفزيون",
             "search_bar":"(ابحث)أيقونة العدسة المكبرة"
         },
-        "error_messages":{"form_modal":"إختر خيار","no_results":"لا نتائج"},
+        "error_messages":{"failed_to_load":"","form_modal":"إختر خيار","no_results":"لا نتائج"},
         "provider_options": {"buy":"اشتريها","rent":"إيجار","stream":"يعرض الان","with_ads":"مع الإعلانات"}
     },
     "be": {
         "english_name":"Belarusian",
         "ISO_Alphabet":"false",
-        "section_labels":{"genre":"Жанр","decade":"Дзесяцігоддзе","provider":"Правайдэр"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Жанр","decade":"Дзесяцігоддзе","provider":"Правайдэр"},
         "trending":"у трэндзе",
         "find":"знаходзіць",
         "search":"шукаць",
@@ -62,13 +64,14 @@ const TransObj = {
             "tv_icon":"Тэлевізійны сімвал",
             "search_bar":"сімвал павелічальнага шкла (шукаць)"
         },
-        "error_messages":{"form_modal":"Выберыце варыянт","no_results":"Няма вынікаў"},
+        "error_messages":{"failed_to_load":"","form_modal":"Выберыце варыянт","no_results":"Няма вынікаў"},
         "provider_options": {"buy":"Купіць","rent":"Арэнда","stream":"Stream","with_ads":"З рэкламай"}
     },
     "bg": {
         "english_name":"Bulgarian",
         "ISO_Alphabet":"false",
-        "section_labels":{"genre":"Жанр","decade":"Десетилетие","provider":"Доставчик"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Жанр","decade":"Десетилетие","provider":"Доставчик"},
         "trending":"Набиращи популярност",
         "find":"намирам",
         "search":"търсене",
@@ -95,13 +98,14 @@ const TransObj = {
             "tv_icon":"ТВ символ",
             "search_bar":"символ на лупа(търсене)"
         },
-        "error_messages":{"form_modal":"Направете избор","no_results":"Няма резултати"},
+        "error_messages":{"failed_to_load":"","form_modal":"Направете избор","no_results":"Няма резултати"},
         "provider_options": {"buy":"Купува","rent":"под наем","stream":"Стриймове","with_ads":"С реклами"}
     },
     "cs":{
         "english_name":"Czech",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Žánr","decade":"Desetiletí","provider":"Poskytovatel"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Žánr","decade":"Desetiletí","provider":"Poskytovatel"},
         "trending":"Nejnavštěvovanější",
         "find":"nalézt",
         "search":"hledat",
@@ -130,13 +134,14 @@ const TransObj = {
             "tv_icon":"symbol TV",
             "search_bar":"symbol lupy (hledat)"
         },
-        "error_messages":{"form_modal":"Vyberte možnost","no_results":"Žádné výsledky"},
+        "error_messages":{"failed_to_load":"","form_modal":"Vyberte možnost","no_results":"Žádné výsledky"},
         "provider_options": {"buy":"Koupit","rent":"Pronajmout si","stream":"Streamované","with_ads":"S reklamami"}
     },
     "da": {
         "english_name":"Danish",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Genre","decade":"Årti","provider":"Udbyder"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Genre","decade":"Årti","provider":"Udbyder"},
         "trending":"Trending",
         "find":"finde",
         "search":"Søg",
@@ -165,13 +170,14 @@ const TransObj = {
             "tv_icon":"TV symbol",
             "search_bar":"forstørrelsesglas symbol"
         },
-        "error_messages":{"form_modal":"Vælg en mulighed","no_results":"Ingen resultater"},
+        "error_messages":{"failed_to_load":"","form_modal":"Vælg en mulighed","no_results":"Ingen resultater"},
         "provider_options": {"buy":"Købe","rent":"Leje","stream":"Stream","with_ads":"Med annoncer"}
     },
     "de": {
         "english_name":"German",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Genre","decade":"Jahrzehnt","provider":"Anbieter"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Genre","decade":"Jahrzehnt","provider":"Anbieter"},
         "trending":"Trends",
         "find":"finden",
         "search":"suchen",
@@ -200,13 +206,14 @@ const TransObj = {
             "tv_icon":"TV-Symbol",
             "search_bar":"Magnifying glass icon (suchen)"
         },
-        "error_messages":{"form_modal":"Wähle eine Option","no_results":"No results"},
+        "error_messages":{"failed_to_load":"","form_modal":"Wähle eine Option","no_results":"keine Ergebnisse"},
         "provider_options": {"buy":"Kaufen","rent":"Mieten","stream":"Stream","with_ads":"Mit Werbung"}
     },
     "el": {
         "english_name":"Greek",
         "ISO_Alphabet":"false",
-        "section_labels":{"genre":"Είδος","decade":"Δεκαετία","provider":"Προμηθευτής"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Είδος","decade":"Δεκαετία","provider":"Προμηθευτής"},
         "trending":"Τάσεις",
         "find":"βρίσκω",
         "search":"ζητώ",
@@ -233,13 +240,14 @@ const TransObj = {
             "tv_icon":"σύμβολο της τηλεόρασης",
             "search_bar":"σύμβολο μεγεθυντικού φακού (ζητώ)"
         },
-        "error_messages":{"form_modal":"Διάλεξε μια επιλογή","no_results":"Δεν υπάρχουν αποτελέσματα που να ταιριάζουν"},
+        "error_messages":{"failed_to_load":"","form_modal":"Διάλεξε μια επιλογή","no_results":"Δεν υπάρχουν αποτελέσματα που να ταιριάζουν"},
         "provider_options": {"buy":"Αγορά","rent":"Ενοίκιο","stream":"Σε ροή","with_ads":"Με διαφήμιση"}
     },
     "en": {
         "english_name":"English",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Genre","decade":"Decade","provider":"Provider"},
+        "section_labels": {"languages":"languages","regions":"regions","sort_options":"sort options",
+            "genre":"Genre","decade":"Decade","provider":"Provider"},
         "trending":"Trending",
         "find":"Find",
         "search":"Search",
@@ -269,13 +277,14 @@ const TransObj = {
             "tv_icon":"TV icon",
             "search_bar":"magnifying glass icon (search)"
         },
-        "error_messages":{"form_modal":"Make a selection","no_results":"No results"},
+        "error_messages":{"failed_to_load":"Failed to load","form_modal":"Make a selection","no_results":"No results"},
         "provider_options": {"buy":"Buy","rent":"Rent","stream":"Stream","with_ads":"With Ads"}
     },
     "es": {
         "english_name":"Spanish",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Género","decade":"Década","provider":"Proveedor"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Género","decade":"Década","provider":"Proveedor"},
         "trending":"tendencias",
         "find":"encontrar",
         "search":"buscar",
@@ -304,13 +313,14 @@ const TransObj = {
             "tv_icon":"",
             "search_bar":""
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Comprar","rent":"Alquilar","stream":"Retransmisión","with_ads":""}
     },
     "fi": {
         "english_name":"Finnish",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Genre","decade":"Vuosikymmen","provider":"Palveluntarjoaja"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Genre","decade":"Vuosikymmen","provider":"Palveluntarjoaja"},
         "trending":"Nousussa",
         "find":"etsiä",
         "search":"etsiä",
@@ -339,13 +349,14 @@ const TransObj = {
             "tv_icon":"",
             "search_bar":""
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Ostaa","rent":"Vuokrata","stream":"Striimattavana","with_ads":""}
     },
     "fr": {
         "english_name":"French",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Genre","decade":"Décennie","provider":"Fournisseur"},
+        "section_labels": {"languages":"langues","regions":"Régions","sort_options":"options de tri",
+            "genre":"Genre","decade":"Décennie","provider":"Fournisseur"},
         "trending":"tendance",
         "search":"chercher",
         "find":"trouver",
@@ -374,13 +385,14 @@ const TransObj = {
             "tv_icon":"Symbole de la télévision",
             "search_bar":"symbole de la loupe (chercher)"
         },
-        "error_messages":{"form_modal":"Choisissez","no_results":"Aucun résultat"},
+        "error_messages":{"failed_to_load":"Échec du chargement","form_modal":"Choisissez","no_results":"Aucun résultat"},
         "provider_options": {"buy":"Acheter","rent":"Louer","stream":"Stream","with_ads":"avec des publicités"}
     },
     "he": {
         "english_name":"Hebrew",
         "ISO_Alphabet":"false",
-        "section_labels":{"genre":"ז'ָאנר","decade":"עָשׂוֹר","provider":"מֵפִיץ"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"ז'ָאנר","decade":"עָשׂוֹר","provider":"מֵפִיץ"},
         "trending":"מגמתי",
         "find":"מִמצָא",
         "search":"לְחַפֵּשׂ",
@@ -407,13 +419,14 @@ const TransObj = {
             "tv_icon":"סמל טלוויזיה",
             "search_bar":"סמל זכוכית מגדלת"
         },
-        "error_messages":{"form_modal":"בחר אפשרות","no_results":"אין תוצאות"},
+        "error_messages":{"failed_to_load":"","form_modal":"בחר אפשרות","no_results":"אין תוצאות"},
         "provider_options": {"buy":"לִקְנוֹת","rent":"השכרה","stream":"הזרמה","with_ads":"with advertisements"}
     },
     "hu": {
         "english_name":"Hungarian",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Műfaj","decade":"Évtized","provider":"Szolgáltató"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Műfaj","decade":"Évtized","provider":"Szolgáltató"},
         "trending":"Népszerű",
         "find":"keres",
         "search":"keres",
@@ -442,13 +455,14 @@ const TransObj = {
             "tv_icon":"TV szimbólum",
             "search_bar":"nagyító szimbólum (keres)"
         },
-        "error_messages":{"form_modal":"Válassz egy lehetőséget","no_results":"Nincs eredmény"},
+        "error_messages":{"failed_to_load":"","form_modal":"Válassz egy lehetőséget","no_results":"Nincs eredmény"},
         "provider_options": {"buy":"megvesz","rent":"Bérlés","stream":"Stream","with_ads":"hirdetésekkel"}
     },
     "id": {
         "english_name":"Indonesian",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Genre","decade":"Dasawarsa","provider":"Pemasok"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Genre","decade":"Dasawarsa","provider":"Pemasok"},
         "trending":"Trending",
         "find":"Cari",
         "search":"Cari",
@@ -478,13 +492,14 @@ const TransObj = {
             "tv_icon":"simbol televisi",
             "search_bar":"simbol kaca pembesar (Cari)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Membeli","rent":"Menyewa","stream":"Stream","with_ads":"dengan iklan"}
     },
     "it": {
         "english_name":"Italian",
         "ISO_Alphabet":"true",
-        "section_labels":{"genre":"Genere","decade":"Decennio","provider":"Fornitore"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Genere","decade":"Decennio","provider":"Fornitore"},
         "trending":"Di tendenza",
         "find":"trovare",
         "search":"cercare",
@@ -514,13 +529,14 @@ const TransObj = {
             "tv_icon":"simbolo televisivo",
             "search_bar":"simbolo della lente di ingrandimento (cercare)"
         },
-        "error_messages":{"form_modal":"selezionare e opzione","no_results":"o risultati"},
+        "error_messages":{"failed_to_load":"","form_modal":"selezionare e opzione","no_results":"o risultati"},
         "provider_options": {"buy":"Acquistare","rent":"Affitto","stream":"Stream","with_ads":"con annunci"}
     },
     "ja": {
         "english_name":"Japanese",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"ジャンル","decade":"十年","provider":"プロバイダー"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"ジャンル","decade":"十年","provider":"プロバイダー"},
         "trending":"動向",
         "find":"探す",
         "search":"探す",
@@ -547,13 +563,14 @@ const TransObj = {
             "tv_icon":"テレビのシンボル",
             "search_bar":"虫眼鏡のシンボル 探す"
         },
-        "error_messages":{"form_modal":"選択肢一つを選択してください","no_results":"検索結果はありません"},
+        "error_messages":{"failed_to_load":"","form_modal":"選択肢一つを選択してください","no_results":"検索結果はありません"},
         "provider_options": {"buy":"買う","rent":"家賃","stream":"ストリーミング","with_ads":"広告あり"}
     },
     "ka": {
         "english_name":"Georgian",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"ჟანრი","decade":"ათწლეული","provider":"პროვაიდერი"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"ჟანრი","decade":"ათწლეული","provider":"პროვაიდერი"},
         "trending":"Trending",
         "find":"პოვნა",
         "search":"ძებნა",
@@ -581,13 +598,14 @@ const TransObj = {
             "tv_icon":"ტელევიზორის ხატულა",
             "search_bar":"(ძებნა)"
         },
-        "error_messages":{"form_modal":"აირჩიეთ ვარიანტი","no_results":"არანაირი შედეგი"},
+        "error_messages":{"failed_to_load":"","form_modal":"აირჩიეთ ვარიანტი","no_results":"არანაირი შედეგი"},
         "provider_options": {"buy":"იყიდე","rent":"Ქირავდება","stream":"Stream","with_ads":"რეკლამებით"}
     },
     "ko": {
         "english_name":"Korean",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"장르","decade":"10년","provider":"공급자"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"장르","decade":"10년","provider":"공급자"},
         "trending":"트렌딩",
         "find":"검색",
         "search":"검색",
@@ -615,13 +633,14 @@ const TransObj = {
             "tv_icon":"TV 기호",
             "search_bar":"돋보기 기호 (검색)"
         },
-        "error_messages":{"form_modal":"옵션을 선택하세요","no_results":"결과가 없다"},
+        "error_messages":{"failed_to_load":"","form_modal":"옵션을 선택하세요","no_results":"결과가 없다"},
         "provider_options": {"buy":"구입하다","rent":"임대","stream":"스트리밍","with_ads":"광고와 함께"}
     },
     "lt": {
         "english_name":"Lithuanian",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Žanras","decade":"Dešimtmetis","provider":"Teikėjas"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Žanras","decade":"Dešimtmetis","provider":"Teikėjas"},
         "trending":"Tendencijos",
         "find":"rasti",
         "search":"ieškoti",
@@ -651,13 +670,14 @@ const TransObj = {
             "tv_icon":"TV simbolis",
             "search_bar":"didinamojo stiklo simbolis (ieškoti)"
         },
-        "error_messages":{"form_modal":"pasirinkite parinktį","no_results":"jokių rezultatų"},
+        "error_messages":{"failed_to_load":"","form_modal":"pasirinkite parinktį","no_results":"jokių rezultatų"},
         "provider_options": {"buy":"Pirkti","rent":"Nuoma","stream":"Internetu","with_ads":"su skelbimais"}
     },
     "nl": {
         "english_name":"Dutch",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Genre","decade":"Decennium","provider":"Aanbieder"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Genre","decade":"Decennium","provider":"Aanbieder"},
         "trending":"Trending",
         "find":"vinden",
         "search":"Zoeken",
@@ -687,13 +707,14 @@ const TransObj = {
             "tv_icon":"tv-pictogram",
             "search_bar":"vergrootglaspictogram(Zoeken)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Kopen","rent":"Huur","stream":"Stream","with_ads":""}
     },
     "pl": {
         "english_name":"Polish",
         "ISO_Alphabet":"true",
-        "section_labels": { "genre":"Gatunek","decade":"Dekada","provider":"Dostawca"},
+        "section_labels": {"languages":"","regions":"","sort_options":"", 
+            "genre":"Gatunek","decade":"Dekada","provider":"Dostawca"},
         "trending":"Trending",
         "search":"Szukaj",
         "find":"odszukać",
@@ -723,13 +744,14 @@ const TransObj = {
             "tv_icon":"symbol telewizora",
             "search_bar":"symbol szkła powiększającego (Szukaj)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Kupić","rent":"Wynajem","stream":"Stream","with_ads":""}
     },
     "pt": {
         "english_name":"Portuguese",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Gênero","decade":"Década","provider":"Fornecedor"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Gênero","decade":"Década","provider":"Fornecedor"},
         "trending":"Tendências",
         "find":"buscar",
         "search":"Pesquisar",
@@ -759,13 +781,14 @@ const TransObj = {
             "tv_icon":"símbolo de televisão",
             "search_bar":"magnifying glass symbol (Pesquisar)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Comprar","rent":"Aluguel","stream":"Stream","with_ads":"com anúncios"}
     },
     "ro": {
         "english_name":"Romanian",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Gen","decade":"Deceniu","provider":"Furnizor"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Gen","decade":"Deceniu","provider":"Furnizor"},
         "trending":"Tendință",
         "find":"găsi",
         "search":"caută",
@@ -795,13 +818,14 @@ const TransObj = {
             "tv_icon":"Simbol TV",
             "search_bar":"simbolul lupei (caută)",
         },
-        "error_messages":{"form_modal":"selecteaza o optiune","no_results":"fara rezultate"},
+        "error_messages":{"failed_to_load":"","form_modal":"selecteaza o optiune","no_results":"fara rezultate"},
         "provider_options": {"buy":"Cumpără","rent":"Chirie","stream":"Stream","with_ads":"cu reclame"}
     },
     "ru": {
         "english_name":"Russian",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"Жанр","decade":"Десятилетие","provider":"Поставщик"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Жанр","decade":"Десятилетие","provider":"Поставщик"},
         "trending":"В тренде",
         "find":"Найти",
         "search":"искать",
@@ -829,13 +853,14 @@ const TransObj = {
             "tv_icon":"символ телевизора",
             "search_bar":"символ увеличительного стекла (искать)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Купить","rent":"Арендовать","stream":"Онлайн","with_ads":"с рекламой"}
     },
     "sk": {
         "english_name":"Slovak",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Žánru","decade":"desaťročie","provider":"Poskytovateľ"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Žánru","decade":"desaťročie","provider":"Poskytovateľ"},
         "trending":"Trendujúce",
         "find":"Hľadať",
         "search":"Hľadať",
@@ -865,13 +890,14 @@ const TransObj = {
             "tv_icon":"symbol TV",
             "search_bar":"symbol lupy (Hľadať)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Kúpiť","rent":"Nájomné","stream":"Streamované","with_ads":"s reklamami"}
     },
     "sl": {
         "english_name":"Slovenian",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Žanr","decade":"desetletje","provider":"Ponudnik"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Žanr","decade":"desetletje","provider":"Ponudnik"},
         "trending":"Trending",
         "find":"raziskovati",
         "search":"raziskovati",
@@ -901,13 +927,14 @@ const TransObj = {
             "tv_icon":"tv simbol",
             "search_bar":"simbol povečevalnega stekla (raziskovati)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Nakup","rent":"Najemnina","stream":"Stream","with_ads":"z oglasi"}
     },
     "sr": {
         "english_name":"Serbian",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"Жанр","decade":"Декада","provider":"Провајдер"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Жанр","decade":"Декада","provider":"Провајдер"},
         "trending":"У тренду",
         "find":"наћи",
         "search":"Претражите",
@@ -935,13 +962,14 @@ const TransObj = {
             "tv_icon":"ТВ симбол",
             "search_bar":"симбол лупе (Претражите)"
         },
-        "error_messages":{"form_modal":"изаберите опцију","no_results":"Нема резултата"},
+        "error_messages":{"failed_to_load":"","form_modal":"изаберите опцију","no_results":"Нема резултата"},
         "provider_options": {"buy":"Купи","rent":"Закуп","stream":"Стрим","with_ads":"са рекламама"}
     },
     "sv": {
         "english_name":"Swedish",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"Genre","decade":"Årtionde","provider":"Leverantör"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Genre","decade":"Årtionde","provider":"Leverantör"},
         "trending":"Trendande",
         "find":"hitta",
         "search":"Sök",
@@ -968,13 +996,14 @@ const TransObj = {
             "tv_icon":"TV-symbol",
             "search_bar":"symbol för förstoringsglas (Sök)"
         },
-        "error_messages":{"form_modal":"Välj ett alternativ","no_results":"inga resultat"},
+        "error_messages":{"failed_to_load":"","form_modal":"Välj ett alternativ","no_results":"inga resultat"},
         "provider_options": {"buy":"köpa","rent":"Hyra","stream":"Strömmas","with_ads":"med annonser"}
     },
     "th": {
         "english_name":"Thai",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"ประเภท","decade":"ทศวรรษ","provider":"ผู้ให้บริการ"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"ประเภท","decade":"ทศวรรษ","provider":"ผู้ให้บริการ"},
         "trending":"Trending",
         "find":"สอบถาม",
         "serach":"สอบถาม",
@@ -1002,14 +1031,15 @@ const TransObj = {
             "tv_icon":"สัญลักษณ์ทีวี",
             "search_bar":"สัญลักษณ์แว่นขยาย (สอบถาม)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"ซื้อ","rent":"เช่า","stream":"Stream","with_ads":"ด้วยโฆษณา"}
 
     },
     "tr": {
         "english_name":"Turkish",
         "ISO_Alphabet":"true",
-        "section_labels": {"genre":"Tür","decade":"On yıl","provider":"Sağlayıcı"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"Tür","decade":"On yıl","provider":"Sağlayıcı"},
         "trending":"Trend",
         "find":"bakmak",
         "search":"ara",
@@ -1039,13 +1069,14 @@ const TransObj = {
             "tv_icon":"televizyon sembolü",
             "search_bar":"büyüteç sembolü (ara)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Satın almak","rent":"Kira","stream":"Yayın Akışı","with_ads":"reklamlarla"}
     },
     "vi": {
         "english_name":"Vietnamese",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"thể loại","decade":"Thập kỷ","provider":"Các nhà cung cấp"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"thể loại","decade":"Thập kỷ","provider":"Các nhà cung cấp"},
         "trending":"Trending",
         "find":"tìm kiếm",
         "search":"tìm kiếm",
@@ -1073,13 +1104,14 @@ const TransObj = {
             "tv_icon":"biểu tượng tivi",
             "search_bar":"biểu tượng kính lúp (tìm kiếm)"
         },
-        "error_messages":{"form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
         "provider_options": {"buy":"Mua","rent":"Thuê","stream":"Stream","with_ads":"với quảng cáo"}
     },
     "zh": {
         "english_name":"Mandarin",
         "ISO_Alphabet":"false",
-        "section_labels": {"genre":"类型","decade":"十年","provider":"提供者"},
+        "section_labels": {"languages":"","regions":"","sort_options":"",
+            "genre":"类型","decade":"十年","provider":"提供者"},
         "trending":"趋势",
         "find":"搜寻",
         "search":"搜寻",
@@ -1107,7 +1139,7 @@ const TransObj = {
             "tv_icon":"电视符号",
             "search_bar":"放大镜符号 搜寻"
         },
-        "error_messages":{"form_modal":"选择一个选项","no_results":"没有结果"},
+        "error_messages":{"failed_to_load":"","form_modal":"选择一个选项","no_results":"没有结果"},
         "provider_options": {"buy":"买","rent":"租","stream":"流媒体","with_ads":"有广告"}
     }
 }

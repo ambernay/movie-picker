@@ -131,6 +131,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 setCurrentRegion={setCurrentRegion}
                                 currentLanguage={currentLanguage}
                                 screenSize={screenSize}
+                                currentTranslation={currentTranslation}
                             />
                             : null
                         }
@@ -152,6 +153,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setCurrentRegion={setCurrentRegion}
                             currentLanguage={currentLanguage}
                             screenSize={screenSize}
+                            currentTranslation={currentTranslation}
                         />
                         : null
                     }
@@ -159,6 +161,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         isGenreSelected={genre}
                         submitAttempted={submitAttempted}
                         isValidRequest={isValidRequest}
+                        currentTranslation={currentTranslation}
                     />
                     <section className="fieldset-container">
                         <GenreList
@@ -167,6 +170,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             tvMovieToggle={tvMovieToggle}
                             currentLanguage={currentLanguage}
                             sectionLabel={capFirstChar(formLabels.genre)}
+                            currentTranslation={currentTranslation}
                         />
                         <DecadeList
                             setStartDate={setStartDate}
@@ -180,11 +184,11 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setProvider={setProvider}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.provider)}
+                            currentTranslation={currentTranslation}
                         />
                     </section>
                     <section className='form-bottom'>
-                        <div className="form-button-container"
-                        >
+                        <div className="form-button-container">
                             <button>{`${capFirstChar(currentTranslation.search)}`}</button>
                         </div>
                         <SortByDropdown

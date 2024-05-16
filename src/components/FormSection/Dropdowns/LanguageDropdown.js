@@ -1,10 +1,11 @@
 import React from "react";
 import CustomDropdown from './CustomDropdown';
 
-function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
+function LanguageDropdown ({ currentLanguage, setCurrentLanguage, currentTranslation }) {
     
     const [langCode, nativeName, englishName] = currentLanguage;
-    
+    const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.languages}`;
+   
     const languagesObj = {
         "langList": [
             {"iso_639_1":"cs","english_name":"Czech","name":"Český"},
@@ -60,7 +61,7 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage }) {
             itemName={'english_name'}
             listHeading={"name"}
             handleChange={handleChange}
-            errorMessage={'Failed to load languages'}
+            errorMessage={failedMessage}
         />
     )
 }

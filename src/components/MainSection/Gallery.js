@@ -11,6 +11,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setC
     const [statusMessage, setStatusMessage] = useState('Loading...');
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
+    const noResults = currentTranslation.error_messages.no_results;
     
     // stops background scroll when using tab keys
     const tabIndex = isDropdownVisible ? '-1' : '0';
@@ -26,7 +27,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setC
             // message for no results
             if (!result.movieResults && isTrending){setStatusMessage(`Failed to Load Trending ${mediaType}`)}
             else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load:\n\n${messageArr}`)}
-            else if (result.movieResults < 1) {setStatusMessage(`No results for:\n\n${messageArr}`)};
+            else if (result.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
         });
     }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion, currentLanguage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
 

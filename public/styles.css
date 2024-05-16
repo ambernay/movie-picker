@@ -358,7 +358,7 @@ img {
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
     --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + 5px));
     --regionDropdownWidth: 270px;
-    --sortByListWidth: 230px;
+    --sortByListWidth: 260px;
     /* other */
     --bottomNavHeight: 2.55rem;
     --switchWidth: 75px;
@@ -706,7 +706,7 @@ li:focus {
 }
 
 .input-container input::placeholder {
-    color: var(--backgroundColor);
+    color: var(--backgroundColorDesat);
     font-size: 1rem;
 }
 

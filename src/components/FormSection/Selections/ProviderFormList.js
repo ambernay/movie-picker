@@ -1,7 +1,7 @@
 import { useState, useEffect, memo } from "react";
 import { ProviderListApiCall } from '../../MovieApiCache';
 
-function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sectionLabel }) {
+function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sectionLabel, currentTranslation }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
 
@@ -34,7 +34,10 @@ function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sec
             })
                 :
                 <div className="error-message-container">
-                    <h4>Failed to load streaming options</h4>
+                    <h4>{
+                        `${currentTranslation.error_messages.failed_to_load} 
+                        ${currentTranslation.section_labels.provider}`}
+                    </h4>
                 </div>
             }
         </fieldset>
