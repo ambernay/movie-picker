@@ -25,16 +25,11 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
 
         if ((screenSize !== 'narrowScreen') && (positionClass === 'form-region')) {
             let fullRegionName = currentRegion[2];
-          
-            let spaceCount = (fullRegionName.split(" ").length - 1);
+            let displayName = fullRegionName.length > 19 ? (fullRegionName.slice(0, 19) + '...') 
+            : fullRegionName;
+                
+            return displayName;
 
-            if (spaceCount > 1) {
-                let truncatedRegionName = (fullRegionName.slice(0, fullRegionName.lastIndexOf(' ')) + '...');
-
-                return truncatedRegionName;
-            }
-
-            return fullRegionName;
         } else { return countryCode; }
     }
 
