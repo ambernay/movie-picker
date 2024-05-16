@@ -10,6 +10,12 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
         RegionApiCall(currentLanguage).then(result => setRegionList(result));
     }, [currentLanguage, setRegionList]);
 
+    // resets current region to new native name when region list / language changes
+    useEffect(() => {
+        const currentSelection = regionList?.find(current => current.iso_3166_1 === currentRegion[0]);
+        if (currentSelection) setCurrentRegion([currentSelection.iso_3166_1, currentSelection.english_name, currentSelection.native_name])
+    },[regionList]);
+
     const handleChange = (e) => {
         setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('name'), e.target.getAttribute('value')]);
     }
