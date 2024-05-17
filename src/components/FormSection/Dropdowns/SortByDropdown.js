@@ -1,20 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CustomDropdown from './CustomDropdown';
 
-function SortByDropdown({ setSortOption }) {
+function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) {
+    const [currentSelectedLabel, setCurrentSelectedLabel] = useState('');
+    
+    const sortOptionsTrans = currentTranslation['sort_by'];
+    const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.sort_options}`
 
-    const sortMenuObj = {
-        "sortOptions": [
-            { "sort-by": "Rating: High to Low", "choice": "vote_average.desc" },
-            { "sort-by": "Rating: Low to High", "choice": "vote_average.asc" },
-            { "sort-by": "Titles A-Z", "choice": "original_title.asc" },
-            { "sort-by": "Titles Z-A", "choice": "original_title.desc" },
-            { "sort-by": "Release date newest", "choice": "primary_release_date.desc" },
-            { "sort-by": "Release date oldest", "choice": "primary_release_date.asc" }
-        ]
-    };
-
-    const [currentSelectedLabel, setCurrentSelectedLabel] = useState(sortMenuObj.sortOptions[0]['sort-by']);
+    let sortOptions = [
+        { "sort-by": sortOptionsTrans.rating_desc, "choice": "vote_average.desc" },
+        { "sort-by": sortOptionsTrans.rating_asc, "choice": "vote_average.asc" },
+        { "sort-by": sortOptionsTrans.A_Z, "choice": "original_title.asc" },
+        { "sort-by": sortOptionsTrans.Z_A, "choice": "original_title.desc" },
+        { "sort-by": sortOptionsTrans.date_desc, "choice": "primary_release_date.desc" },
+        { "sort-by": sortOptionsTrans.date_asc, "choice": "primary_release_date.asc" }
+    ]
+    // Filter out undefined sort-bys (some languages don't offer alphabetical sort)
+    sortOptions = sortOptions.filter(option => option["sort-by"]);
+    
+    useEffect(() => {
+        sortOptions.length > 0 ? setCurrentSelectedLabel(sortOptions[0]['sort-by'])
+        : setCurrentSelectedLabel('No options');
+    },[currentLanguage])
 
     const handleChange = (e) => {
         setSortOption(e.target.getAttribute('value'));
@@ -25,13 +32,13 @@ function SortByDropdown({ setSortOption }) {
         <CustomDropdown
             listClass={'sort-by'}
             currentSelectedLabel={currentSelectedLabel}
-            selectList={sortMenuObj.sortOptions}
+            selectList={sortOptions}
             itemID={"choice"}
             itemValue={"choice"}
             itemName={"sort-by"}
             listHeading={'sort-by'}
             handleChange={handleChange}
-            errorMessage={'Failed to load sort options'}
+            errorMessage={failedMessage}
         />
     )
 }

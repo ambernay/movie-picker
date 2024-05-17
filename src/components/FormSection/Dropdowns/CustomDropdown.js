@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from 'react';
 
-function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, itemValue, itemName, listHeading, handleChange, errorMessage }) {
+function CustomDropdown({ listClass, selectList, currentSelectedLabel, 
+    itemID, itemValue, itemName, listHeading, handleChange, errorMessage }) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -29,7 +30,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
                 {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
-                        
+                            // (listItem['sort-by'] && listItem['sort-by'] !== 'undefined')?
                             return (
                                 <li
                                     key={listItem[itemID]}

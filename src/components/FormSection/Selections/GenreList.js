@@ -1,7 +1,7 @@
 import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
-function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel }) {
+function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel, currentTranslation }) {
 
     const [genreList, setGenreList] = useState([]);
 
@@ -28,7 +28,10 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage
             })
                 :
                 <div className="error-message-container">
-                    <h4>Failed to load genres</h4>
+                    <h4>{
+                        `${currentTranslation.error_messages.failed_to_load} 
+                        ${currentTranslation.section_labels.genre}`}
+                    </h4>
                 </div>
             }
         </fieldset>

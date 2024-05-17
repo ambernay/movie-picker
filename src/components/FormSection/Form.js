@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeList from './Selections/DecadeList.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
-import { TransObj } from '../StaticObjects.js';
+import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
@@ -24,6 +24,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const formLabelTranslation = currentTranslation['section_labels'];
     const allTranslation = currentTranslation['all'];
+    const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
         
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
@@ -62,6 +63,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
 const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre) => {
 
     const regionCode = currentRegion[0];
+    const regionNativeName = currentRegion[2];
     const langCode = currentLanguage[0];
  
     let cacheKeyArr = [`${tvOrMovie}`];
@@ -101,7 +103,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, cur
 
     // split on underscores and discard value before first underscore
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
-    selectionsForMessage.push(currentRegion[1]); 
+    selectionsForMessage.push(regionNativeName); 
     cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
 
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
@@ -130,6 +132,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 setCurrentRegion={setCurrentRegion}
                                 currentLanguage={currentLanguage}
                                 screenSize={screenSize}
+                                currentTranslation={currentTranslation}
                             />
                             : null
                         }
@@ -151,6 +154,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setCurrentRegion={setCurrentRegion}
                             currentLanguage={currentLanguage}
                             screenSize={screenSize}
+                            currentTranslation={currentTranslation}
                         />
                         : null
                     }
@@ -158,6 +162,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         isGenreSelected={genre}
                         submitAttempted={submitAttempted}
                         isValidRequest={isValidRequest}
+                        currentTranslation={currentTranslation}
                     />
                     <section className="fieldset-container">
                         <GenreList
@@ -166,6 +171,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             tvMovieToggle={tvMovieToggle}
                             currentLanguage={currentLanguage}
                             sectionLabel={capFirstChar(formLabels.genre)}
+                            currentTranslation={currentTranslation}
                         />
                         <DecadeList
                             setStartDate={setStartDate}
@@ -173,20 +179,25 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setDecade={setDecade}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
+                            currentTranslation={currentTranslation}
                         />
                         <ProviderFormList
                             setProvider={setProvider}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.provider)}
+                            currentTranslation={currentTranslation}
                         />
                     </section>
                     <section className='form-bottom'>
-                        <div className="form-button-container"
-                        >
-                            <button>{tvMovieToggle === 'movie' ? 'Get Movies' : 'Get Shows'}</button>
+                        <div className="form-button-container">
+                            <button>{
+                                `${capFirstChar(currentTranslation.find)} ${capFirstChar(mediaType)}`
+                            }</button>
                         </div>
                         <SortByDropdown
                             setSortOption={setSortOption}
+                            currentLanguage={currentLanguage}
+                            currentTranslation={currentTranslation}
                         />
                     </section>
 
