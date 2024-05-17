@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import CustomDropdown from './CustomDropdown';
 
 function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) {
+    const [currentSelectedLabel, setCurrentSelectedLabel] = useState('');
+    
     const sortOptionsTrans = currentTranslation['sort_by'];
     const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.sort_options}`
-    console.log(currentTranslation, failedMessage);
 
     let sortOptions = [
         { "sort-by": sortOptionsTrans.rating_desc, "choice": "vote_average.desc" },
@@ -16,8 +17,6 @@ function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) 
     ]
     // Filter out undefined sort-bys (some languages don't offer alphabetical sort)
     sortOptions = sortOptions.filter(option => option["sort-by"]);
-
-    const [currentSelectedLabel, setCurrentSelectedLabel] = useState('');
     
     useEffect(() => {
         sortOptions.length > 0 ? setCurrentSelectedLabel(sortOptions[0]['sort-by'])

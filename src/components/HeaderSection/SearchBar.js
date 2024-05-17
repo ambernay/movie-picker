@@ -1,6 +1,6 @@
 import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
-import { TransObj } from '../StaticObjects.js';
+import { TransObj } from '../TranslationObjects.js';
 
 function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
     tvMovieToggle, currentLanguage, currentPage, setCurrentPage }) {

@@ -2,10 +2,10 @@ const TransObj = {
     "ar": {
         "english_name":"Arabic",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"اللغات","regions":"المناطق","sort_options":"خيارات الفرز",
             "genre":"النوع","decade":"يعقد","provider":"مزود"},
         "trending":"رائج",
-        "find":"يجد",
+        "find":"العثور على",
         "search":"ابحث",
         "movie": "فيلم",
         "movies": "أفلام",
@@ -30,16 +30,16 @@ const TransObj = {
             "tv_icon":"التلفزيون",
             "search_bar":"(ابحث)أيقونة العدسة المكبرة"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"إختر خيار","no_results":"لا نتائج"},
+        "error_messages":{"failed_to_load":"فشل في التحميل","form_modal":"إختر خيار","no_results":"لا نتائج"},
         "provider_options": {"buy":"اشتريها","rent":"إيجار","stream":"يعرض الان","with_ads":"مع الإعلانات"}
     },
     "be": {
         "english_name":"Belarusian",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"мовы","regions":"рэгіёнах","sort_options":"параметры сартавання",
             "genre":"Жанр","decade":"Дзесяцігоддзе","provider":"Правайдэр"},
         "trending":"у трэндзе",
-        "find":"знаходзіць",
+        "find":"знайсці",
         "search":"шукаць",
         "movie":"фільм",
         "movies":"Фільмы",
@@ -64,16 +64,16 @@ const TransObj = {
             "tv_icon":"Тэлевізійны сімвал",
             "search_bar":"сімвал павелічальнага шкла (шукаць)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Выберыце варыянт","no_results":"Няма вынікаў"},
+        "error_messages":{"failed_to_load":"Не ўдалося загрузіць","form_modal":"Выберыце варыянт","no_results":"Няма вынікаў"},
         "provider_options": {"buy":"Купіць","rent":"Арэнда","stream":"Stream","with_ads":"З рэкламай"}
     },
     "bg": {
         "english_name":"Bulgarian",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"езици","regions":"региони","sort_options":"опции за сортиране",
             "genre":"Жанр","decade":"Десетилетие","provider":"Доставчик"},
         "trending":"Набиращи популярност",
-        "find":"намирам",
+        "find":"намери",
         "search":"търсене",
         "movie":"филм",
         "movies":"Филми",
@@ -98,21 +98,21 @@ const TransObj = {
             "tv_icon":"ТВ символ",
             "search_bar":"символ на лупа(търсене)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Направете избор","no_results":"Няма резултати"},
+        "error_messages":{"failed_to_load":"изтеглянето се провали","form_modal":"Направете избор","no_results":"Няма резултати"},
         "provider_options": {"buy":"Купува","rent":"под наем","stream":"Стриймове","with_ads":"С реклами"}
     },
     "cs":{
         "english_name":"Czech",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"jazyky","regions":"regionech","sort_options":"možnosti řazení",
             "genre":"Žánr","decade":"Desetiletí","provider":"Poskytovatel"},
         "trending":"Nejnavštěvovanější",
-        "find":"nalézt",
+        "find":"najít",
         "search":"hledat",
         "movie":"filmů",
         "movies":"filmy",
         "tv":"televize",
-        "tv_series":"TV pořady",
+        "tv_series":"televizní seriál",
         "movie_title":"Název filmu",
         "all":"Všechno",
         "sort_by": {
@@ -134,13 +134,13 @@ const TransObj = {
             "tv_icon":"symbol TV",
             "search_bar":"symbol lupy (hledat)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Vyberte možnost","no_results":"Žádné výsledky"},
+        "error_messages":{"failed_to_load":"se nepodařilo stáhnout","form_modal":"Vyberte možnost","no_results":"Žádné výsledky"},
         "provider_options": {"buy":"Koupit","rent":"Pronajmout si","stream":"Streamované","with_ads":"S reklamami"}
     },
     "da": {
         "english_name":"Danish",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"Sprog","regions":"regioner","sort_options":"sorteringsmuligheder",
             "genre":"Genre","decade":"Årti","provider":"Udbyder"},
         "trending":"Trending",
         "find":"finde",
@@ -170,13 +170,13 @@ const TransObj = {
             "tv_icon":"TV symbol",
             "search_bar":"forstørrelsesglas symbol"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Vælg en mulighed","no_results":"Ingen resultater"},
+        "error_messages":{"failed_to_load":"kunne ikke downloades","form_modal":"Vælg en mulighed","no_results":"Ingen resultater"},
         "provider_options": {"buy":"Købe","rent":"Leje","stream":"Stream","with_ads":"Med annoncer"}
     },
     "de": {
         "english_name":"German",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"Sprachen","regions":"Regionen","sort_options":"Sortiermöglichkeiten",
             "genre":"Genre","decade":"Jahrzehnt","provider":"Anbieter"},
         "trending":"Trends",
         "find":"finden",
@@ -206,16 +206,16 @@ const TransObj = {
             "tv_icon":"TV-Symbol",
             "search_bar":"Magnifying glass icon (suchen)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Wähle eine Option","no_results":"keine Ergebnisse"},
+        "error_messages":{"failed_to_load":"Laden fehlgeschlagen","form_modal":"Wähle eine Option","no_results":"keine Ergebnisse"},
         "provider_options": {"buy":"Kaufen","rent":"Mieten","stream":"Stream","with_ads":"Mit Werbung"}
     },
     "el": {
         "english_name":"Greek",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"Γλώσσες","regions":"περιφέρειες","sort_options":"επιλογές ταξινόμησης",
             "genre":"Είδος","decade":"Δεκαετία","provider":"Προμηθευτής"},
         "trending":"Τάσεις",
-        "find":"βρίσκω",
+        "find":"βρείτε",
         "search":"ζητώ",
         "movie":"ταινία",
         "movies":"Ταινίες",
@@ -224,10 +224,10 @@ const TransObj = {
         "movie_title":"Τίτλος ταινίας",
         "all":"Τα παντα",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Η βαθμολογία φθίνουσα",
+            "rating_asc":"βαθμολογία αύξουσα",
+            "date_desc":"φθίνουσα ημερομηνία κυκλοφορίας",
+            "date_asc":"ημερομηνία κυκλοφορίας αύξουσα"
         }, 
         "sr-only": {
             "back_arrow":"κουμπί βέλους προς τα πίσω",
@@ -240,7 +240,7 @@ const TransObj = {
             "tv_icon":"σύμβολο της τηλεόρασης",
             "search_bar":"σύμβολο μεγεθυντικού φακού (ζητώ)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Διάλεξε μια επιλογή","no_results":"Δεν υπάρχουν αποτελέσματα που να ταιριάζουν"},
+        "error_messages":{"failed_to_load":"απέτυχε η λήψη","form_modal":"Διάλεξε μια επιλογή","no_results":"Δεν υπάρχουν αποτελέσματα που να ταιριάζουν"},
         "provider_options": {"buy":"Αγορά","rent":"Ενοίκιο","stream":"Σε ροή","with_ads":"Με διαφήμιση"}
     },
     "en": {
@@ -260,7 +260,7 @@ const TransObj = {
         "all":"All",
         "sort_by": {
             "rating_desc":"Rating: high to low",
-            "rating_asc":"Rating low to high",
+            "rating_asc":"Rating: low to high",
             "A_Z":"Titles: A-Z",
             "Z_A":"Titles Z-A",
             "date_desc":"Release date: old to new",
@@ -283,7 +283,7 @@ const TransObj = {
     "es": {
         "english_name":"Spanish",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"idiomas","regions":"regiones","sort_options":"opciones de clasificación",
             "genre":"Género","decade":"Década","provider":"Proveedor"},
         "trending":"tendencias",
         "find":"encontrar",
@@ -291,7 +291,7 @@ const TransObj = {
         "movie":"película",
         "movies":"películas",
         "tv":"tele",
-        "tv_series":"programas de televisión",
+        "tv_series":"Series de TV",
         "movie_title":"Título de la película",
         "all":"Todo",
         "sort_by": {
@@ -307,22 +307,22 @@ const TransObj = {
             "forward_arrow":"botón de flecha hacia atrás: página anterior",
             "up_arrow":"botón de flecha hacia abajo: abrir menú",
             "down_arrow":"botón de flecha hacia abajo: abrir menú",
-            "deactivated":"",
-            "eye_icon":"",
-            "film_icon":"",
-            "tv_icon":"",
-            "search_bar":""
+            "deactivated":"desactivado",
+            "eye_icon":"opciones de visualización del símbolo del ojo",
+            "film_icon":"símbolo de la película",
+            "tv_icon":"símbolo de televisión",
+            "search_bar":"símbolo de lupa (buscar)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
-        "provider_options": {"buy":"Comprar","rent":"Alquilar","stream":"Retransmisión","with_ads":""}
+        "error_messages":{"failed_to_load":"Descarga fracasó","form_modal":"Seleccione una opción","no_results":"no hay resultados"},
+        "provider_options": {"buy":"Comprar","rent":"Alquilar","stream":"Retransmisión","with_ads":"Con anuncios"}
     },
     "fi": {
         "english_name":"Finnish",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"Kieli","regions":"alueilla","sort_options":"lajitteluvaihtoehdot",
             "genre":"Genre","decade":"Vuosikymmen","provider":"Palveluntarjoaja"},
         "trending":"Nousussa",
-        "find":"etsiä",
+        "find":"löytää",
         "search":"etsiä",
         "movie":"elokuva",
         "movies":"elokuvia",
@@ -331,26 +331,26 @@ const TransObj = {
         "movie_title":"Elokuvan nimi",
         "all":"Kaikki",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Arvosana laskeva",
+            "rating_asc":"Arvosana nouseva",
+            "A_Z":"Nimikkeet A-Z",
+            "Z_A":"Nimikkeet Z-A",
+            "date_desc":"Julkaisupäivä uudesta vanhaan",
+            "date_asc":"Julkaisupäivä vanhasta uuteen"
         }, 
         "sr-only": {
             "back_arrow":"eteenpäin-nuolipainike: seuraava sivu",
             "forward_arrow":"Takaisinnuolipainike: edellinen sivu",
             "up_arrow":"ylänuolipainike: sulje valikko",
             "down_arrow":"alanuolipainike: avaa valikko",
-            "deactivated":"",
-            "eye_icon":"",
-            "film_icon":"",
-            "tv_icon":"",
-            "search_bar":""
+            "deactivated":"deaktivoitu",
+            "eye_icon":"silmäsymbolin katseluvaihtoehdot",
+            "film_icon":"elokuvan symboli",
+            "tv_icon":"elokuvan symboli",
+            "search_bar":"suurennuslasin symboli (etsiä)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
-        "provider_options": {"buy":"Ostaa","rent":"Vuokrata","stream":"Striimattavana","with_ads":""}
+        "error_messages":{"failed_to_load":"lataaminen epäonnistui","form_modal":"Valitse vaihtoehto","no_results":"Ei tuloksia"},
+        "provider_options": {"buy":"Ostaa","rent":"Vuokrata","stream":"Striimattavana","with_ads":"Mainoksilla"}
     },
     "fr": {
         "english_name":"French",
@@ -359,7 +359,7 @@ const TransObj = {
             "genre":"Genre","decade":"Décennie","provider":"Fournisseur"},
         "trending":"tendance",
         "search":"chercher",
-        "find":"trouver",
+        "find":"trouver des",
         "movie":"film",
         "movies":"​les films",
         "tv":"la télé",
@@ -367,12 +367,12 @@ const TransObj = {
         "movie_title":"Titre du film",
         "all":"Tout",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Note décroissante",
+            "rating_asc":"Note croissante",
+            "A_Z":"Titres A à Z",
+            "Z_A":"Titres Z à A",
+            "date_desc":"Date de sortie décroissante",
+            "date_asc":"Date de sortie croissante"
         }, 
         "sr-only": {
             "back_arrow":"bouton fléché vers l'arrière : page précédente",
@@ -391,10 +391,10 @@ const TransObj = {
     "he": {
         "english_name":"Hebrew",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"שפות","regions":"אזורים","sort_options":"אפשרויות מיון",
             "genre":"ז'ָאנר","decade":"עָשׂוֹר","provider":"מֵפִיץ"},
         "trending":"מגמתי",
-        "find":"מִמצָא",
+        "find":"למצוא",
         "search":"לְחַפֵּשׂ",
         "movie":"סרט",
         "movies":"סרטים",
@@ -419,19 +419,19 @@ const TransObj = {
             "tv_icon":"סמל טלוויזיה",
             "search_bar":"סמל זכוכית מגדלת"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"בחר אפשרות","no_results":"אין תוצאות"},
+        "error_messages":{"failed_to_load":"ההורדה נכשלה","form_modal":"בחר אפשרות","no_results":"אין תוצאות"},
         "provider_options": {"buy":"לִקְנוֹת","rent":"השכרה","stream":"הזרמה","with_ads":"with advertisements"}
     },
     "hu": {
         "english_name":"Hungarian",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"nyelvek","regions":"régiók","sort_options":"rendezési lehetőségek",
             "genre":"Műfaj","decade":"Évtized","provider":"Szolgáltató"},
         "trending":"Népszerű",
-        "find":"keres",
+        "find":"találnis",
         "search":"keres",
         "movie":"film",
-        "movies":"Filmek",
+        "movies":"filmeket",
         "tv":"Tévé",
         "tv_series":"tévéműsor",
         "movie_title":"Film cím",
@@ -455,16 +455,16 @@ const TransObj = {
             "tv_icon":"TV szimbólum",
             "search_bar":"nagyító szimbólum (keres)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Válassz egy lehetőséget","no_results":"Nincs eredmény"},
+        "error_messages":{"failed_to_load":"Sikertelen letöltés","form_modal":"Válassz egy lehetőséget","no_results":"Nincs eredmény"},
         "provider_options": {"buy":"megvesz","rent":"Bérlés","stream":"Stream","with_ads":"hirdetésekkel"}
     },
     "id": {
         "english_name":"Indonesian",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"bahasa","regions":"wilayah","sort_options":"opsi penyortiran",
             "genre":"Genre","decade":"Dasawarsa","provider":"Pemasok"},
         "trending":"Trending",
-        "find":"Cari",
+        "find":"menemukan",
         "search":"Cari",
         "person":"kru / aktor",
         "movie":"film",
@@ -474,31 +474,31 @@ const TransObj = {
         "movie_title":"Judul film",
         "all":"Semuanya",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Peringkat menurun",
+            "rating_asc":"Peringkat naik",
+            "A_Z":"Judul A-Z",
+            "Z_A":"Judul Z-A",
+            "date_desc":"Tanggal rilis menurun",
+            "date_asc":"Tanggal rilis meningkat"
         }, 
         "sr-only": {
             "back_arrow":"panah kembali: halaman sebelumnya",
             "forward_arrow":"tombol panah maju: halaman berikutnya",
             "up_arrow":"tombol panah atas: tutup menu",
             "down_arrow":"tombol panah bawah: buka menu",
-            "deactivated":"",
+            "deactivated":"dinonaktifkan",
             "eye_icon":"simbol mata",
             "film_icon":"simbol film",
             "tv_icon":"simbol televisi",
             "search_bar":"simbol kaca pembesar (Cari)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"gagal mengunduh","form_modal":"Pilih sebuah opsi","no_results":"Tidak ada hasil"},
         "provider_options": {"buy":"Membeli","rent":"Menyewa","stream":"Stream","with_ads":"dengan iklan"}
     },
     "it": {
         "english_name":"Italian",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"le lingue","regions":"regioni","sort_options":"opzioni di ordinamento",
             "genre":"Genere","decade":"Decennio","provider":"Fornitore"},
         "trending":"Di tendenza",
         "find":"trovare",
@@ -529,16 +529,16 @@ const TransObj = {
             "tv_icon":"simbolo televisivo",
             "search_bar":"simbolo della lente di ingrandimento (cercare)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"selezionare e opzione","no_results":"o risultati"},
+        "error_messages":{"failed_to_load":"impossibile caricare","form_modal":"selezionare e opzione","no_results":"o risultati"},
         "provider_options": {"buy":"Acquistare","rent":"Affitto","stream":"Stream","with_ads":"con annunci"}
     },
     "ja": {
         "english_name":"Japanese",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"言語","regions":"地域","sort_options":"並べ替えオプション",
             "genre":"ジャンル","decade":"十年","provider":"プロバイダー"},
         "trending":"動向",
-        "find":"探す",
+        "find":"を探す",
         "search":"探す",
         "movie":"映画",
         "movies":"映画",
@@ -563,13 +563,13 @@ const TransObj = {
             "tv_icon":"テレビのシンボル",
             "search_bar":"虫眼鏡のシンボル 探す"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"選択肢一つを選択してください","no_results":"検索結果はありません"},
+        "error_messages":{"failed_to_load":"ダウンロードに失敗しました","form_modal":"選択肢一つを選択してください","no_results":"検索結果はありません"},
         "provider_options": {"buy":"買う","rent":"家賃","stream":"ストリーミング","with_ads":"広告あり"}
     },
     "ka": {
         "english_name":"Georgian",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"ენები","regions":"რეგიონები","sort_options":"დახარისხების ვარიანტები",
             "genre":"ჟანრი","decade":"ათწლეული","provider":"პროვაიდერი"},
         "trending":"Trending",
         "find":"პოვნა",
@@ -598,16 +598,16 @@ const TransObj = {
             "tv_icon":"ტელევიზორის ხატულა",
             "search_bar":"(ძებნა)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"აირჩიეთ ვარიანტი","no_results":"არანაირი შედეგი"},
+        "error_messages":{"failed_to_load":"ჩამოტვირთვა ვერ მოხერხდა","form_modal":"აირჩიეთ ვარიანტი","no_results":"არანაირი შედეგი"},
         "provider_options": {"buy":"იყიდე","rent":"Ქირავდება","stream":"Stream","with_ads":"რეკლამებით"}
     },
     "ko": {
         "english_name":"Korean",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"언어","regions":"지역","sort_options":"정렬 옵션",
             "genre":"장르","decade":"10년","provider":"공급자"},
         "trending":"트렌딩",
-        "find":"검색",
+        "find":"찾기",
         "search":"검색",
         "person":"인물",
         "movie":"영화",
@@ -617,10 +617,10 @@ const TransObj = {
         "movie_title":"영화 제목",
         "all":"모든 것",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"순위별로 내림차순",
+            "rating_asc":"등급 오름차순",
+            "date_desc":"출시일 내림차순",
+            "date_asc":"출시일 오름차순"
         }, 
         "sr-only": {
             "back_arrow":"앞으로 화살표 버튼 다음 페이지",
@@ -633,13 +633,13 @@ const TransObj = {
             "tv_icon":"TV 기호",
             "search_bar":"돋보기 기호 (검색)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"옵션을 선택하세요","no_results":"결과가 없다"},
+        "error_messages":{"failed_to_load":"다운로드 실패","form_modal":"옵션을 선택하세요","no_results":"결과가 없다"},
         "provider_options": {"buy":"구입하다","rent":"임대","stream":"스트리밍","with_ads":"광고와 함께"}
     },
     "lt": {
         "english_name":"Lithuanian",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"kalbomis","regions":"regionuose","sort_options":"rūšiavimo parinktys",
             "genre":"Žanras","decade":"Dešimtmetis","provider":"Teikėjas"},
         "trending":"Tendencijos",
         "find":"rasti",
@@ -670,13 +670,13 @@ const TransObj = {
             "tv_icon":"TV simbolis",
             "search_bar":"didinamojo stiklo simbolis (ieškoti)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"pasirinkite parinktį","no_results":"jokių rezultatų"},
+        "error_messages":{"failed_to_load":"Nepavyko atsisiųsti","form_modal":"pasirinkite parinktį","no_results":"jokių rezultatų"},
         "provider_options": {"buy":"Pirkti","rent":"Nuoma","stream":"Internetu","with_ads":"su skelbimais"}
     },
     "nl": {
         "english_name":"Dutch",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"talen","regions":"Regio's","sort_options":"sorteer opties",
             "genre":"Genre","decade":"Decennium","provider":"Aanbieder"},
         "trending":"Trending",
         "find":"vinden",
@@ -689,35 +689,35 @@ const TransObj = {
         "movie_title":"Film titel",
         "all":"Alles",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Waardering aflopend",
+            "rating_asc":"Waardering oplopend",
+            "A_Z":"Titels A-Z",
+            "Z_A":"Titels Z-A",
+            "date_desc":"Releasedatum aflopend",
+            "date_asc":"Releasedatum oplopend"
         }, 
         "sr-only": {
             "back_arrow":"pijl-terug-knop: vorige pagina",
             "forward_arrow":"pijltje vooruit: volgende pagina",
             "up_arrow":"pijl-omhoog: sluit het menu",
             "down_arrow":"pijl-omlaag: open het menu",
-            "deactivated":"",
+            "deactivated":"gedeactiveerd",
             "eye_icon":"oogpictogram",
             "film_icon":"film pictogram",
             "tv_icon":"tv-pictogram",
             "search_bar":"vergrootglaspictogram(Zoeken)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
-        "provider_options": {"buy":"Kopen","rent":"Huur","stream":"Stream","with_ads":""}
+        "error_messages":{"failed_to_load":"Laden mislukt","form_modal":"Kies een optie","no_results":"Geen resultaten"},
+        "provider_options": {"buy":"Kopen","rent":"Huur","stream":"Stream","with_ads":"Met advertenties"}
     },
     "pl": {
         "english_name":"Polish",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"", 
+        "section_labels": {"languages":"Języki","regions":"regiony","sort_options":"opcje sortowania", 
             "genre":"Gatunek","decade":"Dekada","provider":"Dostawca"},
         "trending":"Trending",
         "search":"Szukaj",
-        "find":"odszukać",
+        "find":"znajdź",
         "person":"osoby",
         "movie":"filmu",
         "movies":"filmy",
@@ -726,68 +726,68 @@ const TransObj = {
         "movie_title":"Tytuł filmu",
         "all":"Wszystko",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Ocena malejąca",
+            "rating_asc":"Ocena rosnąca",
+            "A_Z":"Tytuły A-Z",
+            "Z_A":"Tytuły Z-A",
+            "date_desc":"Data wydania malejąco",
+            "date_asc":"Data wydania rosnąca"
         }, 
         "sr-only": {
-            "back_arrow":"strzałka wstecz",
-            "forward_arrow":"strzałka do przodu",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
+            "back_arrow":"przycisk strzałki wstecz powrót do poprzedniej strony",
+            "forward_arrow":"przycisk strzałki do przodu, przejdź do następnej strony",
+            "up_arrow":"przycisk strzałki w górę zamknij menu",
+            "down_arrow":"przycisk strzałki w dół otwiera menu",
+            "deactivated":"dezaktywowany",
             "eye_icon":"symbol oka",
             "film_icon":"symbol filmu",
             "tv_icon":"symbol telewizora",
             "search_bar":"symbol szkła powiększającego (Szukaj)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
-        "provider_options": {"buy":"Kupić","rent":"Wynajem","stream":"Stream","with_ads":""}
+        "error_messages":{"failed_to_load":"Nie udało się pobrać","form_modal":"Wybierz opcję","no_results":"Brak wyników"},
+        "provider_options": {"buy":"Kupić","rent":"Wynajem","stream":"Stream","with_ads":"Z reklamami"}
     },
     "pt": {
         "english_name":"Portuguese",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"línguas","regions":"regiões","sort_options":"opções de classificação",
             "genre":"Gênero","decade":"Década","provider":"Fornecedor"},
         "trending":"Tendências",
-        "find":"buscar",
+        "find":"encontrar",
         "search":"Pesquisar",
         "person":"pessoa",
         "movie":"filme",
         "movies":"Filmes",
         "tv":"Na TV",
-        "tv_series":"série televisiva",
+        "tv_series":"série de TV",
         "movie_title":"Título do filme",
         "all":"Tudo",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Classificação ascendente",
+            "rating_asc":"Classificação decrescente",
+            "A_Z":"Títulos de A a Z",
+            "Z_A":"Títulos de Z a A",
+            "date_desc":"Data de lançamento decrescente",
+            "date_asc":"Data de lançamento ascendente"
         }, 
         "sr-only": {
-            "back_arrow":"seta para trás",
-            "forward_arrow":"seta para frente",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
+            "back_arrow":"Botão de seta para voltar para voltar à página anterior",
+            "forward_arrow":"Botão de seta para frente, vá para a próxima página",
+            "up_arrow":"Botão de seta para cima fechar menu",
+            "down_arrow":"Botão de seta para baixo para abrir o menu",
+            "deactivated":"desativado",
             "eye_icon":"símbolo do olho",
             "film_icon":"símbolo do filme",
             "tv_icon":"símbolo de televisão",
             "search_bar":"magnifying glass symbol (Pesquisar)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"Falha ao carregar","form_modal":"Selecione uma opção","no_results":"Nenhum resultado"},
         "provider_options": {"buy":"Comprar","rent":"Aluguel","stream":"Stream","with_ads":"com anúncios"}
     },
     "ro": {
         "english_name":"Romanian",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"limbi","regions":"regiuni","sort_options":"opțiuni de sortare",
             "genre":"Gen","decade":"Deceniu","provider":"Furnizor"},
         "trending":"Tendință",
         "find":"găsi",
@@ -818,13 +818,13 @@ const TransObj = {
             "tv_icon":"Simbol TV",
             "search_bar":"simbolul lupei (caută)",
         },
-        "error_messages":{"failed_to_load":"","form_modal":"selecteaza o optiune","no_results":"fara rezultate"},
+        "error_messages":{"failed_to_load":"Descărcarea eșuată","form_modal":"selecteaza o optiune","no_results":"fara rezultate"},
         "provider_options": {"buy":"Cumpără","rent":"Chirie","stream":"Stream","with_ads":"cu reclame"}
     },
     "ru": {
         "english_name":"Russian",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"языки","regions":"регионы","sort_options":"параметры сортировки",
             "genre":"Жанр","decade":"Десятилетие","provider":"Поставщик"},
         "trending":"В тренде",
         "find":"Найти",
@@ -837,32 +837,32 @@ const TransObj = {
         "movie_title":"Название фильма",
         "all":"Все",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Рейтинг по убыванию",
+            "rating_asc":"Рейтинг по возрастанию",
+            "date_desc":"Дата выпуска по убыванию",
+            "date_asc":"Дата выпуска по возрастанию"
         }, 
         "sr-only": {
-            "back_arrow":"стрелка назад",
-            "forward_arrow":"стрелка вперед",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
+            "back_arrow":"Кнопка со стрелкой назад, возврат на предыдущую страницу",
+            "forward_arrow":"Кнопка со стрелкой вперед для перехода на следующую страницу",
+            "up_arrow":"Кнопка со стрелкой вверх закрыть меню",
+            "down_arrow":"Кнопка со стрелкой вниз открывает меню",
+            "deactivated":"деактивирован",
             "eye_icon":"символ глаза",
             "film_icon":"символ фильма",
             "tv_icon":"символ телевизора",
             "search_bar":"символ увеличительного стекла (искать)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
-        "provider_options": {"buy":"Купить","rent":"Арендовать","stream":"Онлайн","with_ads":"с рекламой"}
+        "error_messages":{"failed_to_load":"Не удалось скачать","form_modal":"Выберите вариант","no_results":"Без результатов"},
+        "provider_options": {"buy":"Купить","rent":"Арендовать","stream":"Онлайн","with_ads":"С рекламой"}
     },
     "sk": {
         "english_name":"Slovak",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"jazykoch","regions":"regiónoch","sort_options":"možnosti triedenia",
             "genre":"Žánru","decade":"desaťročie","provider":"Poskytovateľ"},
         "trending":"Trendujúce",
-        "find":"Hľadať",
+        "find":"nájsť",
         "search":"Hľadať",
         "person":"osobu",
         "movie":"film",
@@ -872,31 +872,31 @@ const TransObj = {
         "movie_title":"Názov filmu",
         "all":"Všetko",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Hodnotenie zostupne",
+            "rating_asc":"Hodnotenie Vzostupne",
+            "A_Z":"Tituly A-Z",
+            "Z_A":"Tituly Z-A",
+            "date_desc":"Dátum vydania Zostupne",
+            "date_asc":"Dátum vydania Vzostupne"
         }, 
         "sr-only": {
-            "back_arrow":"šípka dozadu",
-            "forward_arrow":"šípka dopredu",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
+            "back_arrow":"Tlačidlo šípky späť na návrat na predchádzajúcu stránku",
+            "forward_arrow":"Tlačidlo so šípkou dopredu pre prechod na ďalšiu stránku",
+            "up_arrow":"Tlačidlo šípky nahor zatvorte ponuku",
+            "down_arrow":"Tlačidlo so šípkou nadol otvorí ponuku",
+            "deactivated":"deaktivovaný",
             "eye_icon":"symbol oka",
             "film_icon":"symbol filmu",
             "tv_icon":"symbol TV",
             "search_bar":"symbol lupy (Hľadať)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"Sťahovanie zlyhalo","form_modal":"Vyberte možnosť","no_results":"Žiadne výsledky"},
         "provider_options": {"buy":"Kúpiť","rent":"Nájomné","stream":"Streamované","with_ads":"s reklamami"}
     },
     "sl": {
         "english_name":"Slovenian",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"jezikov","regions":"regije","sort_options":"možnosti razvrščanja",
             "genre":"Žanr","decade":"desetletje","provider":"Ponudnik"},
         "trending":"Trending",
         "find":"raziskovati",
@@ -909,34 +909,34 @@ const TransObj = {
         "movie_title":"Naslov filma",
         "all":"Vse",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Ocena pada",
+            "rating_asc":"Ocena narašča",
+            "A_Z":"Addresses from A to Z",
+            "Z_A":"Addresses from Z to A",
+            "date_desc":"Datum izdaje padajoče",
+            "date_asc":"Datum izdaje naraščajoče"
         }, 
         "sr-only": {
-            "back_arrow":"puščica nazaj",
-            "forward_arrow":"puščica naprej",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
+            "back_arrow":"Puščični gumb za vrnitev na prejšnjo stran",
+            "forward_arrow":"Gumb s puščico naprej pojdi na naslednjo stran",
+            "up_arrow":"Gumb s puščico navzgor zapre meni",
+            "down_arrow":"Puščični gumb navzdol odpre meni",
+            "deactivated":"deaktivirano",
             "eye_icon":"simbol oči",
             "film_icon":"filmski simbol",
             "tv_icon":"tv simbol",
             "search_bar":"simbol povečevalnega stekla (raziskovati)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"Prenos ni uspel","form_modal":"Izberite možnost","no_results":"Brez rezultatov"},
         "provider_options": {"buy":"Nakup","rent":"Najemnina","stream":"Stream","with_ads":"z oglasi"}
     },
     "sr": {
         "english_name":"Serbian",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"језика","regions":"региони","sort_options":"опције сортирања",
             "genre":"Жанр","decade":"Декада","provider":"Провајдер"},
         "trending":"У тренду",
-        "find":"наћи",
+        "find":"пронађите",
         "search":"Претражите",
         "person":"особа",
         "movie":"филм",
@@ -962,13 +962,13 @@ const TransObj = {
             "tv_icon":"ТВ симбол",
             "search_bar":"симбол лупе (Претражите)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"изаберите опцију","no_results":"Нема резултата"},
+        "error_messages":{"failed_to_load":"Преузимање није успело","form_modal":"изаберите опцију","no_results":"Нема резултата"},
         "provider_options": {"buy":"Купи","rent":"Закуп","stream":"Стрим","with_ads":"са рекламама"}
     },
     "sv": {
         "english_name":"Swedish",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"språk","regions":"regioner","sort_options":"sorteringsalternativ",
             "genre":"Genre","decade":"Årtionde","provider":"Leverantör"},
         "trending":"Trendande",
         "find":"hitta",
@@ -996,16 +996,16 @@ const TransObj = {
             "tv_icon":"TV-symbol",
             "search_bar":"symbol för förstoringsglas (Sök)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"Välj ett alternativ","no_results":"inga resultat"},
+        "error_messages":{"failed_to_load":"Nedladdning misslyckad","form_modal":"Välj ett alternativ","no_results":"inga resultat"},
         "provider_options": {"buy":"köpa","rent":"Hyra","stream":"Strömmas","with_ads":"med annonser"}
     },
     "th": {
         "english_name":"Thai",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"ภาษา","regions":"ภูมิภาค","sort_options":"ตัวเลือกการเรียงลำดับ",
             "genre":"ประเภท","decade":"ทศวรรษ","provider":"ผู้ให้บริการ"},
         "trending":"Trending",
-        "find":"สอบถาม",
+        "find":"ค้นหา",
         "serach":"สอบถาม",
         "person":"บุคคล",
         "movie":"ภาพยนตร์",
@@ -1015,33 +1015,33 @@ const TransObj = {
         "movie_title":"ชื่อหนัง",
         "all":"ทุกอย่าง",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"เรตติ้งเรียงลำดับจากมากไปน้อย",
+            "rating_asc":"การให้คะแนนจะเรียงลำดับจากน้อยไปหามาก",
+            "date_desc":"วันที่วางจำหน่ายตามลำดับจากมากไปน้อย",
+            "date_asc":"วันที่วางจำหน่ายตามลำดับจากน้อยไปหามาก"
         }, 
         "sr-only": {
-            "back_arrow":"ลูกศรย้อนกลับ",
-            "forward_arrow":"ลูกศรไปข้างหน้า",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
-            "eye_icon":"สัญลักษณ์ตา",
+            "back_arrow":"ปุ่มลูกศรย้อนกลับ กลับไปยังหน้าก่อนหน้า",
+            "forward_arrow":"ปุ่มลูกศรไปข้างหน้าไปที่หน้าถัดไป",
+            "up_arrow":"ปุ่มลูกศรขึ้นปิดเมนู",
+            "down_arrow":"ปุ่มลูกศรลงเปิดเมนู",
+            "deactivated":"ปิดใช้งานแล้ว",
+            "eye_icon":"ตัวเลือกการดูปุ่มสัญลักษณ์ตา",
             "film_icon":"สัญลักษณ์ภาพยนตร์",
             "tv_icon":"สัญลักษณ์ทีวี",
             "search_bar":"สัญลักษณ์แว่นขยาย (สอบถาม)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"ดาวน์โหลดไม่สำเร็จ","form_modal":"เลือกตัวเลือก","no_results":"ไม่มีผลลัพธ์"},
         "provider_options": {"buy":"ซื้อ","rent":"เช่า","stream":"Stream","with_ads":"ด้วยโฆษณา"}
 
     },
     "tr": {
         "english_name":"Turkish",
         "ISO_Alphabet":"true",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"Diller","regions":"bölgeler","sort_options":"sıralama seçenekleri",
             "genre":"Tür","decade":"On yıl","provider":"Sağlayıcı"},
         "trending":"Trend",
-        "find":"bakmak",
+        "find":"bul",
         "search":"ara",
         "person":"kişi",
         "movie":"film",
@@ -1051,31 +1051,31 @@ const TransObj = {
         "movie_title":"Film başlığı",
         "all":"Her şey",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "A_Z":"",
-            "Z_A":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Derecelendirme azalan",
+            "rating_asc":"Derecelendirme Artan",
+            "A_Z":"A'dan Z'ye Başlıklar",
+            "Z_A":"Z'dan A'ye Başlıklar",
+            "date_desc":"Çıkış tarihi azalan sırada",
+            "date_asc":"Artan sırada yayın tarihi"
         }, 
         "sr-only": {
-            "back_arrow":"geri ok",
-            "forward_arrow":"ileri ok",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
+            "back_arrow":"Geri ok düğmesi önceki sayfaya döner",
+            "forward_arrow":"İleri ok düğmesi sonraki sayfaya gider",
+            "up_arrow":"Menüyü kapatmak için yukarı ok düğmesi",
+            "down_arrow":"Menüyü açmak için aşağı ok düğmesi",
+            "deactivated":"devre dışı bırakıldı",
             "eye_icon":"göz sembolü",
             "film_icon":"film sembolü",
             "tv_icon":"televizyon sembolü",
             "search_bar":"büyüteç sembolü (ara)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"İndirme başarısız","form_modal":"Bir seçenek seçin","no_results":"Sonuç yok"},
         "provider_options": {"buy":"Satın almak","rent":"Kira","stream":"Yayın Akışı","with_ads":"reklamlarla"}
     },
     "vi": {
         "english_name":"Vietnamese",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"ngôn ngữ","regions":"vùng","sort_options":"tùy chọn sắp xếp",
             "genre":"thể loại","decade":"Thập kỷ","provider":"Các nhà cung cấp"},
         "trending":"Trending",
         "find":"tìm kiếm",
@@ -1088,34 +1088,34 @@ const TransObj = {
         "movie_title":"Tiêu đề phim",
         "all":"Mọi thứ",
         "sort_by": {
-            "rating_desc":"",
-            "rating_asc":"",
-            "date_desc":"",
-            "date_asc":""
+            "rating_desc":"Thứ tự xếp hạng giảm dần",
+            "rating_asc":"Thứ tự xếp hạng tăng dần",
+            "date_desc":"Ngày phát hành đang giảm dần",
+            "date_asc":"Ngày phát hành ngày càng tăng"
         }, 
         "sr-only": {
-            "back_arrow":"Mũi tên quay lại",
-            "forward_arrow":"mũi tên tiến",
-            "up_arrow":"",
-            "down_arrow":"",
-            "deactivated":"",
+            "back_arrow":"Nút mũi tên quay lại quay lại trang trước",
+            "forward_arrow":"Nút mũi tên chuyển tiếp đi tới trang tiếp theo",
+            "up_arrow":"Nút mũi tên lên để đóng menu",
+            "down_arrow":"Nút mũi tên xuống để mở menu",
+            "deactivated":"tàn tật",
             "eye_icon":"biểu tượng mắt",
             "film_icon":"biểu tượng phim",
             "tv_icon":"biểu tượng tivi",
             "search_bar":"biểu tượng kính lúp (tìm kiếm)"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"","no_results":""},
+        "error_messages":{"failed_to_load":"Không thể tải xuống","form_modal":"Chọn một tùy chọn","no_results":"Ko có kết quả"},
         "provider_options": {"buy":"Mua","rent":"Thuê","stream":"Stream","with_ads":"với quảng cáo"}
     },
     "zh": {
         "english_name":"Mandarin",
         "ISO_Alphabet":"false",
-        "section_labels": {"languages":"","regions":"","sort_options":"",
+        "section_labels": {"languages":"语言","regions":"地区","sort_options":"排序选项",
             "genre":"类型","decade":"十年","provider":"提供者"},
         "trending":"趋势",
-        "find":"搜寻",
+        "find":"查找",
         "search":"搜寻",
-        "person":"",
+        "person":"人",
         "movie":"电影",
         "movies":"电影",
         "tv":"电视",
@@ -1139,7 +1139,7 @@ const TransObj = {
             "tv_icon":"电视符号",
             "search_bar":"放大镜符号 搜寻"
         },
-        "error_messages":{"failed_to_load":"","form_modal":"选择一个选项","no_results":"没有结果"},
+        "error_messages":{"failed_to_load":"下载失败","form_modal":"选择一个选项","no_results":"没有结果"},
         "provider_options": {"buy":"买","rent":"租","stream":"流媒体","with_ads":"有广告"}
     }
 }

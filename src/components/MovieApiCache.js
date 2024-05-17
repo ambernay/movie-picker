@@ -1,4 +1,4 @@
-import { TransObj } from './StaticObjects.js';
+import { TransObj } from './TranslationObjects.js';
 
 let regionsPromise = {};
 const RegionApiCall = async (currentLanguage) => {

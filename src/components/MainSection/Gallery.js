@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
-import { TransObj } from '../StaticObjects.js';
+import { TransObj } from '../TranslationObjects.js';
 
 function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentLanguage, searchState }) {
 

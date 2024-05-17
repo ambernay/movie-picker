@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeList from './Selections/DecadeList.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
-import { TransObj } from '../StaticObjects.js';
+import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
@@ -24,6 +24,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const formLabelTranslation = currentTranslation['section_labels'];
     const allTranslation = currentTranslation['all'];
+    const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
         
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
@@ -189,7 +190,9 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                     </section>
                     <section className='form-bottom'>
                         <div className="form-button-container">
-                            <button>{`${capFirstChar(currentTranslation.search)}`}</button>
+                            <button>{
+                                `${capFirstChar(currentTranslation.find)} ${capFirstChar(mediaType)}`
+                            }</button>
                         </div>
                         <SortByDropdown
                             setSortOption={setSortOption}

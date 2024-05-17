@@ -3,7 +3,7 @@ import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
 import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
-import { TransObj } from '../StaticObjects.js';
+import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentLanguage, setCurrentLanguage, 
