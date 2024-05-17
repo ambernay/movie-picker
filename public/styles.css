@@ -361,7 +361,7 @@ img {
     --sortByListWidth: 55%;
     /* other */
     --bottomNavHeight: 2.55rem;
-    --switchWidth: 75px;
+    --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
     --searchFormContainerHeight: calc(var(--searchInputHeight) + 1rem)
@@ -371,8 +371,17 @@ img {
 /* #endregion - variables */
 
 /* #region - fonts and sizes */
+.main-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: start;
+}
+
 .main-title {
     font-size: var(--mainHeaderFontSize);
+    text-align: start;
+    white-space: nowrap;
     color: var(--darkNeutral);
     padding: 0;
 }
@@ -804,9 +813,7 @@ button:focus svg {
 .toggle-button-container {
     display: flex;
     position: relative;
-    height: 85%;
-    min-width: 85px;
-
+    min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
     border-radius: 10%;
     justify-content: space-around;
@@ -1189,9 +1196,6 @@ legend {
 
 .form-button-container {
     display: flex;
-    /* position: absolute;
-    bottom: 0;
-    left: 0; */
     width: 100%;
     height: fit-content;
     justify-content: center;
@@ -1481,8 +1485,8 @@ input[type="radio"] {
 
 @media(max-width: 565px) {
 
-    .main-title {
-        font-size: calc(1.5rem + 1vw);
+    :root {
+        --mainHeaderFontSize: calc(1.4rem + 1vw);
     }
 
     .form-nav {
@@ -1507,10 +1511,14 @@ input[type="radio"] {
 
     /* #region - variables */
     :root {
-        --headerHeight: calc(10vw + 1.2rem);
+        --headerHeight: calc(var(--mainHeaderFontSize) * 2.8);
     }
-
     /* #endregion - variables */
+
+    .main-title {
+        width: calc(var(--mainHeaderFontSize) * 3.5);
+        white-space: wrap;
+    }
 
     .wrapper {
         --wrapperWidth: 90%;
@@ -1540,6 +1548,7 @@ input[type="radio"] {
         display: flex;
         width: 17%;
         justify-content: flex-end;
+        align-self: end;
         padding: 0;
     }
 
@@ -1553,21 +1562,26 @@ input[type="radio"] {
         justify-content: space-between;
     }
 
-    .find-movie-button svg {
+    /* .find-movie-button svg {
         fill: var(--lightAccent);
-    }
+    } */
 
-    .find-movie-button:hover svg,
+    /* .find-movie-button:hover svg,
     .find-movie-button:active svg,
     .find-movie-button:focus-within svg {
         fill: var(--midAccent);
-    }
+    } */
 }
 
 @media(max-width: 335px) {
 
+    :root {
+        --headerHeight: calc(var(--mainHeaderFontSize) * 2.8);
+    }
+
     .main-title {
-        font-size: 9vw;
+        width: calc(var(--mainHeaderFontSize) * 3.5);
+        white-space: wrap;
     }
 
     .form-nav a {

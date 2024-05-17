@@ -35,8 +35,22 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
             <section className="main-heading">
                 <div className="wrapper">
                     <div className="heading-container">
-                        <button type='button' className="main-title"
-                            onClick={(e) => { handleTrendingButton(); e.stopPropagation(); }}>Movie Picker</button>
+                        <div className='main-title-container'>
+                            <button type='button' className="main-title"
+                                onClick={(e) => { handleTrendingButton(); e.stopPropagation(); }}>
+                                    Movie Picker
+                            </button>
+                            {screenSize === 'narrowScreen' ?
+                                <FindMovieButton
+                                    handleDropdown={handleDropdown}
+                                    arrowClass={arrowClass}
+                                    tvMovieToggle={tvMovieToggle}
+                                    currentTranslation={currentTranslation}
+                                    screenSize={screenSize}
+                                />
+                                : null
+                            }
+                        </div>
                         <div className="header-buttons-container">
                             {screenSize !== 'narrowScreen' ?
                                 <FindMovieButton
@@ -80,16 +94,6 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 screenSize={screenSize}
                                 currentTranslation={currentTranslation}
                             />
-                            {screenSize === 'narrowScreen' ?
-                                <FindMovieButton
-                                    handleDropdown={handleDropdown}
-                                    arrowClass={arrowClass}
-                                    tvMovieToggle={tvMovieToggle}
-                                    currentTranslation={currentTranslation}
-                                    screenSize={screenSize}
-                                />
-                                : null
-                            }
                             <SearchBar
                                 searchState={searchState} 
                                 setSearchState={setSearchState}
