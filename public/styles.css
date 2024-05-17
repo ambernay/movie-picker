@@ -351,7 +351,7 @@ img {
     --searchIconWidth: 1.5rem;
     /* form */
     --formWidth: 96%;
-    --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
+    --formHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     --formNavHeight: 2.25rem;
     --dropdownHeight: 2.2rem;
     --formBottomHeight: 5.5rem;
@@ -657,7 +657,7 @@ li:focus {
     top: calc(var(--headerHeight) + var(--subHeaderHeight));
     right: calc(50vw - (var(--regionDropdownWidth) / 2));
     width: var(--regionDropdownWidth);
-    height: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
+    height: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
 }
 
 .region-list.header-region li {
@@ -1561,16 +1561,6 @@ input[type="radio"] {
         height: 100%;
         justify-content: space-between;
     }
-
-    /* .find-movie-button svg {
-        fill: var(--lightAccent);
-    } */
-
-    /* .find-movie-button:hover svg,
-    .find-movie-button:active svg,
-    .find-movie-button:focus-within svg {
-        fill: var(--midAccent);
-    } */
 }
 
 @media(max-width: 335px) {
@@ -1587,6 +1577,10 @@ input[type="radio"] {
     .form-nav a {
         font-size: 0.8rem;
     }
+}
+
+@media(max-height: 700px){
+    
 }
 
 /* Safari 11+ */
