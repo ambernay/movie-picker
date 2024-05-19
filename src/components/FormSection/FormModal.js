@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 function FormModal({ isValidRequest, submitAttempted, currentTranslation }) {
     
-    const modalMessage = currentTranslation.error_messages.form_modal;
+    const modalMessage = currentTranslation.status_messages.form_modal;
 
     const modalClass = (submitAttempted && !isValidRequest) ? "modal" : "make-display-none";
     return (
