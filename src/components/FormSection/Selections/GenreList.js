@@ -29,7 +29,7 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage
                 :
                 <div className="error-message-container">
                     <h4>{
-                        `${currentTranslation.error_messages.failed_to_load} 
+                        `${currentTranslation.status_messages.failed_to_load} 
                         ${currentTranslation.section_labels.genre}`}
                     </h4>
                 </div>

@@ -6,7 +6,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
 
     const [regionList, setRegionList] = useState([]);
     
-    const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.regions}`
+    const failedMessage = `${currentTranslation.status_messages.failed_to_load} ${currentTranslation.section_labels.regions}`
     
     useEffect(() => {
         RegionApiCall(currentLanguage).then(result => setRegionList(result));

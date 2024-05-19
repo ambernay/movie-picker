@@ -35,7 +35,7 @@ function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sec
                 :
                 <div className="error-message-container">
                     <h4>{
-                        `${currentTranslation.error_messages.failed_to_load} 
+                        `${currentTranslation.status_messages.failed_to_load} 
                         ${currentTranslation.section_labels.provider}`}
                     </h4>
                 </div>

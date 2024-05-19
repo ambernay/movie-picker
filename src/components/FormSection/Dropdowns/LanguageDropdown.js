@@ -4,7 +4,7 @@ import CustomDropdown from './CustomDropdown';
 function LanguageDropdown ({ currentLanguage, setCurrentLanguage, currentTranslation }) {
     
     const [langCode, nativeName, englishName] = currentLanguage;
-    const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.languages}`;
+    const failedMessage = `${currentTranslation.status_messages.failed_to_load} ${currentTranslation.section_labels.languages}`;
    
     const languagesObj = {
         "langList": [

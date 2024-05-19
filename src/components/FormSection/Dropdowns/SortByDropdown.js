@@ -5,7 +5,7 @@ function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) 
     const [currentSelectedLabel, setCurrentSelectedLabel] = useState('');
     
     const sortOptionsTrans = currentTranslation['sort_by'];
-    const failedMessage = `${currentTranslation.error_messages.failed_to_load} ${currentTranslation.section_labels.sort_options}`
+    const failedMessage = `${currentTranslation.status_messages.failed_to_load} ${currentTranslation.section_labels.sort_options}`
 
     let sortOptions = [
         { "sort-by": sortOptionsTrans.rating_desc, "choice": "vote_average.desc" },
