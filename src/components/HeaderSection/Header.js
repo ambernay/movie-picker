@@ -37,7 +37,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                     <div className="heading-container">
                         <div className='main-title-container'>
                             <button type='button' className="main-title"
-                                onClick={(e) => { handleTrendingButton(); e.stopPropagation(); }}>
+                                onClick={(e) => { handleDropdown(); e.stopPropagation(); }}>
                                     Movie Picker
                             </button>
                             {screenSize === 'narrowScreen' ?

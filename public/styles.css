@@ -347,7 +347,7 @@ img {
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeadingMargin: 4px;
     --mainHeaderFontSize: 2.2rem;
-    --langLabelWidth: 2.8rem;
+    --langLabelWidth: 2.6rem;
     --searchIconWidth: 1.5rem;
     /* form */
     --formWidth: 96%;
@@ -356,7 +356,8 @@ img {
     --dropdownHeight: 2.2rem;
     --formBottomHeight: 5.5rem;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
-    --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + 5px));
+    --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + var(--regionDropdownMargin)));
+    --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
     --sortByListWidth: 55%;
     /* other */
@@ -625,6 +626,7 @@ li:focus {
 .trending-button figure svg {
     fill: var(--midAccent);
     width: 1.5rem;
+    margin-left: -8px;
 }
 
 .trending-button:hover figure svg {
@@ -635,6 +637,7 @@ li:focus {
 .trending-button {
     display: flex;
     align-items: center;
+    padding: 0;
 }
 
 .region-list.header-region {
@@ -644,18 +647,20 @@ li:focus {
 
 .region-list.header-region .label-container {
     display: flex;
-    position: absolute;
-    right: calc(((100% - var(--wrapperWidth)) / 2) + (var(--searchIconWidth) * 1.5));
     justify-content: space-between;
     width: var(--langLabelWidth);
     border: none;
 }
 
+.region-list.header-region .label-container:hover {
+    background-color: var(--darkAccent);
+} 
+
 .region-list.header-region .select-container {
     background-color: var(--darkNeutral);
     --dropdownHoverColor: var(--darkAccent);
-    top: calc(var(--headerHeight) + var(--subHeaderHeight));
-    right: calc(50vw - (var(--regionDropdownWidth) / 2));
+    top: var(--subHeaderHeight);
+    right: calc(0px - var(--langLabelWidth));
     width: var(--regionDropdownWidth);
     height: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
 }
@@ -1331,6 +1336,12 @@ input[type="radio"] {
     margin: 0 auto;
 }
 
+.dropdown-menu.region-list.header-region {
+    position: absolute;
+    right: calc(((100% - var(--wrapperWidth)) / 2) + var(--searchIconWidth));
+    margin: 2px;
+}
+
 .dropdown-menu.sort-by {
     align-items: flex-end;
     margin: 5px 0;
@@ -1398,7 +1409,7 @@ input[type="radio"] {
 }
 
 .region-list.form-region .select-container {
-    top: calc(var(--formNavHeight) + var(--dropdownHeight) + 5px);
+    top: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--regionDropdownMargin));
     height: var(--regionDropdownHeight);
 }
 
@@ -1486,7 +1497,7 @@ input[type="radio"] {
 @media(max-width: 565px) {
 
     :root {
-        --mainHeaderFontSize: calc(1.4rem + 1vw);
+        --mainHeaderFontSize: calc(1.3rem + 1vw);
     }
 
     .form-nav {
@@ -1511,13 +1522,14 @@ input[type="radio"] {
 
     /* #region - variables */
     :root {
-        --headerHeight: calc(var(--mainHeaderFontSize) * 2.8);
+        --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
     }
     /* #endregion - variables */
 
     .main-title {
         width: calc(var(--mainHeaderFontSize) * 3.5);
         white-space: wrap;
+        line-height: var(--mainHeaderFontSize);
     }
 
     .wrapper {
@@ -1565,22 +1577,9 @@ input[type="radio"] {
 
 @media(max-width: 335px) {
 
-    :root {
-        --headerHeight: calc(var(--mainHeaderFontSize) * 2.8);
-    }
-
-    .main-title {
-        width: calc(var(--mainHeaderFontSize) * 3.5);
-        white-space: wrap;
-    }
-
     .form-nav a {
         font-size: 0.8rem;
     }
-}
-
-@media(max-height: 700px){
-    
 }
 
 /* Safari 11+ */
