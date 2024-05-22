@@ -4,7 +4,7 @@ const handler = async (event) => {
 
     const apiKey = `api_key=${process.env.tmdb_key}`;
     const {isTrending, mediaType, language, page, selectionsQueryString, searchValue, searchState} = event.queryStringParameters;
-   
+    console.log(apiKey);
     const baseURL = 'https://api.themoviedb.org/3';
     const defaultURL = `${baseURL}/trending/${mediaType}/day?${apiKey}&language=${language}&page=${page}`;
     const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}&page=${page}`;
