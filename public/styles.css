@@ -337,7 +337,7 @@ img {
     --mainFont: 'Merriweather', serif;
     /* #region - sizes */
     /* main */
-    --mainHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
+    --mainHeight: calc(100dvh - var(--headerMargin));
     --wrapperWidth: 80%;
     --movieWidth: 265px;
     --paddingGap: 30px;
@@ -913,7 +913,7 @@ main {
 .gallery-container {
     display: flex;
     justify-content: center;
-    padding-top: var(--paddingGap);
+    padding: var(--paddingGap) 0;
     margin-bottom: var(--bottomNavHeight);
 }
 
@@ -1562,10 +1562,6 @@ input[type="radio"] {
         justify-content: flex-end;
         align-self: end;
         padding: 0;
-    }
-
-    footer p {
-        font-size: 0.6rem;
     }
 
     /* for toggle button on portrait mobile */

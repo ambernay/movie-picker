@@ -75,7 +75,6 @@ function App() {
                     searchState={searchState}
                 />
             </main>
-
             <Form
                 setUserSelections={setUserSelections}
                 isDropdownVisible={isDropdownVisible}
