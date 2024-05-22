@@ -12,6 +12,8 @@ function App() {
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
     const [currentRegion, setCurrentRegion] = useState(["CA", "Canada", "Canada"]);
     const [currentLanguage, setCurrentLanguage] = useState(["en", "English", "English"]);
+    const [sortOption, setSortOption] = useState("vote_average.desc");
+
     const [searchState, setSearchState] = useState(''); 
 
     function evaluateScreenSize() {
@@ -53,6 +55,9 @@ function App() {
                 setCurrentPage={setCurrentPage}
                 currentLanguage={currentLanguage}
                 setCurrentLanguage={setCurrentLanguage}
+                currentRegion={currentRegion}
+                setCurrentRegion={setCurrentRegion}
+                setSortOption={setSortOption}
                 tvMovieToggle={tvMovieToggle}
                 setTvMovieToggle={setTvMovieToggle}
                 screenSize={screenSize}
@@ -83,6 +88,8 @@ function App() {
                 currentRegion={currentRegion}
                 setCurrentRegion={setCurrentRegion}
                 currentLanguage={currentLanguage}
+                sortOption={sortOption}
+                setSortOption={setSortOption}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 tvMovieToggle={tvMovieToggle}

@@ -2,7 +2,8 @@ import { useState, useEffect, memo } from 'react';
 import CustomDropdown from './CustomDropdown';
 import { RegionApiCall } from '../../MovieApiCache';
 
-function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, currentLanguage, screenSize, currentTranslation }) {
+function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, 
+    currentLanguage, screenSize, currentTranslation }) {
 
     const [regionList, setRegionList] = useState([]);
     
@@ -14,8 +15,11 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, curren
 
     // resets current region to new native name when region list / language changes
     useEffect(() => {
-        const currentSelection = regionList?.find(current => current.iso_3166_1 === currentRegion[0]);
-        if (currentSelection) setCurrentRegion([currentSelection.iso_3166_1, currentSelection.english_name, currentSelection.native_name])
+        let currentSelection = currentRegion[0];
+        if (regionList.length > 0) {
+            currentSelection = regionList?.find(current => current.iso_3166_1 === currentRegion[0]);
+            setCurrentRegion([currentSelection.iso_3166_1, currentSelection.english_name, currentSelection.native_name]);
+        }
     },[regionList]);
 
     const handleChange = (e) => {

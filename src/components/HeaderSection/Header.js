@@ -7,7 +7,8 @@ import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentLanguage, setCurrentLanguage, 
-    tvMovieToggle, setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
+    currentRegion, setSortOption, setCurrentRegion, tvMovieToggle, setTvMovieToggle, 
+    screenSize, searchState, setSearchState, setUserSelections }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
@@ -103,6 +104,10 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
+                                currentRegion={currentRegion}
+                                setCurrentRegion={setCurrentRegion}
+                                setSortOption={setSortOption}
+                                screenSize={screenSize}
                             />
                         </div>
                     </div>{/* wrapper */}

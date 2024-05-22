@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import CustomDropdown from './CustomDropdown';
 
-function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) {
+function SortByDropdown({ positionClass, setSortOption, currentLanguage, currentTranslation }) {
     const [currentSelectedLabel, setCurrentSelectedLabel] = useState('');
     
     const sortOptionsTrans = currentTranslation['sort_by'];
@@ -30,7 +30,7 @@ function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) 
 
     return (
         <CustomDropdown
-            listClass={'sort-by'}
+            listClass={`sort-by ${positionClass}`}
             currentSelectedLabel={currentSelectedLabel}
             selectList={sortOptions}
             itemID={"choice"}

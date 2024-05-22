@@ -365,7 +365,7 @@ img {
     --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
-    --searchFormContainerHeight: calc(var(--searchInputHeight) + 1rem)
+    --searchFormContainerHeight: calc(var(--searchInputHeight) + (var(--dropdownHeight) * 2) + 1rem)
     /* #endregion - sizes */
 }
 
@@ -703,8 +703,9 @@ li:focus {
     cursor: pointer;
 }
 
-.input-container {
+.search-bar-form {
     display: flex;
+    flex-direction: column;
     position: absolute;
     top: var(--headerMargin);
     right: 0;
@@ -715,6 +716,10 @@ li:focus {
     background: var(--darkNeutral);
     border-top: 2px solid var(--lightAccent);
     z-index: 1;
+}
+
+.input-container {
+    display: flex;
 }
 
 .input-container input {

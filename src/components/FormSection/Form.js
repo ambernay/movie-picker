@@ -8,8 +8,8 @@ import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
 function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, 
-    isDropdownVisible, currentRegion, currentLanguage, setCurrentRegion, 
-    currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, setSearchState }) {
+    isDropdownVisible, currentRegion, currentLanguage, sortOption, setSortOption, 
+    setCurrentRegion, currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, setSearchState }) {
 
     const [genre, setGenre] = useState();
     const [decade, setDecade] = useState();
@@ -19,7 +19,6 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     const [formLabels, setFormLabels] = useState(TransObj[`${currentLanguage[0]}`]['section_labels']);
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
-    const [sortOption, setSortOption] = useState("vote_average.desc");
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const formLabelTranslation = currentTranslation['section_labels'];
@@ -195,6 +194,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             }</button>
                         </div>
                         <SortByDropdown
+                            positionClass={'form-region'}
                             setSortOption={setSortOption}
                             currentLanguage={currentLanguage}
                             currentTranslation={currentTranslation}
