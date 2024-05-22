@@ -3,13 +3,15 @@ import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
 import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
+import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentLanguage, setCurrentLanguage, 
     tvMovieToggle, setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
 
-    // const subHeading = isTrending ? "Trending" : "Back to Trending";
-
+    const currentTranslation = TransObj[`${currentLanguage[0]}`];
+    const iconDescription = currentTranslation['sr-only'];
+  
     // toggle visibility and orientation of arrow image
     let arrowClass = isDropdownVisible ? "arrow-up" : "arrow-down";
 
@@ -24,19 +26,39 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
         }
     }
 
+    const capFirstChar = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     return (
         <header>
             <section className="main-heading">
                 <div className="wrapper">
                     <div className="heading-container">
-                        <button type='button' className="main-title"
-                            onClick={(e) => { handleTrendingButton(); e.stopPropagation(); }}>Movie Picker</button>
+                        <div className='main-title-container'>
+                            <button type='button' className="main-title"
+                                onClick={(e) => { handleDropdown(); e.stopPropagation(); }}>
+                                    Movie Picker
+                            </button>
+                            {screenSize === 'narrowScreen' ?
+                                <FindMovieButton
+                                    handleDropdown={handleDropdown}
+                                    arrowClass={arrowClass}
+                                    tvMovieToggle={tvMovieToggle}
+                                    currentTranslation={currentTranslation}
+                                    screenSize={screenSize}
+                                />
+                                : null
+                            }
+                        </div>
                         <div className="header-buttons-container">
                             {screenSize !== 'narrowScreen' ?
                                 <FindMovieButton
                                     handleDropdown={handleDropdown}
                                     arrowClass={arrowClass}
                                     tvMovieToggle={tvMovieToggle}
+                                    currentTranslation={currentTranslation}
+                                    screenSize={screenSize}
                                 />
                                 : null
                             }
@@ -44,6 +66,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 tvMovieToggle={tvMovieToggle}
                                 setTvMovieToggle={setTvMovieToggle}
                                 setCurrentPage={setCurrentPage}
+                                iconDescription={iconDescription}
                             />
                         </div>
                     </div>
@@ -56,12 +79,12 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                             <button className="trending-button"
                                 onClick={handleTrendingButton}>
                                 <figure >
-                                    <figcaption className="sr-only">Back arrow</figcaption>
+                                    <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption>
                                     <LeftArrowIcon
                                         arrowClass={toggleArrow}
                                     />
                                     <span className={styleClass}>
-                                        <h4 className="result-heading">Trending</h4>
+                                        <h4 className="result-heading">{capFirstChar(currentTranslation.trending)}</h4>
                                     </span>
                                 </figure>
                             </button>
@@ -69,18 +92,8 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 currentLanguage={currentLanguage}
                                 setCurrentLanguage={setCurrentLanguage}
                                 screenSize={screenSize}
+                                currentTranslation={currentTranslation}
                             />
-                            {/* <label>
-                                {currentRegion[0]}
-                            </label> */}
-                            {screenSize === 'narrowScreen' ?
-                                <FindMovieButton
-                                    handleDropdown={handleDropdown}
-                                    arrowClass={arrowClass}
-                                    tvMovieToggle={tvMovieToggle}
-                                />
-                                : null
-                            }
                             <SearchBar
                                 searchState={searchState} 
                                 setSearchState={setSearchState}

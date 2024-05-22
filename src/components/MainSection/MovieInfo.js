@@ -3,7 +3,9 @@ import { memo } from 'react';
 import ProviderIconsList from './ProviderIconsList.js';
 import { EyeIcon } from '../Icons.js';
 
-function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion, infoState, setInfoState }) {
+function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion, infoState, setInfoState, currentTranslation }) {
+
+    const iconDescription = currentTranslation['sr-only'];
 
     const handleMovieInfo = () => {
         setInfoState('provider-info');
@@ -17,7 +19,7 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                         <h4>{movieTitle}</h4>
                         <figure className="eye-icon">
                             <EyeIcon />
-                            <figcaption className="sr-only">Eye icon: where to watch</figcaption>
+                            <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
                         </figure>
                     </div>
                     <p>{overview}</p>
@@ -30,6 +32,7 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                         tvMovieToggle={tvMovieToggle}
                         currentRegion={currentRegion}
                         infoState={infoState}
+                        currentTranslation={currentTranslation}
                     />
                     : null
                 }

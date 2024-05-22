@@ -1,6 +1,8 @@
 import { RightArrowIcon, LeftArrowIcon } from '../Icons';
 
-function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }) {
+function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages, currentTranslation }) {
+
+    const iconDescription = currentTranslation['sr-only'];
 
     // removes button section from dom when no result are available
     const buttonContainerClass = (moviesArrayLength < 1) ? "make-display-none" : "load-button-container";
@@ -35,7 +37,7 @@ function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }
                             <LeftArrowIcon
                                 arrowClass={backButton}
                             />
-                            <figcaption className="sr-only">back arrow</figcaption>
+                            <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption>
                         </figure>
                     </button>
                     {currentPage && totalPages ? 
@@ -47,7 +49,7 @@ function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages }
                             <RightArrowIcon
                                 arrowClass={forwardButton}
                             />
-                            <figcaption className="sr-only">forward arrow</figcaption>
+                            <figcaption className="sr-only">{iconDescription.forward_arrow}</figcaption>
                         </figure>
                     </button>
                 </div>

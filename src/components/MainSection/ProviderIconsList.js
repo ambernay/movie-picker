@@ -2,10 +2,12 @@ import { memo } from 'react';
 import { useState, useEffect } from 'react';
 import { ProviderIconsApiCall } from '../MovieApiCache.js';
 
-function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, infoState }) {
+function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, infoState, currentTranslation }) {
 
     const [viewingOptions, setViewingOptions] = useState();
     const [fetchStatus, setFetchStatus] = useState('Loading...');
+
+    const sectionLabel = currentTranslation.provider_options;
 
     useEffect(() => {
         ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
@@ -18,23 +20,29 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
     const filteredKey = (key) => {
         switch (key) {
             case 'flatrate':
-                key = 'Stream:';
+                key = `${sectionLabel.stream}:`;
                 break;
             case 'ads':
-                key = 'With Ads:';
+                key = `${sectionLabel.with_ads}:`;
                 break;
             case 'buy_rent':
-                key = 'Buy/Rent:';
+                key = `${sectionLabel.buy}/${sectionLabel.rent}:`;
                 break;
+            case 'buy':
+                console.log(key);
+                key = `${sectionLabel.buy}`;
+            case 'rent':
+                key = `${sectionLabel.rent}`;
             default:
                 key = (key.charAt(0).toUpperCase() + key.slice(1) + ':');
         }
+        
         return key;
     }
 
     const filteredViewingOptions = (result) => {
         delete result.link;
-        console.log(viewingOptions);
+
         const hasBuy = Object.keys(result).includes('buy');
         const hasRent = Object.keys(result).includes('rent');
         if (!hasBuy || !hasRent) { return result; }

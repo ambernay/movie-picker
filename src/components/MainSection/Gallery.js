@@ -2,29 +2,41 @@ import { useState, useEffect } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
+import { TransObj } from '../TranslationObjects.js';
 
-function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, currentLanguage, searchState }) {
+function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
+     setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, 
+     currentLanguage, searchState }) {
+
+    const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
+
+    const currentTranslation = TransObj[`${currentLanguage[0]}`];
+    const noResults = capFirstChar(currentTranslation.status_messages.no_results);
+    const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
+    const failedToLoad = capFirstChar(currentTranslation.status_messages.failed_to_load);
+    const trending = capFirstChar(currentTranslation.trending);
+
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
-    const [statusMessage, setStatusMessage] = useState('Loading...');
+    const [statusMessage, setStatusMessage] = useState(loadingMessage);
     
     // stops background scroll when using tab keys
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
-        console.log('search', searchBarQuery);
         MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage, userSelections, searchState).then(result => {
-            setStatusMessage('Loading...');
+            setStatusMessage(loadingMessage);
+
             let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
             // list of user selections for 'no results' message
             let messageArr = userSelections[2]?.join(' / ');
             setTotalPages(result.totalPages);
             setMoviesToDisplay(result.movieResults);
             // message for no results
-            if (!result.movieResults && isTrending){setStatusMessage(`Failed to Load Trending ${mediaType}`)}
-            else if (!result.movieResults && !isTrending){setStatusMessage(`Failed to Load:\n\n${messageArr}`)}
-            else if (result.movieResults < 1) {setStatusMessage(`No results for:\n\n${messageArr}`)};
+            if (!result.movieResults && isTrending){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
+            else if (!result.movieResults && !isTrending){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
+            else if (result.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
         });
     }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion, currentLanguage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
 
@@ -57,6 +69,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setC
                                         movieID={movie.id}
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}
+                                        currentTranslation={currentTranslation}
                                     />
                                 )
                             })}
@@ -69,6 +82,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage, setC
                 setCurrentPage={setCurrentPage}
                 moviesArrayLength={moviesToDisplay?.length}
                 totalPages={totalPages}
+                currentTranslation={currentTranslation}
             />
         </>
     )

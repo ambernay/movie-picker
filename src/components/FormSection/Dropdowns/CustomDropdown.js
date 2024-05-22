@@ -1,18 +1,16 @@
 import React from "react";
 import { useState } from 'react';
 
-function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, itemValue, itemName, listHeading, handleChange, errorMessage }) {
+function CustomDropdown({ listClass, selectList, currentSelectedLabel, 
+    itemID, itemValue, itemName, listHeading, handleChange, errorMessage }) {
 
     const [isOpen, setIsOpen] = useState(false);
 
     const showOrHide = isOpen ? 'visible' : 'hidden';
-    const disabledClass = listClass === 'region-list header-region' ?
-    'disabled-label' : null;
 
     const handleDropdownClick = (e) => {
         e.stopPropagation();
-        // condition disables language dropdown
-        if(listClass !== 'region-list header-region') setIsOpen(!isOpen);
+        setIsOpen(!isOpen);
     }
 
     return (
@@ -22,14 +20,17 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
             onBlur={() => { setIsOpen(false); }}
             tabIndex={0}
         >
-            <label className={`label-container ${disabledClass}`}>
-                {currentSelectedLabel}
+            <label className="label-container">
+                {listClass === 'region-list header-region' ? 
+                    currentSelectedLabel.toUpperCase() 
+                    : currentSelectedLabel
+                }
             </label>
             <div className={`select-container ${showOrHide}`}>
                 {selectList && selectList.length > 0 ?
                     <ul className="select">
                         {selectList.map((listItem) => {
-                            
+                            // (listItem['sort-by'] && listItem['sort-by'] !== 'undefined')?
                             return (
                                 <li
                                     key={listItem[itemID]}
@@ -38,7 +39,12 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel, itemID, i
                                     name={listItem[itemName]}
                                     onClick={handleChange}
                                 >
-                                    {listItem[listHeading]}
+                                   { listClass !== 'region-list header-region' ? <>{listItem[listHeading]}</> :
+                                    <>
+                                        <label className='lang-code-label'>{listItem[itemID].toUpperCase()}</label>
+                                        <label>{listItem[listHeading]}</label>
+                                    </>
+                                    }
                                 </li>
                             )
                         })}

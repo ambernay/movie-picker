@@ -337,7 +337,7 @@ img {
     --mainFont: 'Merriweather', serif;
     /* #region - sizes */
     /* main */
-    --mainHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
+    --mainHeight: calc(100dvh - var(--headerMargin));
     --wrapperWidth: 80%;
     --movieWidth: 265px;
     --paddingGap: 30px;
@@ -347,20 +347,22 @@ img {
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeadingMargin: 4px;
     --mainHeaderFontSize: 2.2rem;
-    --langLabelWidth: 2.8rem;
+    --langLabelWidth: 2.6rem;
+    --searchIconWidth: 1.5rem;
     /* form */
     --formWidth: 96%;
-    --formHeight: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
+    --formHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     --formNavHeight: 2.25rem;
     --dropdownHeight: 2.2rem;
     --formBottomHeight: 5.5rem;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
-    --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + 5px));
+    --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + var(--regionDropdownMargin)));
+    --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
-    --sortByListWidth: 230px;
+    --sortByListWidth: 55%;
     /* other */
     --bottomNavHeight: 2.55rem;
-    --switchWidth: 75px;
+    --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
     --searchFormContainerHeight: calc(var(--searchInputHeight) + 1rem)
@@ -370,8 +372,17 @@ img {
 /* #endregion - variables */
 
 /* #region - fonts and sizes */
+.main-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: start;
+}
+
 .main-title {
     font-size: var(--mainHeaderFontSize);
+    text-align: start;
+    white-space: nowrap;
     color: var(--darkNeutral);
     padding: 0;
 }
@@ -615,6 +626,7 @@ li:focus {
 .trending-button figure svg {
     fill: var(--midAccent);
     width: 1.5rem;
+    margin-left: -8px;
 }
 
 .trending-button:hover figure svg {
@@ -625,6 +637,7 @@ li:focus {
 .trending-button {
     display: flex;
     align-items: center;
+    padding: 0;
 }
 /* diabled dropdown menu */
 .label-container.disabled-label::before,
@@ -642,24 +655,32 @@ li:focus {
 
 .region-list.header-region .label-container {
     display: flex;
-    position: absolute;
-    left: calc(50% - (var(--langLabelWidth)/2));
     justify-content: space-between;
     width: var(--langLabelWidth);
     border: none;
 }
 
+.region-list.header-region .label-container:hover {
+    background-color: var(--darkAccent);
+} 
+
 .region-list.header-region .select-container {
     background-color: var(--darkNeutral);
     --dropdownHoverColor: var(--darkAccent);
-    top: calc(var(--headerHeight) + var(--subHeaderHeight));
-    right: calc(50vw - (var(--regionDropdownWidth) / 2));
+    top: var(--subHeaderHeight);
+    right: calc(0px - var(--langLabelWidth));
     width: var(--regionDropdownWidth);
-    height: calc(100vh - (var(--headerMargin) + var(--bottomNavHeight)));
+    height: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
 }
 
 .region-list.header-region li {
+    display: inline-flex;
+    justify-content: start;
     color: var(--lightAccent);
+}
+
+.lang-code-label {
+    margin-right: 1rem;
 }
 
 .empty-modal {
@@ -677,7 +698,7 @@ li:focus {
 
 .search-container {
     display: flex;
-    width: 1.5rem;
+    width: var(--searchIconWidth);
     justify-content: flex-end;
     cursor: pointer;
 }
@@ -707,7 +728,7 @@ li:focus {
 }
 
 .input-container input::placeholder {
-    color: var(--backgroundColor);
+    color: var(--backgroundColorDesat);
     font-size: 1rem;
 }
 
@@ -805,9 +826,7 @@ button:focus svg {
 .toggle-button-container {
     display: flex;
     position: relative;
-    height: 85%;
-    min-width: 85px;
-
+    min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
     border-radius: 10%;
     justify-content: space-around;
@@ -902,7 +921,7 @@ main {
 .gallery-container {
     display: flex;
     justify-content: center;
-    padding-top: var(--paddingGap);
+    padding: 3dvh 0;
     margin-bottom: var(--bottomNavHeight);
 }
 
@@ -1190,9 +1209,6 @@ legend {
 
 .form-button-container {
     display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     height: fit-content;
     justify-content: center;
@@ -1204,7 +1220,7 @@ legend {
     width: fit-content;
     padding: 5px;
     margin-top: var(--subHeadingMargin);
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 /* fieldset */
@@ -1294,15 +1310,17 @@ input[type="radio"] {
 
 .form-bottom {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     position: absolute;
     bottom: 0;
     left: calc((100% - var(--formWidth)) / 2);
     height: var(--formBottomHeight);
     width: var(--formWidth);
     align-items: center;
+    justify-content: space-around;
     background-color: var(--darkNeutral);
     border-top: 1px solid var(--lightAccent);
+    /* padding: 5px 0; */
 }
 
 /* #region - dropdown menus */
@@ -1326,6 +1344,12 @@ input[type="radio"] {
     margin: 0 auto;
 }
 
+.dropdown-menu.region-list.header-region {
+    position: absolute;
+    right: calc(((100% - var(--wrapperWidth)) / 2) + var(--searchIconWidth));
+    margin: 2px;
+}
+
 .dropdown-menu.sort-by {
     align-items: flex-end;
     margin: 5px 0;
@@ -1339,6 +1363,7 @@ input[type="radio"] {
     padding: 3px;
     border: solid 1px var(--lightAccent);
     color: var(--lightAccent);
+    padding-right: 1rem;
 }
 
 /* region dropdown in form */
@@ -1392,7 +1417,7 @@ input[type="radio"] {
 }
 
 .region-list.form-region .select-container {
-    top: calc(var(--formNavHeight) + var(--dropdownHeight) + 5px);
+    top: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--regionDropdownMargin));
     height: var(--regionDropdownHeight);
 }
 
@@ -1401,7 +1426,7 @@ input[type="radio"] {
     display: flex;
     flex-direction: column;
     color: var(--darkNeutral);
-    width: fit-content;
+    width: 100%;
     height: auto;
     text-align: center;
     cursor: pointer;
@@ -1479,8 +1504,8 @@ input[type="radio"] {
 
 @media(max-width: 565px) {
 
-    .main-title {
-        font-size: calc(1.5rem + 1vw);
+    :root {
+        --mainHeaderFontSize: calc(1.3rem + 1vw);
     }
 
     .form-nav {
@@ -1493,6 +1518,11 @@ input[type="radio"] {
         height: 20px;
         width: 3px;
     }
+
+    .dropdown-menu.sort-by {
+        align-items: center;
+        --sortByListWidth: 100%;
+    }
 }
 
 
@@ -1500,10 +1530,15 @@ input[type="radio"] {
 
     /* #region - variables */
     :root {
-        --headerHeight: calc(10vw + 1.2rem);
+        --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
     }
-
     /* #endregion - variables */
+
+    .main-title {
+        width: calc(var(--mainHeaderFontSize) * 3.5);
+        white-space: wrap;
+        line-height: var(--mainHeaderFontSize);
+    }
 
     .wrapper {
         --wrapperWidth: 90%;
@@ -1533,15 +1568,8 @@ input[type="radio"] {
         display: flex;
         width: 17%;
         justify-content: flex-end;
+        align-self: end;
         padding: 0;
-    }
-
-    .dropdown-menu.sort-by {
-        align-items: center;
-    }
-
-    footer p {
-        font-size: 0.6rem;
     }
 
     /* for toggle button on portrait mobile */
@@ -1549,23 +1577,9 @@ input[type="radio"] {
         height: 100%;
         justify-content: space-between;
     }
-
-    .find-movie-button svg {
-        fill: var(--lightAccent);
-    }
-
-    .find-movie-button:hover svg,
-    .find-movie-button:active svg,
-    .find-movie-button:focus-within svg {
-        fill: var(--midAccent);
-    }
 }
 
 @media(max-width: 335px) {
-
-    .main-title {
-        font-size: 9vw;
-    }
 
     .form-nav a {
         font-size: 0.8rem;

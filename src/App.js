@@ -10,13 +10,16 @@ function App() {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
-    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada"]);
+    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada", "Canada"]);
     const [currentLanguage, setCurrentLanguage] = useState(["en", "English", "English"]);
     const [searchState, setSearchState] = useState(''); 
 
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
-        return (window.innerWidth <= 430 && window.innerHeight > 400) ? 'narrowScreen' : 'wideScreen';
+        if(window.innerWidth <= 430 && window.innerHeight > 400) return 'narrowScreen'; 
+        // 740 matches css media query
+        else if ((window.innerWidth > 430 && window.innerWidth <= 990) && window.innerHeight > 400) return 'midScreen';
+        else if (window.innerWidth > 990 && window.innerHeight > 400) return 'wideScreen';
     }
 
     // screen size state for for toggle button
@@ -72,7 +75,6 @@ function App() {
                     searchState={searchState}
                 />
             </main>
-
             <Form
                 setUserSelections={setUserSelections}
                 isDropdownVisible={isDropdownVisible}

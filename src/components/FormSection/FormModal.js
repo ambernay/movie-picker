@@ -1,10 +1,13 @@
 import { memo } from 'react';
-function FormModal({ isValidRequest, submitAttempted }) {
+
+function FormModal({ isValidRequest, submitAttempted, currentTranslation }) {
+    
+    const modalMessage = currentTranslation.status_messages.form_modal;
 
     const modalClass = (submitAttempted && !isValidRequest) ? "modal" : "make-display-none";
     return (
         <div className={modalClass}>
-            <p>Make a selection</p>
+            <p>{modalMessage}</p>
         </div>
     )
 }
