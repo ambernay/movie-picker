@@ -913,7 +913,7 @@ main {
 .gallery-container {
     display: flex;
     justify-content: center;
-    padding: var(--paddingGap) 0;
+    padding: 3dvh 0;
     margin-bottom: var(--bottomNavHeight);
 }
 
