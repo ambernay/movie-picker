@@ -51,7 +51,7 @@ function LanguageDropdown ({ currentLanguage, setCurrentLanguage, currentTransla
 
     return(
         <CustomDropdown
-            listClass={`region-list header-region`}
+            listClass={`language-list header-region`}
             currentSelectedLabel={langCode}
             selectList={sortedLanguageList}
             itemID={"iso_639_1"}

@@ -1,7 +1,8 @@
 import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
-function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel, currentTranslation }) {
+function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, 
+    currentLanguage, sectionLabel, currentTranslation }) {
 
     const [genreList, setGenreList] = useState([]);
 

@@ -1,5 +1,5 @@
 import { useState, useRef, memo, useEffect } from 'react';
-import { MagnifyerIcon } from '../Icons';
+import { MagnifyerIcon, FilmIcon, TvIcon, PersonIcon } from '../Icons';
 import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
 import SortByDropdown from '../FormSection/Dropdowns/SortByDropdown';
@@ -71,35 +71,65 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
                     <figcaption className='sr-only'>{iconDescription.search_bar}</figcaption>
                 </figure>
                 <form  className={inputClass} onSubmit={handleSubmit}>
-                    <div className='input-container'>
-                        <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
-                        <input
-                            placeholder={`${placeholder}...`}
-                            name={'movie search'}
-                            value={newValue}
-                            onChange={handleInput}
-                            onFocus={handleInputFocus}
-                            onSelect={e => setEmptyModalClass('empty-modal')}
-                            ref={searchInput}>
-                        </input>
-                        <button className='search-button' >
-                            <MagnifyerIcon />
-                        </button>
+                    <div className='searchbar-form-wrapper'>
+                        <div className='input-container'>
+                            <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
+                            <input
+                                placeholder={`${placeholder}...`}
+                                name={'movie search'}
+                                value={newValue}
+                                onChange={handleInput}
+                                onFocus={handleInputFocus}
+                                onSelect={e => setEmptyModalClass('empty-modal')}
+                                ref={searchInput}>
+                            </input>
+                            <button className='search-button' >
+                                <MagnifyerIcon />
+                            </button>
+                        </div>
+                        <div className='searchbar-selections-container'>
+                            <RegionDropdown
+                                positionClass={'search-bar'}
+                                currentRegion={currentRegion}
+                                setCurrentRegion={setCurrentRegion}
+                                currentLanguage={currentLanguage}
+                                screenSize={screenSize}
+                                currentTranslation={currentTranslation}
+                            />
+                            <ul className='search-type-list'>
+                                <li>
+                                    <button>
+                                        <figure className="movie-icon">
+                                            <FilmIcon/>
+                                            {/* <figcaption className="sr-only">{iconDescription.film_icon}</figcaption> */}
+                                        </figure>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button>
+                                        <figure className="tv-icon">
+                                            <TvIcon/>
+                                            {/* <figcaption className="sr-only">{iconDescription.film_icon}</figcaption> */}
+                                        </figure>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button>   
+                                        <figure className="person-icon">
+                                            <PersonIcon/>
+                                            {/* <figcaption className="sr-only">{iconDescription.film_icon}</figcaption> */}
+                                        </figure>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <SortByDropdown
+                            positionClass={'search-bar'}
+                            setSortOption={setSortOption}
+                            currentLanguage={currentLanguage}
+                            currentTranslation={currentTranslation}
+                        />
                     </div>
-                    <RegionDropdown
-                        positionClass={'region-searchbar'}
-                        currentRegion={currentRegion}
-                        setCurrentRegion={setCurrentRegion}
-                        currentLanguage={currentLanguage}
-                        screenSize={screenSize}
-                        currentTranslation={currentTranslation}
-                    />
-                    <SortByDropdown
-                        positionClass={'sortby-searchbar'}
-                        setSortOption={setSortOption}
-                        currentLanguage={currentLanguage}
-                        currentTranslation={currentTranslation}
-                    />
                 </form>
                 <div 
                 className={emptyModalClass}

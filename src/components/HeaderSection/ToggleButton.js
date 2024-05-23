@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import { FilmIcon, TvIcon } from '../Icons';
 
-function ToggleButton({ tvMovieToggle, setTvMovieToggle, setCurrentPage, iconDescription }) {
+function ToggleButton({ tvMovieToggle, setTvMovieToggle, setCurrentPage, 
+    iconDescription }) {
 
     const handleTvMovieToggle = () => {
         if (tvMovieToggle === 'movie') {
