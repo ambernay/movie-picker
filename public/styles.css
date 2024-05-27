@@ -368,7 +368,7 @@ img {
     --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
-    --searchFormContainerHeight: calc(var(--searchInputHeight) + (var(--dropdownHeight) * 2) + 2rem);
+    --searchFormContainerHeight: calc(var(--searchInputHeight) + (var(--dropdownHeight) * 2) + 3rem);
     /* #endregion - sizes */
 }
 
@@ -716,6 +716,7 @@ li:focus {
     height: var(--searchFormContainerHeight);
     align-items: center;
     justify-content: center;
+    padding: 1rem 0;
     background: var(--darkNeutral);
     border-top: 2px solid var(--lightAccent);
     z-index: 1;
@@ -728,42 +729,57 @@ li:focus {
 
 .input-container {
     display: flex;
+    margin-bottom: 1rem;
 }
 
 .searchbar-selections-container {
     display: flex;
     flex-direction: row-reverse;
     width: 100%;
-    align-items: center
+    align-items: center;
+    justify-content: space-between;
 }
 
 .searchbar-selections-container .search-type-list {
     display: flex;
-    width: calc(100% - var(--headerDropdownLabelWidth));
-    height: 32px;
-    align-items: baseline;
-    justify-content: space-around;
+    width: calc(90% - var(--headerDropdownLabelWidth));
+    height: 1.6rem;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 4px var(--lightAccent);
+    border-radius: 6px;
 }
 
 .searchbar-selections-container .search-type-list li {
     display: flex;
     flex-direction: row;
-    width: 30%;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5%;
 }
 .searchbar-selections-container .search-type-list li button{
     display: flex;
-    height: 32px;
+    height: 1.4rem;
     width: 2rem;
     justify-content: center;
     align-items: baseline;
-    background-color: var(--backgroundColor);
     border-radius: 10%;
 }
 
-.search-type-list li button svg {
-    height: 1.6rem;
+.active-button {
+    background-color: var(--backgroundColor);
+}
+
+.search-type-list li .active-button svg {
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
+}
+
+.search-type-list li button svg {
+    height: 1.35rem;
+    fill: var(--backgroundColorDesat);
+    stroke: var(--backgroundColorDesat);
 }
 
 .dropdown-menu.region-list.search-bar {

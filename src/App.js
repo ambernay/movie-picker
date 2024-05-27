@@ -10,6 +10,7 @@ function App() {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
+    const [searchType, setSearchType] = useState('movie');
     const [currentRegion, setCurrentRegion] = useState(["CA", "Canada", "Canada"]);
     const [currentLanguage, setCurrentLanguage] = useState(["en", "English", "English"]);
     const [sortOption, setSortOption] = useState("vote_average.desc");
@@ -63,6 +64,8 @@ function App() {
                 screenSize={screenSize}
                 searchState={searchState}
                 setSearchState={setSearchState}
+                searchType={searchType}
+                setSearchType={setSearchType}
                 setUserSelections={setUserSelections}
             />
             <main onClick={handleDropdown}>
@@ -78,6 +81,7 @@ function App() {
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
                     searchState={searchState}
+                    searchType={searchType}
                 />
             </main>
             <Form

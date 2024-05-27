@@ -8,7 +8,7 @@ import { TransObj } from '../TranslationObjects.js';
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentLanguage, setCurrentLanguage, 
     currentRegion, setSortOption, setCurrentRegion, tvMovieToggle, setTvMovieToggle, 
-    screenSize, searchState, setSearchState, setUserSelections }) {
+    screenSize, searchState, setSearchState, searchType, setSearchType, setUserSelections }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
@@ -98,6 +98,8 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                             <SearchBar
                                 searchState={searchState} 
                                 setSearchState={setSearchState}
+                                searchType={searchType}
+                                setSearchType={setSearchType}
                                 setUserSelections={setUserSelections}
                                 setIsTrending={setIsTrending}
                                 tvMovieToggle={tvMovieToggle}

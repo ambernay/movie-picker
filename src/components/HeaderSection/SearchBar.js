@@ -4,9 +4,9 @@ import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
 import SortByDropdown from '../FormSection/Dropdowns/SortByDropdown';
 
-function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
-    tvMovieToggle, currentLanguage, currentPage, setCurrentPage, currentRegion, 
-    setCurrentRegion, setSortOption, screenSize }) {
+function SearchBar({ searchState, setSearchState, searchType, setSearchType, 
+    setUserSelections, setIsTrending, tvMovieToggle, currentLanguage, currentPage, 
+    setCurrentPage, currentRegion, setCurrentRegion, setSortOption, screenSize }) {
     const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
@@ -51,6 +51,7 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
         setSearchState('searchBar');
         setEmptyModalClass('hidden');
+        console.log(searchType);
     }
     // displays modal whenever input is focused
     const handleInputFocus = (e) => {
@@ -61,6 +62,11 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
     const handleModalClick = (e) => {
         setEmptyModalClass('hidden'); 
         if(isOpen) setIsOpen(false);
+    }
+
+    const handleSelection = (e) => {
+        e.preventDefault();
+        setSearchType(e.target.closest('button').id);
     }
 
     return (
@@ -98,7 +104,9 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
                             />
                             <ul className='search-type-list'>
                                 <li>
-                                    <button>
+                                    <button id='movie' 
+                                        className={searchType === 'movie' ? 'active-button' : undefined} 
+                                        onClick={handleSelection}>
                                         <figure className="movie-icon">
                                             <FilmIcon/>
                                             {/* <figcaption className="sr-only">{iconDescription.film_icon}</figcaption> */}
@@ -106,7 +114,9 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
                                     </button>
                                 </li>
                                 <li>
-                                    <button>
+                                    <button id='tv' 
+                                        className={searchType === 'tv' ? 'active-button' : undefined} 
+                                        onClick={handleSelection}>
                                         <figure className="tv-icon">
                                             <TvIcon/>
                                             {/* <figcaption className="sr-only">{iconDescription.film_icon}</figcaption> */}
@@ -114,7 +124,9 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
                                     </button>
                                 </li>
                                 <li>
-                                    <button>   
+                                    <button id='person' 
+                                        className={searchType === 'person' ? 'active-button' : undefined} 
+                                        onClick={handleSelection}>   
                                         <figure className="person-icon">
                                             <PersonIcon/>
                                             {/* <figcaption className="sr-only">{iconDescription.film_icon}</figcaption> */}

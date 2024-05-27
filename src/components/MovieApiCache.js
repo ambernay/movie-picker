@@ -103,4 +103,46 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
     return getMoviePromises[key];
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }
+let getPersonIDPromises = {};
+const SearchApiCall = async (searchType, userSelections, currentPage, currentLanguage) => {
+    const selectionsQueryString = encodeURIComponent(userSelections[0]);
+    const langCode = currentLanguage[0];
+
+    let personKey = `${userSelections[0]}/searchType`;
+
+    if (!getPersonIDPromises.hasOwnProperty(personKey)) {
+        const searchBarURL = `.netlify/functions/get-search-results?queryType=${searchType}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}`;
+
+        getPersonIDPromises[personKey] = fetch(searchBarURL)
+            .then(res => {
+                return res.json();
+            })
+            .catch((err) => {
+                console.log('Failed to fetch Trending', err);
+            })
+    }
+    return getPersonIDPromises[personKey];
+}
+
+let getPersonCreditsByIDPromises = {};
+const SearchPersonByID= async (searchType, userSelections, currentPage, currentLanguage) => {
+    const selectionsQueryString = encodeURIComponent(userSelections[0]);
+    const langCode = currentLanguage[0];
+
+    let personID = `${userSelections[0]}/searchType`;
+
+    if (!getPersonCreditsByIDPromises.hasOwnProperty(personID)) {
+        const searchBarURL = `.netlify/functions/get-search-results?queryType=${searchType}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}`;
+
+        getPersonCreditsByIDPromises[personID] = fetch(searchBarURL)
+            .then(res => {
+                return res.json();
+            })
+            .catch((err) => {
+                console.log('Failed to fetch Trending', err);
+            })
+    }
+    return getPersonCreditsByIDPromises[personID];
+}
+
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, SearchApiCall, SearchPersonByID }
