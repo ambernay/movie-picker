@@ -5,18 +5,22 @@ import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
 import SortByDropdown from '../FormSection/Dropdowns/SortByDropdown';
 
 function SearchBar({ searchState, setSearchState, searchType, setSearchType, 
-    setUserSelections, setIsTrending, tvMovieToggle, currentLanguage, currentPage, 
-    setCurrentPage, currentRegion, setCurrentRegion, setSortOption, screenSize }) {
+    setUserSelections, setIsTrending, currentLanguage, currentPage, setCurrentPage, 
+    currentRegion, setCurrentRegion, setSortOption, screenSize }) {
     const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
     const inputClass = isOpen ? 'search-bar-form' : 'hidden';
-    const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
+    const searchCacheKey = `${newValue.split(' ').join('_')}/${searchType}/${currentLanguage}/
     ${currentPage}`;
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
-    const placeholder = tvMovieToggle === 'movie' ? currentTranslation.movie_title : currentTranslation.tv_series;
+
+    let placeholder;
+        if (searchType === 'movie') {placeholder = currentTranslation.movie_title}
+        else if (searchType === 'tv') {placeholder = currentTranslation.tv_series}
+        else if (searchType === 'person') {placeholder = currentTranslation.person}
 
     const searchInput = useRef(null);
 
@@ -28,10 +32,10 @@ function SearchBar({ searchState, setSearchState, searchType, setSearchType,
     }, [isOpen]);
 
     // reset userSelections on dependencies on search
-    useEffect(() => {
-        if (isOpen && searchState === 'searchBar') 
-        setUserSelections([newValue, searchCacheKey, [newValue]]);
-    },[tvMovieToggle, currentLanguage, currentPage])
+    // useEffect(() => {
+    //     if (isOpen && searchState === 'searchBar') 
+    //     setUserSelections([newValue, searchCacheKey, [newValue]]);
+    // },[searchType, searchType, currentLanguage, currentPage])
 
     const handleInput = (e) => {
         setNewValue(e.target.value);
@@ -48,10 +52,9 @@ function SearchBar({ searchState, setSearchState, searchType, setSearchType,
         setCurrentPage(1);
         setIsTrending(false);
         // selection query / cache key / result message
-        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${searchType}`, [newValue]]);
         setSearchState('searchBar');
         setEmptyModalClass('hidden');
-        console.log(searchType);
     }
     // displays modal whenever input is focused
     const handleInputFocus = (e) => {

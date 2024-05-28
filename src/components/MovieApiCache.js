@@ -75,22 +75,29 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion) => {
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage, userSelections, searchState) => {
+const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage, 
+    userSelections, searchState, searchType) => {
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
- 
-    let key = isTrending ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
+        console.log(searchState, userSelections);
+    let key;
+    if (isTrending) {key = `Trending/${tvOrMovie}/${langCode}/${currentPage}`}
+    else if (!isTrending && searchState === 'formSearch'){key = `${urlCacheKey}`}
+    else if (!isTrending && searchType === 'person'){key = `${userSelections[1]}/${currentPage}`}
+    console.log(key, `${userSelections[1]}/${currentPage}`);
 
     if (!getMoviePromises.hasOwnProperty(key)) {
         const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
         const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
         const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
+        const searchPeopleURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&queryType=${searchType}&page=${currentPage}&language=${langCode}&searchState=${searchState}&searchValue=${selectionsQueryString}`;
 
         let url;
-        if (isTrending) {url = defaultURL}
-        else if (searchState === 'formSearch'){url = formURL}
-        else if(searchState === 'searchBar') {url = searchBarURL}
+            if (isTrending) {url = defaultURL}
+            else if (searchState === 'formSearch'){url = formURL}
+            else if (searchState === 'searchBar' && searchType !== 'person') {url = searchBarURL}
+            else if (searchState === 'searchBar' && searchType === 'person') {url = searchPeopleURL}
  
         getMoviePromises[key] = fetch(url)
             .then(res => {
@@ -103,17 +110,17 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
     return getMoviePromises[key];
 }
 
-let getPersonIDPromises = {};
-const SearchApiCall = async (searchType, userSelections, currentPage, currentLanguage) => {
+let getPeoplePromises = {};
+const SearchPersonApiCall = async (searchType, userSelections, currentPage, currentLanguage) => {
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const langCode = currentLanguage[0];
 
     let personKey = `${userSelections[0]}/searchType`;
 
-    if (!getPersonIDPromises.hasOwnProperty(personKey)) {
+    if (!getPeoplePromises.hasOwnProperty(personKey)) {
         const searchBarURL = `.netlify/functions/get-search-results?queryType=${searchType}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}`;
 
-        getPersonIDPromises[personKey] = fetch(searchBarURL)
+        getPeoplePromises[personKey] = fetch(searchBarURL)
             .then(res => {
                 return res.json();
             })
@@ -121,7 +128,7 @@ const SearchApiCall = async (searchType, userSelections, currentPage, currentLan
                 console.log('Failed to fetch Trending', err);
             })
     }
-    return getPersonIDPromises[personKey];
+    return getPeoplePromises[personKey];
 }
 
 let getPersonCreditsByIDPromises = {};
@@ -145,4 +152,4 @@ const SearchPersonByID= async (searchType, userSelections, currentPage, currentL
     return getPersonCreditsByIDPromises[personID];
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, SearchApiCall, SearchPersonByID }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, SearchPersonApiCall, SearchPersonByID }

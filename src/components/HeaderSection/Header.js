@@ -102,7 +102,6 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 setSearchType={setSearchType}
                                 setUserSelections={setUserSelections}
                                 setIsTrending={setIsTrending}
-                                tvMovieToggle={tvMovieToggle}
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
