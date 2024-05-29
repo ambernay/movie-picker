@@ -45,7 +45,9 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
             console.log(searchState, 'running search');
             SearchApiCall(searchType, userSelections, currentPage, currentLanguage).then(result => {
                 console.log(searchState, searchType);
-                console.log(userSelections, result)
+                console.log(userSelections, result.results);
+                setTotalPages(result.totalPages);
+                setMoviesToDisplay(result.results);
             })
         }
     }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion, currentLanguage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
@@ -64,18 +66,32 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                             {moviesToDisplay?.map((movie) => {
                                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                                 /* if image not available, use icon */
-                                const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
-
+                                const imagePath = (movie.poster_path || movie.profile_path) ? 
+                                (imageURL + (movie.poster_path || movie.profile_path)) 
+                                : "../assets/icons/tv-outline.svg";
+                                console.log(movie.known_for);
+                                const popularCredits = movie.known_for?.map((movie) => {
+                                    return(
+                                        <ul>
+                                            <li>movie.original_title</li>
+                                        </ul>
+                                        )
+                                })
                                 return (
                                     <GalleryItems
                                         key={movie.id}
                                         tabIndex={tabIndex}
                                         movieTitle={movie.title || movie.name}
                                         overview={
-                                            movie.overview ||
-                                            "No description available"}
+                                            movie.overview 
+                                            || [movie.known_for_department, movie.known_for]
+                                            || "No description available"
+                                        }
                                         imagePath={imagePath}
-                                        audienceRating={(movie.vote_average)?.toFixed(1)}
+                                        audienceRating={
+                                            (movie.vote_average)?.toFixed(1) 
+                                            || (movie.popularity)?.toFixed(1)
+                                        }
                                         movieID={movie.id}
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}

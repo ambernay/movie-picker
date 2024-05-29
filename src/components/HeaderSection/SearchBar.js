@@ -5,18 +5,19 @@ import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown';
 import SortByDropdown from '../FormSection/Dropdowns/SortByDropdown';
 
 function SearchBar({ searchState, setSearchState, searchType, setSearchType, 
-    setUserSelections, setIsTrending, tvMovieToggle, currentLanguage, currentPage, 
+    setUserSelections, setIsTrending, currentLanguage, currentPage, 
     setCurrentPage, currentRegion, setCurrentRegion, setSortOption, screenSize }) {
+        
     const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
     const inputClass = isOpen ? 'search-bar-form' : 'hidden';
-    const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
+    const searchCacheKey = `${newValue.split(' ').join('_')}/${searchType}/${currentLanguage}/
     ${currentPage}`;
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
-    const placeholder = tvMovieToggle === 'movie' ? currentTranslation.movie_title : currentTranslation.tv_series;
+    const placeholder = searchType === 'movie' ? currentTranslation.movie_title : currentTranslation.tv_series;
 
     const searchInput = useRef(null);
 
@@ -31,7 +32,7 @@ function SearchBar({ searchState, setSearchState, searchType, setSearchType,
     useEffect(() => {
         if (isOpen && searchState === 'searchBar') 
         setUserSelections([newValue, searchCacheKey, [newValue]]);
-    },[tvMovieToggle, currentLanguage, currentPage])
+    },[searchType, currentLanguage, currentPage])
 
     const handleInput = (e) => {
         setNewValue(e.target.value);
@@ -48,7 +49,7 @@ function SearchBar({ searchState, setSearchState, searchType, setSearchType,
         setCurrentPage(1);
         setIsTrending(false);
         // selection query / cache key / result message
-        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${searchType}`, [newValue]]);
         setSearchState('searchBar');
         setEmptyModalClass('hidden');
         console.log(searchType);
