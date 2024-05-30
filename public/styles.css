@@ -1104,6 +1104,16 @@ ul li .info-container {
     padding: 8px 4px;
 }
 
+.known-for-fieldset  ul {
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.known-for-fieldset  li {
+    flex: 0 1 45%;
+
+}
+
 .overview .heading-container h4 {
     width: 80%;
 }

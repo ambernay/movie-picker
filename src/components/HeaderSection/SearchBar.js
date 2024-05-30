@@ -7,7 +7,7 @@ import SortByDropdown from '../FormSection/Dropdowns/SortByDropdown';
 function SearchBar({ searchState, setSearchState, searchType, setSearchType, 
     setUserSelections, setIsTrending, currentLanguage, currentPage, 
     setCurrentPage, currentRegion, setCurrentRegion, setSortOption, screenSize }) {
-        
+
     const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
@@ -17,7 +17,11 @@ function SearchBar({ searchState, setSearchState, searchType, setSearchType,
     ${currentPage}`;
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
-    const placeholder = searchType === 'movie' ? currentTranslation.movie_title : currentTranslation.tv_series;
+
+    let placeholder;
+        if(searchType === 'movie') {placeholder = currentTranslation.movie_title}
+        else if(searchType === 'tv') {placeholder = currentTranslation.tv_series}
+        else if(searchType === 'person') {placeholder = currentTranslation.person}
 
     const searchInput = useRef(null);
 

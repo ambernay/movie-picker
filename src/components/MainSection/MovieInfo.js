@@ -11,19 +11,9 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle,
     const handleMovieInfo = () => {
         setInfoState('provider-info');
     }
-    // const popularCredits = movie.known_for?.map((movie) => {
-    //     return(
-    //         <ul>
-    //             <li>movie.original_title</li>
-    //         </ul>
-    //         )
-    // })
-    const overviewInfo = () => {
-        if (typeof(overview) === 'string') {console.log('string')}
-        else {console.log('else')}
-    }
-    overviewInfo();
-    console.log(typeof(overview));
+
+    console.log(overview[1]);
+    
     return (
         <>
             <div className='overview'>
@@ -42,7 +32,12 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle,
                             <legend>{overview[0]}</legend>
                             <ul>
                                 {overview[1]?.map((credit) => {
-                                    return(<li>{credit.original_title}</li>)
+                                    // return(<li id={credit.id}>{credit.original_title}</li>)
+                                    return(
+                                        <li>
+                                            <img src={`https://image.tmdb.org/t/p/w500${credit.poster_path}`} alt={credit.original_title} />
+                                        </li>
+                                    )
                                 })}
                             </ul>
                         </fieldset>     

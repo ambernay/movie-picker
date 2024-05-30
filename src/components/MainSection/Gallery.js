@@ -70,13 +70,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                                 (imageURL + (movie.poster_path || movie.profile_path)) 
                                 : "../assets/icons/tv-outline.svg";
                                 console.log(movie.known_for);
-                                const popularCredits = movie.known_for?.map((movie) => {
-                                    return(
-                                        <ul>
-                                            <li>movie.original_title</li>
-                                        </ul>
-                                        )
-                                })
+                                
                                 return (
                                     <GalleryItems
                                         key={movie.id}
