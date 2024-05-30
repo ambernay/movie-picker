@@ -1039,6 +1039,7 @@ li img {
 
 li .placeholder-image {
     height: 75%;
+    min-height: 310px;
 }
 
 ul li .info-container {
@@ -1104,13 +1105,23 @@ ul li .info-container {
     padding: 8px 4px;
 }
 
+.known-for-fieldset {
+    height: 300px;
+    padding: 0;
+}
+
 .known-for-fieldset  ul {
     justify-content: space-around;
+    height: 100%;
     padding: 5px;
 }
 
+.known-for-fieldset legend {
+    color: var(--darkNeutral);
+}
+
 .known-for-fieldset  li {
-    flex: 0 1 45%;
+    flex: 0 1 42%;
 
 }
 
