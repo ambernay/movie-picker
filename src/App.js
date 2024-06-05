@@ -77,6 +77,7 @@ function App() {
                     currentLanguage={currentLanguage}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
+                    sortOption={sortOption}
                     isDropdownVisible={isDropdownVisible}
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}

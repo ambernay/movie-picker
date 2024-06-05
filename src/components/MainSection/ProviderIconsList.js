@@ -29,7 +29,6 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
                 key = `${sectionLabel.buy}/${sectionLabel.rent}:`;
                 break;
             case 'buy':
-                console.log(key);
                 key = `${sectionLabel.buy}`;
             case 'rent':
                 key = `${sectionLabel.rent}`;

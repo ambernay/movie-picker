@@ -1,18 +1,20 @@
 import { memo } from 'react';
-
 import ProviderIconsList from './ProviderIconsList.js';
 import { EyeIcon } from '../Icons.js';
 
 function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, 
-    currentRegion, infoState, setInfoState, currentTranslation }) {
+    currentRegion, infoState, setInfoState, currentTranslation, setPersonInfo }) {
 
     const iconDescription = currentTranslation['sr-only'];
+    const knownForCredit = overview[0];
 
-    const handleMovieInfo = () => {
-        setInfoState('provider-info');
+    const handleMovieInfo = (e) => {
+        if (typeof(overview) === 'object') {setPersonInfo([e.target.closest('li').id, knownForCredit])}
+        // only allows provider info if not a person (overview is available)
+        if (typeof(overview) !== 'object') {setInfoState('provider-info')}
     }
 
-    console.log(overview[1]);
+    // console.log(overview[1]);
     
     return (
         <>
@@ -29,13 +31,12 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle,
                         <p>{overview}</p>
                         :
                         <fieldset className='known-for-fieldset'>
-                            <legend>{overview[0]}</legend>
+                            <legend>{knownForCredit}</legend>
                             <ul>
                                 {overview[1]?.map((credit) => {
-                                    // return(<li id={credit.id}>{credit.original_title}</li>)
                                     return(
                                         <li>
-                                            <img src={`https://image.tmdb.org/t/p/w500${credit.poster_path}`} alt={credit.original_title} />
+                                            <img id={credit.id} src={`https://image.tmdb.org/t/p/w500${credit.poster_path}`} alt={credit.original_title} />
                                         </li>
                                     )
                                 })}

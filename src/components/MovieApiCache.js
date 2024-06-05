@@ -125,16 +125,15 @@ const SearchApiCall = async (searchType, userSelections, currentPage, currentLan
 }
 
 let getPersonCreditsByIDPromises = {};
-const SearchPersonByID= async (searchType, userSelections, currentPage, currentLanguage) => {
-    const selectionsQueryString = encodeURIComponent(userSelections[0]);
+const getPersonCreditsByID= async (personInfo, currentPage, currentLanguage) => {
+    // const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const langCode = currentLanguage[0];
-
-    let personID = `${userSelections[0]}/searchType`;
+    const [personID, knownForCredit] = personInfo;
 
     if (!getPersonCreditsByIDPromises.hasOwnProperty(personID)) {
-        const searchBarURL = `.netlify/functions/get-search-results?queryType=${searchType}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}`;
+        const creditsByPersonIdURL = `.netlify/functions/get-person-credits-by-id?queryType=person&personID=${personID}&page=${currentPage}&language=${langCode}`;
 
-        getPersonCreditsByIDPromises[personID] = fetch(searchBarURL)
+        getPersonCreditsByIDPromises[personID] = fetch(creditsByPersonIdURL)
             .then(res => {
                 return res.json();
             })
@@ -145,4 +144,4 @@ const SearchPersonByID= async (searchType, userSelections, currentPage, currentL
     return getPersonCreditsByIDPromises[personID];
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, SearchApiCall, SearchPersonByID }
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, SearchApiCall, getPersonCreditsByID }
