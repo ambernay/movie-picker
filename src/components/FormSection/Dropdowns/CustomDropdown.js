@@ -21,7 +21,8 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel,
             tabIndex={0}
         >
             <label className="label-container">
-                {listClass === 'region-list header-region' ? 
+                {listClass === 'region-list header-region' 
+                || listClass === 'language-list header-region' ? 
                     currentSelectedLabel.toUpperCase() 
                     : currentSelectedLabel
                 }

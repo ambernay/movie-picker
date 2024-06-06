@@ -349,6 +349,9 @@ img {
     --mainHeaderFontSize: 2.2rem;
     --langLabelWidth: 2.6rem;
     --searchIconWidth: 1.5rem;
+    --narrow-dropdown-width: 55px;
+    --toggleDropdownContainerWidth: calc(var(--switchWidth) + (var(--narrow-dropdown-width) + 5px));
+
     /* form */
     --formWidth: 96%;
     --formHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
@@ -375,7 +378,9 @@ img {
 .main-title-container {
     display: flex;
     flex-direction: row;
+    width: calc(100% - (var(--toggleDropdownContainerWidth) + 4vw));
     justify-content: space-between;
+    align-items: center;
     text-align: start;
 }
 
@@ -448,11 +453,13 @@ header {
 }
 
 .main-heading {
+    display: flex;
     height: var(--headerHeight);
+    align-items: baseline;
 }
 
 .main-heading .heading-container {
-    align-items: center;
+    align-items: end;
     padding: 10px 0;
 }
 
@@ -581,15 +588,16 @@ li:focus {
 
 .header-buttons-container {
     display: flex;
-    width: 50%;
-    height: calc(var(--headerHeight) / 1.5);
+    width: var(--toggleDropdownContainerWidth);
+    height: calc(var(--headerHeight) / 1.2);
     justify-content: flex-end;
     align-items: center;
-    column-gap: 5%;
 }
 
 .find-movie-button {
+    display: flex;
     height: 100%;
+    justify-content: center;
     cursor: pointer;
     padding-right: 10px;
 }
@@ -648,12 +656,23 @@ li:focus {
     cursor: revert;
 }
 
-.region-list.header-region {
-    width: 55px;
-    margin-left: 10px;
+.language-list.header-region {
+    background: none;
 }
 
-.region-list.header-region .label-container {
+.language-list.header-region .label-container {
+    color: var(--darkNeutral);
+
+}
+
+.region-list.header-region,
+.language-list.header-region {
+    width: var(--narrow-dropdown-width);
+    margin-left: 5px;
+}
+
+.region-list.header-region .label-container,
+.language-list.header-region .label-container {
     display: flex;
     justify-content: space-between;
     width: var(--langLabelWidth);
@@ -828,8 +847,9 @@ button:focus svg {
     position: relative;
     min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
-    border-radius: 10%;
+    border-radius: 5px;
     justify-content: space-around;
+    align-self: center;
     padding: 0;
     cursor: pointer;
 }
@@ -1330,14 +1350,15 @@ input[type="radio"] {
     display: flex;
     flex-direction: column;
     background: var(--darkNeutral);
-    height: var(--dropdownHeight);
+    height: var(--subHeaderHeight);
     width: var(--formWidth);
     justify-content: center;
+    align-items: center;
 }
 
-.dropdown-menu.header-region {
+/* .dropdown-menu.header-region {
     --dropdownHeight: var(--subHeaderHeight);
-}
+} */
 
 .dropdown-menu.region-list {
     align-items: center;
@@ -1486,15 +1507,25 @@ input[type="radio"] {
 /* #endregion - load buttons */
 
 /* #region - media queries */
+@media(max-width: 930px) {
+
+    .wrapper {
+        --wrapperWidth: 85%;
+    }
+
+    .find-movie-text{
+        display: none;
+    }
+
+    .main-title-container {
+        justify-content: flex-start;
+    }
+}
 
 @media(max-width: 740px) {
 
     header figure h2 {
         display: none;
-    }
-
-    .header-buttons-container {
-        width: 25%;
     }
 
     .form-button-container button {
@@ -1526,7 +1557,7 @@ input[type="radio"] {
 }
 
 
-@media(max-width: 430px) {
+@media(max-width: 460px) {
 
     /* #region - variables */
     :root {
@@ -1579,7 +1610,27 @@ input[type="radio"] {
     }
 }
 
-@media(max-width: 335px) {
+@media(max-width: 340px) {
+    :root {
+        --toggleDropdownContainerWidth: calc(var(--switchWidth) + 5px);
+
+    }
+
+    .main-heading .heading-container {
+        align-items: center;
+    }
+
+    .heading-container .header-buttons-container {
+        /* min-width: var(--switchWidth); */
+        /* height: calc(var(--headerHeight) / 1.3); */
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .toggle-button-container {
+        align-self: flex-start;
+    }
 
     .form-nav a {
         font-size: 0.8rem;

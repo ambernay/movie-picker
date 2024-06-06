@@ -51,6 +51,8 @@ function App() {
                 setIsTrending={setIsTrending}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                currentRegion={currentRegion}
+                setCurrentRegion={setCurrentRegion}
                 currentLanguage={currentLanguage}
                 setCurrentLanguage={setCurrentLanguage}
                 tvMovieToggle={tvMovieToggle}

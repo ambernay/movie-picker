@@ -12,15 +12,15 @@ function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle, currentTra
 
     return (
         <button type='button' className="find-movie-button" onClick={handleDropdown} >
+            <span className="hover-animation find-movie-text">
+                <h2>{(screenSize === 'midScreen' && fullHeadingLength <= 10) 
+                    || (screenSize === 'wideScreen') ? 
+                    capFirstChar(currentTranslation.find) 
+                    : null}
+                    <span> {capFirstChar(mediaType)} </span>
+                </h2>
+            </span>
             <figure>
-                <span className="hover-animation">
-                    <h2>{(screenSize === 'midScreen' && fullHeadingLength <= 10) 
-                        || (screenSize === 'wideScreen') ? 
-                        capFirstChar(currentTranslation.find) 
-                        : null}
-                        <span> {capFirstChar(mediaType)} </span>
-                    </h2>
-                </span>
                 <UpDownArrowIcon
                     arrowClass={arrowClass}
                 />
