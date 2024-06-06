@@ -40,7 +40,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel,
                                     name={listItem[itemName]}
                                     onClick={handleChange}
                                 >
-                                   { listClass !== 'region-list header-region' ? <>{listItem[listHeading]}</> :
+                                   { listClass !== 'language-list header-region' ? <>{listItem[listHeading]}</> :
                                     <>
                                         <label className='lang-code-label'>{listItem[itemID].toUpperCase()}</label>
                                         <label>{listItem[listHeading]}</label>
