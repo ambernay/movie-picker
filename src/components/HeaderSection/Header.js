@@ -1,13 +1,15 @@
 import ToggleButton from './ToggleButton';
 import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
+import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown.js';
 import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
 import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
-    isTrending, setIsTrending, currentPage, setCurrentPage, currentLanguage, setCurrentLanguage, 
-    tvMovieToggle, setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
+    isTrending, setIsTrending, currentPage, setCurrentPage, currentRegion, 
+    setCurrentRegion, currentLanguage, setCurrentLanguage, tvMovieToggle, 
+    setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
@@ -40,7 +42,6 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 onClick={(e) => { handleDropdown(); e.stopPropagation(); }}>
                                     Movie Picker
                             </button>
-                            {screenSize === 'narrowScreen' ?
                                 <FindMovieButton
                                     handleDropdown={handleDropdown}
                                     arrowClass={arrowClass}
@@ -48,25 +49,19 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                     currentTranslation={currentTranslation}
                                     screenSize={screenSize}
                                 />
-                                : null
-                            }
                         </div>
                         <div className="header-buttons-container">
-                            {screenSize !== 'narrowScreen' ?
-                                <FindMovieButton
-                                    handleDropdown={handleDropdown}
-                                    arrowClass={arrowClass}
-                                    tvMovieToggle={tvMovieToggle}
-                                    currentTranslation={currentTranslation}
-                                    screenSize={screenSize}
-                                />
-                                : null
-                            }
                             <ToggleButton
                                 tvMovieToggle={tvMovieToggle}
                                 setTvMovieToggle={setTvMovieToggle}
                                 setCurrentPage={setCurrentPage}
                                 iconDescription={iconDescription}
+                            />
+                             <LanguageDropdown
+                                currentLanguage={currentLanguage}
+                                setCurrentLanguage={setCurrentLanguage}
+                                screenSize={screenSize}
+                                currentTranslation={currentTranslation}
                             />
                         </div>
                     </div>
@@ -88,9 +83,11 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                     </span>
                                 </figure>
                             </button>
-                            <LanguageDropdown
+                            <RegionDropdown
+                                positionClass={'header-region'}
+                                currentRegion={currentRegion}
+                                setCurrentRegion={setCurrentRegion}
                                 currentLanguage={currentLanguage}
-                                setCurrentLanguage={setCurrentLanguage}
                                 screenSize={screenSize}
                                 currentTranslation={currentTranslation}
                             />

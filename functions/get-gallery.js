@@ -10,15 +10,13 @@ const handler = async (event) => {
     const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}&page=${page}`;
     const searchBarURL = `${baseURL}/search/${mediaType}?query=${searchValue}&${apiKey}&language=${language}&page=${page}`;
 
-    const url = () => {
-        if (isTrending === 'true') {return defaultURL}
-        // else if (isTrending === 'false') {return formURL}
-        else if (searchState === 'formSearch'){return formURL}
-        else if(searchState === 'searchBar') {return searchBarURL}
-    }
+    let url;
+        if (isTrending === 'true') {url = defaultURL}
+        else if (searchState === 'formSearch'){url = formURL}
+        else if(searchState === 'searchBar') {url = searchBarURL}
     
     try{
-        const { data } = await axios.get(url())
+        const { data } = await axios.get(url)
         let apiResults = { movieResults: data.results, totalPages: data.total_pages }
       
         return {
