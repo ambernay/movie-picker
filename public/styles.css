@@ -571,12 +571,9 @@ header {
     cursor: pointer;
 }
 
-input:hover,
-label:hover,
-input:active,
-label:active,
-input:focus-within,
-label:focus-within {
+.radio-button-container:hover,
+.radio-button-container:active,
+.radio-button-container:focus-within {
     color: var(--midAccent);
     cursor: pointer;
 }
@@ -678,8 +675,9 @@ li:focus {
     border: none;
 }
 
-.region-list.header-region .label-container:hover {
+.header-region .label-container.open-menu {
     background-color: var(--midAccent);
+    color: var(--darkNeutral);
 } 
 
 .region-list.header-region li {
@@ -1354,7 +1352,7 @@ input[type="radio"] {
     margin: 0 auto;
 }
 
-.dropdown-menu.region-list.header-region {
+.region-list.header-region .label-container {
     position: absolute;
     right: calc(((100% - var(--wrapperWidth)) / 2) + var(--searchIconWidth));
     margin: 2px;
@@ -1440,12 +1438,15 @@ input[type="radio"] {
 }
 
 .region-list.header-region .select-container {
-    top: var(--subHeaderHeight);
+    top: var(--headerMargin);
     height: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     margin: 0;
     background-color: var(--darkNeutral);
-    --dropdownHoverColor: var(--darkAccent);
     border-top: 2px solid var(--lightAccent);
+}
+
+.region-list.header-region .select-container li:hover {
+    color: var(--darkNeutral);
 }
 
 .language-list.header-region .select-container {  

@@ -20,7 +20,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel,
             onBlur={() => { setIsOpen(false); }}
             tabIndex={0}
         >
-            <label className="label-container">
+            <label className={isOpen ? 'label-container open-menu' : 'label-container'}>
                 {listClass === 'region-list header-region' 
                 || listClass === 'language-list header-region' ? 
                     currentSelectedLabel.toUpperCase() 
