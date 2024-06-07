@@ -486,7 +486,6 @@ header {
     position: relative;
     color: var(--darkAccent);
     align-self: center;
-    cursor: pointer;
 }
 
 .hover-animation::after {
@@ -595,7 +594,6 @@ li:focus {
     display: flex;
     height: 100%;
     justify-content: center;
-    cursor: pointer;
     padding-right: 10px;
 }
 
@@ -710,7 +708,6 @@ li:focus {
     display: flex;
     width: var(--searchIconWidth);
     justify-content: flex-end;
-    cursor: pointer;
 }
 
 .input-container {
@@ -747,6 +744,12 @@ li:focus {
     width: 1.2rem;
 }
 
+.search-button, .search-container, .toggle-button-container, 
+.find-movie-button, .dropdown-menu .select, .dropdown-menu label, 
+.hover-animation {
+    cursor: pointer;
+}
+
 .search-button {
     display: flex;
     justify-content: center;
@@ -755,7 +758,6 @@ li:focus {
     height: var(--searchInputHeight);
     background-color: var(--backgroundColor);
     padding: 2px;
-    cursor: pointer;
 }
 
 .search-button svg {
@@ -842,7 +844,6 @@ button:focus svg {
     justify-content: space-around;
     align-self: center;
     padding: 0;
-    cursor: pointer;
 }
 
 .slider {
@@ -870,7 +871,6 @@ button:focus svg {
 .toggle-right {
     display: flex;
     height: 100%;
-    /* width: 50%; */
     align-items: center;
 }
 
@@ -1462,7 +1462,6 @@ input[type="radio"] {
     width: 100%;
     height: auto;
     text-align: center;
-    cursor: pointer;
 }
 
 .dropdown-menu .select-container.visible {
@@ -1578,7 +1577,7 @@ input[type="radio"] {
 
     .main-title {
         width: calc(var(--mainHeaderFontSize) * 3.5);
-        white-space: wrap;
+        white-space: pre-line;
         line-height: var(--mainHeaderFontSize);
     }
 
