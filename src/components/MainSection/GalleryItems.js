@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import MovieInfo from './MovieInfo.js';
 
-function GalleryItems({ movieID, movieTitle, overview, imagePath, audienceRating, tabIndex, tvMovieToggle, currentRegion, currentTranslation }) {
+function GalleryItems({ movieID, movieTitle, overview, imagePath, 
+    audienceRating, tabIndex, tvMovieToggle, currentRegion, 
+    currentTranslation }) {
 
     const [infoState, setInfoState] = useState('overview');
 

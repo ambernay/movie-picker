@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import ProviderIconsList from './ProviderIconsList.js';
-import { EyeIcon } from '../Icons.js';
+import { EyeIcon, InfoIcon } from '../Icons.js';
 
 function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion, infoState, setInfoState, currentTranslation }) {
 
@@ -15,13 +15,13 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
         <>
             <div className='overview'>
                 <div className={infoState === 'overview' ? 'movie-info' : 'hidden'}>
-                    <div className='heading-container' onClick={handleMovieInfo}>
+                    <section className='heading-container' onClick={handleMovieInfo}>
                         <h4>{movieTitle}</h4>
                         <figure className="eye-icon">
                             <EyeIcon />
                             <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
                         </figure>
-                    </div>
+                    </section>
                     <p>{overview}</p>
                 </div>
                 {infoState === 'provider-info' ?
@@ -36,6 +36,12 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                     />
                     : null
                 }
+                <section className='info-icon-container'>
+                    <figure className="info-icon">
+                        <InfoIcon />
+                        {/* <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption> */}
+                    </figure>
+                </section>
             </div>
         </>
     )
