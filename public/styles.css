@@ -994,7 +994,7 @@ ul li .info-container {
     padding: 5px;
 }
 
-.overview {
+.movie-info-container {
     visibility: collapse;
     background: var(--lightAccent);
     position: absolute;
@@ -1008,11 +1008,21 @@ ul li .info-container {
 
 }
 
-.movie-info {
-    display: block;
-    height: calc(100% - var(--movieInfoIconSize));
+.overview, .more-info {
+    display: flex;
+    flex-direction: column;
+    /* height: calc(100% - var(--movieInfoIconSize)); */
+    height: 100%;
     width: 100%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+}
+
+.overview {
+    background-color: var(--lightNeutral);
+}
+
+.more-info {
+    background-color: var(--darkNeutral);
 }
 
 .watch-providers {
@@ -1023,13 +1033,13 @@ ul li .info-container {
     bottom: 0;
     margin-top: 10px;
     padding: inherit;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     /* overflow transition */
     max-height: 0;
     transition: max-height 0.5s ease-out;
 }
 
-.overview .heading-container {
+.movie-info-container .heading-container {
     position: sticky;
     top: 0;
     left: 0;
@@ -1038,11 +1048,15 @@ ul li .info-container {
     padding: 8px 6px;
 }
 
-.overview .heading-container h4 {
+.movie-info-container .heading-container h4 {
     width: 80%;
 }
 
-.overview p {
+.movie-info-middle {
+    overflow-y: scroll;
+}
+
+.movie-info-container p {
     margin: 7px;
 }
 
@@ -1076,19 +1090,19 @@ ul li .info-container {
     stroke: var(--movieInfoIconColor);
 }
 
-.overview .heading-container:hover,
-.overview .info-icon-container:hover,
-.overview .heading-container:active,
-.overview .info-icon-container:active,
-.overview .heading-container:focus,
-.overview .info-icon-container:focus {
+.movie-info-container .heading-container:hover,
+.movie-info-container .info-icon-container:hover,
+.movie-info-container .heading-container:active,
+.movie-info-container .info-icon-container:active,
+.movie-info-container .heading-container:focus,
+.movie-info-container .info-icon-container:focus {
     --movieInfoIconColor: var(--lightAccent);
     cursor: pointer;
 }
 
-li:hover .overview,
-li:active .overview,
-li:focus .overview {
+li:hover .movie-info-container,
+li:active .movie-info-container,
+li:focus .movie-info-container {
     display: block;
     visibility: visible;
     max-height: -webkit-fill-available;
@@ -1097,44 +1111,45 @@ li:focus .overview {
     transition: max-height 0.5s ease-in;
 }
 
-/* #region - where-to-watch */
-.wheretowatch-container {
-    background: var(--darkNeutral);
-    height: 100%;
+/* #region - movie-info */
+
+.movie-info-list-container {
     width: 100%;
-    padding-bottom: 10px;
-}
-
-.wheretowatch-heading {
-    background-color: var(--midAccent);
-    color: var(--darkNeutral);
-    padding: 3px 5px;
-    margin-bottom: 10px;
-}
-
-.viewing-options-list-container {
-    flex-direction: column;
-    width: 100%;
-    justify-content: flex-start;
-}
-
-.viewing-options-list-container li {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 5px 0 0;
-}
-
-.provider-options-list-container {
+    align-items: center;
     justify-content: center;
+    margin-bottom: 5px;
+    padding: 5px;
 }
 
-.provider-list-fieldsets {
+.movie-info-list-container li,
+.movie-info-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 5px 0 0;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.movie-info-list .full-width {
+    width: 100%;
+}
+
+.movie-info-list li {
+    width: auto;
+}
+
+.movie-info-list-fieldsets {
     justify-content: center;
     margin: 5px calc(var(--providerFieldsetPadding) / 2);
     padding: var(--providerFieldsetPadding);
+    text-align: left;
+    font-size: 1rem;
 }
 
-.provider-list-fieldsets h4 {
+.movie-info-list-fieldsets h4 {
     color: var(--backgroundColor);
 }
 
@@ -1166,7 +1181,7 @@ li:focus .overview {
     color: var(--backgroundColor);
 }
 
-/* #endregion - where-to-watch */
+/* #endregion - movie-info */
 
 /* #endregion - gallery */
 
@@ -1496,7 +1511,7 @@ input[type="radio"] {
 }
 
 .select-container.hidden,
-.overview .hidden,
+.movie-info-container .hidden,
 .hidden {
     display: none;
 }
@@ -1513,7 +1528,7 @@ input[type="radio"] {
 .info-icon-container {
     display: flex;
     position: sticky;
-    bottom: 0;
+    top: 100%;
     left: var(--galleryItemPadding);
     /* width: calc(100% - (var(--galleryItemPadding) * 2)); */
     width: 100%;

@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useState, useEffect } from 'react';
 import { ProviderIconsApiCall } from '../../MovieApiCache.js';
 
-function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, infoState, currentTranslation }) {
+function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTranslation }) {
 
     const [viewingOptions, setViewingOptions] = useState();
     const [fetchStatus, setFetchStatus] = useState('Loading...');
@@ -80,46 +80,43 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
     }
 
     return (
-        <div className={infoState === 'provider-info' ? 'movie-info' : 'hidden'}>
-            <div className='wheretowatch-container'>
-                <h4 className='wheretowatch-heading'>{movieTitle}</h4>
-                <ul className='viewing-options-list-container'>
-                    {viewingOptions ? Object.keys(viewingOptions).sort().map((key) => {
-                        const imageURL = 'https://image.tmdb.org/t/p/w500';
-                        // create lists
-                        const optionKey = key + '/' + movieID;
-                        return (
-                            <li className='option' key={optionKey}>
-                                <fieldset className='provider-list-fieldsets'>
-                                    <legend>{filteredKey(key)}</legend>
-                                    <ul className='provider-options-list-container'>
-                                        {/* create icons */}
-                                        {viewingOptions[key]?.map((key, i) => {
-                                            const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
+        <>
+        <ul className='movie-info-list-container movie-info-middle'>
+            {viewingOptions ? Object.keys(viewingOptions).sort().map((key) => {
+                const imageURL = 'https://image.tmdb.org/t/p/w500';
+                // create lists
+                const optionKey = key + '/' + movieID;
+                return (
+                    <li key={optionKey}>
+                        <fieldset className='movie-info-list-fieldsets'>
+                            <legend>{filteredKey(key)}</legend>
+                            <ul className='movie-info-list'>
+                                {/* create icons */}
+                                {viewingOptions[key]?.map((key, i) => {
+                                    const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
-                                            return (
-                                                <li key={iconKey}>
-                                                    {(key.logo_path === 'N/A') ?
-                                                        <h4>{key.logo_path}</h4>
-                                                        :
-                                                        <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
-                                                    }
-                                                </li>
-                                            )
-                                        })
-                                        }
-                                    </ul>
-                                </fieldset>
-                            </li>
-                        )
-                    }) :
-                        <div className='icon-message-container'>
-                            <h4>{fetchStatus}</h4>
-                        </div>
-                    }
-                </ul>
-            </div>
-        </div>
+                                    return (
+                                        <li key={iconKey}>
+                                            {(key.logo_path === 'N/A') ?
+                                                <h4>{key.logo_path}</h4>
+                                                :
+                                                <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
+                                            }
+                                        </li>
+                                    )
+                                })
+                                }
+                            </ul>
+                        </fieldset>
+                    </li>
+                )
+            }) :
+                <div className='icon-message-container'>
+                    <h4>{fetchStatus}</h4>
+                </div>
+            }
+        </ul>
+        </>
     )
 }
 

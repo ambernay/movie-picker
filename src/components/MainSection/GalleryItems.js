@@ -15,8 +15,8 @@ function GalleryItems({ movieID, releaseDate, movieTitle, overview, imagePath,
 
     const handleMouseLeave = () => {
         // resets state to overview on mouseout
-        setInfoState('overview');
-
+        // setInfoState('overview');
+        // setInfoState('more-info');
         // blurs active element to allow hover out
         if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
     }
