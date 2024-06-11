@@ -1,21 +1,20 @@
 import { memo } from 'react';
 
 import ProviderIconsList from './ProviderIconsList.js';
-import { EyeIcon, InfoIcon } from '../Icons.js';
+import MoreInfo from './MoreInfo.js';
 
-function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion, infoState, setInfoState, currentTranslation }) {
+import { EyeIcon, InfoIcon } from '../../Icons.js';
 
+function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, currentRegion, 
+    infoState, setInfoState, currentTranslation }) {
+    
     const iconDescription = currentTranslation['sr-only'];
-
-    const handleMovieInfo = () => {
-        setInfoState('provider-info');
-    }
 
     return (
         <>
             <div className='overview'>
                 <div className={infoState === 'overview' ? 'movie-info' : 'hidden'}>
-                    <section className='heading-container' onClick={handleMovieInfo}>
+                    <section className='heading-container' onClick={() => setInfoState('provider-info')}>
                         <h4>{movieTitle}</h4>
                         <figure className="eye-icon">
                             <EyeIcon />
@@ -36,10 +35,20 @@ function MovieInfo({ overview, movieTitle, movieID, tvMovieToggle, currentRegion
                     />
                     : null
                 }
-                <section className='info-icon-container'>
+                {infoState === 'more-info' ?
+                    /* only renders and fetches icons onclick */
+                    <MoreInfo
+                        infoState={infoState}
+                        movieID={movieID}
+                        movieTitle={movieTitle}
+                        currentTranslation={currentTranslation}
+                    />
+                    : null
+                }
+                <section className='info-icon-container' onClick={() => setInfoState('more-info')}>
                     <figure className="info-icon">
                         <InfoIcon />
-                        {/* <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption> */}
+                        <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
                     </figure>
                 </section>
             </div>

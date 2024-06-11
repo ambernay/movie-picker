@@ -56,9 +56,9 @@ function MagnifyerIcon() {
 function MagnifyerButtonIcon() {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512">
-            <path d="M256 80a176 176 0 10176 176A176 176 0 00256 80z" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
-            <path d="M232 160a72 72 0 1072 72 72 72 0 00-72-72z" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
-            <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M283.64 283.64L336 336" />
+            <path d="M256 80a176 176 0 10176 176A176 176 0 00256 80z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32" />
+            <path d="M232 160a72 72 0 1072 72 72 72 0 00-72-72z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32" />
+            <path stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M283.64 283.64L336 336" />
         </svg>
     )
 }
@@ -66,9 +66,9 @@ function MagnifyerButtonIcon() {
 function InfoIcon() {
     return(
         <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512">
-            <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z" fill="none" stroke="" stroke-miterlimit="10" stroke-width="32"/>
-            <path fill="none" stroke="" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M220 220h32v116"/>
-            <path fill="none" stroke="" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M208 340h88"/>
+            <path d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z" fill="none" stroke="" strokeMiterlimit="10" strokeWidth="32"/>
+            <path fill="none" stroke="" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M220 220h32v116"/>
+            <path fill="none" stroke="" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M208 340h88"/>
             <path d="M248 130a26 26 0 1026 26 26 26 0 00-26-26z"/>
         </svg>
     )

@@ -103,4 +103,23 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
     return getMoviePromises[key];
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall }
+let movieInfoPromise = {};
+const MovieInfoApiCall = async (movieID) => {
+    
+    const key = movieID;
+   
+    if (!movieInfoPromise.hasOwnProperty(key)) {
+        const movieInfoAPI = `/.netlify/functions/get-movie-info?movieID=${movieID}`;
+
+        movieInfoPromise[key] = fetch(movieInfoAPI)
+            .then(res => {
+                return res.json();
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
+    return movieInfoPromise[key];
+}
+
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall }

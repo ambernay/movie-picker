@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useState, useEffect } from 'react';
-import { ProviderIconsApiCall } from '../MovieApiCache.js';
+import { ProviderIconsApiCall } from '../../MovieApiCache.js';
 
 function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, infoState, currentTranslation }) {
 
@@ -12,7 +12,7 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
     useEffect(() => {
         ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
             setViewingOptions(filteredViewingOptions(result));
-            if (!result || result < 1) setFetchStatus('Failed to load viewing options');
+            if (!result || result < 1) setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
         });
 
     }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])
@@ -29,7 +29,6 @@ function ProviderIconsList({ movieTitle, movieID, tvMovieToggle, currentRegion, 
                 key = `${sectionLabel.buy}/${sectionLabel.rent}:`;
                 break;
             case 'buy':
-                console.log(key);
                 key = `${sectionLabel.buy}`;
             case 'rent':
                 key = `${sectionLabel.rent}`;
