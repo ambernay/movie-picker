@@ -3,18 +3,20 @@ import { useState, useEffect } from 'react';
 
 import { MovieInfoApiCall } from '../../MovieApiCache.js';
 
-function MovieInfo({ infoState, movieID, movieTitle, currentTranslation }) {
+function MovieInfo({ infoState, movieID, releaseDate, movieTitle, tvMovieToggle, 
+    currentTranslation }) {
 
     const [moreInfoData, setMoreInfoData] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
 
     useEffect (() => {
-        MovieInfoApiCall(movieID).then(result => {
+        MovieInfoApiCall(movieID, tvMovieToggle).then(result => {
             const cast = result.cast.slice(0, 5);
             const directing = result.crew.filter((item) => item.job === 'Director');
             const screenWriting = result.crew.filter((item) => item.job === 'Screenplay')
-
-            setMoreInfoData({Cast: [...cast], Directing: [...directing], Screenplay: [...screenWriting]});
+        
+            setMoreInfoData({...moreInfoData, Cast: [...cast], Directing: [...directing], 
+                Screenplay: [...screenWriting], Release_Date: [releaseDate]});
             if (!result || result < 1) setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
         });
     },[setMoreInfoData])
@@ -22,12 +24,13 @@ function MovieInfo({ infoState, movieID, movieTitle, currentTranslation }) {
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    
+
     return (
         <section className={infoState === 'more-info' ? 'movie-info' : 'hidden'}>
             <div className='wheretowatch-container'>
                 <h4 className='wheretowatch-heading'>{movieTitle}</h4>
                 <ul className='viewing-options-list-container'>
+                    
                     {moreInfoData ? Object.keys(moreInfoData).map((key) => {
                         // create lists
                         const listKey = key + '/' + movieID;
@@ -35,6 +38,7 @@ function MovieInfo({ infoState, movieID, movieTitle, currentTranslation }) {
                         const legendTitle = key === 'Cast' ? capFirstChar(currentTranslation.more_info.cast)
                         : key === "Directing" ? capFirstChar(currentTranslation.more_info.directing)
                         : key === "Screenplay" ? capFirstChar(currentTranslation.more_info.screenplay)
+                        : key === "Release_Date" ? capFirstChar(currentTranslation.more_info.release_date)
                         : currentTranslation.status_messages.no_results;
                         
                         if (moreInfoData[key].length){ 
@@ -46,11 +50,14 @@ function MovieInfo({ infoState, movieID, movieTitle, currentTranslation }) {
                                         <ul className='provider-options-list-container'>
                                             {/* create list name items */}
                                             { moreInfoData[key].map((key) => {
-                                                const listKey = movieID + '/' + key.job + key.name;
-                                                
+                                                // console.log(typeof(key), typeof(key) === typeof('string'));
+                                                const listKey = typeof(key) === typeof('release_date') 
+                                                ?`${movieID}/${key}` 
+                                                : `${movieID}/${key.credit_id}`;
+                                                console.log(listKey);
                                                 return (
                                                     <li key={listKey}>
-                                                        {key.name}
+                                                        {key.name || key}
                                                     </li>
                                                 )
                                             })

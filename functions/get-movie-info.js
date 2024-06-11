@@ -2,9 +2,9 @@ const axios = require('axios');
 
 const handler = async (event) => {
     const apiKey = process.env.tmdb_key;
-    const {movieID} = event.queryStringParameters;
+    const {movieID, mediaType} = event.queryStringParameters;
 
-    const movieInfoURL= `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${apiKey}`;
+    const movieInfoURL= `https://api.themoviedb.org/3/${mediaType}/${movieID}/credits?api_key=${apiKey}`;
  
     try{
         const { data } = await axios.get(movieInfoURL);

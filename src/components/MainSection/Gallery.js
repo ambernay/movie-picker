@@ -67,6 +67,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                                         imagePath={imagePath}
                                         audienceRating={(movie.vote_average)?.toFixed(1)}
                                         movieID={movie.id}
+                                        releaseDate={movie.release_date ? movie.release_date : null}
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}
                                         currentTranslation={currentTranslation}

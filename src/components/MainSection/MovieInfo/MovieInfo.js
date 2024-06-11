@@ -5,7 +5,7 @@ import MoreInfo from './MoreInfo.js';
 
 import { EyeIcon, InfoIcon } from '../../Icons.js';
 
-function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, currentRegion, 
+function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, currentRegion, 
     infoState, setInfoState, currentTranslation }) {
     
     const iconDescription = currentTranslation['sr-only'];
@@ -40,7 +40,9 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, currentRegion
                     <MoreInfo
                         infoState={infoState}
                         movieID={movieID}
+                        releaseDate={releaseDate}
                         movieTitle={movieTitle}
+                        tvMovieToggle={tvMovieToggle}
                         currentTranslation={currentTranslation}
                     />
                     : null

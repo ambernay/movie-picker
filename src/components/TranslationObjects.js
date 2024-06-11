@@ -30,7 +30,7 @@ const TransObj = {
             "tv_icon":"التلفزيون",
             "search_bar":"(ابحث)أيقونة العدسة المكبرة"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"يتم التحميل","failed_to_load":"فشل في التحميل","form_modal":"إختر خيار","no_results":"لا نتائج"},
         "provider_options": {"buy":"اشتريها","rent":"إيجار","stream":"يعرض الان","with_ads":"مع الإعلانات"}
     },
@@ -65,7 +65,7 @@ const TransObj = {
             "tv_icon":"Тэлевізійны сімвал",
             "search_bar":"сімвал павелічальнага шкла (шукаць)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"атрыманне вынікаў","failed_to_load":"Не ўдалося загрузіць","form_modal":"Выберыце варыянт","no_results":"Няма вынікаў"},
         "provider_options": {"buy":"Купіць","rent":"Арэнда","stream":"Stream","with_ads":"З рэкламай"}
     },
@@ -100,7 +100,7 @@ const TransObj = {
             "tv_icon":"ТВ символ",
             "search_bar":"символ на лупа(търсене)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"получаване на резултати","failed_to_load":"изтеглянето се провали","form_modal":"Направете избор","no_results":"Няма резултати"},
         "provider_options": {"buy":"Купува","rent":"под наем","stream":"Стриймове","with_ads":"С реклами"}
     },
@@ -137,7 +137,7 @@ const TransObj = {
             "tv_icon":"symbol TV",
             "search_bar":"symbol lupy (hledat)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"získávání výsledků","failed_to_load":"se nepodařilo stáhnout","form_modal":"Vyberte možnost","no_results":"Žádné výsledky"},
         "provider_options": {"buy":"Koupit","rent":"Pronajmout si","stream":"Streamované","with_ads":"S reklamami"}
     },
@@ -174,7 +174,7 @@ const TransObj = {
             "tv_icon":"TV symbol",
             "search_bar":"forstørrelsesglas symbol"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"indlæsning af oplysninger","failed_to_load":"kunne ikke downloades","form_modal":"Vælg en mulighed","no_results":"Ingen resultater"},
         "provider_options": {"buy":"Købe","rent":"Leje","stream":"Stream","with_ads":"Med annoncer"}
     },
@@ -211,7 +211,7 @@ const TransObj = {
             "tv_icon":"TV-Symbol",
             "search_bar":"Magnifying glass icon (suchen)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"Daten werden geladen","failed_to_load":"Laden fehlgeschlagen","form_modal":"Wähle eine Option","no_results":"keine Ergebnisse"},
         "provider_options": {"buy":"Kaufen","rent":"Mieten","stream":"Stream","with_ads":"Mit Werbung"}
     },
@@ -246,7 +246,7 @@ const TransObj = {
             "tv_icon":"σύμβολο της τηλεόρασης",
             "search_bar":"σύμβολο μεγεθυντικού φακού (ζητώ)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"λήψη αποτελεσμάτων","failed_to_load":"απέτυχε η λήψη","form_modal":"Διάλεξε μια επιλογή","no_results":"Δεν υπάρχουν αποτελέσματα που να ταιριάζουν"},
         "provider_options": {"buy":"Αγορά","rent":"Ενοίκιο","stream":"Σε ροή","with_ads":"Με διαφήμιση"}
     },
@@ -284,7 +284,7 @@ const TransObj = {
             "tv_icon":"TV icon",
             "search_bar":"magnifying glass icon (search)"
         },
-        "more_info":{"cast":"cast", "directing":"directing", "screenplay":"screenplay"},
+        "more_info":{"cast":"cast", "directing":"directing", "screenplay":"screenplay", "release_date":"release date"},
         "status_messages":{"loading":"loading...","failed_to_load":"Failed to load","form_modal":"Make a selection","no_results":"No results"},
         "provider_options": {"buy":"Buy","rent":"Rent","stream":"Stream","with_ads":"With Ads"}
     },
@@ -321,7 +321,7 @@ const TransObj = {
             "tv_icon":"símbolo de televisión",
             "search_bar":"símbolo de lupa (buscar)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"obteniendo resultados","failed_to_load":"Descarga fracasó","form_modal":"Seleccione una opción","no_results":"no hay resultados"},
         "provider_options": {"buy":"Comprar","rent":"Alquilar","stream":"Retransmisión","with_ads":"Con anuncios"}
     },
@@ -358,7 +358,7 @@ const TransObj = {
             "tv_icon":"elokuvan symboli",
             "search_bar":"suurennuslasin symboli (etsiä)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"tulosten saaminen","failed_to_load":"lataaminen epäonnistui","form_modal":"Valitse vaihtoehto","no_results":"Ei tuloksia"},
         "provider_options": {"buy":"Ostaa","rent":"Vuokrata","stream":"Striimattavana","with_ads":"Mainoksilla"}
     },
@@ -395,7 +395,7 @@ const TransObj = {
             "tv_icon":"Symbole de la télévision",
             "search_bar":"symbole de la loupe (chercher)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"obtenir des résultats","failed_to_load":"Échec du chargement","form_modal":"Choisissez","no_results":"Aucun résultat"},
         "provider_options": {"buy":"Acheter","rent":"Louer","stream":"Stream","with_ads":"avec des publicités"}
     },
@@ -430,7 +430,7 @@ const TransObj = {
             "tv_icon":"סמל טלוויזיה",
             "search_bar":"סמל זכוכית מגדלת"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"מקבל תוצאות","failed_to_load":"ההורדה נכשלה","form_modal":"בחר אפשרות","no_results":"אין תוצאות"},
         "provider_options": {"buy":"לִקְנוֹת","rent":"השכרה","stream":"הזרמה","with_ads":"with advertisements"}
     },
@@ -467,7 +467,7 @@ const TransObj = {
             "tv_icon":"TV szimbólum",
             "search_bar":"nagyító szimbólum (keres)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"az eredmények megszerzése","failed_to_load":"Sikertelen letöltés","form_modal":"Válassz egy lehetőséget","no_results":"Nincs eredmény"},
         "provider_options": {"buy":"megvesz","rent":"Bérlés","stream":"Stream","with_ads":"hirdetésekkel"}
     },
@@ -505,7 +505,7 @@ const TransObj = {
             "tv_icon":"simbol televisi",
             "search_bar":"simbol kaca pembesar (Cari)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"hasilnya sedang dimuat","failed_to_load":"gagal mengunduh","form_modal":"Pilih sebuah opsi","no_results":"Tidak ada hasil"},
         "provider_options": {"buy":"Membeli","rent":"Menyewa","stream":"Stream","with_ads":"dengan iklan"}
     },
@@ -543,7 +543,7 @@ const TransObj = {
             "tv_icon":"simbolo televisivo",
             "search_bar":"simbolo della lente di ingrandimento (cercare)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"ottenere risultati","failed_to_load":"impossibile caricare","form_modal":"selezionare e opzione","no_results":"o risultati"},
         "provider_options": {"buy":"Acquistare","rent":"Affitto","stream":"Stream","with_ads":"con annunci"}
     },
@@ -578,7 +578,7 @@ const TransObj = {
             "tv_icon":"テレビのシンボル",
             "search_bar":"虫眼鏡のシンボル 探す"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"加载数据中","failed_to_load":"ダウンロードに失敗しました","form_modal":"選択肢一つを選択してください","no_results":"検索結果はありません"},
         "provider_options": {"buy":"買う","rent":"家賃","stream":"ストリーミング","with_ads":"広告あり"}
     },
@@ -614,7 +614,7 @@ const TransObj = {
             "tv_icon":"ტელევიზორის ხატულა",
             "search_bar":"გამადიდებელი შუშის სიმბოლო (ძებნა)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"იტვირთება","failed_to_load":"ჩამოტვირთვა ვერ მოხერხდა","form_modal":"აირჩიეთ ვარიანტი","no_results":"არანაირი შედეგი"},
         "provider_options": {"buy":"იყიდე","rent":"Ქირავდება","stream":"Stream","with_ads":"რეკლამებით"}
     },
@@ -650,7 +650,7 @@ const TransObj = {
             "tv_icon":"TV 기호",
             "search_bar":"돋보기 기호 (검색)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"결과를 얻는 중","failed_to_load":"다운로드 실패","form_modal":"옵션을 선택하세요","no_results":"결과가 없다"},
         "provider_options": {"buy":"구입하다","rent":"임대","stream":"스트리밍","with_ads":"광고와 함께"}
     },
@@ -688,7 +688,7 @@ const TransObj = {
             "tv_icon":"TV simbolis",
             "search_bar":"didinamojo stiklo simbolis (ieškoti)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"Rezultatų gavimas","failed_to_load":"Nepavyko atsisiųsti","form_modal":"pasirinkite parinktį","no_results":"jokių rezultatų"},
         "provider_options": {"buy":"Pirkti","rent":"Nuoma","stream":"Internetu","with_ads":"su skelbimais"}
     },
@@ -726,7 +726,7 @@ const TransObj = {
             "tv_icon":"tv-pictogram",
             "search_bar":"vergrootglaspictogram(Zoeken)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"het verkrijgen van de resultaten","failed_to_load":"Laden mislukt","form_modal":"Kies een optie","no_results":"Geen resultaten"},
         "provider_options": {"buy":"Kopen","rent":"Huur","stream":"Stream","with_ads":"Met advertenties"}
     },
@@ -764,7 +764,7 @@ const TransObj = {
             "tv_icon":"symbol telewizora",
             "search_bar":"symbol szkła powiększającego (Szukaj)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"uzyskanie wyników","failed_to_load":"Nie udało się pobrać","form_modal":"Wybierz opcję","no_results":"Brak wyników"},
         "provider_options": {"buy":"Kupić","rent":"Wynajem","stream":"Stream","with_ads":"Z reklamami"}
     },
@@ -802,7 +802,7 @@ const TransObj = {
             "tv_icon":"símbolo de televisão",
             "search_bar":"magnifying glass symbol (Pesquisar)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"obtendo resultados","failed_to_load":"Falha ao carregar","form_modal":"Selecione uma opção","no_results":"Nenhum resultado"},
         "provider_options": {"buy":"Comprar","rent":"Aluguel","stream":"Stream","with_ads":"com anúncios"}
     },
@@ -840,7 +840,7 @@ const TransObj = {
             "tv_icon":"Simbol TV",
             "search_bar":"simbolul lupei (caută)",
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"obtinerea de rezultate","failed_to_load":"Descărcarea eșuată","form_modal":"selecteaza o optiune","no_results":"fara rezultate"},
         "provider_options": {"buy":"Cumpără","rent":"Chirie","stream":"Stream","with_ads":"cu reclame"}
     },
@@ -876,7 +876,7 @@ const TransObj = {
             "tv_icon":"символ телевизора",
             "search_bar":"символ увеличительного стекла (искать)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"получение результатов","failed_to_load":"Не удалось скачать","form_modal":"Выберите вариант","no_results":"Без результатов"},
         "provider_options": {"buy":"Купить","rent":"Арендовать","stream":"Онлайн","with_ads":"С рекламой"}
     },
@@ -914,7 +914,7 @@ const TransObj = {
             "tv_icon":"symbol TV",
             "search_bar":"symbol lupy (Hľadať)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"získavanie výsledkov","failed_to_load":"Sťahovanie zlyhalo","form_modal":"Vyberte možnosť","no_results":"Žiadne výsledky"},
         "provider_options": {"buy":"Kúpiť","rent":"Nájomné","stream":"Streamované","with_ads":"s reklamami"}
     },
@@ -952,7 +952,7 @@ const TransObj = {
             "tv_icon":"tv simbol",
             "search_bar":"simbol povečevalnega stekla (raziskovati)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"pridobivanje rezultatov","failed_to_load":"Prenos ni uspel","form_modal":"Izberite možnost","no_results":"Brez rezultatov"},
         "provider_options": {"buy":"Nakup","rent":"Najemnina","stream":"Stream","with_ads":"z oglasi"}
     },
@@ -988,7 +988,7 @@ const TransObj = {
             "tv_icon":"ТВ симбол",
             "search_bar":"симбол лупе (Претражите)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"добијање резултата","failed_to_load":"Преузимање није успело","form_modal":"изаберите опцију","no_results":"Нема резултата"},
         "provider_options": {"buy":"Купи","rent":"Закуп","stream":"Стрим","with_ads":"са рекламама"}
     },
@@ -1023,7 +1023,7 @@ const TransObj = {
             "tv_icon":"TV-symbol",
             "search_bar":"symbol för förstoringsglas (Sök)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"laddar resultaten","failed_to_load":"Nedladdning misslyckad","form_modal":"Välj ett alternativ","no_results":"inga resultat"},
         "provider_options": {"buy":"köpa","rent":"Hyra","stream":"Strömmas","with_ads":"med annonser"}
     },
@@ -1059,7 +1059,7 @@ const TransObj = {
             "tv_icon":"สัญลักษณ์ทีวี",
             "search_bar":"สัญลักษณ์แว่นขยาย (สอบถาม)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"กำลังโหลดผลลัพธ์","failed_to_load":"ดาวน์โหลดไม่สำเร็จ","form_modal":"เลือกตัวเลือก","no_results":"ไม่มีผลลัพธ์"},
         "provider_options": {"buy":"ซื้อ","rent":"เช่า","stream":"Stream","with_ads":"ด้วยโฆษณา"}
 
@@ -1098,7 +1098,7 @@ const TransObj = {
             "tv_icon":"televizyon sembolü",
             "search_bar":"büyüteç sembolü (ara)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"Sonuç Alma","failed_to_load":"İndirme başarısız","form_modal":"Bir seçenek seçin","no_results":"Sonuç yok"},
         "provider_options": {"buy":"Satın almak","rent":"Kira","stream":"Yayın Akışı","with_ads":"reklamlarla"}
     },
@@ -1134,7 +1134,7 @@ const TransObj = {
             "tv_icon":"biểu tượng tivi",
             "search_bar":"biểu tượng kính lúp (tìm kiếm)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"đang tải kết quả","failed_to_load":"Không thể tải xuống","form_modal":"Chọn một tùy chọn","no_results":"Ko có kết quả"},
         "provider_options": {"buy":"Mua","rent":"Thuê","stream":"Stream","with_ads":"với quảng cáo"}
     },
@@ -1170,7 +1170,7 @@ const TransObj = {
             "tv_icon":"电视符号",
             "search_bar":"放大镜符号 搜寻"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":""},
+        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
         "status_messages":{"loading":"正在取得成果","failed_to_load":"下载失败","form_modal":"选择一个选项","no_results":"没有结果"},
         "provider_options": {"buy":"买","rent":"租","stream":"流媒体","with_ads":"有广告"}
     }

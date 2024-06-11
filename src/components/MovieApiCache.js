@@ -104,12 +104,12 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
 }
 
 let movieInfoPromise = {};
-const MovieInfoApiCall = async (movieID) => {
+const MovieInfoApiCall = async (movieID, tvOrMovie) => {
     
     const key = movieID;
    
     if (!movieInfoPromise.hasOwnProperty(key)) {
-        const movieInfoAPI = `/.netlify/functions/get-movie-info?movieID=${movieID}`;
+        const movieInfoAPI = `/.netlify/functions/get-movie-info?movieID=${movieID}&mediaType=${tvOrMovie}`;
 
         movieInfoPromise[key] = fetch(movieInfoAPI)
             .then(res => {
@@ -122,4 +122,6 @@ const MovieInfoApiCall = async (movieID) => {
     return movieInfoPromise[key];
 }
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall }
+
+export { RegionApiCall, ProviderListApiCall, GenreListApiCall, 
+    ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall }
