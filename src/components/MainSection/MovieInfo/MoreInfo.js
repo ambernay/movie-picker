@@ -52,7 +52,7 @@ function MovieInfo({ movieID, releaseDate, movieTitle, tvMovieToggle,
                 : currentTranslation.status_messages.no_results;
                 
                 return (
-                    <li className='full-width' key={listKey}>
+                    <li key={listKey}>
                         <fieldset className='movie-info-list-fieldsets'>
                             
                             <legend>{legendTitle}</legend>
