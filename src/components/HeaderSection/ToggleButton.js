@@ -10,7 +10,6 @@ function ToggleButton({ tvMovieToggle, setTvMovieToggle, setCurrentPage, iconDes
             setTvMovieToggle('movie');
         }
         setCurrentPage(1);
-        console.log(iconDescription.film_icon)
     }
 
     return (

@@ -18,7 +18,7 @@ const handler = async (event) => {
     try{
         const { data } = await axios.get(url)
         let apiResults = { movieResults: data.results, totalPages: data.total_pages }
-      
+        
         return {
             statusCode: 200,
             body: JSON.stringify(apiResults)
