@@ -342,7 +342,6 @@ img {
     --wrapperWidth: 80%;
     --movieWidth: 265px;
     --paddingGap: 30px;
-    --galleryItemPadding: 10px;
     /* header */
     --headerHeight: calc(var(--mainHeaderFontSize) + 0.8rem);
     --subHeaderHeight: 1.5rem;
@@ -353,7 +352,9 @@ img {
     --searchIconWidth: 1.5rem;
     --narrow-dropdown-width: 55px;
     --toggleDropdownContainerWidth: calc(var(--switchWidth) + (var(--narrow-dropdown-width) + 5px));
-
+    /* gallery */
+    --galleryItemMinWidth: 245px;
+    --galleryItemPadding: 10px;
     /* form */
     --formWidth: 96%;
     --formHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
@@ -854,7 +855,7 @@ button:focus svg {
     background-color: var(--backgroundColor);
     border-radius: 10%;
     width: 43%;
-    height: 80%;
+    height: 81%;
     top: 10%;
     z-index: 0;
     transition: left 0.5s linear;
@@ -959,7 +960,7 @@ main {
     background: var(--lightAccent);
     flex-direction: column;
     flex: 1;
-    min-width: 245px;
+    min-width: var(--galleryItemMinWidth);
     width: max-content;
     max-width: min-content;
     padding: var(--galleryItemPadding);
@@ -976,8 +977,9 @@ li .placeholder-image {
 ul li .info-container {
     display: flex;
     overflow: hidden;
-    width: 100%;
+    min-width: 100%;
     max-height: 6rem;
+    max-width: calc(var(--galleryItemMinWidth) - (var(--galleryItemPadding) * 2));
     justify-content: space-between;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 5;
@@ -1632,6 +1634,26 @@ input[type="radio"] {
 
     header h1 {
         font-size: 1.6rem;
+    }
+
+    /* to fit gallery items on phone screen */
+    :root{
+        --galleryItemMinWidth: 235px;
+    }
+    .gallery-container {
+        padding: 1.5dvh;
+    }
+
+    .gallery-items {
+        max-height: 400px;
+    }
+
+    .info-container h3 {
+        line-height: 1.2rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        align-self: center;
     }
     /* for when region moves next to x-button on mobile */
     .region-list.form-region {

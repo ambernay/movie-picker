@@ -24,7 +24,7 @@ function App() {
 
     // screen size state for for toggle button
     const [screenSize, setScreenSize] = useState(evaluateScreenSize());
-
+    console.log(navigator.standalone === true);
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, []);
