@@ -62,7 +62,7 @@ function App() {
                 setSearchState={setSearchState}
                 setUserSelections={setUserSelections}
             />
-            <main onClick={handleDropdown}>
+            <main>
                 <Gallery
                     userSelections={userSelections}
                     isTrending={isTrending}
