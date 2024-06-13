@@ -14,8 +14,6 @@ function GalleryItems({ movieID, releaseDate, movieTitle, overview, imagePath,
     let truncatedTitle = (movieTitle.length > 35) ? (movieTitle.slice(0, 35) + "...") : movieTitle;
 
     const handleMouseLeave = () => {
-        // resets state to overview on mouseout
-        setInfoState('hidden');
         // blurs active element to allow hover out
         if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
     }
@@ -27,7 +25,7 @@ function GalleryItems({ movieID, releaseDate, movieTitle, overview, imagePath,
         onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave}>
             <img className={imageHeightClass} src={imagePath} alt={movieTitle} />
             <div className="info-container">
-                <h3>{truncatedTitle}</h3>
+                <h3>{movieTitle}</h3>
                 <p className="rating">{rating}</p>
             </div>
             <MovieInfo
