@@ -345,7 +345,7 @@ img {
     --paddingGap: 30px;
     /* header */
     --headerHeight: calc(var(--mainHeaderFontSize) + 0.8rem);
-    --subHeaderHeight: 1.5rem;
+    --subHeaderHeight: 1.6rem;
     --headerMargin: calc(var(--headerHeight) + var(--subHeaderHeight));
     --subHeadingMargin: 4px;
     --mainHeaderFontSize: 2.2rem;
@@ -372,7 +372,7 @@ img {
     --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
-    --searchFormContainerHeight: calc(var(--searchInputHeight) + 1rem)
+    --searchFormContainerHeight: calc(var(--searchInputHeight) * 3);
     /* #endregion - sizes */
 }
 
@@ -728,13 +728,13 @@ li:focus {
 }
 
 .input-container input {
-    --listItemWidth: 245px;
     --inputPadding: 4px;
     background: var(--lightAccent);
     color: var(--darkNeutral);
     height: var(--searchInputHeight);
-    width: calc(var(--listItemWidth) + var(--inputPadding));
+    width: calc(var(--galleryItemMinWidth) - var(--searchInputHeight));
     padding: var(--inputPadding);
+    border-radius: 0;
 }
 
 .input-container input::placeholder {
