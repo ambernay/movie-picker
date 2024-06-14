@@ -335,6 +335,7 @@ img {
     /* fonts  and icons */
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
+    --galleryItemTitleSize: 1.2rem;
     --movieInfoIconSize: 31px;
     /* #region - sizes */
     /* main */
@@ -353,7 +354,7 @@ img {
     --narrow-dropdown-width: 55px;
     --toggleDropdownContainerWidth: calc(var(--switchWidth) + (var(--narrow-dropdown-width) + 5px));
     /* gallery */
-    --galleryItemMinWidth: 245px;
+    --galleryItemMinWidth: 14rem;
     --galleryItemPadding: 10px;
     /* form */
     --formWidth: 96%;
@@ -426,7 +427,6 @@ a {
 p,
 select {
     font-size: 0.8rem;
-    line-height: 1rem;
 }
 
 /* #endregion - fonts and sizes */
@@ -966,6 +966,12 @@ main {
     padding: var(--galleryItemPadding);
 }
 
+.gallery-container h3,
+.gallery-container h4 {
+    font-size: var(--galleryItemTitleSize);
+    line-height: 1.2rem;
+}
+
 li img {
     background: var(--midAccent);
 }
@@ -988,10 +994,14 @@ ul li .info-container {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical; 
-    line-height: 1.2rem;
     text-overflow: ellipsis;
     overflow: hidden;
     align-self: center;
+}
+
+.movie-info-container p {
+    font-size: calc(var(--galleryItemMinWidth) / 15);
+    line-height: calc((var(--galleryItemMinWidth) / 13));
 }
 
 /* rating */
@@ -1585,8 +1595,18 @@ input[type="radio"] {
 
 @media(max-width: 565px) {
 
+    /* #region - variables */
     :root {
+        --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
         --mainHeaderFontSize: calc(1.3rem + 1vw);
+        --galleryItemMinWidth: 38dvh;
+    }
+    /* #endregion - variables */
+
+    .main-title {
+        width: calc(var(--mainHeaderFontSize) * 3.5);
+        white-space: pre-line;
+        line-height: var(--mainHeaderFontSize);
     }
 
     .form-nav {
@@ -1609,18 +1629,6 @@ input[type="radio"] {
 
 @media(max-width: 460px) {
 
-    /* #region - variables */
-    :root {
-        --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
-    }
-    /* #endregion - variables */
-
-    .main-title {
-        width: calc(var(--mainHeaderFontSize) * 3.5);
-        white-space: pre-line;
-        line-height: var(--mainHeaderFontSize);
-    }
-
     .wrapper {
         --wrapperWidth: 90%;
     }
@@ -1629,16 +1637,9 @@ input[type="radio"] {
         font-size: 1.6rem;
     }
     /* #region - to fit gallery items on phone screen */
-    :root{
-        --galleryItemMinWidth: 40dvh;
-    }
+    
     .gallery-container {
         padding: 1.5dvh;
-    }
-
-    .info-container h3 {
-        font-size: 1rem;
-        line-height: 1.1rem;
     }
     /* #endregion - to fit gallery items on phone screen */
 
