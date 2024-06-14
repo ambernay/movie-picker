@@ -1016,7 +1016,7 @@ ul li .info-container {
     padding: 5px;
 }
 
-li .movie-info-container {
+.gallery-items .movie-info-container {
     visibility: collapse;
     /* background: var(--lightAccent); */
     position: absolute;
@@ -1099,13 +1099,13 @@ li .movie-info-container {
     cursor: pointer;
 }
 
-li:hover .movie-info-container,
-li:active .movie-info-container {
+.gallery-items:hover .movie-info-container,
+.gallery-items:active .movie-info-container {
     display: block;
     visibility: visible;
     max-height: calc(100% - var(--galleryItemPadding));
     height: 100%;
-    /* transition: max-height 0.5s ease-in-out; */
+    /* transition: all 0.5s ease-in-out; */
 }
 
 /* #region - movie-info */
