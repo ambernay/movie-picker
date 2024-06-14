@@ -336,12 +336,13 @@ img {
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
     --galleryItemTitleSize: 1.2rem;
-    --movieInfoIconSize: 31px;
+    --smallTextSize: calc(var(--galleryItemMinWidth) / 15);
+    --smallTextLineHeight: calc(var(--galleryItemMinWidth) / 13);
+    --movieInfoIconSize: 1.8rem;
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
     --wrapperWidth: 80%;
-    --movieWidth: 265px;
     --paddingGap: 30px;
     /* header */
     --headerHeight: calc(var(--mainHeaderFontSize) + 0.8rem);
@@ -1000,8 +1001,9 @@ ul li .info-container {
 }
 
 .movie-info-container p {
-    font-size: calc(var(--galleryItemMinWidth) / 15);
-    line-height: calc((var(--galleryItemMinWidth) / 13));
+    font-size: var(--smallTextSize);
+    line-height: var(--smallTextLineHeight);
+    margin: 5px 0;
 }
 
 /* rating */
@@ -1123,6 +1125,7 @@ li:active .movie-info-container {
 
 .movie-info-list {
     width: 100%;
+    justify-content: space-between;
 }
 
 .movie-info-list-container.movie-info-middle li,
@@ -1134,12 +1137,14 @@ li:active .movie-info-container {
     text-align: center;
     padding: 3px;
     margin-bottom: 5px;
-    font-size: 0.9rem;
+    font-size: var(--smallTextSize);
+    line-height: var(--smallTextLineHeight);
     width: 100%;
 }
 /* for viewing options provider icons */
-.movie-info-container .movie-info-list .auto-width {
-    width: auto;
+.movie-info-container .movie-info-list .provider-icon-list {
+    width: 30%;
+    margin: 2px;
 }
 
 .movie-info-list-fieldsets {
@@ -1147,7 +1152,6 @@ li:active .movie-info-container {
     margin: 5px calc(var(--providerFieldsetPadding) / 2);
     padding: var(--providerFieldsetPadding);
     text-align: left;
-    font-size: 1rem;
 }
 
 .movie-info-list-fieldsets h4 {
@@ -1155,7 +1159,6 @@ li:active .movie-info-container {
 }
 
 .provider-icons {
-    width: 2rem;
     border: solid var(--lightAccent) 1px;
 }
 
@@ -1300,7 +1303,7 @@ fieldset {
 }
 
 .provider-buttons {
-    flex: 0 0 135px;
+    flex: 0 0 100px;
 }
 
 fieldset label {
