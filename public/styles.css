@@ -1139,12 +1139,13 @@ ul li .info-container {
     padding: 3px;
     margin-bottom: 5px;
     font-size: var(--smallTextSize);
-    line-height: var(--smallTextLineHeight);
+    line-height: calc(var(--smallTextSize) + 20%);
     width: 100%;
 }
 /* for viewing options provider icons */
 .movie-info-container .movie-info-list .provider-icon-list {
     width: 30%;
+    min-width: 2.9rem;
     margin: 2px;
 }
 
