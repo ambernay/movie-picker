@@ -336,8 +336,7 @@ img {
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
     --galleryItemTitleSize: 1.2rem;
-    --smallTextSize: calc(var(--galleryItemMinWidth) / 15);
-    --smallTextLineHeight: calc(var(--galleryItemMinWidth) / 13);
+    --smallTextSize: 90%;
     --movieInfoIconSize: 1.8rem;
     /* #region - sizes */
     /* main */
@@ -470,7 +469,6 @@ header {
 .heading-container {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 .find-movie-button figure,
@@ -734,6 +732,7 @@ li:focus {
     color: var(--darkNeutral);
     height: var(--searchInputHeight);
     width: calc(var(--galleryItemMinWidth) - var(--searchInputHeight));
+    min-width: 10rem;
     padding: var(--inputPadding);
     border-radius: 0;
 }
@@ -970,7 +969,7 @@ main {
 .gallery-container h3,
 .gallery-container h4 {
     font-size: var(--galleryItemTitleSize);
-    line-height: 1.2rem;
+    line-height: var(--galleryItemTitleSize + 0.1rem);
 }
 
 li img {
@@ -1002,7 +1001,7 @@ ul li .info-container {
 
 .movie-info-container p {
     font-size: var(--smallTextSize);
-    line-height: var(--smallTextLineHeight);
+    line-height: calc(var(--smallTextSize) + 20%);
     margin: 5px 0;
 }
 
@@ -1052,7 +1051,7 @@ ul li .info-container {
     left: 0;
     align-items: flex-end;
     background-color: var(--midAccent);
-    padding: 8px 6px;
+    padding: 5px;
 }
 
 .movie-info-container .heading-container h4 {
@@ -1064,7 +1063,9 @@ ul li .info-container {
     position: relative;
     width: var(--movieInfoIconSize);
     align-items: center;
+    align-self: flex-start;
     justify-content: center;
+    padding: 14px 0;
 }
 
 .eye-icon {
@@ -1602,7 +1603,7 @@ input[type="radio"] {
     :root {
         --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
         --mainHeaderFontSize: calc(1.3rem + 1vw);
-        --galleryItemMinWidth: 38dvh;
+        --galleryItemMinWidth: 40dvh;
     }
     /* #endregion - variables */
 
@@ -1701,6 +1702,15 @@ input[type="radio"] {
 }
 
 @media (max-height: 600px) {
+
+    :root {
+        --galleryItemTitleSize: 1rem;
+        --movieInfoIconSize: 1.6rem;
+    }
+
+    .gallery-container {
+        padding: 1dvh;
+    }
 
     .info-container h3 {
         -webkit-line-clamp: 1;
