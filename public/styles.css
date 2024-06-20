@@ -336,7 +336,8 @@ img {
     --headingFont: 'Limelight', cursive;
     --mainFont: 'Merriweather', serif;
     --galleryItemTitleSize: 1.2rem;
-    --smallTextSize: 90%;
+    --smallTextSize: 1rem;
+    --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 1.8rem;
     /* #region - sizes */
     /* main */
@@ -1001,7 +1002,7 @@ ul li .info-container {
 
 .movie-info-container p {
     font-size: var(--smallTextSize);
-    line-height: calc(var(--smallTextSize) + 20%);
+    line-height: var(--smallTextLineheight);
     margin: 5px 0;
 }
 
@@ -1139,12 +1140,12 @@ ul li .info-container {
     padding: 3px;
     margin-bottom: 5px;
     font-size: var(--smallTextSize);
-    line-height: calc(var(--smallTextSize) + 20%);
+    line-height: var(--smallTextLineheight);
     width: 100%;
 }
 /* for viewing options provider icons */
 .movie-info-container .movie-info-list .provider-icon-list {
-    width: 30%;
+    flex: 0 1 30%;
     min-width: 2.9rem;
     margin: 2px;
 }
@@ -1633,6 +1634,9 @@ input[type="radio"] {
 
 
 @media(max-width: 460px) {
+    :root {
+        --smallTextSize: calc(0.8rem + 0.8dvh);
+    }
 
     .wrapper {
         --wrapperWidth: 90%;
