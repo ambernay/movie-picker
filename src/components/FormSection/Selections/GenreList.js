@@ -1,7 +1,7 @@
 import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
-function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel, currentTranslation }) {
+function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel, currentTranslation }) {
 
     const [genreList, setGenreList] = useState([]);
 
@@ -11,7 +11,10 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage
     }, [tvMovieToggle, currentLanguage, setGenreList]);
 
     const handleChange = (e) => {
-        setGenre(e.target);
+        let newValue = [e.target.value, e.target.id];
+        
+        if (e.target.checked) setGenres(pre => [...pre, newValue]);
+        else if (!e.target.checked) setGenres(pre => pre.filter(item => item[1] !== newValue[1]))
         setIsValidRequest(true);
     }
 
@@ -21,7 +24,7 @@ function GenreList({ setGenre, setIsValidRequest, tvMovieToggle, currentLanguage
             {genreList.length > 0 ? genreList.map((genre) => {
                 return (
                     <div className="radio-button-container genre-buttons" key={genre.id}>
-                        <input onChange={handleChange} type="radio" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
+                        <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
                         <label htmlFor={genre.id}>{genre.name}</label>
                     </div>
                 )

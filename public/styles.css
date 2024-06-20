@@ -1313,7 +1313,8 @@ fieldset label {
     align-self: center;
 }
 
-input[type="radio"] {
+input[type="radio"], 
+input[type="checkbox"] {
     accent-color: var(--backgroundColor);
     margin: 10px;
 }

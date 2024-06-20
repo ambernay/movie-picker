@@ -11,11 +11,11 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     isDropdownVisible, currentRegion, currentLanguage, setCurrentRegion, 
     currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, setSearchState }) {
 
-    const [genre, setGenre] = useState();
+    const [genres, setGenres] = useState([]);
     const [decade, setDecade] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
-    const [provider, setProvider] = useState();
+    const [providers, setProviders] = useState([]);
     const [formLabels, setFormLabels] = useState(TransObj[`${currentLanguage[0]}`]['section_labels']);
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
@@ -29,7 +29,9 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
         if (searchState === 'formSearch')
-        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre));
+        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
+        sortOption, currentRegion, currentLanguage, startDate, endDate, 
+        providers, genres));
     },[currentPage, tvMovieToggle, currentLanguage]);
 
     useEffect(() => {
@@ -44,7 +46,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
         e.preventDefault();
         setSubmitAttempted(true);
 
-        if (genre || startDate || endDate || provider) {
+        if (genres || startDate || endDate || providers) {
             setIsDropdownVisible(false);
             setIsTrending(false);
             setIsValidRequest(true);
@@ -55,12 +57,29 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
             setTimeout(() => window.scrollTo(0, 0), 100);
         }
 
-        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre));
+        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
+            sortOption, currentRegion, currentLanguage, startDate, endDate, 
+            providers, genres));
         setSearchState('formSearch');
     }
 
+    const addQueries = (valueToUpdate, newQueryType, newValue) => {
+        if (valueToUpdate[newQueryType] === undefined) {
+            valueToUpdate[newQueryType] = newValue;  
+        }
+        else {
+            // adds a pipe to the begining of each query after first
+            if(valueToUpdate[newQueryType].length > 0){
+                valueToUpdate[newQueryType] += `|${newValue}`;}
+            else {
+                valueToUpdate[newQueryType] += newValue;
+            }
+            }
+    }
+
     // structuring the url from user selections to be passed into MovieApiCall
-const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, currentLanguage, startDate, endDate, provider, genre) => {
+const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, 
+    currentLanguage, startDate, endDate, providers, genres) => {
 
     const regionCode = currentRegion[0];
     const regionNativeName = currentRegion[2];
@@ -84,20 +103,26 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, cur
         selectionsForMessage.push(decade.id);
         cacheKeyArr.push(decade.id);
     }
-    if (provider && provider.id !== "all") {
-        storeUserSelections["with_watch_providers"] = provider.id;
-        // info for cacheKey and 'no results' message
-        selectionsForMessage.push(provider.value);
-        // discard everything after first word
-        cacheKeyArr.push((`${provider.value}`).split(' ')[0]);
+    if (providers && providers.length > 0) {
+        providers.map((provider) => {
+            const [providerValue, providerID] = provider;
+            addQueries(storeUserSelections, "with_watch_providers", providerID);
+             // info for cacheKey and 'no results' message
+            selectionsForMessage.push(providerValue);
+        });
+        cacheKeyArr.push((storeUserSelections["with_watch_providers"]));   
     }
-    if (genre && genre.id !== "all-genres") {
-        storeUserSelections["with_genres"] = genre.id;
-        // info for cacheKey and 'no results' message
-        // makes genre first index
-        selectionsForMessage.unshift(genre.value); 
+    if (genres && genres.length > 0) {
+        genres.map((genre) => {
+            const [genreValue, genreID] = genre;
+            addQueries(storeUserSelections, "with_genres", genreID);
+            // info for cacheKey and 'no results' message
+            // makes genre first index
+            selectionsForMessage.unshift(genreValue); 
+        });
+        
         // replace spaces with underscores
-        cacheKeyArr.push((`${genre.value}`).split(' ').join('_'));
+        cacheKeyArr.push(storeUserSelections["with_genres"]);
     };
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
 
@@ -105,7 +130,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion, cur
     let sortOptionTitle = (`${sortOption}`).split('_')[1];
     selectionsForMessage.push(regionNativeName); 
     cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
-
+    console.log(selectionsForMessage);
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
 }
 
@@ -159,14 +184,14 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         : null
                     }
                     <FormModal
-                        isGenreSelected={genre}
+                        isGenreSelected={genres}
                         submitAttempted={submitAttempted}
                         isValidRequest={isValidRequest}
                         currentTranslation={currentTranslation}
                     />
                     <section className="fieldset-container">
                         <GenreList
-                            setGenre={setGenre}
+                            setGenres={setGenres}
                             setIsValidRequest={setIsValidRequest}
                             tvMovieToggle={tvMovieToggle}
                             currentLanguage={currentLanguage}
@@ -182,7 +207,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             currentTranslation={currentTranslation}
                         />
                         <ProviderFormList
-                            setProvider={setProvider}
+                            setProviders={setProviders}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.provider)}
                             currentTranslation={currentTranslation}
