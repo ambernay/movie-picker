@@ -9,12 +9,12 @@ const handler = async (event) => {
     const defaultURL = `${baseURL}/trending/${mediaType}/day?${apiKey}&language=${language}&page=${page}`;
     const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}&page=${page}`;
     const searchBarURL = `${baseURL}/search/${mediaType}?query=${searchValue}&${apiKey}&language=${language}&page=${page}`;
-
+    
     let url;
         if (isTrending === 'true') {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
         else if(searchState === 'searchBar') {url = searchBarURL}
-    
+        
     try{
         const { data } = await axios.get(url)
         let apiResults = { movieResults: data.results, totalPages: data.total_pages }

@@ -127,10 +127,12 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
 
     // split on underscores and discard value before first underscore
-    let sortOptionTitle = (`${sortOption}`).split('_')[1];
+    let splitIndex = sortOption.includes('date') ? 2 : 1;
+    let sortOptionTitle = (`${sortOption}`).split('_')[splitIndex];
+   
     selectionsForMessage.push(regionNativeName); 
     cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
-    console.log(selectionsForMessage);
+
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
 }
 

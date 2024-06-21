@@ -269,8 +269,8 @@ const TransObj = {
             "rating_asc":"Rating: low to high",
             "A_Z":"Titles: A-Z",
             "Z_A":"Titles Z-A",
-            "date_desc":"Release date: old to new",
-            "date_asc":"Release date: new to old"
+            "date_desc":"Release date: new to old",
+            "date_asc":"Release date: old to new"
         }, 
         "sr-only": {
             "back_arrow":"back arrow button: previous page",
