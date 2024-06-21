@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { GeoLocationApiCall } from './components/MovieApiCache.js';
 import Header from './components/HeaderSection/Header.js';
 import Gallery from './components/MainSection/Gallery.js';
 import Form from './components/FormSection/Form.js';
@@ -10,7 +11,8 @@ function App() {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
-    const [currentRegion, setCurrentRegion] = useState(["CA", "Canada", "Canada"]);
+    // [region-code, name, native-name]
+    const [currentRegion, setCurrentRegion] = useState(["US", "United States", "United States"]);
     const [currentLanguage, setCurrentLanguage] = useState(["en", "English", "English"]);
     const [searchState, setSearchState] = useState(''); 
 
@@ -27,6 +29,13 @@ function App() {
    
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
+        //  get user's location on load
+        GeoLocationApiCall().then(result => {
+            const defaultCountry = result.country;
+            const defaultLanguage = defaultCountry.languages[0];
+            setCurrentRegion([`${defaultCountry.iso_code}`, `${defaultCountry.name}`, `${defaultCountry.name_native}`]);
+            setCurrentLanguage([`${defaultLanguage.iso_code}`, `${defaultLanguage.name}`, `${defaultLanguage.name_native}`])
+        });
     }, []);
 
     // stop background scroll when form is visible
