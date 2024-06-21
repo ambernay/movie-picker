@@ -32,7 +32,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
         setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
         sortOption, currentRegion, currentLanguage, startDate, endDate, 
         providers, genres));
-    },[currentPage, tvMovieToggle, currentLanguage]);
+    },[currentPage, tvMovieToggle, currentLanguage, currentRegion]);
 
     useEffect(() => {
         setFormLabels(formLabelTranslation);
