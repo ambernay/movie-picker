@@ -25,7 +25,8 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
     const tabIndex = isDropdownVisible ? '-1' : '0';
 
     useEffect(() => {
-        MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage, userSelections, searchState).then(result => {
+        MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage,
+             userSelections, searchState).then(result => {
             setStatusMessage(loadingMessage);
 
             let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
@@ -38,7 +39,9 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
             else if (!result.movieResults && !isTrending){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
             else if (result.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
         });
-    }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion, currentLanguage, tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
+    }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion,
+         currentLanguage, tvMovieToggle, searchState, setTotalPages, 
+         setMoviesToDisplay]);
 
     return (
         <>

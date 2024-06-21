@@ -24,7 +24,7 @@ function App() {
 
     // screen size state for for toggle button
     const [screenSize, setScreenSize] = useState(evaluateScreenSize());
-
+   
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, []);
@@ -62,7 +62,7 @@ function App() {
                 setSearchState={setSearchState}
                 setUserSelections={setUserSelections}
             />
-            <main onClick={handleDropdown}>
+            <main>
                 <Gallery
                     userSelections={userSelections}
                     isTrending={isTrending}

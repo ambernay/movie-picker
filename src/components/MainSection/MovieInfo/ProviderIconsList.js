@@ -96,7 +96,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
                                     return (
-                                        <li className={key.logo_path !== 'N/A' ? 'auto-width' : null} key={iconKey}>
+                                        <li className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null} key={iconKey}>
                                             {(key.logo_path === 'N/A') ?
                                                 <h4>{key.logo_path}</h4>
                                                 :

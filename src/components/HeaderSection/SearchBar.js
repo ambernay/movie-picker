@@ -44,6 +44,7 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
         e.preventDefault();
         setCurrentPage(1);
         setIsTrending(false);
+        setIsOpen(false);
         // selection query / cache key / result message
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
         setSearchState('searchBar');

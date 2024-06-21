@@ -1,7 +1,8 @@
 import { useState, useEffect, memo } from "react";
 import { ProviderListApiCall } from '../../MovieApiCache';
 
-function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sectionLabel, currentTranslation }) {
+function ProviderFormList({ setProviders, setIsValidRequest, 
+    currentLanguage, sectionLabel, currentTranslation }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
 
@@ -10,13 +11,12 @@ function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sec
     }, [setProviderFormList]);
 
     const handleChange = (e) => {
-        setProvider(e.target);
+        let newValue = [e.target.value, e.target.id];
+        
+        if (e.target.checked) setProviders(pre => [...pre, newValue]);
+        else if (!e.target.checked) setProviders(pre => pre.filter(item => item[1] !== newValue[1]))
         setIsValidRequest(true);
     }
-
-    const trimmedName = (str) => {
-        return (str.indexOf(' ') !== -1) ? str.slice(0, str.indexOf(' ')) : str;
-    };
 
     return (
         <fieldset className="providers-fieldset">
@@ -25,7 +25,7 @@ function ProviderFormList({ setProvider, setIsValidRequest, currentLanguage, sec
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 return (
                     <div className="radio-button-container provider-buttons" key={provider.provider_id}>
-                        <input onChange={handleChange} type="radio" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
+                        <input onChange={handleChange} type="checkbox" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
                         <label htmlFor={provider.provider_id}>
                             <img className='provider-icons' src={imageURL + provider.logo_path} alt={provider.provider_name}/>
                         </label>
