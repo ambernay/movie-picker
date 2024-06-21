@@ -9,7 +9,8 @@ import FormModal from './FormModal.js';
 
 function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, 
     isDropdownVisible, currentRegion, currentLanguage, setCurrentRegion, 
-    currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, setSearchState }) {
+    currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, 
+    setSearchState }) {
 
     const [genres, setGenres] = useState([]);
     const [decade, setDecade] = useState();
@@ -28,11 +29,11 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
         
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
-        if (searchState === 'formSearch')
+        if (searchState === 'formSearch' && !isDropdownVisible)
         setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
         sortOption, currentRegion, currentLanguage, startDate, endDate, 
         providers, genres));
-    },[currentPage, tvMovieToggle, currentLanguage, currentRegion]);
+    },[currentPage, tvMovieToggle, currentRegion]);
 
     useEffect(() => {
         setFormLabels(formLabelTranslation);
@@ -164,7 +165,8 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             : null
                         }
 
-                        <button onClick={() => setIsDropdownVisible(false)} className="x-button">
+                        <button type="button" className="x-button"
+                        onClick={() => {setIsDropdownVisible(false); return false}}>
                             <div className="lines a"></div>
                             <div className="lines b"></div>
                         </button>
