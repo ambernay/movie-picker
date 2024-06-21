@@ -1475,8 +1475,7 @@ input[type="checkbox"] {
 .header-region .select-container {
     height: calc(100dvh - (var(--headerHeight) + var(--bottomNavHeight)));
     width: var(--regionDropdownWidth);
-    /* right: calc((100% - var(--wrapperWidth)) / 2); */
-    left: calc(50% - (var(--regionDropdownWidth) / 2));  
+    right: calc((100% - var(--wrapperWidth)) / 2);
 }
 
 .region-list.header-region .select-container {
@@ -1679,6 +1678,12 @@ input[type="checkbox"] {
     .result-heading-container {
         height: 100%;
         justify-content: space-between;
+    }
+
+    /* header dropdowns */
+    .header-region .select-container {
+        /* centered */
+        left: calc(50% - (var(--regionDropdownWidth) / 2));  
     }
 }
 
