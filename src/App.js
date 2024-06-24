@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GeoLocationApiCall } from './components/MovieApiCache.js';
+import { LanguagesObj } from './components/TranslationObjects.js';
 import Header from './components/HeaderSection/Header.js';
 import Gallery from './components/MainSection/Gallery.js';
 import Form from './components/FormSection/Form.js';
@@ -13,7 +14,7 @@ function App() {
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
     // [region-code, name, native-name]
     const [currentRegion, setCurrentRegion] = useState(["US", "United States", "United States"]);
-    const [currentLanguage, setCurrentLanguage] = useState(["en", "English", "English"]);
+    const [currentLanguage, setCurrentLanguage] = useState(['en', 'en-US']);
     const [searchState, setSearchState] = useState(''); 
 
     function evaluateScreenSize() {
@@ -26,16 +27,22 @@ function App() {
 
     // screen size state for for toggle button
     const [screenSize, setScreenSize] = useState(evaluateScreenSize());
-   
+
+    // default settings on load
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
         //  get user's location on load
         GeoLocationApiCall().then(result => {
             const defaultCountry = result.country;
-            const defaultLanguage = defaultCountry.languages[0];
             setCurrentRegion([`${defaultCountry.iso_code}`, `${defaultCountry.name}`, `${defaultCountry.name_native}`]);
-            setCurrentLanguage([`${defaultLanguage.iso_code}`, `${defaultLanguage.name}`, `${defaultLanguage.name_native}`])
         });
+        // setLanguage by browser settings if exist else EN default
+        const defaultLanguage = LanguagesObj.langList.some(item => 
+        item.iso_639_1 === navigator.language.substring(0,2)) 
+        ? [navigator.language.substring(0,2), navigator.language]
+        : ['en', 'en-US'];
+
+        setCurrentLanguage(defaultLanguage)
     }, []);
 
     // stop background scroll when form is visible
