@@ -47,21 +47,21 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
         e.preventDefault();
         setSubmitAttempted(true);
 
-        if (genres || startDate || endDate || providers) {
+        if (genres.length > 0 || startDate || endDate || providers.length > 0) {
             setIsDropdownVisible(false);
             setIsTrending(false);
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-
+            console.log(genres, startDate, endDate, providers)
             // scroll back to top when new gallery loads - (offset to wait for page load)
             setTimeout(() => window.scrollTo(0, 0), 100);
-        }
 
-        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
-            sortOption, currentRegion, currentLanguage, startDate, endDate, 
-            providers, genres));
-        setSearchState('formSearch');
+            setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
+                sortOption, currentRegion, currentLanguage, startDate, endDate, 
+                providers, genres));
+            setSearchState('formSearch');
+        } 
     }
 
     const addQueries = (valueToUpdate, newQueryType, newValue) => {
