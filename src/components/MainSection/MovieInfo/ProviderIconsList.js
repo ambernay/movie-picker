@@ -12,7 +12,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
     useEffect(() => {
         ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
             setViewingOptions(filteredViewingOptions(result));
-            if (!result || result < 1) setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
+            if (!result || Object.keys(result).length > 0) setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
         });
 
     }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])
