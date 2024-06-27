@@ -159,6 +159,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 currentRegion={currentRegion}
                                 setCurrentRegion={setCurrentRegion}
                                 currentLanguage={currentLanguage}
+                                setCurrentLanguage={setCurrentLanguage}
                                 screenSize={screenSize}
                                 currentTranslation={currentTranslation}
                             />

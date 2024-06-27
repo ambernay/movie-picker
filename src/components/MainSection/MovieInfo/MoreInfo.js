@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { MovieInfoApiCall } from '../../MovieApiCache.js';
 
-function MovieInfo({ movieID, releaseDate, movieTitle, tvMovieToggle, 
-    currentTranslation }) {
+function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation }) {
 
     const [moreInfoData, setMoreInfoData] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
@@ -12,20 +11,39 @@ function MovieInfo({ movieID, releaseDate, movieTitle, tvMovieToggle,
     useEffect (() => {
         MovieInfoApiCall(movieID, tvMovieToggle).then(result => {
             
-            const cast = result.cast.slice(0, 5);
-            const directing = result.crew.filter((item) => item.job === 'Director');
-            const screenWriting = result.crew.filter((item) => item.job === 'Screenplay')
-
-            const moreInfoObj = {
-                ...(cast && cast.length > 0) && {Cast: [...cast]},
-                ...(directing && directing.length > 0) && {Directing: [...directing]},
-                ...(screenWriting && screenWriting.length > 0) && {Screenplay: [...screenWriting]},
-                ...(releaseDate) && {Release_Date: [releaseDate]}
+            if (!result || Object.keys(result).length < 1) {
+                setFetchStatus(`${currentTranslation.status_messages.no_results}`);
+                return;
             }
+
+            const cast = result?.cast?.slice(0, 5);
+            const directing = result?.crew?.filter((item) => item.job === 'Director');
+            const screenWriting = result?.crew?.filter((item) => item.job === 'Screenplay')
+
+            const moreInfoObj = {}
+            if (cast && cast.length > 0) {
+                moreInfoObj.Cast = cast;
+            }
+            if (directing && directing.length > 0){
+                moreInfoObj.Directing = directing;
+            }
+
+            if (screenWriting && screenWriting.length > 0){
+                moreInfoObj.ScreenPlay = screenWriting;
+            }
+            if (releaseDate){
+                moreInfoObj.Release_Date = [releaseDate];
+            }
+
+            // const moreInfoObj = {
+            //     ...(cast && cast.length > 0) && {Cast: cast},
+            //     ...(directing && directing.length > 0) && {Directing: directing},
+            //     ...(screenWriting && screenWriting.length > 0) && {Screenplay: screenWriting},
+            //     ...(releaseDate) && {Release_Date: [releaseDate]}
+            // }
 
             setMoreInfoData(moreInfoObj);
             if (Object.keys(moreInfoObj).length < 1) setFetchStatus(`${currentTranslation.status_messages.no_results}`)
-            if (!result || result < 1) setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
         });
     },[setMoreInfoData])
 
@@ -37,7 +55,7 @@ function MovieInfo({ movieID, releaseDate, movieTitle, tvMovieToggle,
         <>
         <ul className='movie-info-list-container movie-info-middle'>
             
-            {Object.keys(moreInfoData).length < 1 ? 
+            {Object.keys(moreInfoData)?.length < 1 ? 
                 <div className='icon-message-container'>
                     <h4>{fetchStatus}</h4>
                 </div>
@@ -58,7 +76,7 @@ function MovieInfo({ movieID, releaseDate, movieTitle, tvMovieToggle,
                             <legend>{legendTitle}</legend>
                             <ul className='movie-info-list'>
                                 {/* create list name items */}
-                                { moreInfoData[key].map((key) => {
+                                { moreInfoData[key]?.map((key) => {
                                     const listKey = typeof(key) === typeof('release_date') 
                                     ?`${movieID}/${key}` 
                                     : `${movieID}/${key.credit_id}`;

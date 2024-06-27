@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { GeoLocationApiCall } from './components/MovieApiCache.js';
 import { LanguagesObj } from './components/TranslationObjects.js';
+import { GeoLocation } from './components/MovieApiCache.js';
 import Header from './components/HeaderSection/Header.js';
 import Gallery from './components/MainSection/Gallery.js';
 import Form from './components/FormSection/Form.js';
@@ -12,11 +12,16 @@ function App() {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
-    // [region-code, name, native-name]
-    const [currentRegion, setCurrentRegion] = useState(["US", "United States", "United States"]);
-    const [currentLanguage, setCurrentLanguage] = useState(['en', 'en-US']);
     const [searchState, setSearchState] = useState(''); 
-
+    // [region-code, native-name]
+    const [currentRegion, setCurrentRegion] = useState(null);
+    // default language from navigator
+    const defaultLanguage = LanguagesObj.langList.some(item => 
+        item.iso_639_1 === navigator.language.substring(0,2)) 
+        ? [navigator.language.substring(0,2), navigator.language]
+        : ['en', 'en-US'];
+    const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage);
+    
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
         if(window.innerWidth <= 430 && window.innerHeight > 400) return 'narrowScreen'; 
@@ -24,25 +29,12 @@ function App() {
         else if ((window.innerWidth > 430 && window.innerWidth <= 990) && window.innerHeight > 400) return 'midScreen';
         else if (window.innerWidth > 990 && window.innerHeight > 400) return 'wideScreen';
     }
-
     // screen size state for for toggle button
     const [screenSize, setScreenSize] = useState(evaluateScreenSize());
 
-    // default settings on load
+    // evaluates screen size on load
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
-        //  get user's location on load
-        GeoLocationApiCall().then(result => {
-            const defaultCountry = result.country;
-            setCurrentRegion([`${defaultCountry.iso_code}`, `${defaultCountry.name}`, `${defaultCountry.name_native}`]);
-        });
-        // setLanguage by browser settings if exist else EN default
-        const defaultLanguage = LanguagesObj.langList.some(item => 
-        item.iso_639_1 === navigator.language.substring(0,2)) 
-        ? [navigator.language.substring(0,2), navigator.language]
-        : ['en', 'en-US'];
-
-        setCurrentLanguage(defaultLanguage)
     }, []);
 
     // stop background scroll when form is visible

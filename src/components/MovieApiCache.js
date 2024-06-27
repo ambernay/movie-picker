@@ -122,21 +122,21 @@ const MovieInfoApiCall = async (movieID, tvOrMovie) => {
     return movieInfoPromise[key];
 }
 
-const GeoLocationApiCall = async () => {
+const GeoLocation = async () => {
 
-        const movieInfoAPI = `/.netlify/functions/get-geo-location?`;
+    const geoLocation = `/.netlify/functions/get-geo-location`;
 
-        const geoLocationPromise = fetch(movieInfoAPI)
-            .then(res => {
-                return res.json();
-            })
-            .catch((err) => {
-                console.error(err);
-            })
+    const geoLocationPromise = fetch(geoLocation)
+        .then(res => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.error(err);
+        })
 
     return geoLocationPromise;
 }
 
 
 export { RegionApiCall, ProviderListApiCall, GenreListApiCall, 
-    ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocationApiCall }
+    ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation }
