@@ -26,7 +26,6 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
 
     // reset userSelections on dependencies on search
     useEffect(() => {
-        console.log(searchState)
         if (searchState === 'searchBar') {
             setUserSelections([newValue, searchCacheKey, [newValue]]);
         }
