@@ -26,8 +26,10 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
 
     // reset userSelections on dependencies on search
     useEffect(() => {
-        if (isOpen && searchState === 'searchBar') 
-        setUserSelections([newValue, searchCacheKey, [newValue]]);
+        console.log(searchState)
+        if (searchState === 'searchBar') {
+            setUserSelections([newValue, searchCacheKey, [newValue]]);
+        }
     },[tvMovieToggle, currentLanguage, currentPage])
 
     const handleInput = (e) => {

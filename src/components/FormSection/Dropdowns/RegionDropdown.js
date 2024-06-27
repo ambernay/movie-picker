@@ -6,35 +6,36 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion,
     currentLanguage, screenSize, currentTranslation }) {
 
     const [regionList, setRegionList] = useState([]);
-    const [countryCode, nativeName] = currentRegion ? currentRegion : ['CA', 'Canada'];
+    const [countryCode, nativeName] = currentRegion || ['',''];
     const failedMessage = `${currentTranslation.status_messages.failed_to_load} ${currentTranslation.section_labels.regions}`
     
     useEffect(() => {
         RegionApiCall(currentLanguage).then(result => {
             setRegionList(result);
-            if (currentRegion === null) {
-                setDefaultRegion(result);
-            }
+            getDefaultRegion(result);
         });
     }, [currentLanguage, setRegionList]);
 
-    const setDefaultRegion = async (regionList) => {
-        // gets user region from netlify functions
-        const geodata = await GeoLocation();
-        
-        if (regionList.some(item => item.iso_3166_1 === geodata.countryCode)){   
-            setCurrentRegion([geodata.countryCode, geodata.countryName]);
+    const getDefaultRegion = async (regionList) => {
+        if (currentRegion === null) {
+            // gets user region from netlify functions
+            const geodata = await GeoLocation();
+            
+            if (regionList.some(item => item.iso_3166_1 === geodata.countryCode)){   
+                setCurrentRegion([geodata.countryCode, geodata.countryName]);
+            }
+            else {
+                setCurrentRegion(['US', `United States`]);
+            }
         }
-        else {
-            setCurrentRegion(['US', `United States`]);
-        }
+        return;
     }
 
     // resets current region to new native name when region list / language changes
     useEffect(() => {
         const currentSelection = regionList?.find(current => current.iso_3166_1 === countryCode);
         if (currentSelection) { setCurrentRegion([currentSelection.iso_3166_1, currentSelection.native_name]); }
-    },[regionList]);
+    },[regionList, setCurrentRegion]);
 
     const handleChange = (e) => {
         setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('value')]);
