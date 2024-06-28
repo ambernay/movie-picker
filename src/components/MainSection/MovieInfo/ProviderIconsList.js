@@ -13,7 +13,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
         ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
             if (!result || Object.keys(result).length < 1) {
                 setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
-                return
+                return;
             }
             setViewingOptions(filteredViewingOptions(result));
         });
