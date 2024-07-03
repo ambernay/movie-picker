@@ -1,3 +1,40 @@
+const LanguagesObj = {
+    "langList": [
+        {"iso_639_1":"cs","english_name":"Czech","name":"Český"},
+        {"iso_639_1":"de","english_name":"German","name":"Deutsch"},
+        {"iso_639_1":"vi","english_name":"Vietnamese","name":"Tiếng Việt"},
+        {"iso_639_1":"it","english_name":"Italian","name":"Italiano"},
+        {"iso_639_1":"pl","english_name":"Polish","name":"Polski"},
+        {"iso_639_1":"da","english_name":"Danish","name":"Dansk"},
+        {"iso_639_1":"sk","english_name":"Slovak","name":"Slovenčina"},
+        {"iso_639_1":"en","english_name":"English","name":"English"},
+        {"iso_639_1":"hu","english_name":"Hungarian","name":"Magyar"},
+        {"iso_639_1":"ru","english_name":"Russian","name":"Pусский"},
+        {"iso_639_1":"sr","english_name":"Serbian","name":"Srpski"},
+        {"iso_639_1":"sv","english_name":"Swedish","name":"svenska"},
+        {"iso_639_1":"ka","english_name":"Georgian","name":"ქართული"},
+        {"iso_639_1":"be","english_name":"Belarusian","name":"беларуская мова"},
+        {"iso_639_1":"fi","english_name":"Finnish","name":"suomi"},
+        {"iso_639_1":"fr","english_name":"French","name":"Français"},
+        {"iso_639_1":"id","english_name":"Indonesian","name":"Bahasa indonesia"},
+        {"iso_639_1":"ja","english_name":"Japanese","name":"日本語"},
+        {"iso_639_1":"ko","english_name":"Korean","name":"한국어/조선말"},
+        {"iso_639_1":"nl","english_name":"Dutch","name":"Nederlands"},
+        {"iso_639_1":"el","english_name":"Greek","name":"ελληνικά"},
+        {"iso_639_1":"ar","english_name":"Arabic","name":"العربية"},
+        {"iso_639_1":"tr","english_name":"Turkish","name":"Türkçe"},
+        {"iso_639_1":"pt","english_name":"Portuguese","name":"Português"},
+        {"iso_639_1":"th","english_name":"Thai","name":"ภาษาไทย"},
+        {"iso_639_1":"lt","english_name":"Lithuanian","name":"Lietuvių"},
+        {"iso_639_1":"sl","english_name":"Slovenian","name":"Slovenščina"},
+        {"iso_639_1":"es","english_name":"Spanish","name":"Español"},
+        {"iso_639_1":"zh","english_name":"Mandarin","name":"普通话"},
+        {"iso_639_1":"he","english_name":"Hebrew","name":"עִבְרִית"},
+        {"iso_639_1":"ro","english_name":"Romanian","name":"Română"},
+        {"iso_639_1":"bg","english_name":"Bulgarian","name":"български език"}
+    ]
+};
+
 const TransObj = {   
     "ar": {
         "english_name":"Arabic",     
@@ -306,8 +343,8 @@ const TransObj = {
             "rating_asc":"Clasificación: Ascendente",
             "A_Z":"Títulos: A-Z",
             "Z_A":"Títulos: Z-A",
-            "date_desc":"Fecha de lanzamiento: Descendente",
-            "date_asc":"Fecha de lanzamiento: Ascendente"
+            "date_desc":"Fecha de publicación: Descendente",
+            "date_asc":"Fecha de publicación: Ascendente"
         }, 
         "sr-only": {
             "back_arrow":"botón de flecha hacia atrás: página anterior",
@@ -316,12 +353,12 @@ const TransObj = {
             "down_arrow":"botón de flecha hacia abajo: abrir menú",
             "deactivated":"desactivado",
             "eye_icon":"opciones de visualización del símbolo del ojo",
-            "info-icon": "",
+            "info-icon": "símbolo de información",
             "film_icon":"símbolo de la película",
             "tv_icon":"símbolo de televisión",
             "search_bar":"símbolo de lupa (buscar)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"actores", "directing":"director", "screenplay":"guionista", "release_date":"Fecha de publicación"},
         "status_messages":{"loading":"obteniendo resultados","failed_to_load":"Descarga fracasó","form_modal":"Seleccione una opción","no_results":"no hay resultados"},
         "provider_options": {"buy":"Comprar","rent":"Alquilar","stream":"Retransmisión","with_ads":"Con anuncios"}
     },
@@ -861,8 +898,8 @@ const TransObj = {
         "sort_by": {
             "rating_desc":"Рейтинг по убыванию",
             "rating_asc":"Рейтинг по возрастанию",
-            "date_desc":"Дата выпуска по убыванию",
-            "date_asc":"Дата выпуска по возрастанию"
+            "date_desc":"Дата публикации по убыванию",
+            "date_asc":"Дата публикации по возрастанию"
         }, 
         "sr-only": {
             "back_arrow":"Кнопка со стрелкой назад, возврат на предыдущую страницу",
@@ -871,12 +908,12 @@ const TransObj = {
             "down_arrow":"Кнопка со стрелкой вниз открывает меню",
             "deactivated":"деактивирован",
             "eye_icon":"символ глаза",
-            "info-icon": "",
+            "info-icon": "информационный символ",
             "film_icon":"символ фильма",
             "tv_icon":"символ телевизора",
             "search_bar":"символ увеличительного стекла (искать)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"Актеры", "directing":"Режиссер", "screenplay":"Сценарий", "release_date":"Дата публикации"},
         "status_messages":{"loading":"получение результатов","failed_to_load":"Не удалось скачать","form_modal":"Выберите вариант","no_results":"Без результатов"},
         "provider_options": {"buy":"Купить","rent":"Арендовать","stream":"Онлайн","with_ads":"С рекламой"}
     },
@@ -899,8 +936,8 @@ const TransObj = {
             "rating_asc":"Hodnotenie Vzostupne",
             "A_Z":"Tituly A-Z",
             "Z_A":"Tituly Z-A",
-            "date_desc":"Dátum vydania Zostupne",
-            "date_asc":"Dátum vydania Vzostupne"
+            "date_desc":"Dátum publikácie Zostupne",
+            "date_asc":"Dátum publikácie Vzostupne"
         }, 
         "sr-only": {
             "back_arrow":"Tlačidlo šípky späť na návrat na predchádzajúcu stránku",
@@ -909,12 +946,12 @@ const TransObj = {
             "down_arrow":"Tlačidlo so šípkou nadol otvorí ponuku",
             "deactivated":"deaktivovaný",
             "eye_icon":"symbol oka",
-            "info-icon": "",
+            "info-icon": "informačný symbol",
             "film_icon":"symbol filmu",
             "tv_icon":"symbol TV",
             "search_bar":"symbol lupy (Hľadať)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"herci", "directing":"režisér", "screenplay":"Scenár", "release_date":"Dátum publikácie"},
         "status_messages":{"loading":"získavanie výsledkov","failed_to_load":"Sťahovanie zlyhalo","form_modal":"Vyberte možnosť","no_results":"Žiadne výsledky"},
         "provider_options": {"buy":"Kúpiť","rent":"Nájomné","stream":"Streamované","with_ads":"s reklamami"}
     },
@@ -937,8 +974,8 @@ const TransObj = {
             "rating_asc":"Ocena narašča",
             "A_Z":"Addresses from A to Z",
             "Z_A":"Addresses from Z to A",
-            "date_desc":"Datum izdaje padajoče",
-            "date_asc":"Datum izdaje naraščajoče"
+            "date_desc":"Datum objave padajoče",
+            "date_asc":"Datum objave naraščajoče"
         }, 
         "sr-only": {
             "back_arrow":"Puščični gumb za vrnitev na prejšnjo stran",
@@ -947,12 +984,12 @@ const TransObj = {
             "down_arrow":"Puščični gumb navzdol odpre meni",
             "deactivated":"deaktivirano",
             "eye_icon":"simbol oči",
-            "info-icon": "",
+            "info-icon": "informacijski simbol",
             "film_icon":"filmski simbol",
             "tv_icon":"tv simbol",
             "search_bar":"simbol povečevalnega stekla (raziskovati)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"igralci", "directing":"direktor", "screenplay":"scenarij", "release_date":"Datum objave"},
         "status_messages":{"loading":"pridobivanje rezultatov","failed_to_load":"Prenos ni uspel","form_modal":"Izberite možnost","no_results":"Brez rezultatov"},
         "provider_options": {"buy":"Nakup","rent":"Najemnina","stream":"Stream","with_ads":"z oglasi"}
     },
@@ -973,8 +1010,8 @@ const TransObj = {
         "sort_by": {
             "rating_desc":"Оцена: опадајућа",
             "rating_asc":"Оцена: растућа",
-            "date_desc":"Датум изласка: опадајуће",
-            "date_asc":"Датум изласка: растући"
+            "date_desc":"Датум објављивања у опадајућем ",
+            "date_asc":"Датум објављивања у растућем"
         }, 
         "sr-only": {
             "back_arrow":"Дугме са стрелицом уназад: идите на претходну страницу",
@@ -983,12 +1020,12 @@ const TransObj = {
             "down_arrow":"Дугме са стрелицом унапред: идите на претходну страницу",
             "deactivated":"деактивирано",
             "eye_icon":"симбол ока: опције прегледа",
-            "info-icon": "",
+            "info-icon": "симбол информација",
             "film_icon":"филмски симбол",
             "tv_icon":"ТВ симбол",
             "search_bar":"симбол лупе (Претражите)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"глумци", "directing":"редитељ", "screenplay":"сценарио", "release_date":"Датум издавања"},
         "status_messages":{"loading":"добијање резултата","failed_to_load":"Преузимање није успело","form_modal":"изаберите опцију","no_results":"Нема резултата"},
         "provider_options": {"buy":"Купи","rent":"Закуп","stream":"Стрим","with_ads":"са рекламама"}
     },
@@ -1008,8 +1045,8 @@ const TransObj = {
         "sort_by": {
             "rating_desc":"Betyg: fallande",
             "rating_asc":"Betyg: stigande",
-            "date_desc":"Releasedatum: fallande",
-            "date_asc":"Releasedatum: stigande"
+            "date_desc":"Publiceringsdatum: fallande",
+            "date_asc":"Publiceringsdatum: stigande"
         }, 
         "sr-only": {
             "back_arrow":"bakåtpil: gå till föregående sida",
@@ -1018,12 +1055,12 @@ const TransObj = {
             "down_arrow":"nedåtpil: öppna menyn",
             "deactivated":"avaktiverad",
             "eye_icon":"ögonsymbol: visningsalternativ",
-            "info-icon": "",
+            "info-icon": "informationssymbol",
             "film_icon":"film symbol",
             "tv_icon":"TV-symbol",
             "search_bar":"symbol för förstoringsglas (Sök)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"skådespelare", "directing":"regissör", "screenplay":"manus", "release_date":"Publiceringsdatum"},
         "status_messages":{"loading":"laddar resultaten","failed_to_load":"Nedladdning misslyckad","form_modal":"Välj ett alternativ","no_results":"inga resultat"},
         "provider_options": {"buy":"köpa","rent":"Hyra","stream":"Strömmas","with_ads":"med annonser"}
     },
@@ -1044,8 +1081,8 @@ const TransObj = {
         "sort_by": {
             "rating_desc":"เรตติ้งเรียงลำดับจากมากไปน้อย",
             "rating_asc":"การให้คะแนนจะเรียงลำดับจากน้อยไปหามาก",
-            "date_desc":"วันที่วางจำหน่ายตามลำดับจากมากไปน้อย",
-            "date_asc":"วันที่วางจำหน่ายตามลำดับจากน้อยไปหามาก"
+            "date_desc":"วันที่ตีพิมพ์จากมากไปน้อย",
+            "date_asc":"วันที่ตีพิมพ์จากน้อยไปหามาก"
         }, 
         "sr-only": {
             "back_arrow":"ปุ่มลูกศรย้อนกลับ กลับไปยังหน้าก่อนหน้า",
@@ -1054,12 +1091,12 @@ const TransObj = {
             "down_arrow":"ปุ่มลูกศรลงเปิดเมนู",
             "deactivated":"ปิดใช้งานแล้ว",
             "eye_icon":"ตัวเลือกการดูปุ่มสัญลักษณ์ตา",
-            "info-icon": "",
+            "info-icon": "สัญลักษณ์ข้อมูล",
             "film_icon":"สัญลักษณ์ภาพยนตร์",
             "tv_icon":"สัญลักษณ์ทีวี",
             "search_bar":"สัญลักษณ์แว่นขยาย (สอบถาม)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"นักแสดงภาพย", "directing":"ผู้กำกับภาพยนต", "screenplay":"บทภาพยนตร์", "release_date":"วันที่ตีพิมพ์"},
         "status_messages":{"loading":"กำลังโหลดผลลัพธ์","failed_to_load":"ดาวน์โหลดไม่สำเร็จ","form_modal":"เลือกตัวเลือก","no_results":"ไม่มีผลลัพธ์"},
         "provider_options": {"buy":"ซื้อ","rent":"เช่า","stream":"Stream","with_ads":"ด้วยโฆษณา"}
 
@@ -1083,8 +1120,8 @@ const TransObj = {
             "rating_asc":"Derecelendirme Artan",
             "A_Z":"A'dan Z'ye Başlıklar",
             "Z_A":"Z'dan A'ye Başlıklar",
-            "date_desc":"Çıkış tarihi azalan sırada",
-            "date_asc":"Artan sırada yayın tarihi"
+            "date_desc":"Azalan sırada yayın tarihi",
+            "date_asc":"Artan sırada yayınlar"
         }, 
         "sr-only": {
             "back_arrow":"Geri ok düğmesi önceki sayfaya döner",
@@ -1093,12 +1130,12 @@ const TransObj = {
             "down_arrow":"Menüyü açmak için aşağı ok düğmesi",
             "deactivated":"devre dışı bırakıldı",
             "eye_icon":"göz sembolü",
-            "info-icon": "",
+            "info-icon": "bilgi sembolü",
             "film_icon":"film sembolü",
             "tv_icon":"televizyon sembolü",
             "search_bar":"büyüteç sembolü (ara)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"aktörleri", "directing":"yönetmeni", "screenplay":"senaryo", "release_date":"Yayın tarihi"},
         "status_messages":{"loading":"Sonuç Alma","failed_to_load":"İndirme başarısız","form_modal":"Bir seçenek seçin","no_results":"Sonuç yok"},
         "provider_options": {"buy":"Satın almak","rent":"Kira","stream":"Yayın Akışı","with_ads":"reklamlarla"}
     },
@@ -1119,8 +1156,8 @@ const TransObj = {
         "sort_by": {
             "rating_desc":"Thứ tự xếp hạng giảm dần",
             "rating_asc":"Thứ tự xếp hạng tăng dần",
-            "date_desc":"Ngày phát hành đang giảm dần",
-            "date_asc":"Ngày phát hành ngày càng tăng"
+            "date_desc":"Thứ tự giảm ngày bản",
+            "date_asc":"Thứ tự tăng ngày phát hành"
         }, 
         "sr-only": {
             "back_arrow":"Nút mũi tên quay lại quay lại trang trước",
@@ -1129,12 +1166,12 @@ const TransObj = {
             "down_arrow":"Nút mũi tên xuống để mở menu",
             "deactivated":"tàn tật",
             "eye_icon":"biểu tượng mắt",
-            "info-icon": "",
+            "info-icon": "biểu tượng thông tin",
             "film_icon":"biểu tượng phim",
             "tv_icon":"biểu tượng tivi",
             "search_bar":"biểu tượng kính lúp (tìm kiếm)"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"người biểu diễn", "directing":"đạo diễn", "screenplay":"kịch bản", "release_date":"Ngày xuất bản"},
         "status_messages":{"loading":"đang tải kết quả","failed_to_load":"Không thể tải xuống","form_modal":"Chọn một tùy chọn","no_results":"Ko có kết quả"},
         "provider_options": {"buy":"Mua","rent":"Thuê","stream":"Stream","with_ads":"với quảng cáo"}
     },
@@ -1155,8 +1192,8 @@ const TransObj = {
         "sort_by": {
             "rating_desc":"评分降序",
             "rating_asc":"评级上升",
-            "date_desc":"发布日期降序",
-            "date_asc":"发布日期升序"
+            "date_desc":"出版日期降序",
+            "date_asc":"出版日期升序"
         }, 
         "sr-only": {
             "back_arrow":"后退箭头按钮转到上一页",
@@ -1165,15 +1202,15 @@ const TransObj = {
             "down_arrow":"向下箭头按钮打开菜单",
             "deactivated":"停用",
             "eye_icon":"眼睛符号 查看选项",
-            "info-icon": "",
+            "info-icon": "信息符号",
             "film_icon":"电影符号",
             "tv_icon":"电视符号",
             "search_bar":"放大镜符号 搜寻"
         },
-        "more_info":{"cast":"", "directing":"", "screenplay":"", "release_date":""},
+        "more_info":{"cast":"影演员", "directing":"导演", "screenplay":"剧本", "release_date":"发布日期"},
         "status_messages":{"loading":"正在取得成果","failed_to_load":"下载失败","form_modal":"选择一个选项","no_results":"没有结果"},
         "provider_options": {"buy":"买","rent":"租","stream":"流媒体","with_ads":"有广告"}
     }
 }
 
-export { TransObj }
+export { TransObj, LanguagesObj }

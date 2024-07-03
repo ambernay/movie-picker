@@ -11,8 +11,11 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
 
     useEffect(() => {
         ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
+            if (!result || Object.keys(result).length < 1) {
+                setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
+                return;
+            }
             setViewingOptions(filteredViewingOptions(result));
-            if (!result || result < 1) setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
         });
 
     }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])

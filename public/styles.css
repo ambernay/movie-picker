@@ -339,6 +339,7 @@ img {
     --smallTextSize: 1rem;
     --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 1.8rem;
+    --labelFontSize: 1rem;
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
@@ -1408,8 +1409,11 @@ input[type="checkbox"] {
 .dropdown-menu .label-container {
     display: flex;
     position: relative;
+    height: calc(var(--labelFontSize) * 1.3);
     justify-content: space-between;
+    align-items: center;
     text-align: center;
+    font-size: var(--labelFontSize);
     padding: 3px;
     border: solid 1px var(--lightAccent);
     color: var(--lightAccent);

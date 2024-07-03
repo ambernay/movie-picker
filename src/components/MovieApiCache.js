@@ -57,7 +57,7 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
 let providerIconPromises = {};
 const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion) => {
     const regionCode = currentRegion[0];
-    const key = `${movieID}`;
+    const key = `${movieID}/${regionCode}`;
 
     if (!providerIconPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
@@ -122,6 +122,21 @@ const MovieInfoApiCall = async (movieID, tvOrMovie) => {
     return movieInfoPromise[key];
 }
 
+const GeoLocation = async () => {
+
+    const geoLocation = `/.netlify/functions/get-geo-location`;
+
+    const geoLocationPromise = fetch(geoLocation)
+        .then(res => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+
+    return geoLocationPromise;
+}
+
 
 export { RegionApiCall, ProviderListApiCall, GenreListApiCall, 
-    ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall }
+    ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation }

@@ -24,10 +24,17 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
         }
     }, [isOpen]);
 
+    const capitalize = (string) => {
+        if (string === 'tv') {return string.toUpperCase();}
+        else {return string.charAt(0).toUpperCase() + string.slice(1);}
+    }
+
     // reset userSelections on dependencies on search
     useEffect(() => {
-        if (isOpen && searchState === 'searchBar') 
-        setUserSelections([newValue, searchCacheKey, [newValue]]);
+        if (searchState === 'searchBar') {
+             // selection query / cache key / result message
+            setUserSelections([newValue, searchCacheKey, [capitalize(newValue), capitalize(tvMovieToggle)]]);
+        }
     },[tvMovieToggle, currentLanguage, currentPage])
 
     const handleInput = (e) => {
@@ -46,7 +53,7 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
         setIsTrending(false);
         setIsOpen(false);
         // selection query / cache key / result message
-        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [newValue]]);
+        setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [capitalize(newValue), capitalize(tvMovieToggle)]]);
         setSearchState('searchBar');
         setEmptyModalClass('hidden');
     }

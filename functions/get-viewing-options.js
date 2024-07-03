@@ -4,8 +4,8 @@ const handler = async (event) => {
     const apiKey = process.env.tmdb_key;
     const {id, mediaType, regionCode} = event.queryStringParameters;
 
-        // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
-        const viewingOptionsAPI = `https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=${apiKey}`;
+    // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
+    const viewingOptionsAPI = `https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=${apiKey}`;
 
     try {
         const { data } = await axios.get(viewingOptionsAPI);

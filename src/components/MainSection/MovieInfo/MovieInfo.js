@@ -42,7 +42,6 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                         <MoreInfo
                             movieID={movieID}
                             releaseDate={releaseDate}
-                            movieTitle={movieTitle}
                             tvMovieToggle={tvMovieToggle}
                             currentTranslation={currentTranslation}
                         />
