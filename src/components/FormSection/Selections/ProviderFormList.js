@@ -1,13 +1,15 @@
 import { useState, useEffect, memo } from "react";
 import { ProviderListApiCall } from '../../MovieApiCache';
 
-function ProviderFormList({ setProviders, setIsValidRequest, 
-    currentLanguage, sectionLabel, currentTranslation }) {
+function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
+    currentRegion, currentLanguage, currentTranslation }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
 
     useEffect(() => {
-        ProviderListApiCall(currentLanguage).then(result => setProviderFormList(result));
+        let displayAmount = Math.round(window.innerWidth / 150) * 3;
+        
+        ProviderListApiCall(currentLanguage, currentRegion, displayAmount).then(result => setProviderFormList(result));
     }, [setProviderFormList]);
 
     const handleChange = (e) => {
@@ -19,9 +21,9 @@ function ProviderFormList({ setProviders, setIsValidRequest,
     }
 
     return (
-        <fieldset className="providers-fieldset">
+        <fieldset id='provider-list' className="providers-fieldset">
             <legend id="provider">{sectionLabel}:</legend>
-            {providerFormList.length > 0 ? providerFormList.map((provider) => {
+            {providerFormList?.length > 0 ? providerFormList.map((provider) => {
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 return (
                     <div className="radio-button-container provider-buttons" key={provider.provider_id}>

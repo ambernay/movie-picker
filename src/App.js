@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { LanguagesObj } from './components/TranslationObjects.js';
-import { GeoLocation } from './components/MovieApiCache.js';
 import Header from './components/HeaderSection/Header.js';
 import Gallery from './components/MainSection/Gallery.js';
 import Form from './components/FormSection/Form.js';

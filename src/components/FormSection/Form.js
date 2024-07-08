@@ -153,7 +153,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                 <form className='form-container' onSubmit={handleSubmit}>
                     <nav className="form-nav">
 
-                        {screenSize === 'narrowScreen' ?
+                        {screenSize === 'narrowScreen' && currentRegion ?
                             <RegionDropdown
                                 positionClass={'form-region'}
                                 currentRegion={currentRegion}
@@ -176,7 +176,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         <a href="#provider" tabIndex='0'>{formLabels.provider}</a>
 
                     </nav>
-                    {screenSize !== 'narrowScreen' ?
+                    {screenSize !== 'narrowScreen' && currentRegion ?
                         <RegionDropdown
                             positionClass={'form-region'}
                             currentRegion={currentRegion}
@@ -210,12 +210,17 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             sectionLabel={capFirstChar(formLabels.decade)}
                             currentTranslation={currentTranslation}
                         />
-                        <ProviderFormList
-                            setProviders={setProviders}
-                            setIsValidRequest={setIsValidRequest}
-                            sectionLabel={capFirstChar(formLabels.provider)}
-                            currentTranslation={currentTranslation}
-                        />
+                        {currentRegion ?
+                            <ProviderFormList
+                                setProviders={setProviders}
+                                setIsValidRequest={setIsValidRequest}
+                                sectionLabel={capFirstChar(formLabels.provider)}
+                                currentRegion={currentRegion}
+                                currentLanguage={currentLanguage}
+                                currentTranslation={currentTranslation}
+                            />
+                        : null
+                        }
                     </section>
                     <section className='form-bottom'>
                         <div className="form-button-container">
