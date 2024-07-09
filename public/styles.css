@@ -483,6 +483,21 @@ header {
     font-size: 1.2rem;
     color: var(--darkNeutral);
 }
+/* tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    background-color: var(--lightAccent);
+    color: var(--darkNeutral);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
 
 /* #region - underline animation */
 .hover-animation {
