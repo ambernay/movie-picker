@@ -965,6 +965,7 @@ main {
     min-width: var(--galleryItemMinWidth);
     width: max-content;
     max-width: min-content;
+    min-height: calc(var(--galleryItemMinWidth) * 1.6);
     padding: var(--galleryItemPadding);
 }
 
@@ -1308,6 +1309,8 @@ fieldset {
 
 .provider-buttons {
     flex: 0 0 100px;
+    justify-content: center;
+    align-items: center;
 }
 
 fieldset label {

@@ -2,17 +2,21 @@ const axios = require('axios');
 
 const handler = async (event) => {
     const apiKey = process.env.tmdb_key;
+    const {language, regionCode, displayAmount} = event.queryStringParameters;
 
     try{
         // codes are the same between movie and tv
-        const providerListAPI = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&language=de`;
-      
+        const providerListAPI = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&watch_region=${regionCode}&language=${language}`;
+        
         const { data } = await axios.get(providerListAPI);
+        const sortedList = data.results.sort((a, b) => a.display_priorities.CA)
+        const selectionOfProviders = sortedList.slice(0, displayAmount);
+        console.log(providerListAPI)
         //  filter api request for specific providers
         // appletv:2, netflix:8, tubi:73, amazon:119, crave:230, disney:337,paramount:531
-        const selectionOfProviders = data.results.filter((provider) => {
-            return [2, 8, 73, 119, 230, 337, 531].includes(provider.provider_id)
-        });
+        // const selectionOfProviders = data.results.filter((provider) => {
+        //     return [2, 8, 73, 119, 230, 337, 531].includes(provider.provider_id)
+        // });
 
         return {
             statusCode: 200,

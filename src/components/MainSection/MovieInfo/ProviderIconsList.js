@@ -22,7 +22,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
 
     const filteredKey = (key) => {
         switch (key) {
-            case 'flatrate':
+            case 'flatrate' || 'stream':
                 key = `${sectionLabel.stream}:`;
                 break;
             case 'ads':

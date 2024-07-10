@@ -19,20 +19,23 @@ const RegionApiCall = async (currentLanguage) => {
     return regionsPromise[key];
 }
 
-let providerListPromise;
-const ProviderListApiCall = async () => {
+let providerListPromises = {};
+const ProviderListApiCall = async (currentLanguage, currentRegion, displayAmount) => {
+    const langCode = currentLanguage[0].toLowerCase();
+    const regionCode = currentRegion[0];
+    const key = `${langCode}/${regionCode}` 
 
-    if (!providerListPromise) {
-        const providerListURL = `.netlify/functions/get-provider-list`;
+    if (!providerListPromises.hasOwnProperty(key)) {
+        const providerListURL = `.netlify/functions/get-provider-list?language=${langCode}&regionCode=${regionCode}&displayAmount=${displayAmount}`;
 
-        providerListPromise = fetch(providerListURL)
+        providerListPromises[key] = fetch(providerListURL)
             .then(res => {
                 return res.json();
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
             })
     }
-    return providerListPromise;
+    return providerListPromises[key];
 }
 
 let genreListPromises = {};
