@@ -68,7 +68,7 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation }) 
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.more_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.more_info.release_date)
                 : key;
-                console.log(key);
+     
                 return (
                     <li key={listKey}>
                         <fieldset className='movie-info-list-fieldsets'>

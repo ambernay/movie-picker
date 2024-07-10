@@ -11,7 +11,7 @@ const handler = async (event) => {
         const { data } = await axios.get(providerListAPI);
         const sortedList = data.results.sort((a, b) => a.display_priorities.CA)
         const selectionOfProviders = sortedList.slice(0, displayAmount);
-        
+        console.log(providerListAPI)
         //  filter api request for specific providers
         // appletv:2, netflix:8, tubi:73, amazon:119, crave:230, disney:337,paramount:531
         // const selectionOfProviders = data.results.filter((provider) => {
