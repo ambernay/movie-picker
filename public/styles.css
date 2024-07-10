@@ -1167,6 +1167,27 @@ ul li .info-container {
     border: solid var(--lightAccent) 1px;
 }
 
+.more-providers-button {
+    display: flex;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--midAccent);
+}
+
+.more-providers-button figure {
+    display: flex;
+    align-items: center;
+}
+
+.more-providers-button svg {
+    fill: var(--darkNeutral);
+    align-self: center;
+    width: 1.5rem;
+}
+
 .icon-message-container,
 .error-message-container {
     display: flex;
@@ -1280,6 +1301,7 @@ legend {
 /* fieldset */
 fieldset {
     display: flex;
+    position: relative;
     flex-wrap: wrap;
     column-gap: 5px;
     color: var(--lightAccent);

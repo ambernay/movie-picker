@@ -1,16 +1,26 @@
 import { useState, useEffect, memo } from "react";
 import { ProviderListApiCall } from '../../MovieApiCache';
+import { UpDownArrowIcon } from '../../Icons.js';
 
 function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     currentRegion, currentLanguage, currentTranslation }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
+    const [selectionOfProviders, setSelectionOfProviders] = useState(null);
+    const [currentNumDisplaySets, setCurrentNumDisplaySets] = useState(1);
+    const [arrowClass, setArrowClass] = useState('arrow-down');
+    const displaySet = Math.round(window.innerWidth / 150) * 3;
+    const upArrow = currentTranslation['sr-only'].up_arrow;
+    const downArrow = currentTranslation['sr-only'].down_arrow;
 
     useEffect(() => {
-        let displayAmount = Math.round(window.innerWidth / 150) * 3;
-        
-        ProviderListApiCall(currentLanguage, currentRegion, displayAmount).then(result => {setProviderFormList(result); console.log(result)});
-    }, [setProviderFormList]);
+        ProviderListApiCall(currentLanguage, currentRegion).then(result => {
+            const sortedList = result.results?.sort((a, b) => a.display_priorities.CA)
+            setProviderFormList(sortedList); 
+            setSelectionOfProviders(sortedList?.slice(0, displaySet));
+            setArrowClass('down-arrow');
+        });
+    }, [setProviderFormList, setSelectionOfProviders, currentRegion, currentLanguage, displaySet]);
 
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
@@ -19,11 +29,22 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         else if (!e.target.checked) setProviders(pre => pre.filter(item => item[1] !== newValue[1]))
         setIsValidRequest(true);
     }
+
+    const handleMoreProvidersButton = (e) => {
+        e.preventDefault();
+        let newNumDisplaySets = currentNumDisplaySets + 1;
+        let newProviderSelections = providerFormList?.slice(0, (displaySet * (newNumDisplaySets)))
+        setSelectionOfProviders(newProviderSelections);
+        setCurrentNumDisplaySets(newNumDisplaySets);
+        if (newProviderSelections.length === providerFormList.length) {
+            setArrowClass('down-arrow disabled');
+        }
+    }
  
     return (
         <fieldset id='provider-list' className="providers-fieldset">
             <legend id="provider">{sectionLabel}:</legend>
-            {providerFormList?.length > 0 ? providerFormList.map((provider) => {
+            {selectionOfProviders?.length > 0 ? selectionOfProviders.map((provider) => {
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 return (
                     <div className="radio-button-container provider-buttons" key={provider.provider_id}>
@@ -42,6 +63,14 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                     </h4>
                 </div>
             }
+            <button className='more-providers-button' onClick={handleMoreProvidersButton}>
+                <figure>
+                    <UpDownArrowIcon
+                        arrowClass={arrowClass}
+                    />
+                    <figcaption className="sr-only">{arrowClass === 'arrow-up' ? upArrow : downArrow}</figcaption>
+                </figure>
+            </button>
         </fieldset>
     )
 }
