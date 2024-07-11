@@ -17,7 +17,7 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                 : infoState === 'more-info' || 'provider-info' ? 'more-info' : 'hidden'}>
                     <section className='heading-container' onClick={() => setInfoState('provider-info')}>
                         <h4>{movieTitle}</h4>
-                        <figure title={iconDescription.provider_options} className="eye-icon">
+                        <figure title={iconDescription.viewing_options} className="eye-icon">
                             <EyeIcon />
                             <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
                         </figure>

@@ -63,7 +63,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                     </h4>
                 </div>
             }
-            <button className='more-providers-button' onClick={handleMoreProvidersButton}>
+            <button title={currentTranslation['sr-only'].more_options} className='more-providers-button' onClick={handleMoreProvidersButton}>
                 <figure>
                     <UpDownArrowIcon
                         arrowClass={arrowClass}
