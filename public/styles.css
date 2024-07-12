@@ -340,6 +340,7 @@ img {
     --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 1.8rem;
     --labelFontSize: 1rem;
+    --providerImageSize: 100px;
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
@@ -365,6 +366,7 @@ img {
     --dropdownHeight: 2.2rem;
     --formBottomHeight: 5.5rem;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
+    --fieldsetContainerHeight: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
     --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + var(--regionDropdownMargin)));
     --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
@@ -1269,7 +1271,7 @@ a:focus {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
+    height: var(--fieldsetContainerHeight);
     width: var(--formWidth);
     border-top: 1px solid var(--lightAccent);
     padding-top: 15px;
@@ -1313,12 +1315,18 @@ fieldset {
     /* overflow: scroll; */
 }
 
+/* .providers-fieldset {
+    height: calc((var(--providerImageSize) * 3) + 1.6rem);
+    overflow: scroll;
+} */
+
 .provider-list-container {
     display: flex;
     position: relative;
     flex-wrap: wrap;
     column-gap: 5px;
     width: 100%;
+    height: inherit;
     justify-content: space-between;
     margin-bottom: 10px;
     overflow: scroll;
@@ -1338,7 +1346,7 @@ fieldset {
 }
 
 .provider-buttons {
-    flex: 0 0 100px;
+    flex: 0 0 var(--providerImageSize);
     justify-content: center;
     align-items: center;
 }
