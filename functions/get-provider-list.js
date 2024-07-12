@@ -9,9 +9,7 @@ const handler = async (event) => {
         const providerListAPI = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${apiKey}&watch_region=${regionCode}&language=${language}`;
         
         const { data } = await axios.get(providerListAPI);
-        const sortedList = data.results.sort((a, b) => a.display_priorities.CA)
-        const selectionOfProviders = sortedList.slice(0, displayAmount);
-        console.log(providerListAPI)
+     
         //  filter api request for specific providers
         // appletv:2, netflix:8, tubi:73, amazon:119, crave:230, disney:337,paramount:531
         // const selectionOfProviders = data.results.filter((provider) => {
@@ -20,7 +18,7 @@ const handler = async (event) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify(selectionOfProviders)
+            body: JSON.stringify(data)
           }
     }catch(error){
         const { status, statusText, headers, data } = error.response;
