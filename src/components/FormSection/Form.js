@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeList from './Selections/DecadeList.js';
+import DecadeSlider from './Selections/DecadeSlider.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
 import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
@@ -202,7 +203,15 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             sectionLabel={capFirstChar(formLabels.genre)}
                             currentTranslation={currentTranslation}
                         />
-                        <DecadeList
+                        {/* <DecadeList
+                            setStartDate={setStartDate}
+                            setEndDate={setEndDate}
+                            setDecade={setDecade}
+                            setIsValidRequest={setIsValidRequest}
+                            sectionLabel={capFirstChar(formLabels.decade)}
+                            currentTranslation={currentTranslation}
+                        /> */}
+                        <DecadeSlider
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
                             setDecade={setDecade}
