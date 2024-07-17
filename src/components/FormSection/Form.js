@@ -14,7 +14,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     setSearchState }) {
 
     const [genres, setGenres] = useState([]);
-    const [decade, setDecade] = useState();
+    const [rangeIsSelected, setRangeIsSelected] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [providers, setProviders] = useState([]);
@@ -98,12 +98,13 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
         "language": langCode,
     }
     // add params to userSelections object only when selected
-    if (decade && decade.id !== 'all') {
-        storeUserSelections["primary_release_date.gte"] = startDate;
-        storeUserSelections["primary_release_date.lte"] = endDate;
+    if (rangeIsSelected) {
+        storeUserSelections["primary_release_date.gte"] = `${startDate}-01-01`;
+        storeUserSelections["primary_release_date.lte"] = `${endDate}-12-31`;
+        
         // info for cacheKey and 'no results' message
-        selectionsForMessage.push(decade.id);
-        cacheKeyArr.push(decade.id);
+        selectionsForMessage.push(`${startDate} - ${endDate}`);
+        cacheKeyArr.push(`${startDate}-${endDate}`);
     }
     if (providers && providers.length > 0) {
         providers.map((provider) => {
@@ -214,7 +215,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         <DecadeSlider
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
-                            setDecade={setDecade}
+                            setRangeIsSelected={setRangeIsSelected}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
                             currentTranslation={currentTranslation}

@@ -1345,12 +1345,13 @@ fieldset {
     flex: 0 0 120px;
 }
 
-/* #region - outer label */
+/* #region - decade slider */
 
 .decade-slider {
     -webkit-appearance: none;
     width: 100%;
     height: 25px;
+    margin-bottom: 5px;
     background: var(--lightAccent);
     outline: none;
     opacity: 0.8;
@@ -1377,7 +1378,15 @@ fieldset {
     background: var(--backgroundColor);
     cursor: pointer;
   }
-  /* #endregion - outer label */
+
+  .range-label-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: var(--midAccent);
+  }
+  /* #endregion - decade slider */
 
 .provider-buttons {
     flex: 0 0 var(--providerImageSize);
