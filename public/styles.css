@@ -377,6 +377,7 @@ img {
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
     --searchFormContainerHeight: calc(var(--searchInputHeight) * 3);
+    --decade-slider-height: 25px;
     /* #endregion - sizes */
 }
 
@@ -1344,6 +1345,74 @@ fieldset {
 .decade-buttons {
     flex: 0 0 120px;
 }
+
+/* #region - decade slider */
+
+.decade-slider-container {
+    position: relative;
+    width: 100%;
+}
+
+.decade-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: var(--decade-slider-height);
+    margin-bottom: 5px;
+    background: var(--lightAccent);
+    outline: none;
+    opacity: 0.8;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    z-index: 0;
+  }
+
+  #endRange {
+    position: absolute;
+    top: calc(var(--decade-slider-height) / 2);
+    left: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  /* doesn't work when webkit and moz are combined ?? */
+  #endRange::-webkit-slider-thumb {
+    visibility: visible;
+  }
+
+  #endRange::-moz-range-thumb {
+    visibility: visible;
+  }
+  
+  .decade-slider-container:hover .decade-slider {
+    opacity: 1;
+  }
+  
+  .decade-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--decade-slider-height);
+    height: var(--decade-slider-height);
+    background: var(--backgroundColor);
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .decade-slider::-moz-range-thumb {
+    width: var(--decade-slider-height);
+    height: var(--decade-slider-height);
+    background: var(--backgroundColor);
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .range-label-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: var(--midAccent);
+  }
+  /* #endregion - decade slider */
 
 .provider-buttons {
     flex: 0 0 var(--providerImageSize);

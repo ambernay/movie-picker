@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeList from './Selections/DecadeList.js';
+import DecadeSlider from './Selections/DecadeSlider.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
 import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
@@ -13,7 +14,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
     setSearchState }) {
 
     const [genres, setGenres] = useState([]);
-    const [decade, setDecade] = useState();
+    const [rangeIsSelected, setRangeIsSelected] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [providers, setProviders] = useState([]);
@@ -53,7 +54,6 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-            console.log(genres, startDate, endDate, providers)
             // scroll back to top when new gallery loads - (offset to wait for page load)
             setTimeout(() => window.scrollTo(0, 0), 100);
 
@@ -97,12 +97,13 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
         "language": langCode,
     }
     // add params to userSelections object only when selected
-    if (decade && decade.id !== 'all') {
-        storeUserSelections["primary_release_date.gte"] = startDate;
-        storeUserSelections["primary_release_date.lte"] = endDate;
+    if (rangeIsSelected) {
+        storeUserSelections["primary_release_date.gte"] = `${startDate}-01-01`;
+        storeUserSelections["primary_release_date.lte"] = `${endDate}-12-31`;
+        
         // info for cacheKey and 'no results' message
-        selectionsForMessage.push(decade.id);
-        cacheKeyArr.push(decade.id);
+        selectionsForMessage.push(`${startDate} - ${endDate}`);
+        cacheKeyArr.push(`${startDate}-${endDate}`);
     }
     if (providers && providers.length > 0) {
         providers.map((provider) => {
@@ -202,13 +203,12 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             sectionLabel={capFirstChar(formLabels.genre)}
                             currentTranslation={currentTranslation}
                         />
-                        <DecadeList
+                        <DecadeSlider
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
-                            setDecade={setDecade}
+                            setRangeIsSelected={setRangeIsSelected}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
-                            currentTranslation={currentTranslation}
                         />
                         {currentRegion ?
                             <ProviderFormList
