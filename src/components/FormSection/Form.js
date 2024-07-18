@@ -54,7 +54,6 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-            console.log(genres, startDate, endDate, providers)
             // scroll back to top when new gallery loads - (offset to wait for page load)
             setTimeout(() => window.scrollTo(0, 0), 100);
 
@@ -204,21 +203,12 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             sectionLabel={capFirstChar(formLabels.genre)}
                             currentTranslation={currentTranslation}
                         />
-                        {/* <DecadeList
-                            setStartDate={setStartDate}
-                            setEndDate={setEndDate}
-                            setDecade={setDecade}
-                            setIsValidRequest={setIsValidRequest}
-                            sectionLabel={capFirstChar(formLabels.decade)}
-                            currentTranslation={currentTranslation}
-                        /> */}
                         <DecadeSlider
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
                             setRangeIsSelected={setRangeIsSelected}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
-                            currentTranslation={currentTranslation}
                         />
                         {currentRegion ?
                             <ProviderFormList
