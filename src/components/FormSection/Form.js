@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
-import DecadeList from './Selections/DecadeList.js';
 import DecadeSlider from './Selections/DecadeSlider.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
 import { TransObj } from '../TranslationObjects.js';
