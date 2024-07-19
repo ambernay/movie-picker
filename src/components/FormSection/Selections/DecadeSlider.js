@@ -31,7 +31,7 @@ function DecadeSlider({ setStartDate, setEndDate, setRangeIsSelected, setIsValid
     return (
         <fieldset className='decade-fieldset'>
             <legend id="decade">{sectionLabel}:</legend>
-            <div className="radio-button-container decade-slider-container">
+            <div className="decade-slider-container">
                 <input min={startRangeYear} max={endRangeYear} type="range" 
                 name={"decade"} className='decade-slider' id='slider-timeline'></input>
 

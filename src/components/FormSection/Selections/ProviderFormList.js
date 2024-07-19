@@ -10,7 +10,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     const [currentNumDisplaySets, setCurrentNumDisplaySets] = useState(1);
     const [arrowClass, setArrowClass] = useState('arrow-down');
     
-    const displaySet = Math.round(window.innerWidth / 150) * 3;
+    const displaySet = Math.round(window.innerWidth / 151) * 3;
     
     const upArrow = currentTranslation['sr-only'].up_arrow;
     const downArrow = currentTranslation['sr-only'].down_arrow;
@@ -52,16 +52,16 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     return (
         <fieldset id='provider-list' className="providers-fieldset">
             <legend id="provider">{sectionLabel}:</legend>
-                <div className='provider-list-container' >
+                <ul className='provider-list-container' >
                 {selectionOfProviders?.length > 0 ? selectionOfProviders.map((provider) => {
                     const imageURL = 'https://image.tmdb.org/t/p/w500';
                     return (
-                        <div className="radio-button-container provider-buttons" key={provider.provider_id}>
+                        <li className="radio-button-container provider-buttons" key={provider.provider_id}>
                             <input onChange={handleChange} type="checkbox" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
                             <label title={provider.provider_name} htmlFor={provider.provider_id}>
                                 <img className='provider-icons' src={imageURL + provider.logo_path} alt={provider.provider_name}/>
                             </label>
-                        </div>
+                        </li>
                     )
                 })
                     :
@@ -72,7 +72,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                         </h4>
                     </div>
                 }
-            </div>
+            </ul>
             <button title={currentTranslation['sr-only'].more_options} className='more-providers-button' onClick={handleMoreProvidersButton}>
                 <figure>
                     <UpDownArrowIcon

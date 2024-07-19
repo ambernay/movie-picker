@@ -21,22 +21,24 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, currentLanguag
     return (
         <fieldset className='genre-fieldset'>
             <legend id="genre">{sectionLabel}:</legend>
-            {genreList.length > 0 ? genreList.map((genre) => {
-                return (
-                    <div className="radio-button-container genre-buttons" key={genre.id}>
-                        <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
-                        <label htmlFor={genre.id}>{genre.name}</label>
+            <ul className='genre-buttons-list'>
+                {genreList.length > 0 ? genreList.map((genre) => {
+                    return (
+                        <li className="radio-button-container genre-buttons" key={genre.id}>
+                            <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
+                            <label htmlFor={genre.id}>{genre.name}</label>
+                        </li>
+                    )
+                })
+                    :
+                    <div className="error-message-container">
+                        <h4>{
+                            `${currentTranslation.status_messages.failed_to_load} 
+                            ${currentTranslation.section_labels.genre}`}
+                        </h4>
                     </div>
-                )
-            })
-                :
-                <div className="error-message-container">
-                    <h4>{
-                        `${currentTranslation.status_messages.failed_to_load} 
-                        ${currentTranslation.section_labels.genre}`}
-                    </h4>
-                </div>
-            }
+                }
+            </ul>
         </fieldset>
     )
 }

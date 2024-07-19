@@ -1307,7 +1307,7 @@ legend {
 fieldset {
     display: flex;
     position: relative;
-    flex-wrap: wrap;
+    flex-direction: column;
     column-gap: 5px;
     color: var(--lightAccent);
     width: 99%;
@@ -1322,7 +1322,7 @@ fieldset {
     overflow: scroll;
 } */
 
-.provider-list-container {
+.provider-list-container, .genre-buttons-list {
     display: flex;
     position: relative;
     flex-wrap: wrap;
@@ -1340,16 +1340,13 @@ fieldset {
 }
 
 .genre-buttons {
-    flex: 0 0 190px;
-}
-
-.decade-buttons {
-    flex: 0 0 120px;
+    flex: 1 1 190px;
 }
 
 /* #region - decade slider */
 
 .decade-slider-container {
+    display: flex;
     position: relative;
     width: 100%;
     height: var(--decade-slider-height);
