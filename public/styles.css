@@ -378,6 +378,7 @@ img {
     --searchInputHeight: 1.5rem;
     --searchFormContainerHeight: calc(var(--searchInputHeight) * 3);
     --decade-slider-height: 25px;
+    --slider-timeline-height: 2px;
     /* #endregion - sizes */
 }
 
@@ -848,7 +849,7 @@ button:focus svg {
     position: relative;
     min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
-    border-radius: 5px;
+    border-radius: 6px;
     justify-content: space-around;
     align-self: center;
     padding: 0;
@@ -858,7 +859,7 @@ button:focus svg {
     display: flex;
     position: absolute;
     background-color: var(--backgroundColor);
-    border-radius: 10%;
+    border-radius: 3px;
     width: 43%;
     height: 81%;
     top: 10%;
@@ -1351,12 +1352,19 @@ fieldset {
 .decade-slider-container {
     position: relative;
     width: 100%;
+    height: var(--decade-slider-height);
+    align-items: center;
 }
+
+ 
+.decade-slider-container:hover .decade-slider {
+    opacity: 1;
+  }
 
 .decade-slider {
     -webkit-appearance: none;
     width: 100%;
-    height: var(--decade-slider-height);
+    height: var(--slider-timeline-height);
     margin-bottom: 5px;
     background: var(--lightAccent);
     outline: none;
@@ -1366,44 +1374,53 @@ fieldset {
     z-index: 0;
   }
 
-  #endRange {
+  #startRange, #endRange {
     position: absolute;
-    top: calc(var(--decade-slider-height) / 2);
+    top: calc((var(--decade-slider-height) / 2) - var(--slider-timeline-height));
     left: 0;
     height: 0;
     visibility: hidden;
   }
 
-  /* doesn't work when webkit and moz are combined ?? */
-  #endRange::-webkit-slider-thumb {
-    visibility: visible;
-  }
-
-  #endRange::-moz-range-thumb {
-    visibility: visible;
-  }
+  /* doesn't work when webkit and moz are combined */
   
-  .decade-slider-container:hover .decade-slider {
-    opacity: 1;
-  }
-  
-  .decade-slider::-webkit-slider-thumb {
+  #startRange::-webkit-slider-thumb , #endRange::-webkit-slider-thumb {
+    visibility: visible;
     -webkit-appearance: none;
     appearance: none;
     width: var(--decade-slider-height);
     height: var(--decade-slider-height);
     background: var(--backgroundColor);
+    border-radius: 3px;
     cursor: pointer;
     z-index: 1;
   }
-  
-  .decade-slider::-moz-range-thumb {
+
+  #startRange::-moz-range-thumb , #endRange::-moz-range-thumb {
+    visibility: visible;
     width: var(--decade-slider-height);
     height: var(--decade-slider-height);
     background: var(--backgroundColor);
+    border-radius: 3px;
     cursor: pointer;
     z-index: 1;
   }
+    /* #region - slider timeline, disabled thumbs */
+
+    #slider-timeline {
+        visibility: visible;
+        z-index: 0;
+    }
+
+    #slider-timeline::-webkit-slider-thumb {
+        display: none;
+    }
+
+    #slider-timeline::-moz-range-thumb {
+        display: none;
+    }
+    /* #endregion - slider timeline, disabled thumbs */
+
 
   .range-label-container {
     display: flex;

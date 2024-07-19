@@ -4,11 +4,10 @@ function DecadeSlider({ setStartDate, setEndDate, setRangeIsSelected, setIsValid
 
     const startRangeYear = 1884;
     const currentYear = new Date().getFullYear();
-    const currentDecade = Math.round(currentYear / 10) * 10;
-    const endRangeYear = currentDecade + 9;
+    const endRangeYear = currentYear + 5;
 
     const [startRangeSlider, setStartRangeSlider] = useState(startRangeYear);
-    const [endRangeSlider, setEndRangeSlider] = useState(currentDecade + 9);
+    const [endRangeSlider, setEndRangeSlider] = useState(endRangeYear);
    
     const handleChange = (e) => {
        
@@ -34,8 +33,12 @@ function DecadeSlider({ setStartDate, setEndDate, setRangeIsSelected, setIsValid
             <legend id="decade">{sectionLabel}:</legend>
             <div className="radio-button-container decade-slider-container">
                 <input min={startRangeYear} max={endRangeYear} type="range" 
+                name={"decade"} className='decade-slider' id='slider-timeline'></input>
+
+                <input min={startRangeYear} max={endRangeYear} type="range" 
                 name={"decade"} className='decade-slider' id='startRange'
                 defaultValue={startRangeYear} onChange={handleChange}></input>
+                
                 <input min={startRangeYear} max={endRangeYear} type="range" 
                 name={"decade"} className='decade-slider' id='endRange'
                 defaultValue={endRangeYear} onChange={handleChange}></input>
