@@ -1360,7 +1360,9 @@ fieldset {
 }
 
  
-.decade-slider-container:hover .decade-slider {
+.decade-slider-container:hover .decade-slider,
+.decade-slider-container:active .decade-slider,
+.decade-slider-container:focus .decade-slider {
     opacity: 1;
   }
 
@@ -1452,9 +1454,13 @@ input[type="checkbox"] {
 
 /* x button */
 .x-button {
+    display: flex;
     position: absolute;
     top: 0.8%;
     right: 3%;
+    width: 20px;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .lines {
@@ -1531,12 +1537,9 @@ input[type="checkbox"] {
     margin: 4px;
 }
 
-.region-list.header-region:hover .label-container,
-.language-list.header-region:hover .label-container,
-.region-list.header-region:active .label-container,
-.language-list.header-region:active .label-container,
-.region-list.header-region:focus .label-container,
-.language-list.header-region:focus .label-container {
+.dropdown-menu:hover .label-container,
+.dropdown-menu:active .label-container,
+.dropdown-menu:focus .label-container {
     border: 1px solid var(--midAccent);
 }
 
