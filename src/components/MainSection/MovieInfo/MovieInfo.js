@@ -17,10 +17,6 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                 : infoState === 'more-info' || 'provider-info' ? 'more-info' : 'hidden'}>
                     <section className='heading-container' onClick={() => setInfoState('provider-info')}>
                         <h4>{movieTitle}</h4>
-                        <figure title={iconDescription.viewing_options} className="eye-icon">
-                            <EyeIcon />
-                            <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
-                        </figure>
                     </section>
                     {infoState === 'overview' ?
                         <p className='movie-info-middle'>{overview}</p>
@@ -51,6 +47,10 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                         <figure title={iconDescription.more_info} className="info-icon">
                             <InfoIcon />
                             <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
+                        </figure>
+                        <figure title={iconDescription.viewing_options} className="eye-icon">
+                            <EyeIcon />
+                            <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
                         </figure>
                     </section>
                 </div>
