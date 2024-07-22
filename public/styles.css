@@ -771,7 +771,7 @@ li:focus {
 
 .search-button, .search-container, .toggle-button-container, 
 .find-movie-button, .dropdown-menu .select, .dropdown-menu label, 
-.hover-animation {
+.hover-animation, .provider-buttons label {
     cursor: pointer;
 }
 
@@ -1186,6 +1186,14 @@ ul li .info-container {
     height: 1.6rem;
     justify-content: center;
     background-color: var(--midAccent);
+    opacity: 0.7;
+}
+
+.more-providers-button:hover,
+.more-providers-button:active,
+.more-providers-button:focus {
+    opacity: 1;
+
 }
 
 .more-providers-button figure {
