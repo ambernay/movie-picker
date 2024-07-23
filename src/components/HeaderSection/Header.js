@@ -8,8 +8,8 @@ import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isFormVisible, setIsFormVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentRegion, 
-    setCurrentRegion, currentLanguage, setCurrentLanguage, tvMovieToggle, 
-    setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections,
+    sortOption, setSortOption, setCurrentRegion, currentLanguage, 
+    setCurrentLanguage, tvMovieToggle, setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections,
     isSearchbarOpen, setIsSearchbarOpen }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
@@ -101,6 +101,8 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 setIsTrending={setIsTrending}
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
+                                sortOption={sortOption}
+                                setSortOption={setSortOption}
                                 setCurrentPage={setCurrentPage}
                                 isSearchbarOpen={isSearchbarOpen}
                                 setIsSearchbarOpen={setIsSearchbarOpen}

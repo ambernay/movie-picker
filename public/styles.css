@@ -376,7 +376,7 @@ img {
     --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
-    --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
+    --searchFormContainerHeight: calc(var(--searchInputHeight) * 6);
     --decade-slider-height: 25px;
     --slider-timeline-height: 2px;
     /* #endregion - sizes */
@@ -737,9 +737,10 @@ li:focus {
     width: 100%;
     height: var(--searchFormContainerHeight);
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background: var(--darkNeutral);
     border-top: 2px solid var(--lightAccent);
+    padding: 20px 0;
     z-index: 1;
 }
 
@@ -768,6 +769,27 @@ li:focus {
 .searchbar-form input::placeholder {
     color: var(--backgroundColorDesat);
     font-size: 1rem;
+}
+
+.searchbar-selections-container {
+    flex-direction: column;
+}
+
+.searchbar-selections-container .sort-by {
+    --formWidth: var(--galleryItemMinWidth);
+    height: fit-content;
+    width: var(--galleryItemMinWidth);
+}
+
+.searchbar-form .sort-by label {
+    --sortByListWidth: var(--galleryItemMinWidth);
+    height: 100%;
+}
+
+.searchbar-form .sort-by .select-container.visible {
+    --sortByListWidth: var(--galleryItemMinWidth);
+    top: calc(var(--searchFormContainerHeight) - 25px);
+    right: calc(50vw - (var(--galleryItemMinWidth) / 2));
 }
 
 .searchbar-selections-container .toggle-button-container {
@@ -924,7 +946,7 @@ button:focus svg {
     height: 1.6rem;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
-    z-index: 10;
+    z-index: 1;
 }
 
 #movie-option .tv-icon svg,
@@ -1605,6 +1627,11 @@ input[type="checkbox"] {
 
 /* #region - dropdown arrows */
 
+.header-region .label-container::before, 
+.header-region .label-container::after {
+    right: calc(var(--size) - 3px);
+}
+
 .label-container::before,
 .label-container::after {
     --size: 0.3rem;
@@ -1612,7 +1639,7 @@ input[type="checkbox"] {
     position: absolute;
     content: "";
     width: var(--size);
-    right: calc(var(--size) - 3px);
+    right: var(--size);
     border-left: var(--size) solid transparent;
     border-right: var(--size) solid transparent;
     pointer-events: none;

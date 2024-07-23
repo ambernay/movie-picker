@@ -12,7 +12,8 @@ function App() {
     const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
-    const [searchState, setSearchState] = useState('none'); 
+    const [searchState, setSearchState] = useState('none');
+    const [sortOption, setSortOption] = useState("vote_average.desc"); 
     // [region-code, native-name]
     const [currentRegion, setCurrentRegion] = useState(null);
     // default language from navigator
@@ -58,8 +59,10 @@ function App() {
                 isTrending={isTrending}
                 setIsTrending={setIsTrending}
                 currentPage={currentPage}
+                sortOption={sortOption} 
+                setSortOption={setSortOption}
                 setCurrentPage={setCurrentPage}
-                currentRegion={currentRegion}
+                currentRegion={currentRegion} 
                 setCurrentRegion={setCurrentRegion}
                 currentLanguage={currentLanguage}
                 setCurrentLanguage={setCurrentLanguage}
