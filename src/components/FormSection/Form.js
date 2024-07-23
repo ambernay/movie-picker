@@ -7,8 +7,8 @@ import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
-function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, 
-    isDropdownVisible, currentRegion, currentLanguage, setCurrentRegion, 
+function Form({ setUserSelections, setIsTrending, setIsFormVisible, 
+    isFormVisible, currentRegion, currentLanguage, setCurrentRegion, 
     currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, 
     setSearchState }) {
 
@@ -24,12 +24,11 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const formLabelTranslation = currentTranslation['section_labels'];
-    const allTranslation = currentTranslation['all'];
     const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
         
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
-        if (searchState === 'formSearch' && !isDropdownVisible)
+        if (searchState === 'formSearch' && !isFormVisible)
         setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
         sortOption, currentRegion, currentLanguage, startDate, endDate, 
         providers, genres));
@@ -48,7 +47,7 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
         setSubmitAttempted(true);
 
         if (genres.length > 0 || startDate || endDate || providers.length > 0) {
-            setIsDropdownVisible(false);
+            setIsFormVisible(false);
             setIsTrending(false);
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
@@ -145,7 +144,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
     return (keyValuePairs.join('&'));
 }
     // toggles form visiblity
-    const formClass = isDropdownVisible ? "form-section" : "make-display-none";
+    const formClass = isFormVisible ? "form-section" : "make-display-none";
 
     return (
         <section className={formClass}>
@@ -166,7 +165,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         }
 
                         <button type="button" className="x-button"
-                        onClick={() => {setIsDropdownVisible(false); return false}}>
+                        onClick={() => {setIsFormVisible(false); setSearchState('formSearch'); return false}}>
                             <div className="lines a"></div>
                             <div className="lines b"></div>
                         </button>

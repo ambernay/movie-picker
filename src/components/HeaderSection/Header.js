@@ -6,16 +6,17 @@ import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
 import { TransObj } from '../TranslationObjects.js';
 
-function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
+function Header({ handleDropdown, isFormVisible, setIsFormVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentRegion, 
     setCurrentRegion, currentLanguage, setCurrentLanguage, tvMovieToggle, 
-    setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
+    setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections,
+    isSearchbarOpen, setIsSearchbarOpen }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
   
     // toggle visibility and orientation of arrow image
-    let arrowClass = isDropdownVisible ? "arrow-up" : "arrow-down";
+    let arrowClass = isFormVisible ? "arrow-up" : "arrow-down";
 
     let toggleArrow = isTrending ? "make-display-none" : '';
     let styleClass = !isTrending ? "hover-animation" : '';
@@ -23,7 +24,7 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
     const handleTrendingButton = () => {
         if (!isTrending) {
             setIsTrending(true);
-            setIsDropdownVisible(false);
+            setIsFormVisible(false);
             setCurrentPage(1);
         }
     }
@@ -101,6 +102,8 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
+                                isSearchbarOpen={isSearchbarOpen}
+                                setIsSearchbarOpen={setIsSearchbarOpen}
                             />
                         </div>
                     </div>{/* wrapper */}

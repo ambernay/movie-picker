@@ -3,13 +3,14 @@ import { MagnifyerIcon } from '../Icons';
 import ToggleButton from './ToggleButton';
 import { TransObj } from '../TranslationObjects.js';
 
-function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggle, setUserSelections, setIsTrending, 
-    currentLanguage, currentPage, setCurrentPage }) {
-    const [isOpen, setIsOpen] = useState(false);
+function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggle, 
+    setUserSelections, setIsTrending, currentLanguage, currentPage, setCurrentPage,
+    isSearchbarOpen, setIsSearchbarOpen }) {
+
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
-    const inputClass = isOpen ? 'searchbar-form' : 'hidden';
+    const inputClass = isSearchbarOpen ? 'searchbar-form' : 'hidden';
     const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
     ${currentPage}`;
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
@@ -20,10 +21,10 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
 
     // sets focus when window opens
     useEffect(() => {
-        if (isOpen && searchInput.current) {
+        if (isSearchbarOpen && searchInput.current) {
             searchInput.current.focus();
         }
-    }, [isOpen]);
+    }, [isSearchbarOpen]);
 
     const capitalize = (string) => {
         if (string === 'tv') {return string.toUpperCase();}
@@ -42,7 +43,7 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
         setNewValue(e.target.value);
     }
     const handleIconClick = (e) => {
-        setIsOpen(!isOpen);
+        setIsSearchbarOpen(!isSearchbarOpen);
         searchInput.current.focus();
         setEmptyModalClass('hidden');
         document.querySelector('input').blur();
@@ -52,7 +53,7 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
         e.preventDefault();
         setCurrentPage(1);
         setIsTrending(false);
-        setIsOpen(false);
+        setIsSearchbarOpen(false);
         // selection query / cache key / result message
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [capitalize(newValue), capitalize(tvMovieToggle)]]);
         setSearchState('searchBar');
@@ -66,9 +67,9 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
     // hides modal and input form when modal is clicked
     const handleModalClick = (e) => {
         setEmptyModalClass('hidden'); 
-        if(isOpen) setIsOpen(false);
+        if(isSearchbarOpen) setIsSearchbarOpen(false);
     }
-
+   
     return (
         <div className='search-container' >
             <div className='wrapper'>
@@ -89,8 +90,12 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
                             ref={searchInput}>
                         </input>
                         <button className='search-button'>
-                        <MagnifyerIcon />
+                            <figure className={'search-icon-container'}>
+                                <MagnifyerIcon />
+                                <figcaption className='sr-only'>{currentTranslation.search}</figcaption>
+                            </figure>
                         </button>
+                        
                     </section>
                     <section className='searchbar-selections-container'>
                         <ToggleButton
