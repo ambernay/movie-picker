@@ -43,12 +43,14 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                         />
                         : null
                     }
-                    <section className='info-icon-container' onClick={() => setInfoState('more-info')}>
-                        <figure title={iconDescription.more_info} className="info-icon">
+                    <section className='info-icon-container'>
+                        <figure title={iconDescription.more_info} className="info-icon"
+                        onClick={() => setInfoState('more-info')}>
                             <InfoIcon />
                             <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
                         </figure>
-                        <figure title={iconDescription.viewing_options} className="eye-icon">
+                        <figure title={iconDescription.viewing_options} className="eye-icon"
+                        onClick={() => setInfoState('provider-info')}>
                             <EyeIcon />
                             <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
                         </figure>
