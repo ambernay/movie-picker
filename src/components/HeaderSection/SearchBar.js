@@ -1,14 +1,15 @@
 import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
+import ToggleButton from './ToggleButton';
 import { TransObj } from '../TranslationObjects.js';
 
-function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
-    tvMovieToggle, currentLanguage, currentPage, setCurrentPage }) {
+function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggle, setUserSelections, setIsTrending, 
+    currentLanguage, currentPage, setCurrentPage }) {
     const [isOpen, setIsOpen] = useState(false);
     const [newValue, setNewValue] = useState('');
     const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
-    const inputClass = isOpen ? 'input-container' : 'hidden';
+    const inputClass = isOpen ? 'searchbar-form' : 'hidden';
     const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
     ${currentPage}`;
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
@@ -76,24 +77,33 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
                     <figcaption className='sr-only'>{iconDescription.search_bar}</figcaption>
                 </figure>
                 <form className={inputClass} onSubmit={handleSubmit}>
-                    <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
-                    <input
-                        placeholder={`${placeholder}...`}
-                        name={'movie search'}
-                        value={newValue}
-                        onChange={handleInput}
-                        onFocus={handleInputFocus}
-                        onSelect={e => setEmptyModalClass('empty-modal')}
-                        ref={searchInput}>
-                    </input>
-                    <button className='search-button' >
+                    <section className='searchbar-input-container'>
+                        <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
+                        <input
+                            placeholder={`${placeholder}...`}
+                            name={'movie search'}
+                            value={newValue}
+                            onChange={handleInput}
+                            onFocus={handleInputFocus}
+                            onSelect={e => setEmptyModalClass('empty-modal')}
+                            ref={searchInput}>
+                        </input>
+                        <button className='search-button'>
                         <MagnifyerIcon />
-                    </button>
+                        </button>
+                    </section>
+                    <section className='searchbar-selections-container'>
+                        <ToggleButton
+                            tvMovieToggle={tvMovieToggle}
+                            setTvMovieToggle={setTvMovieToggle}
+                            setCurrentPage={setCurrentPage}
+                            iconDescription={iconDescription}
+                        />
+                    </section> 
                 </form>
-                <div 
-                className={emptyModalClass}
-                onClick={handleModalClick}
-                >
+                
+                <div className={emptyModalClass}
+                onClick={handleModalClick}>
                 </div>
             </div>
         </div>

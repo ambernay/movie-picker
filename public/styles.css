@@ -376,7 +376,7 @@ img {
     --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
-    --searchFormContainerHeight: calc(var(--searchInputHeight) * 3);
+    --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
     --decade-slider-height: 25px;
     --slider-timeline-height: 2px;
     /* #endregion - sizes */
@@ -728,11 +728,12 @@ li:focus {
     padding: 1px;
 }
 
-.input-container {
+.searchbar-form {
     display: flex;
     position: absolute;
     top: var(--headerMargin);
     right: 0;
+    flex-direction: column;
     width: 100%;
     height: var(--searchFormContainerHeight);
     align-items: center;
@@ -742,7 +743,18 @@ li:focus {
     z-index: 1;
 }
 
-.input-container input {
+.searchbar-form section {
+    display: flex;
+    width: var(--galleryItemMinWidth);
+    justify-content: center;
+}
+
+.searchbar-input-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.searchbar-form input {
     --inputPadding: 4px;
     background: var(--lightAccent);
     color: var(--darkNeutral);
@@ -753,9 +765,17 @@ li:focus {
     border-radius: 0;
 }
 
-.input-container input::placeholder {
+.searchbar-form input::placeholder {
     color: var(--backgroundColorDesat);
     font-size: 1rem;
+}
+
+.searchbar-selections-container .toggle-button-container {
+    border: 2px groove var(--lightAccent);
+}
+
+.searchbar-selections-container .toggle-button-container svg {
+    width: 1.5rem;
 }
 
 .search-icon-container {
@@ -789,7 +809,6 @@ li:focus {
     fill: var(--lightAccent);
     width: 1.2rem;
 }
-
 /* #endregion - search bar */
 
 /* #endregion - subheading dropdown */
@@ -1329,6 +1348,10 @@ fieldset {
     justify-content: flex-start;
     margin-bottom: 10px;
     /* overflow: scroll; */
+}
+
+.decade-fieldset {
+    height: 90px;
 }
 
 /* .providers-fieldset {

@@ -13,7 +13,8 @@ function ToggleButton({ tvMovieToggle, setTvMovieToggle, setCurrentPage, iconDes
     }
 
     return (
-        <button type='button' id={tvMovieToggle === 'movie' ? "movie-option" : "tv-option"} className="toggle-button-container" onClick={handleTvMovieToggle}>
+        <button type='button' id={tvMovieToggle === 'movie' ? "movie-option" : "tv-option"} 
+        className="toggle-button-container" onClick={handleTvMovieToggle}>
             <span className="slider"></span>
             <figure className="toggle-left movie-icon">
                 <FilmIcon />

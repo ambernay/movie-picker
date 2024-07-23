@@ -94,9 +94,10 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                             <SearchBar
                                 searchState={searchState} 
                                 setSearchState={setSearchState}
+                                tvMovieToggle={tvMovieToggle}
+                                setTvMovieToggle={setTvMovieToggle}
                                 setUserSelections={setUserSelections}
                                 setIsTrending={setIsTrending}
-                                tvMovieToggle={tvMovieToggle}
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
