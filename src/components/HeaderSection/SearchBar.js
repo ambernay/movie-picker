@@ -1,12 +1,11 @@
 import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
 import ToggleButton from './ToggleButton';
-import SortByDropdown from '../FormSection/Dropdowns/SortByDropdown.js';
 import { TransObj } from '../TranslationObjects.js';
 
 function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggle, 
     setUserSelections, setIsTrending, currentLanguage, currentPage, setCurrentPage,
-    sortOption, setSortOption, isSearchbarOpen, setIsSearchbarOpen, isFormVisible, setIsFormVisible }) {
+    isSearchbarOpen, setIsSearchbarOpen, isFormVisible, setIsFormVisible }) {
 
     const [newValue, setNewValue] = useState('');
 
@@ -94,11 +93,6 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
                             setTvMovieToggle={setTvMovieToggle}
                             setCurrentPage={setCurrentPage}
                             iconDescription={iconDescription}
-                        />
-                         <SortByDropdown
-                            setSortOption={setSortOption}
-                            currentLanguage={currentLanguage}
-                            currentTranslation={currentTranslation}
                         />
                     </section> 
                 </form>

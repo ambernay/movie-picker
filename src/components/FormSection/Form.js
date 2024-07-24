@@ -9,14 +9,15 @@ import FormModal from './FormModal.js';
 
 function Form({ setUserSelections, setIsTrending, setIsFormVisible, 
     isFormVisible, currentRegion, currentLanguage, setCurrentRegion, 
-    sortOption, setSortOption, currentPage, setCurrentPage, tvMovieToggle, 
-    screenSize, searchState, setSearchState }) {
+    currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, 
+    setSearchState }) {
 
     const [genres, setGenres] = useState([]);
     const [rangeIsSelected, setRangeIsSelected] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [providers, setProviders] = useState([]);
+    const [sortOption, setSortOption] = useState("vote_average.desc"); 
     const [formLabels, setFormLabels] = useState(TransObj[`${currentLanguage[0]}`]['section_labels']);
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);

@@ -8,9 +8,9 @@ import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isFormVisible, setIsFormVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentRegion, 
-    sortOption, setSortOption, setCurrentRegion, currentLanguage, 
-    setCurrentLanguage, tvMovieToggle, setTvMovieToggle, screenSize, searchState, 
-    setSearchState, setUserSelections, isSearchbarOpen, setIsSearchbarOpen }) {
+    setCurrentRegion, currentLanguage, setCurrentLanguage, tvMovieToggle, 
+    setTvMovieToggle, screenSize, searchState, setSearchState, 
+    setUserSelections, isSearchbarOpen, setIsSearchbarOpen }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
@@ -36,7 +36,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
 
     const handleTvMovieToggle = () => {
         if (isFormVisible) {setIsFormVisible(false)};
-        
+
         if (tvMovieToggle === 'movie') {
             setTvMovieToggle('tv');
         } else {
@@ -112,8 +112,6 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 setIsTrending={setIsTrending}
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
-                                sortOption={sortOption}
-                                setSortOption={setSortOption}
                                 setCurrentPage={setCurrentPage}
                                 isSearchbarOpen={isSearchbarOpen}
                                 setIsSearchbarOpen={setIsSearchbarOpen}
