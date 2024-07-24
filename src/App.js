@@ -46,7 +46,11 @@ function App() {
 
     const handleDropdown = (e) => {
         const headerRegionDropdown = document.querySelector('.header-region');
-        (!isFormVisible && document.activeElement !== headerRegionDropdown) ? setIsFormVisible(true) : setIsFormVisible(false);
+        (!isFormVisible && document.activeElement !== headerRegionDropdown) ? 
+        setIsFormVisible(true) : setIsFormVisible(false);
+
+        if (isSearchbarOpen) { setIsSearchbarOpen(false);}
+
         return false;
     }
 

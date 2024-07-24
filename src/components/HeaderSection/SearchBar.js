@@ -6,10 +6,9 @@ import { TransObj } from '../TranslationObjects.js';
 
 function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggle, 
     setUserSelections, setIsTrending, currentLanguage, currentPage, setCurrentPage,
-    sortOption, setSortOption, isSearchbarOpen, setIsSearchbarOpen }) {
+    sortOption, setSortOption, isSearchbarOpen, setIsSearchbarOpen, isFormVisible, setIsFormVisible }) {
 
     const [newValue, setNewValue] = useState('');
-    const [emptyModalClass, setEmptyModalClass] = useState('hidden');
 
     const inputClass = isSearchbarOpen ? 'searchbar-form' : 'hidden';
     const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
@@ -19,6 +18,8 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
     const placeholder = tvMovieToggle === 'movie' ? currentTranslation.movie_title : currentTranslation.tv_series;
 
     const searchInput = useRef(null);
+
+    const emptyModalClass = isSearchbarOpen ? 'empty-modal' : 'hidden';
 
     // sets focus when window opens
     useEffect(() => {
@@ -45,8 +46,8 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
     }
     const handleIconClick = (e) => {
         setIsSearchbarOpen(!isSearchbarOpen);
+        if (isFormVisible) {setIsFormVisible(false)};
         searchInput.current.focus();
-        setEmptyModalClass('hidden');
         document.querySelector('input').blur();
     }
   
@@ -58,17 +59,6 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
         // selection query / cache key / result message
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [capitalize(newValue), capitalize(tvMovieToggle)]]);
         setSearchState('searchBar');
-        setEmptyModalClass('hidden');
-    }
-    // displays modal whenever input is focused
-    const handleInputFocus = (e) => {
-        e.target.select();
-        setEmptyModalClass('empty-modal');
-    }
-    // hides modal and input form when modal is clicked
-    const handleModalClick = (e) => {
-        setEmptyModalClass('hidden'); 
-        if(isSearchbarOpen) setIsSearchbarOpen(false);
     }
    
     return (
@@ -86,8 +76,8 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
                             name={'movie search'}
                             value={newValue}
                             onChange={handleInput}
-                            onFocus={handleInputFocus}
-                            onSelect={e => setEmptyModalClass('empty-modal')}
+                            onFocus={(e) => e.target.select()}
+                            // onSelect={e => setEmptyModalClass('empty-modal')}
                             ref={searchInput}>
                         </input>
                         <button className='search-button'>
@@ -114,7 +104,7 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
                 </form>
                 
                 <div className={emptyModalClass}
-                onClick={handleModalClick}>
+                onClick={() => {setIsSearchbarOpen(false)}}>
                 </div>
             </div>
         </div>

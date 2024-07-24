@@ -9,8 +9,8 @@ import { TransObj } from '../TranslationObjects.js';
 function Header({ handleDropdown, isFormVisible, setIsFormVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentRegion, 
     sortOption, setSortOption, setCurrentRegion, currentLanguage, 
-    setCurrentLanguage, tvMovieToggle, setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections,
-    isSearchbarOpen, setIsSearchbarOpen }) {
+    setCurrentLanguage, tvMovieToggle, setTvMovieToggle, screenSize, searchState, 
+    setSearchState, setUserSelections, isSearchbarOpen, setIsSearchbarOpen }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
@@ -25,12 +25,24 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
         if (!isTrending) {
             setIsTrending(true);
             setIsFormVisible(false);
+            setIsSearchbarOpen(false);
             setCurrentPage(1);
         }
     }
 
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    const handleTvMovieToggle = () => {
+        if (isFormVisible) {setIsFormVisible(false)};
+        
+        if (tvMovieToggle === 'movie') {
+            setTvMovieToggle('tv');
+        } else {
+            setTvMovieToggle('movie');
+        }
+        setCurrentPage(1);
     }
 
     return (
@@ -53,9 +65,8 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                         </div>
                         <div className="header-buttons-container">
                             <ToggleButton
+                                handleTvMovieToggle={handleTvMovieToggle}
                                 tvMovieToggle={tvMovieToggle}
-                                setTvMovieToggle={setTvMovieToggle}
-                                setCurrentPage={setCurrentPage}
                                 iconDescription={iconDescription}
                             />
                              <LanguageDropdown
@@ -106,6 +117,8 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 setCurrentPage={setCurrentPage}
                                 isSearchbarOpen={isSearchbarOpen}
                                 setIsSearchbarOpen={setIsSearchbarOpen}
+                                isFormVisible={isFormVisible}
+                                setIsFormVisible={setIsFormVisible}
                             />
                         </div>
                     </div>{/* wrapper */}

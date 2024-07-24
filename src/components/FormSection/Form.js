@@ -126,7 +126,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
 
     // split on underscores and discard value before first underscore
-    let splitIndex = sortOption.includes('date') ? 2 : 1;
+    let splitIndex = sortOption?.includes('date') ? 2 : 1;
     let sortOptionTitle = (`${sortOption}`).split('_')[splitIndex];
    
     selectionsForMessage.push(regionNativeName); 
@@ -164,7 +164,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         }
 
                         <button type="button" className="x-button"
-                        onClick={() => {setIsFormVisible(false); setSearchState('formSearch'); return false}}>
+                        onClick={() => {setIsFormVisible(false); return false}}>
                             <div className="lines a"></div>
                             <div className="lines b"></div>
                         </button>
