@@ -82,7 +82,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
- 
+
     let key = isTrending ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {

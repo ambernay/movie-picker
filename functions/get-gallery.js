@@ -14,7 +14,7 @@ const handler = async (event) => {
         if (isTrending === 'true') {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
         else if(searchState === 'searchBar') {url = searchBarURL}
-    
+
     try{
         const { data } = await axios.get(url)
         let apiResults = { movieResults: data.results, totalPages: data.total_pages }

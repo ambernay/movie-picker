@@ -125,13 +125,9 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
         cacheKeyArr.push(storeUserSelections["with_genres"]);
     };
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
-
-    // split on underscores and discard value before first underscore
-    let splitIndex = sortOption?.includes('date') ? 2 : 1;
-    let sortOptionTitle = (`${sortOption}`).split('_')[splitIndex];
    
     selectionsForMessage.push(regionNativeName); 
-    cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
+    cacheKeyArr.push(`${sortOption}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
 
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
 }

@@ -29,17 +29,23 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
     
             MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage,
                 userSelections, searchState).then(result => {
-                setStatusMessage(loadingMessage);
+                    // list of user selections for 'no results' message
+                    let messageArr = userSelections[2]?.join(' / ');
+                    let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
+                
+                if (result) {
+                    setStatusMessage(loadingMessage);
+                    setTotalPages(result?.totalPages);
+                    setMoviesToDisplay(result?.movieResults);
+                    // message for no results
+                    if (result?.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
 
-                let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-                // list of user selections for 'no results' message
-                let messageArr = userSelections[2]?.join(' / ');
-                setTotalPages(result.totalPages);
-                setMoviesToDisplay(result.movieResults);
-                // message for no results
-                if (!result.movieResults && isTrending){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
-                else if (!result.movieResults && !isTrending){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
-                else if (result.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
+                }
+                else {
+                    // message for no results
+                    if (isTrending){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
+                    else if (!isTrending){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
+                }
             });
         }
     }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion,
