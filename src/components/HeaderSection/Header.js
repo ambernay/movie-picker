@@ -117,6 +117,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 setIsSearchbarOpen={setIsSearchbarOpen}
                                 isFormVisible={isFormVisible}
                                 setIsFormVisible={setIsFormVisible}
+                                handleTvMovieToggle={handleTvMovieToggle}
                             />
                         </div>
                     </div>{/* wrapper */}

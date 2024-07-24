@@ -3,9 +3,10 @@ import { MagnifyerIcon } from '../Icons';
 import ToggleButton from './ToggleButton';
 import { TransObj } from '../TranslationObjects.js';
 
-function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggle, 
-    setUserSelections, setIsTrending, currentLanguage, currentPage, setCurrentPage,
-    isSearchbarOpen, setIsSearchbarOpen, isFormVisible, setIsFormVisible }) {
+function SearchBar({ handleTvMovieToggle, searchState, setSearchState, tvMovieToggle,
+    setTvMovieToggle, setUserSelections, setIsTrending, currentLanguage, 
+    currentPage, setCurrentPage, isSearchbarOpen, setIsSearchbarOpen, 
+    isFormVisible, setIsFormVisible }) {
 
     const [newValue, setNewValue] = useState('');
 
@@ -89,9 +90,8 @@ function SearchBar({ searchState, setSearchState, tvMovieToggle, setTvMovieToggl
                     </section>
                     <section className='searchbar-selections-container'>
                         <ToggleButton
+                            handleTvMovieToggle={handleTvMovieToggle}
                             tvMovieToggle={tvMovieToggle}
-                            setTvMovieToggle={setTvMovieToggle}
-                            setCurrentPage={setCurrentPage}
                             iconDescription={iconDescription}
                         />
                     </section> 
