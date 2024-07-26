@@ -96,6 +96,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                 moviesArrayLength={moviesToDisplay?.length}
                 totalPages={totalPages}
                 currentTranslation={currentTranslation}
+                isFormVisible={isFormVisible}
             />
         </>
     )
