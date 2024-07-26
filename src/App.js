@@ -92,21 +92,24 @@ function App() {
                     isSearchbarOpen={isSearchbarOpen}
                 />
             </main>
-            <Form
-                setUserSelections={setUserSelections}
-                isFormVisible={isFormVisible}
-                setIsTrending={setIsTrending}
-                setIsFormVisible={setIsFormVisible}
-                currentRegion={currentRegion}
-                setCurrentRegion={setCurrentRegion}
-                currentLanguage={currentLanguage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                tvMovieToggle={tvMovieToggle}
-                screenSize={screenSize}
-                searchState={searchState}
-                setSearchState={setSearchState}
-            />
+            { isFormVisible ?
+                <Form
+                    setUserSelections={setUserSelections}
+                    isFormVisible={isFormVisible}
+                    setIsTrending={setIsTrending}
+                    setIsFormVisible={setIsFormVisible}
+                    currentRegion={currentRegion}
+                    setCurrentRegion={setCurrentRegion}
+                    currentLanguage={currentLanguage}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    tvMovieToggle={tvMovieToggle}
+                    screenSize={screenSize}
+                    searchState={searchState}
+                    setSearchState={setSearchState}
+                />
+            : null
+            }
         </>
     );
 }

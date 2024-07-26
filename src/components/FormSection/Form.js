@@ -141,7 +141,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
 }
     // toggles form visiblity
     const formClass = isFormVisible ? "form-section" : "make-display-none";
-
+    
     return (
         <section className={formClass}>
             <div className="wrapper">

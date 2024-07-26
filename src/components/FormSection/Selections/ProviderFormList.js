@@ -10,8 +10,8 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     const [currentNumDisplaySets, setCurrentNumDisplaySets] = useState(1);
     const [arrowClass, setArrowClass] = useState('arrow-down');
     
-    const divisor = window.innerWidth < 565 ? 175 : 151;
-    const displaySet = Math.round(window.innerWidth / divisor) * 3;
+    const fieldsetWidth = Math.round(document.querySelector('.provider-list-container')?.clientWidth);
+    const displaySet = Math.floor((fieldsetWidth / 100)) * 3;
     
     const upArrow = currentTranslation['sr-only'].up_arrow;
     const downArrow = currentTranslation['sr-only'].down_arrow;
