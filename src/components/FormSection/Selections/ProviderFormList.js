@@ -19,7 +19,6 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         
         if (fieldsetWidth > 0) {
             const displaySet = Math.floor((fieldsetWidth / 105)) * 3;
-            console.log(displaySet);
 
             ProviderListApiCall(currentLanguage, currentRegion).then(result => {
                 const sortedList = result.results?.sort((a, b) => a.display_priorities.CA)

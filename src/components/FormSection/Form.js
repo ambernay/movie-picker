@@ -25,7 +25,7 @@ function Form({ setUserSelections, setIsTrending, setIsFormVisible,
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const formLabelTranslation = currentTranslation['section_labels'];
     const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
-        
+        console.log(currentTranslation['sr-only'].close_menu);
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
         if (searchState === 'formSearch' && !isFormVisible) {
@@ -163,8 +163,11 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
 
                         <button type="button" className="x-button"
                         onClick={() => {setIsFormVisible(false); return false}}>
-                            <div className="lines a"></div>
-                            <div className="lines b"></div>
+                            <figure>
+                                <div className="lines a"></div>
+                                <div className="lines b"></div>
+                                <figcaption className="sr-only">{currentTranslation['sr-only'].close_menu}</figcaption>
+                            </figure>
                         </button>
 
                         <a href="#genre" tabIndex='0'>{formLabels.genre}</a>
