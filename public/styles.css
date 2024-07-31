@@ -1833,6 +1833,7 @@ input[type="checkbox"] {
 @media(max-width: 460px) {
     :root {
         --smallTextSize: calc(0.8rem + 0.8dvh);
+        --formBottomHeight: 5.8rem;
     }
 
     .wrapper {
@@ -1881,6 +1882,10 @@ input[type="checkbox"] {
     .header-region .select-container {
         /* centered */
         left: calc(50% - (var(--regionDropdownWidth) / 2));  
+    }
+
+    .sort-by, .sort-by .label-container {
+        height: fit-content;
     }
 }
 
