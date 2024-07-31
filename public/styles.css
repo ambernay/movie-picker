@@ -1360,20 +1360,21 @@ fieldset {
     justify-content: center;
 }
 
-/* .providers-fieldset {
-    height: calc((var(--providerImageSize) * 3) + 1.6rem);
-    overflow: scroll;
-} */
+.providers-fieldset {
+    padding-bottom: 5px;
+    /* height: calc((var(--providerImageSize) * 3) + 1.6rem); */
+    /* overflow: scroll; */
+}
 
 .provider-list-container, .genre-buttons-list {
     display: flex;
     position: relative;
     flex-wrap: wrap;
-    column-gap: 5px;
+    gap: 5px;
     width: 100%;
     height: inherit;
     justify-content: space-between;
-    margin-bottom: 10px;
+    padding-bottom: 5px;
     overflow: scroll;
 }
 
@@ -1479,7 +1480,15 @@ fieldset {
     align-items: center;
 }
 
+.provider-buttons:hover,
+.provider-buttons:active,
+.provider-buttons:focus {
+    border: solid 1px var(--lightAccent);
+}
+
 fieldset label {
+    display: flex;
+    align-items: center;
     align-self: center;
 }
 
