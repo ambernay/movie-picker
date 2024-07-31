@@ -7,6 +7,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
 
     const [providerFormList, setProviderFormList] = useState([]);
     const [selectionOfProviders, setSelectionOfProviders] = useState(null);
+    const [displaySet, setDisplaySet] = useState(0);
     const [currentNumDisplaySets, setCurrentNumDisplaySets] = useState(1);
     const [arrowClass, setArrowClass] = useState('arrow-down');
     
@@ -18,14 +19,15 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         const fieldsetWidth = Math.round(providerListEl?.clientWidth);
         
         if (fieldsetWidth > 0) {
-            const displaySet = Math.floor((fieldsetWidth / 105)) * 3;
+            let newDisplaySet = Math.floor((fieldsetWidth / 105)) * 3;
 
             ProviderListApiCall(currentLanguage, currentRegion).then(result => {
-                const sortedList = result.results?.sort((a, b) => a.display_priorities.CA)
+                const sortedList = result.results?.sort((a, b) => a.display_priorities.currentRegion)
                 setProviderFormList(sortedList); 
-                setSelectionOfProviders(sortedList?.slice(0, displaySet));
-                setArrowClass('down-arrow');
+                setSelectionOfProviders(sortedList?.slice(0, newDisplaySet)); 
             });
+            setArrowClass('down-arrow');
+            setDisplaySet(newDisplaySet);
         }
     }, [setProviderFormList, setSelectionOfProviders, currentRegion, currentLanguage]);
 
