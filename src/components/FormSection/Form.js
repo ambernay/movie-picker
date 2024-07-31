@@ -28,10 +28,11 @@ function Form({ setUserSelections, setIsTrending, setIsFormVisible,
         
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
-        if (searchState === 'formSearch' && !isFormVisible)
-        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
-        sortOption, currentRegion, currentLanguage, startDate, endDate, 
-        providers, genres));
+        if (searchState === 'formSearch' && !isFormVisible) {
+            setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
+            sortOption, currentRegion, currentLanguage, startDate, endDate, 
+            providers, genres));
+        }
     },[currentPage, tvMovieToggle, currentRegion]);
 
     useEffect(() => {
@@ -204,7 +205,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
                         />
-                        {currentRegion ?
+                        {currentRegion && isFormVisible ?
                             <ProviderFormList
                                 setProviders={setProviders}
                                 setIsValidRequest={setIsValidRequest}
@@ -215,6 +216,8 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             />
                         : null
                         }
+
+                        
                     </section>
                     <section className='form-bottom'>
                         <div className="form-button-container">

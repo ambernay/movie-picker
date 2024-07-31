@@ -1231,7 +1231,8 @@ ul li .info-container {
 }
 
 .icon-message-container,
-.error-message-container {
+.error-message-container, 
+fieldset .error-message-container {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -1356,6 +1357,7 @@ fieldset {
 
 .decade-fieldset {
     height: 92px;
+    justify-content: center;
 }
 
 /* .providers-fieldset {
@@ -1772,6 +1774,11 @@ input[type="checkbox"] {
     .main-title-container {
         justify-content: flex-start;
     }
+
+    .dropdown-menu.sort-by {
+        align-items: center;
+        --sortByListWidth: 100%;
+    }
 }
 
 @media(max-width: 740px) {
@@ -1810,11 +1817,6 @@ input[type="checkbox"] {
     .x-button .lines {
         height: 20px;
         width: 3px;
-    }
-
-    .dropdown-menu.sort-by {
-        align-items: center;
-        --sortByListWidth: 100%;
     }
 }
 

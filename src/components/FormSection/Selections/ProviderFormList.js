@@ -10,20 +10,25 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     const [currentNumDisplaySets, setCurrentNumDisplaySets] = useState(1);
     const [arrowClass, setArrowClass] = useState('arrow-down');
     
-    const fieldsetWidth = Math.round(document.querySelector('.provider-list-container')?.clientWidth);
-    const displaySet = Math.floor((fieldsetWidth / 100)) * 3;
-    
     const upArrow = currentTranslation['sr-only'].up_arrow;
     const downArrow = currentTranslation['sr-only'].down_arrow;
-
+    
     useEffect(() => {
-        ProviderListApiCall(currentLanguage, currentRegion).then(result => {
-            const sortedList = result.results?.sort((a, b) => a.display_priorities.CA)
-            setProviderFormList(sortedList); 
-            setSelectionOfProviders(sortedList?.slice(0, displaySet));
-            setArrowClass('down-arrow');
-        });
-    }, [setProviderFormList, setSelectionOfProviders, currentRegion, currentLanguage, displaySet]);
+        const providerListEl = document.querySelector('.provider-list-container');
+        const fieldsetWidth = Math.round(providerListEl?.clientWidth);
+        
+        if (fieldsetWidth > 0) {
+            const displaySet = Math.floor((fieldsetWidth / 105)) * 3;
+            console.log(displaySet);
+
+            ProviderListApiCall(currentLanguage, currentRegion).then(result => {
+                const sortedList = result.results?.sort((a, b) => a.display_priorities.CA)
+                setProviderFormList(sortedList); 
+                setSelectionOfProviders(sortedList?.slice(0, displaySet));
+                setArrowClass('down-arrow');
+            });
+        }
+    }, [setProviderFormList, setSelectionOfProviders, currentRegion, currentLanguage]);
 
     // useEffect(() => {
     //     const el = document.getElementById('331');
@@ -33,7 +38,6 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
-        
         if (e.target.checked) setProviders(pre => [...pre, newValue]);
         else if (!e.target.checked) setProviders(pre => pre.filter(item => item[1] !== newValue[1]))
         setIsValidRequest(true);
@@ -53,7 +57,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     return (
         <fieldset id='provider-list' className="providers-fieldset">
             <legend id="provider">{sectionLabel}:</legend>
-                <ul className='provider-list-container' >
+                <ul className='provider-list-container'>
                 {selectionOfProviders?.length > 0 ? selectionOfProviders.map((provider) => {
                     const imageURL = 'https://image.tmdb.org/t/p/w500';
                     return (
@@ -74,7 +78,8 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                     </div>
                 }
             </ul>
-            <button title={currentTranslation['sr-only'].more_options} className='more-providers-button' onClick={handleMoreProvidersButton}>
+            {selectionOfProviders?.length > 0 ?
+                <button title={currentTranslation['sr-only'].more_options} className='more-providers-button' onClick={handleMoreProvidersButton}>
                 <figure>
                     <UpDownArrowIcon
                         arrowClass={arrowClass}
@@ -82,6 +87,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                     <figcaption className="sr-only">{arrowClass === 'arrow-up' ? upArrow : downArrow}</figcaption>
                 </figure>
             </button>
+            : null}
         </fieldset>
     )
 }
