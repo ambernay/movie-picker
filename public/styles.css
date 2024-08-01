@@ -340,7 +340,8 @@ img {
     --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 1.8rem;
     --labelFontSize: 1rem;
-    --providerImageSize: 100px;
+    --providerInputWidth: 100px;
+    --providerInputHeight: calc(62px + 10px);
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
@@ -1213,10 +1214,8 @@ ul li .info-container {
 }
 
 .more-providers-button:hover,
-.more-providers-button:active,
-.more-providers-button:focus {
+.more-providers-button:active {
     opacity: 1;
-
 }
 
 .more-providers-button figure {
@@ -1228,6 +1227,10 @@ ul li .info-container {
     fill: var(--darkNeutral);
     align-self: center;
     width: 1.5rem;
+}
+
+.more-providers-button:focus svg {
+    border: 1px dashed var(--lightAccent);
 }
 
 .icon-message-container,
@@ -1346,13 +1349,15 @@ fieldset {
     display: flex;
     position: relative;
     flex-direction: column;
-    column-gap: 5px;
     color: var(--lightAccent);
     width: 99%;
-    flex: 1 1 30%;
     justify-content: flex-start;
     margin-bottom: 10px;
     /* overflow: scroll; */
+}
+
+.genre-fieldset {
+    flex: 1 1 30%;
 }
 
 .decade-fieldset {
@@ -1362,8 +1367,11 @@ fieldset {
 
 .providers-fieldset {
     padding-bottom: 5px;
-    /* height: calc((var(--providerImageSize) * 3) + 1.6rem); */
-    /* overflow: scroll; */
+    height: calc((100px * 3) + 1.6rem);
+}
+
+.provider-list-container {
+    height: calc(var(--providerInputHeight) * 3);
 }
 
 .provider-list-container, .genre-buttons-list {
@@ -1372,7 +1380,6 @@ fieldset {
     flex-wrap: wrap;
     gap: 5px;
     width: 100%;
-    height: inherit;
     justify-content: space-between;
     padding-bottom: 5px;
     overflow: scroll;
@@ -1475,7 +1482,7 @@ fieldset {
   /* #endregion - decade slider */
 
 .provider-buttons {
-    flex: 0 0 var(--providerImageSize);
+    flex: 0 0 var(--providerInputWidth);
     justify-content: center;
     align-items: center;
 }
