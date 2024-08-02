@@ -208,7 +208,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
                         />
-                        {currentRegion && isFormVisible ?
+                        {currentRegion ?
                             <ProviderFormList
                                 setProviders={setProviders}
                                 setIsValidRequest={setIsValidRequest}
@@ -216,11 +216,10 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 currentRegion={currentRegion}
                                 currentLanguage={currentLanguage}
                                 currentTranslation={currentTranslation}
+                                isFormVisible={isFormVisible}
                             />
                         : null
                         }
-
-                        
                     </section>
                     <section className='form-bottom'>
                         <div className="form-button-container">

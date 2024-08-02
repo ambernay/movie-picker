@@ -3,7 +3,7 @@ import { ProviderListApiCall } from '../../MovieApiCache';
 import { UpDownArrowIcon } from '../../Icons.js';
 
 function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
-    currentRegion, currentLanguage, currentTranslation }) {
+    currentRegion, currentLanguage, currentTranslation, isFormVisible }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
     const [selectionOfProviders, setSelectionOfProviders] = useState(null);
@@ -16,9 +16,9 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     
     useEffect(() => {
         const providerListEl = document.querySelector('.provider-list-container');
-        const fieldsetWidth = Math.round(providerListEl?.clientWidth);
         
-        if (fieldsetWidth > 0) {
+        if (isFormVisible) {
+            const fieldsetWidth = Math.round(providerListEl?.clientWidth);
             let newDisplaySet = Math.floor((fieldsetWidth / 105)) * 3;
 
             ProviderListApiCall(currentLanguage, currentRegion).then(result => {
@@ -29,13 +29,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
             setArrowClass('down-arrow');
             setDisplaySet(newDisplaySet);
         }
-    }, [setProviderFormList, setSelectionOfProviders, currentRegion, currentLanguage]);
-
-    // useEffect(() => {
-    //     const el = document.getElementById('331');
-    //     console.log(el);
-    //     el.scrollTop;
-    // },[currentNumDisplaySets]);
+    }, [setProviderFormList, setSelectionOfProviders, currentRegion, currentLanguage, isFormVisible]);   
     
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
@@ -54,7 +48,14 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
             setArrowClass('down-arrow disabled');
         }
     }
- 
+
+    // const handleScroll = (e) => {
+    //     const inputEl = e.currentTarget.childNodes[0];
+    //     const topElID = selectionOfProviders[displaySet * currentNumDisplaySets - displaySet].provider_id;
+    //     // if (inputEl.id === )
+    //     console.log(e.currentTarget.childNodes[0].id, topElID);
+    // }
+
     return (
         <fieldset id='provider-list' className="providers-fieldset">
             <legend id="provider">{sectionLabel}:</legend>
