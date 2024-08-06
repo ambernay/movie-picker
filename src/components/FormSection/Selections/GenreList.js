@@ -6,14 +6,13 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
     
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
     const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
+    const [genreStatusMessage, setGenreStatusMessage] = useState(`${loadingMessage}...`);
 
     const [genreList, setGenreList] = useState([]);
-    const [genreStatusMessage, setGenreStatusMessage] = useState(`${loadingMessage}...`);
 
     // caching genre lists by media type and language
     useEffect(() => {
         if (isFormVisible) {
-            setGenreStatusMessage(`${loadingMessage}...`);
             GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
                 if (result) {
                     setGenreList(result);
@@ -27,7 +26,7 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
                 
             });
         }
-    }, [tvMovieToggle, currentLanguage, isFormVisible, setGenreList]);
+    }, [tvMovieToggle, currentLanguage, isFormVisible, setGenreList, setGenreStatusMessage]);
 
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
@@ -40,21 +39,23 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
     return (
         <fieldset className='genre-fieldset'>
             <legend id="genre">{sectionLabel}:</legend>
-            <ul className='genre-buttons-list'>
-                {genreList.length > 0 ? genreList.map((genre) => {
-                    return (
-                        <li className="radio-button-container genre-buttons" key={genre.id}>
-                            <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
-                            <label htmlFor={genre.id}>{genre.name}</label>
-                        </li>
-                    )
-                })
-                    :
-                    <div className="error-message-container">
-                        <h4>{`${genreStatusMessage} `}</h4>
-                    </div>
-                }
-            </ul>
+            {genreList?.length > 0 ? 
+                <ul className='genre-buttons-list'>
+                    {genreList.map((genre) => {
+                        return (
+                            <li className="radio-button-container genre-buttons" key={genre.id}>
+                                <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
+                                <label htmlFor={genre.id}>{genre.name}</label>
+                            </li>
+                        )
+                    })}
+                </ul>
+                :
+                <div className="error-message-container">
+                    <h4>{`${genreStatusMessage} `}</h4>
+                </div>
+            }
+           
         </fieldset>
     )
 }

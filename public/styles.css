@@ -1243,6 +1243,10 @@ fieldset .error-message-container {
     text-align: center;
 }
 
+fieldset .error-message-container {
+    height: 100%;
+}
+
 .icon-message-container {
     height: 6rem;
 }
@@ -1380,7 +1384,6 @@ fieldset {
     flex-wrap: wrap;
     gap: 5px;
     width: 100%;
-    height: 100%;
     justify-content: space-between;
     padding-bottom: 5px;
     overflow: scroll;
