@@ -6,13 +6,12 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     currentRegion, currentLanguage, currentTranslation, isFormVisible }) {
 
     const [providerFormList, setProviderFormList] = useState([]);
-    const [selectionOfProviders, setSelectionOfProviders] = useState(null);
+    const [selectionOfProviders, setSelectionOfProviders] = useState([]);
     const [displaySet, setDisplaySet] = useState(0);
     const [currentNumDisplaySets, setCurrentNumDisplaySets] = useState(1);
-    const [arrowClass, setArrowClass] = useState('arrow-down');
     
-    const upArrow = currentTranslation['sr-only'].up_arrow;
-    const downArrow = currentTranslation['sr-only'].down_arrow;
+    const isDisabledClass = selectionOfProviders.length === providerFormList.length ?
+        'disabled' : '';
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
     const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
@@ -23,7 +22,6 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         const providerListEl = document.querySelector('.provider-list-container');
         
         if (isFormVisible) {
-            console.log(`${loadingMessage}...`);
             setCallStatusMessage(`${loadingMessage}...`);
             const fieldsetWidth = Math.round(providerListEl?.clientWidth);
             let newDisplaySet = Math.floor((fieldsetWidth / 105)) * 3;
@@ -43,7 +41,6 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                     );
                 }
             });
-            setArrowClass('down-arrow');
             setDisplaySet(newDisplaySet);
         }
     }, [setProviderFormList, setSelectionOfProviders, setCallStatusMessage,
@@ -59,12 +56,15 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     const handleMoreProvidersButton = (e) => {
         e.preventDefault();
         let newNumDisplaySets = currentNumDisplaySets + 1;
-        let newProviderSelections = providerFormList?.slice(0, (displaySet * (newNumDisplaySets)))
-        setSelectionOfProviders(newProviderSelections);
-        setCurrentNumDisplaySets(newNumDisplaySets);
-        if (newProviderSelections.length === providerFormList.length) {
-            setArrowClass('down-arrow disabled');
+        let newProviderSelections = providerFormList?.slice(0, (displaySet * (newNumDisplaySets)));
+        
+        if (selectionOfProviders.length !== providerFormList.length) {
+            const topElID = newProviderSelections[displaySet * newNumDisplaySets - displaySet];
+            console.log(topElID, topElID.provider_id, newProviderSelections.length, displaySet * newNumDisplaySets - displaySet);
+            setSelectionOfProviders(newProviderSelections);
+            setCurrentNumDisplaySets(newNumDisplaySets);
         }
+        
     }
 
     // const handleScroll = (e) => {
@@ -97,12 +97,12 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                 }
             </ul>
             {selectionOfProviders?.length > 0 ?
-                <button title={currentTranslation['sr-only'].more_options} className='more-providers-button' onClick={handleMoreProvidersButton}>
+                <button title={currentTranslation['sr-only'].more_options} className={`more-providers-button ${isDisabledClass}`} onClick={handleMoreProvidersButton}>
                 <figure>
                     <UpDownArrowIcon
-                        arrowClass={arrowClass}
+                        arrowClass={'arrow-down'}
                     />
-                    <figcaption className="sr-only">{arrowClass === 'arrow-up' ? upArrow : downArrow}</figcaption>
+                    <figcaption className="sr-only">{currentTranslation['sr-only'].down_arrow}</figcaption>
                 </figure>
             </button>
             : null}

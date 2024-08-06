@@ -1211,11 +1211,13 @@ ul li .info-container {
     justify-content: center;
     background-color: var(--midAccent);
     opacity: 0.7;
+    
 }
 
-.more-providers-button:hover,
-.more-providers-button:active {
+.more-providers-button:not(.disabled):hover,
+.more-providers-button:not(.disabled):active {
     opacity: 1;
+    cursor: pointer;
 }
 
 .more-providers-button figure {
@@ -1231,6 +1233,10 @@ ul li .info-container {
 
 .more-providers-button:focus svg {
     border: 1px dashed var(--lightAccent);
+}
+
+.more-providers-button.disabled svg {
+    opacity: 0.2;
 }
 
 .icon-message-container,
