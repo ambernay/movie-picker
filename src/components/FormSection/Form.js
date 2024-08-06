@@ -200,6 +200,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             currentLanguage={currentLanguage}
                             sectionLabel={capFirstChar(formLabels.genre)}
                             currentTranslation={currentTranslation}
+                            isFormVisible={isFormVisible}
                         />
                         <DecadeSlider
                             setStartDate={setStartDate}

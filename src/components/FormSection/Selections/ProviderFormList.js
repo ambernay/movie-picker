@@ -13,23 +13,37 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     
     const upArrow = currentTranslation['sr-only'].up_arrow;
     const downArrow = currentTranslation['sr-only'].down_arrow;
+
+    const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
+    const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
+    const [callStatusMessage, setCallStatusMessage] = useState(`${loadingMessage}...`);
     
     useEffect(() => {
         const providerListEl = document.querySelector('.provider-list-container');
         
         if (isFormVisible) {
+            setCallStatusMessage(`${loadingMessage}...`);
             const fieldsetWidth = Math.round(providerListEl?.clientWidth);
             let newDisplaySet = Math.floor((fieldsetWidth / 105)) * 3;
 
             ProviderListApiCall(currentLanguage, currentRegion).then(result => {
-                const sortedList = result.results?.sort((a, b) => a.display_priorities.currentRegion)
-                setProviderFormList(sortedList); 
-                setSelectionOfProviders(sortedList?.slice(0, newDisplaySet)); 
+                if (result) {
+                    const sortedList = result.results?.sort((a, b) => a.display_priorities.currentRegion);
+                    setProviderFormList(sortedList); 
+                    setSelectionOfProviders(sortedList?.slice(0, newDisplaySet)); 
+                }
+                else {
+                    setCallStatusMessage(
+                        `${currentTranslation.status_messages.failed_to_load} 
+                        ${currentTranslation.section_labels.provider}`
+                    );
+                }
             });
             setArrowClass('down-arrow');
             setDisplaySet(newDisplaySet);
         }
-    }, [setProviderFormList, setSelectionOfProviders, currentRegion, currentLanguage, isFormVisible]);   
+    }, [setProviderFormList, setSelectionOfProviders, setCallStatusMessage,
+         currentRegion, currentLanguage, isFormVisible]);   
     
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
@@ -73,10 +87,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                 })
                     :
                     <div className="error-message-container">
-                        <h4>{
-                            `${currentTranslation.status_messages.failed_to_load} 
-                            ${currentTranslation.section_labels.provider}`}
-                        </h4>
+                        <h4>{`${callStatusMessage} `}</h4>
                     </div>
                 }
             </ul>

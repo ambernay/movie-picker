@@ -26,6 +26,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
 
     useEffect(() => {
         if (!isSearchbarOpen && !isFormVisible) {
+            setStatusMessage(loadingMessage);
             MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage,
                 userSelections, searchState).then(result => {
                     // list of user selections for 'no results' message
@@ -33,7 +34,6 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
                 
                 if (result) {
-                    setStatusMessage(loadingMessage);
                     setTotalPages(result?.totalPages);
                     setMoviesToDisplay(result?.movieResults);
                     // message for no results

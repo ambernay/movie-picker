@@ -354,7 +354,7 @@ const TransObj = {
             "search_bar":"magnifying glass icon (search)"
         },
         "movie_info":{"cast":"cast", "directing":"directing", "screenplay":"screenplay", "release_date":"release date"},
-        "status_messages":{"loading":"loading...","failed_to_load":"Failed to load","form_modal":"Make a selection","no_results":"No results"},
+        "status_messages":{"loading":"loading","failed_to_load":"Failed to load","form_modal":"Make a selection","no_results":"No results"},
         "provider_options": {"buy":"Buy","rent":"Rent","stream":"Stream","with_ads":"With Ads"}
     },
     "es": {

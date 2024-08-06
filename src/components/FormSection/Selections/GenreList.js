@@ -1,14 +1,33 @@
 import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
-function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel, currentTranslation }) {
+function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, 
+    currentLanguage, sectionLabel, currentTranslation, isFormVisible }) {
+    
+    const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
+    const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
 
     const [genreList, setGenreList] = useState([]);
+    const [genreStatusMessage, setGenreStatusMessage] = useState(`${loadingMessage}...`);
 
     // caching genre lists by media type and language
     useEffect(() => {
-        GenreListApiCall(tvMovieToggle, currentLanguage).then(result => setGenreList(result));
-    }, [tvMovieToggle, currentLanguage, setGenreList]);
+        if (isFormVisible) {
+            setGenreStatusMessage(`${loadingMessage}...`);
+            GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
+                if (result) {
+                    setGenreList(result);
+                }
+                else {
+                    setGenreStatusMessage(
+                        `${currentTranslation.status_messages.failed_to_load} 
+                        ${currentTranslation.section_labels.genre}`
+                    );
+                }
+                
+            });
+        }
+    }, [tvMovieToggle, currentLanguage, isFormVisible, setGenreList]);
 
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
@@ -32,10 +51,7 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, currentLanguag
                 })
                     :
                     <div className="error-message-container">
-                        <h4>{
-                            `${currentTranslation.status_messages.failed_to_load} 
-                            ${currentTranslation.section_labels.genre}`}
-                        </h4>
+                        <h4>{`${genreStatusMessage} `}</h4>
                     </div>
                 }
             </ul>
