@@ -9,7 +9,6 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     const [selectionOfProviders, setSelectionOfProviders] = useState([]);
     const [displaySet, setDisplaySet] = useState(0);
     const [currentNumDisplaySets, setCurrentNumDisplaySets] = useState(1);
-    const [topElID, setTopElID] = useState(null);
     
     const isDisabledClass = selectionOfProviders.length === providerFormList.length ?
         'disabled' : '';
@@ -48,10 +47,11 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
          
     useEffect(() => {
         const listContainer = document.querySelector('.provider-list-container');
-        const lastElID = selectionOfProviders[displaySet * currentNumDisplaySets - 1]?.provider_id;
+        const lastElID = selectionOfProviders[selectionOfProviders.length - 1]?.provider_id;
         const lastEl = document.getElementById(lastElID);
+
         // need last element in list rendered before scroll or it's janky
-        if (lastEl || selectionOfProviders.length === providerFormList.length) {
+        if (lastEl) {
             listContainer.scrollBy({
                 left: 0, 
                 top: listContainer.clientHeight,
@@ -71,23 +71,14 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         e.preventDefault();
         let newNumDisplaySets = currentNumDisplaySets + 1;
         let newProviderSelections = providerFormList?.slice(0, (displaySet * (newNumDisplaySets)));
-
+        
         if (selectionOfProviders.length !== providerFormList.length) {
-            // setTopElID(newProviderSelections[displaySet * newNumDisplaySets - displaySet]?.provider_id);
-            // console.log(topElID, newProviderSelections.length, displaySet * newNumDisplaySets - displaySet);
             setSelectionOfProviders(newProviderSelections);
             setCurrentNumDisplaySets(newNumDisplaySets);
         }
         const providerFieldset = document.querySelector('.providers-fieldset');
         providerFieldset?.scrollIntoView();
     }
-
-    // const handleScroll = (e) => {
-    //     const inputEl = e.currentTarget.childNodes[0];
-    //     const topElID = selectionOfProviders[displaySet * currentNumDisplaySets - displaySet].provider_id;
-    //     // if (inputEl.id === )
-    //     console.log(e.currentTarget.childNodes[0].id, topElID);
-    // }
 
     return (
         <fieldset id='provider-list' className="providers-fieldset">
