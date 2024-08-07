@@ -380,6 +380,7 @@ img {
     --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
     --decade-slider-height: 25px;
     --slider-timeline-height: 2px;
+    --fielsetPadding: 15px;
     /* #endregion - sizes */
 }
 
@@ -1381,7 +1382,7 @@ fieldset {
 }
 
 .provider-list-container {
-    height: calc(var(--providerInputHeight) * 3);
+    height: calc(var(--providerInputHeight) * 3 - var(--fielsetPadding));
 }
 
 .provider-list-container, .genre-buttons-list {
