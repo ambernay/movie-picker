@@ -1372,7 +1372,8 @@ fieldset {
 }
 
 .decade-fieldset {
-    height: 92px;
+    min-height: 92px;
+    height: 30%;
     justify-content: center;
 }
 
@@ -1381,28 +1382,34 @@ fieldset {
     height: calc((100px * 3) + 1.6rem);
 }
 
+.genre-buttons-list {
+    grid-template-columns: repeat(auto-fill, 190px);
+}
+
+.genre-buttons label {
+    word-break: break-all;
+}
+
 .provider-list-container {
+    grid-template-columns: repeat(auto-fill, 100px);
     height: calc(var(--providerInputHeight) * 3 - var(--fielsetPadding));
+    
 }
 
 .provider-list-container, .genre-buttons-list {
-    display: flex;
+    display: grid;
     position: relative;
-    flex-wrap: wrap;
     gap: 5px;
     width: 100%;
     justify-content: space-between;
     padding-bottom: 5px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .radio-button-container {
     display: flex;
     column-gap: 5px;
-}
-
-.genre-buttons {
-    flex: 1 1 190px;
 }
 
 /* #region - decade slider */
@@ -1493,8 +1500,8 @@ fieldset {
   /* #endregion - decade slider */
 
 .provider-buttons {
-    flex: 0 0 var(--providerInputWidth);
-    justify-content: center;
+    flex: 1 0 var(--providerInputWidth);
+    justify-content: space-between;
     align-items: center;
 }
 
