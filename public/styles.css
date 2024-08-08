@@ -1383,11 +1383,11 @@ fieldset {
 }
 
 .genre-buttons-list {
-    grid-template-columns: repeat(auto-fill, 190px);
+    grid-template-columns: repeat(auto-fill, 175px);
 }
 
 .genre-buttons label {
-    word-break: break-all;
+    white-space: break-spaces;
 }
 
 .provider-list-container {

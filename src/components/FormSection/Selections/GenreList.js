@@ -2,7 +2,8 @@ import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
 function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, 
-    currentLanguage, sectionLabel, currentTranslation, isFormVisible }) {
+    currentLanguage, sectionLabel, currentTranslation, isFormVisible, 
+    screenSize }) {
     
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
     const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
@@ -42,6 +43,10 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
             {genreList?.length > 0 ? 
                 <ul className='genre-buttons-list'>
                     {genreList.map((genre) => {
+                        // hyphenate the longer words if no whitespace and no existing hyphens
+                        if(genre.name.length > 11 && genre.name.indexOf(' ') < 0 && genre.name.indexOf('-') < 0 && screenSize !== 'narrowScreen') {
+                            genre.name = `${genre.name.substring(0, genre.name.length / 2)}-${genre.name.substring(genre.name.length / 2, genre.length)}`;
+                        }
                         return (
                             <li className="radio-button-container genre-buttons" key={genre.id}>
                                 <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
