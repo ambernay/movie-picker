@@ -39,6 +39,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                         ${currentTranslation.section_labels.provider}`
                     );
                 }
+                console.log(selectionOfProviders.length, providerFormList.length)
             });
             setDisplaySet(newDisplaySet);
         }
@@ -77,8 +78,8 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
             setSelectionOfProviders(newProviderSelections);
             setCurrentNumDisplaySets(newNumDisplaySets);
         }
-        const providerFieldset = document.querySelector('.providers-fieldset');
-        providerFieldset?.scrollIntoView();
+        // const providerFieldset = document.querySelector('.providers-fieldset');
+        // providerFieldset?.scrollIntoView();
     }
 
     return (

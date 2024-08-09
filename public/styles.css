@@ -370,13 +370,15 @@ img {
     --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
     --sortByListWidth: 55%;
-    /* other */
-    --bottomNavHeight: 2.55rem;
-    --switchWidth: 85px;
+    /* provider fieldset */
     --providerFieldsetPadding: 4px;
     --providerInputWidth: 100px;
     --providerLabelHeight: 62px;
     --providerButtonHeight: calc(var(--providerLabelHeight) + 10px);
+    --moreProvidersButtonHeight: 1.6rem;
+    /* other */
+    --bottomNavHeight: 2.55rem;
+    --switchWidth: 85px;
     --searchInputHeight: 1.5rem;
     --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
     --decade-slider-height: 25px;
@@ -1205,11 +1207,11 @@ ul li .info-container {
 
 .more-providers-button {
     display: flex;
-    position: sticky;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 1.6rem;
+    height: var(--moreProvidersButtonHeight);
     justify-content: center;
     background-color: var(--midAccent);
     opacity: 0.7;
@@ -1380,7 +1382,7 @@ fieldset {
 
 .providers-fieldset {
     padding-bottom: 5px;
-    height: calc((100px * 3) + 1.6rem);
+    height: calc((100px * 3) + var(--moreProvidersButtonHeight));
 }
 
 .genre-buttons-list {
@@ -1390,7 +1392,7 @@ fieldset {
 .provider-list-container {
     grid-template-columns: repeat(auto-fill, 100px);
     height: calc(var(--providerButtonHeight) * 3 - var(--fielsetPadding));
-    
+    margin-bottom: var(--moreProvidersButtonHeight);
 }
 
 .provider-list-container, .genre-buttons-list {
@@ -1407,6 +1409,7 @@ fieldset {
 .radio-button-container {
     display: flex;
     column-gap: 5px;
+    align-items: center;
 }
 
 /* #region - decade slider */
