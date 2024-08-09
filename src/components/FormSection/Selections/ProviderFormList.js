@@ -60,8 +60,9 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         }
     },[selectionOfProviders]);
     
-    const handleChange = (e) => {
+    const handleProviderSelections = (e) => {
         let newValue = [e.target.value, e.target.id];
+        console.log(e.target);
         if (e.target.checked) setProviders(pre => [...pre, newValue]);
         else if (!e.target.checked) setProviders(pre => pre.filter(item => item[1] !== newValue[1]))
         setIsValidRequest(true);
@@ -89,8 +90,10 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 return (
                     <li className="radio-button-container provider-buttons" key={provider.provider_id}>
-                        <input onChange={handleChange} type="checkbox" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
-                        <label title={provider.provider_name} htmlFor={provider.provider_id}>
+                        <label title={provider.provider_name} htmlFor={provider.provider_id}
+                            onChange={handleProviderSelections}
+                        >
+                            <input  type="checkbox" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
                             <img className='provider-icons' src={imageURL + provider.logo_path} alt={provider.provider_name}/>
                         </label>
                     </li>
@@ -103,7 +106,10 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                 }
             </ul>
             {selectionOfProviders?.length > 0 ?
-                <button title={currentTranslation['sr-only'].more_options} className={`more-providers-button ${isDisabledClass}`} onClick={handleMoreProvidersButton}>
+                <button title={currentTranslation['sr-only'].more_options} 
+                    className={`more-providers-button ${isDisabledClass}`} 
+                    onClick={handleMoreProvidersButton}
+                >
                 <figure>
                     <UpDownArrowIcon
                         arrowClass={'arrow-down'}

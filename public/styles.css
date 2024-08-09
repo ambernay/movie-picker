@@ -340,8 +340,6 @@ img {
     --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 1.8rem;
     --labelFontSize: 1rem;
-    --providerInputWidth: 100px;
-    --providerInputHeight: calc(62px + 10px);
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
@@ -376,6 +374,9 @@ img {
     --bottomNavHeight: 2.55rem;
     --switchWidth: 85px;
     --providerFieldsetPadding: 4px;
+    --providerInputWidth: 100px;
+    --providerLabelHeight: 62px;
+    --providerButtonHeight: calc(var(--providerLabelHeight) + 10px);
     --searchInputHeight: 1.5rem;
     --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
     --decade-slider-height: 25px;
@@ -1386,13 +1387,9 @@ fieldset {
     grid-template-columns: repeat(auto-fill, 175px);
 }
 
-.genre-buttons label {
-    white-space: break-spaces;
-}
-
 .provider-list-container {
     grid-template-columns: repeat(auto-fill, 100px);
-    height: calc(var(--providerInputHeight) * 3 - var(--fielsetPadding));
+    height: calc(var(--providerButtonHeight) * 3 - var(--fielsetPadding));
     
 }
 
@@ -1500,15 +1497,27 @@ fieldset {
   /* #endregion - decade slider */
 
 .provider-buttons {
-    flex: 1 0 var(--providerInputWidth);
-    justify-content: space-between;
+    max-height: var(--providerLabelHeight);
     align-items: center;
+    border: solid 1px transparent;
 }
 
 .provider-buttons:hover,
 .provider-buttons:active,
 .provider-buttons:focus {
     border: solid 1px var(--lightAccent);
+}
+
+.provider-buttons label {
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.provider-buttons img {
+    height: 100%;
+    width: var(--providerLabelHeight);
 }
 
 fieldset label {
@@ -1911,6 +1920,10 @@ input[type="checkbox"] {
 
     .sort-by, .sort-by .label-container {
         height: fit-content;
+    }
+
+    .genre-buttons-list {
+        grid-template-columns: repeat(auto-fill, 190px);
     }
 }
 
