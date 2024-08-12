@@ -28,6 +28,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
             ProviderListApiCall(currentLanguage, currentRegion).then(result => {
                 if (result) {
                     const sortedList = result.results?.sort((a, b) => a.display_priorities.currentRegion);
+                    setCurrentNumDisplaySets(1);
                     // full list of providers
                     setProviderFormList(sortedList);
                     // top X providers based on screen height and user request 
@@ -39,12 +40,11 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
                         ${currentTranslation.section_labels.provider}`
                     );
                 }
-                console.log(selectionOfProviders.length, providerFormList.length)
             });
             setDisplaySet(newDisplaySet);
         }
     }, [setProviderFormList, setSelectionOfProviders, setCallStatusMessage,
-         currentRegion, currentLanguage, isFormVisible]);
+        setCurrentNumDisplaySets, currentRegion, currentLanguage, isFormVisible]);
          
     useEffect(() => {
         const listContainer = document.querySelector('.provider-list-container');
@@ -63,7 +63,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     
     const handleProviderSelections = (e) => {
         let newValue = [e.target.value, e.target.id];
-        console.log(e.target);
+    
         if (e.target.checked) setProviders(pre => [...pre, newValue]);
         else if (!e.target.checked) setProviders(pre => pre.filter(item => item[1] !== newValue[1]))
         setIsValidRequest(true);
@@ -73,39 +73,38 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         e.preventDefault();
         let newNumDisplaySets = currentNumDisplaySets + 1;
         let newProviderSelections = providerFormList?.slice(0, (displaySet * (newNumDisplaySets)));
-        
+
         if (selectionOfProviders.length !== providerFormList.length) {
             setSelectionOfProviders(newProviderSelections);
             setCurrentNumDisplaySets(newNumDisplaySets);
         }
-        // const providerFieldset = document.querySelector('.providers-fieldset');
-        // providerFieldset?.scrollIntoView();
     }
 
     return (
         <fieldset id='provider-list' className="providers-fieldset">
             <legend id="provider">{sectionLabel}:</legend>
             {/* {doesn't match genre fieldset because <ul> required to determine provider list} */}
-            <ul className='provider-list-container'>
-            {selectionOfProviders?.length > 0 ? selectionOfProviders.map((provider) => {
-                const imageURL = 'https://image.tmdb.org/t/p/w500';
-                return (
-                    <li className="radio-button-container provider-buttons" key={provider.provider_id}>
-                        <label title={provider.provider_name} htmlFor={provider.provider_id}
-                            onChange={handleProviderSelections}
-                        >
-                            <input  type="checkbox" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
-                            <img className='provider-icons' src={imageURL + provider.logo_path} alt={provider.provider_name}/>
-                        </label>
-                    </li>
-                )
-            })
-                :
-                <div className="error-message-container">
-                    <h4>{`${callStatusMessage} `}</h4>
-                </div>
+            {selectionOfProviders?.length > 0 ?
+            <ul id='provider-container' className='provider-list-container'>
+                {selectionOfProviders.map((provider) => {
+                    const imageURL = 'https://image.tmdb.org/t/p/w500';
+                    return (
+                        <li className="radio-button-container provider-buttons" key={provider.provider_id}>
+                            <label title={provider.provider_name} htmlFor={provider.provider_id}
+                                onChange={handleProviderSelections}
+                            >
+                                <input  type="checkbox" id={provider.provider_id} value={provider.provider_name} name="provider"></input>
+                                <img className='provider-icons' src={imageURL + provider.logo_path} alt={provider.provider_name}/>
+                            </label>
+                        </li>
+                    )
+                    })
                 }
             </ul>
+            :<div className="error-message-container provider-list-container">
+                <h4>{`${callStatusMessage} `}</h4>
+            </div>
+            }
             {selectionOfProviders?.length > 0 ?
                 <button title={currentTranslation['sr-only'].more_options} 
                     className={`more-providers-button ${isDisabledClass}`} 

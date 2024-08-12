@@ -383,6 +383,7 @@ img {
     --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
     --decade-slider-height: 25px;
     --slider-timeline-height: 2px;
+    --fieldsetMinHeight: 92px;
     --fielsetPadding: 15px;
     /* #endregion - sizes */
 }
@@ -1251,6 +1252,7 @@ fieldset .error-message-container {
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin: 0;
 }
 
 fieldset .error-message-container {
@@ -1375,7 +1377,7 @@ fieldset {
 }
 
 .decade-fieldset {
-    min-height: 92px;
+    min-height: var(--fieldsetMinHeight);
     height: 30%;
     justify-content: center;
 }
@@ -1391,6 +1393,7 @@ fieldset {
 
 .provider-list-container {
     grid-template-columns: repeat(auto-fill, 100px);
+    min-height: var(--fieldsetMinHeight);
     height: calc(var(--providerButtonHeight) * 3 - var(--fielsetPadding));
     margin-bottom: var(--moreProvidersButtonHeight);
 }
