@@ -17,6 +17,8 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
     const [callStatusMessage, setCallStatusMessage] = useState(`${loadingMessage}...`);
 
+    const listContainer = document.querySelector('.provider-list-container');
+
     useEffect(() => {
         const providerListEl = document.querySelector('.provider-list-container');
         
@@ -46,21 +48,6 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     }, [setProviderFormList, setSelectionOfProviders, setCallStatusMessage,
         setCurrentNumDisplaySets, currentRegion, currentLanguage, isFormVisible]);
          
-    useEffect(() => {
-        const listContainer = document.querySelector('.provider-list-container');
-        const lastElID = selectionOfProviders[selectionOfProviders.length - 1]?.provider_id;
-        const lastEl = document.getElementById(lastElID);
-
-        // need last element in list rendered before scroll or it's janky
-        if (lastEl) {
-            listContainer.scrollBy({
-                left: 0, 
-                top: listContainer.clientHeight,
-                behavior: "smooth"
-            });
-        }
-    },[selectionOfProviders]);
-    
     const handleProviderSelections = (e) => {
         let newValue = [e.target.value, e.target.id];
     
@@ -80,12 +67,26 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         }
     }
 
+    const handleScroll = (e) => {
+        // checks onload when element size changes 
+        // then scrolls once the scrollHeight can accomodate the full visible height
+        // * unless it's the last scroll
+        if (e.currentTarget.scrollHeight % e.currentTarget.clientHeight === 0
+            || selectionOfProviders % displaySet !== 0){
+            e.currentTarget.scrollBy({
+                left: 0, 
+                top: listContainer.clientHeight,
+                behavior: "smooth"
+            });
+        }
+    }
+
     return (
         <fieldset id='provider-list' className="providers-fieldset">
             <legend id="provider">{sectionLabel}:</legend>
             {/* {doesn't match genre fieldset because <ul> required to determine provider list} */}
             {selectionOfProviders?.length > 0 ?
-            <ul id='provider-container' className='provider-list-container'>
+            <ul id='provider-container' className='provider-list-container' onLoad={handleScroll}>
                 {selectionOfProviders.map((provider) => {
                     const imageURL = 'https://image.tmdb.org/t/p/w500';
                     return (
