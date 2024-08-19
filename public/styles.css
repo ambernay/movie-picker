@@ -440,7 +440,6 @@ p,
 select {
     font-size: 0.8rem;
 }
-
 /* #endregion - fonts and sizes */
 
 .make-display-none {
@@ -1847,7 +1846,7 @@ input[type="checkbox"] {
     :root {
         --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
         --mainHeaderFontSize: calc(1.3rem + 1vw);
-        --galleryItemMinWidth: 40dvh;
+        --galleryItemMinWidth: 76dvw;
     }
     /* #endregion - variables */
 

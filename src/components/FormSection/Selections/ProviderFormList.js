@@ -72,7 +72,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
         // then scrolls once the scrollHeight can accomodate the full visible height
         // * unless it's the last scroll
         if (e.currentTarget.scrollHeight % e.currentTarget.clientHeight === 0
-            || selectionOfProviders % displaySet !== 0){
+            || selectionOfProviders.length % displaySet !== 0){
             e.currentTarget.scrollBy({
                 left: 0, 
                 top: listContainer.clientHeight,

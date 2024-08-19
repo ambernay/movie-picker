@@ -24,9 +24,9 @@ function App() {
   
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
-        if(window.innerWidth <= 430 && window.innerHeight > 400) return 'narrowScreen'; 
+        if(window.innerWidth <= 460 && window.innerHeight > 400) return 'narrowScreen'; 
         // 740 matches css media query
-        else if ((window.innerWidth > 430 && window.innerWidth <= 990) && window.innerHeight > 400) return 'midScreen';
+        else if ((window.innerWidth > 460 && window.innerWidth <= 990) && window.innerHeight > 400) return 'midScreen';
         else if (window.innerWidth > 990 && window.innerHeight > 400) return 'wideScreen';
     }
     // screen size state for for toggle button
