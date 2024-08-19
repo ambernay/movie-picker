@@ -1,6 +1,7 @@
 import { RightArrowIcon, LeftArrowIcon } from '../Icons';
 
-function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages, currentTranslation }) {
+function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, 
+    totalPages, currentTranslation, isFormVisible }) {
 
     const iconDescription = currentTranslation['sr-only'];
 
@@ -8,18 +9,20 @@ function LoadMore({ currentPage, setCurrentPage, moviesArrayLength, totalPages, 
     const buttonContainerClass = (moviesArrayLength < 1) ? "make-display-none" : "load-button-container";
 
     //  disables buttons when there are no more available pages
-    let backButton = (currentPage === 1) ? "disabled-button" : '';
-    let forwardButton = (currentPage === totalPages) ? "disabled-button" : '';
+    let backButton = (currentPage === 1) || isFormVisible ? "disabled-button" : '';
+    let forwardButton = (currentPage === totalPages) || isFormVisible ? "disabled-button" : '';
 
     const handleButtons = (e) => {
         // get parent button
         const buttonClass = e.target.closest('button').className;
 
         // set new page only if page is available
-        if (buttonClass === 'back-button' && currentPage > 1) {
+        if (buttonClass === 'back-button' && currentPage > 1 
+            && !isFormVisible) {
             setCurrentPage(currentPage - 1);
         }
-        else if (buttonClass === 'forward-button' && currentPage < totalPages) {
+        else if (buttonClass === 'forward-button' && currentPage < totalPages 
+            && !isFormVisible) {
             setCurrentPage(currentPage + 1);
         }
     }

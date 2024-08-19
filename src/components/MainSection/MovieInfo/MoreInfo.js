@@ -63,10 +63,10 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation }) 
                 // create lists
                 const listKey = key + '/' + movieID;
                 
-                const legendTitle = key === 'Cast' ? capFirstChar(currentTranslation.more_info.cast)
-                : key === "Directing" ? capFirstChar(currentTranslation.more_info.directing)
-                : key === "ScreenPlay" ? capFirstChar(currentTranslation.more_info.screenplay)
-                : key === "Release_Date" ? capFirstChar(currentTranslation.more_info.release_date)
+                const legendTitle = key === 'Cast' ? capFirstChar(currentTranslation.movie_info.cast)
+                : key === "Directing" ? capFirstChar(currentTranslation.movie_info.directing)
+                : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
+                : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
                 : key;
      
                 return (

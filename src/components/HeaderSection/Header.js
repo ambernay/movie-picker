@@ -6,16 +6,17 @@ import SearchBar from './SearchBar';
 import { LeftArrowIcon } from '../Icons';
 import { TransObj } from '../TranslationObjects.js';
 
-function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible, 
+function Header({ handleDropdown, isFormVisible, setIsFormVisible, 
     isTrending, setIsTrending, currentPage, setCurrentPage, currentRegion, 
     setCurrentRegion, currentLanguage, setCurrentLanguage, tvMovieToggle, 
-    setTvMovieToggle, screenSize, searchState, setSearchState, setUserSelections }) {
+    setTvMovieToggle, screenSize, searchState, setSearchState, 
+    setUserSelections, isSearchbarOpen, setIsSearchbarOpen }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
   
     // toggle visibility and orientation of arrow image
-    let arrowClass = isDropdownVisible ? "arrow-up" : "arrow-down";
+    let arrowClass = isFormVisible ? "arrow-up" : "arrow-down";
 
     let toggleArrow = isTrending ? "make-display-none" : '';
     let styleClass = !isTrending ? "hover-animation" : '';
@@ -23,13 +24,25 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
     const handleTrendingButton = () => {
         if (!isTrending) {
             setIsTrending(true);
-            setIsDropdownVisible(false);
+            setIsFormVisible(false);
+            setIsSearchbarOpen(false);
             setCurrentPage(1);
         }
     }
 
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    const handleTvMovieToggle = () => {
+        // if (isFormVisible) {setIsFormVisible(false)};
+
+        if (tvMovieToggle === 'movie') {
+            setTvMovieToggle('tv');
+        } else {
+            setTvMovieToggle('movie');
+        }
+        setCurrentPage(1);
     }
 
     return (
@@ -52,9 +65,8 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                         </div>
                         <div className="header-buttons-container">
                             <ToggleButton
+                                handleTvMovieToggle={handleTvMovieToggle}
                                 tvMovieToggle={tvMovieToggle}
-                                setTvMovieToggle={setTvMovieToggle}
-                                setCurrentPage={setCurrentPage}
                                 iconDescription={iconDescription}
                             />
                              <LanguageDropdown
@@ -94,12 +106,18 @@ function Header({ handleDropdown, isDropdownVisible, setIsDropdownVisible,
                             <SearchBar
                                 searchState={searchState} 
                                 setSearchState={setSearchState}
+                                tvMovieToggle={tvMovieToggle}
+                                setTvMovieToggle={setTvMovieToggle}
                                 setUserSelections={setUserSelections}
                                 setIsTrending={setIsTrending}
-                                tvMovieToggle={tvMovieToggle}
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
+                                isSearchbarOpen={isSearchbarOpen}
+                                setIsSearchbarOpen={setIsSearchbarOpen}
+                                isFormVisible={isFormVisible}
+                                setIsFormVisible={setIsFormVisible}
+                                handleTvMovieToggle={handleTvMovieToggle}
                             />
                         </div>
                     </div>{/* wrapper */}

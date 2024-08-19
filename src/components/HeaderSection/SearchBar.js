@@ -1,14 +1,16 @@
 import { useState, useRef, memo, useEffect } from 'react';
 import { MagnifyerIcon } from '../Icons';
+import ToggleButton from './ToggleButton';
 import { TransObj } from '../TranslationObjects.js';
 
-function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrending, 
-    tvMovieToggle, currentLanguage, currentPage, setCurrentPage }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [newValue, setNewValue] = useState('');
-    const [emptyModalClass, setEmptyModalClass] = useState('hidden');
+function SearchBar({ handleTvMovieToggle, searchState, setSearchState, tvMovieToggle,
+    setTvMovieToggle, setUserSelections, setIsTrending, currentLanguage, 
+    currentPage, setCurrentPage, isSearchbarOpen, setIsSearchbarOpen, 
+    isFormVisible, setIsFormVisible }) {
 
-    const inputClass = isOpen ? 'input-container' : 'hidden';
+    const [newValue, setNewValue] = useState('');
+
+    const inputClass = isSearchbarOpen ? 'searchbar-form' : 'hidden';
     const searchCacheKey = `${newValue.split(' ').join('_')}/${tvMovieToggle}/${currentLanguage}/
     ${currentPage}`;
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
@@ -17,12 +19,14 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
 
     const searchInput = useRef(null);
 
+    const emptyModalClass = isSearchbarOpen ? 'empty-modal' : 'hidden';
+
     // sets focus when window opens
     useEffect(() => {
-        if (isOpen && searchInput.current) {
+        if (isSearchbarOpen && searchInput.current) {
             searchInput.current.focus();
         }
-    }, [isOpen]);
+    }, [isSearchbarOpen]);
 
     const capitalize = (string) => {
         if (string === 'tv') {return string.toUpperCase();}
@@ -41,9 +45,9 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
         setNewValue(e.target.value);
     }
     const handleIconClick = (e) => {
-        setIsOpen(!isOpen);
+        setIsSearchbarOpen(!isSearchbarOpen);
+        if (isFormVisible) {setIsFormVisible(false)};
         searchInput.current.focus();
-        setEmptyModalClass('hidden');
         document.querySelector('input').blur();
     }
   
@@ -51,23 +55,12 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
         e.preventDefault();
         setCurrentPage(1);
         setIsTrending(false);
-        setIsOpen(false);
+        setIsSearchbarOpen(false);
         // selection query / cache key / result message
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [capitalize(newValue), capitalize(tvMovieToggle)]]);
         setSearchState('searchBar');
-        setEmptyModalClass('hidden');
     }
-    // displays modal whenever input is focused
-    const handleInputFocus = (e) => {
-        e.target.select();
-        setEmptyModalClass('empty-modal');
-    }
-    // hides modal and input form when modal is clicked
-    const handleModalClick = (e) => {
-        setEmptyModalClass('hidden'); 
-        if(isOpen) setIsOpen(false);
-    }
-
+   
     return (
         <div className='search-container' >
             <div className='wrapper'>
@@ -76,24 +69,36 @@ function SearchBar({ searchState, setSearchState, setUserSelections, setIsTrendi
                     <figcaption className='sr-only'>{iconDescription.search_bar}</figcaption>
                 </figure>
                 <form className={inputClass} onSubmit={handleSubmit}>
-                    <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
-                    <input
-                        placeholder={`${placeholder}...`}
-                        name={'movie search'}
-                        value={newValue}
-                        onChange={handleInput}
-                        onFocus={handleInputFocus}
-                        onSelect={e => setEmptyModalClass('empty-modal')}
-                        ref={searchInput}>
-                    </input>
-                    <button className='search-button' >
-                        <MagnifyerIcon />
-                    </button>
+                    <section className='searchbar-input-container'>
+                        <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
+                        <input
+                            placeholder={`${placeholder}...`}
+                            name={'movie search'}
+                            value={newValue}
+                            onChange={handleInput}
+                            onFocus={(e) => e.target.select()}
+                            // onSelect={e => setEmptyModalClass('empty-modal')}
+                            ref={searchInput}>
+                        </input>
+                        <button className='search-button'>
+                            <figure className={'search-icon-container'}>
+                                <MagnifyerIcon />
+                                <figcaption className='sr-only'>{currentTranslation.search}</figcaption>
+                            </figure>
+                        </button>
+                        
+                    </section>
+                    <section className='searchbar-selections-container'>
+                        <ToggleButton
+                            handleTvMovieToggle={handleTvMovieToggle}
+                            tvMovieToggle={tvMovieToggle}
+                            iconDescription={iconDescription}
+                        />
+                    </section> 
                 </form>
-                <div 
-                className={emptyModalClass}
-                onClick={handleModalClick}
-                >
+                
+                <div className={emptyModalClass}
+                onClick={() => {setIsSearchbarOpen(false)}}>
                 </div>
             </div>
         </div>

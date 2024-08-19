@@ -10,8 +10,8 @@ function SortByDropdown({ setSortOption, currentLanguage, currentTranslation }) 
     let sortOptions = [
         { "sort-by": sortOptionsTrans.rating_desc, "choice": "vote_average.desc" },
         { "sort-by": sortOptionsTrans.rating_asc, "choice": "vote_average.asc" },
-        { "sort-by": sortOptionsTrans.A_Z, "choice": "original_title.asc" },
-        { "sort-by": sortOptionsTrans.Z_A, "choice": "original_title.desc" },
+        { "sort-by": sortOptionsTrans.A_Z, "choice": "title.asc" },
+        { "sort-by": sortOptionsTrans.Z_A, "choice": "title.desc" },
         { "sort-by": sortOptionsTrans.date_desc, "choice": "primary_release_date.desc" },
         { "sort-by": sortOptionsTrans.date_asc, "choice": "primary_release_date.asc" }
     ]

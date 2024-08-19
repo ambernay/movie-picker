@@ -1,38 +1,38 @@
 import { useState, useEffect } from 'react';
 import GenreList from './Selections/GenreList.js';
-import DecadeList from './Selections/DecadeList.js';
+import DecadeSlider from './Selections/DecadeSlider.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
 import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
-function Form({ setUserSelections, setIsTrending, setIsDropdownVisible, 
-    isDropdownVisible, currentRegion, currentLanguage, setCurrentRegion, 
+function Form({ setUserSelections, setIsTrending, setIsFormVisible, 
+    isFormVisible, currentRegion, currentLanguage, setCurrentRegion, 
     currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, 
     setSearchState }) {
 
     const [genres, setGenres] = useState([]);
-    const [decade, setDecade] = useState();
+    const [rangeIsSelected, setRangeIsSelected] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [providers, setProviders] = useState([]);
+    const [sortOption, setSortOption] = useState("vote_average.desc"); 
     const [formLabels, setFormLabels] = useState(TransObj[`${currentLanguage[0]}`]['section_labels']);
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const [isValidRequest, setIsValidRequest] = useState(false);
-    const [sortOption, setSortOption] = useState("vote_average.desc");
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const formLabelTranslation = currentTranslation['section_labels'];
-    const allTranslation = currentTranslation['all'];
     const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
-        
+  
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
-        if (searchState === 'formSearch' && !isDropdownVisible)
-        setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
-        sortOption, currentRegion, currentLanguage, startDate, endDate, 
-        providers, genres));
+        if (searchState === 'formSearch' && !isFormVisible) {
+            setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
+            sortOption, currentRegion, currentLanguage, startDate, endDate, 
+            providers, genres));
+        }
     },[currentPage, tvMovieToggle, currentRegion]);
 
     useEffect(() => {
@@ -48,12 +48,11 @@ function Form({ setUserSelections, setIsTrending, setIsDropdownVisible,
         setSubmitAttempted(true);
 
         if (genres.length > 0 || startDate || endDate || providers.length > 0) {
-            setIsDropdownVisible(false);
+            setIsFormVisible(false);
             setIsTrending(false);
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-            console.log(genres, startDate, endDate, providers)
             // scroll back to top when new gallery loads - (offset to wait for page load)
             setTimeout(() => window.scrollTo(0, 0), 100);
 
@@ -97,12 +96,13 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
         "language": langCode,
     }
     // add params to userSelections object only when selected
-    if (decade && decade.id !== 'all') {
-        storeUserSelections["primary_release_date.gte"] = startDate;
-        storeUserSelections["primary_release_date.lte"] = endDate;
+    if (rangeIsSelected) {
+        storeUserSelections["primary_release_date.gte"] = `${startDate}-01-01`;
+        storeUserSelections["primary_release_date.lte"] = `${endDate}-12-31`;
+        
         // info for cacheKey and 'no results' message
-        selectionsForMessage.push(decade.id);
-        cacheKeyArr.push(decade.id);
+        selectionsForMessage.push(`${startDate} - ${endDate}`);
+        cacheKeyArr.push(`${startDate}-${endDate}`);
     }
     if (providers && providers.length > 0) {
         providers.map((provider) => {
@@ -126,13 +126,9 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
         cacheKeyArr.push(storeUserSelections["with_genres"]);
     };
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
-
-    // split on underscores and discard value before first underscore
-    let splitIndex = sortOption.includes('date') ? 2 : 1;
-    let sortOptionTitle = (`${sortOption}`).split('_')[splitIndex];
    
     selectionsForMessage.push(regionNativeName); 
-    cacheKeyArr.push(`${sortOptionTitle}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
+    cacheKeyArr.push(`${sortOption}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
 
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
 }
@@ -145,8 +141,8 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
     return (keyValuePairs.join('&'));
 }
     // toggles form visiblity
-    const formClass = isDropdownVisible ? "form-section" : "make-display-none";
-
+    const formClass = isFormVisible ? "form-section" : "make-display-none";
+    
     return (
         <section className={formClass}>
             <div className="wrapper">
@@ -166,9 +162,12 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         }
 
                         <button type="button" className="x-button"
-                        onClick={() => {setIsDropdownVisible(false); return false}}>
-                            <div className="lines a"></div>
-                            <div className="lines b"></div>
+                        onClick={() => {setIsFormVisible(false); return false}}>
+                            <figure>
+                                <div className="lines a"></div>
+                                <div className="lines b"></div>
+                                <figcaption className="sr-only">{currentTranslation['sr-only'].close_menu}</figcaption>
+                            </figure>
                         </button>
 
                         <a href="#genre" tabIndex='0'>{formLabels.genre}</a>
@@ -201,14 +200,15 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             currentLanguage={currentLanguage}
                             sectionLabel={capFirstChar(formLabels.genre)}
                             currentTranslation={currentTranslation}
+                            isFormVisible={isFormVisible}
+                            screenSize={screenSize}
                         />
-                        <DecadeList
+                        <DecadeSlider
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
-                            setDecade={setDecade}
+                            setRangeIsSelected={setRangeIsSelected}
                             setIsValidRequest={setIsValidRequest}
                             sectionLabel={capFirstChar(formLabels.decade)}
-                            currentTranslation={currentTranslation}
                         />
                         {currentRegion ?
                             <ProviderFormList
@@ -218,6 +218,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 currentRegion={currentRegion}
                                 currentLanguage={currentLanguage}
                                 currentTranslation={currentTranslation}
+                                isFormVisible={isFormVisible}
                             />
                         : null
                         }

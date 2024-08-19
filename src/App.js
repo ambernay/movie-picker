@@ -8,10 +8,11 @@ function App() {
 
     const [isTrending, setIsTrending] = useState(true);
     const [userSelections, setUserSelections] = useState('');
-    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+    const [isFormVisible, setIsFormVisible] = useState(false);
+    const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
-    const [searchState, setSearchState] = useState(''); 
+    const [searchState, setSearchState] = useState('none');
     // [region-code, native-name]
     const [currentRegion, setCurrentRegion] = useState(null);
     // default language from navigator
@@ -20,12 +21,12 @@ function App() {
         ? [navigator.language.substring(0,2), navigator.language]
         : ['en', 'en-US'];
     const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage);
-    
+  
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
-        if(window.innerWidth <= 430 && window.innerHeight > 400) return 'narrowScreen'; 
+        if(window.innerWidth <= 460 && window.innerHeight > 400) return 'narrowScreen'; 
         // 740 matches css media query
-        else if ((window.innerWidth > 430 && window.innerWidth <= 990) && window.innerHeight > 400) return 'midScreen';
+        else if ((window.innerWidth > 460 && window.innerWidth <= 990) && window.innerHeight > 400) return 'midScreen';
         else if (window.innerWidth > 990 && window.innerHeight > 400) return 'wideScreen';
     }
     // screen size state for for toggle button
@@ -35,16 +36,20 @@ function App() {
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, []);
-
+   
     // stop background scroll when form is visible
     useEffect(() => {
         const bodyEl = document.querySelector('body');
-        isDropdownVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
-    }, [isDropdownVisible]);
+        isFormVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
+    }, [isFormVisible]);
 
     const handleDropdown = (e) => {
         const headerRegionDropdown = document.querySelector('.header-region');
-        (!isDropdownVisible && document.activeElement !== headerRegionDropdown) ? setIsDropdownVisible(true) : setIsDropdownVisible(false);
+        (!isFormVisible && document.activeElement !== headerRegionDropdown) ? 
+        setIsFormVisible(true) : setIsFormVisible(false);
+
+        if (isSearchbarOpen) { setIsSearchbarOpen(false);}
+
         return false;
     }
 
@@ -52,13 +57,13 @@ function App() {
         <>
             <Header
                 handleDropdown={handleDropdown}
-                isDropdownVisible={isDropdownVisible}
-                setIsDropdownVisible={setIsDropdownVisible}
+                isFormVisible={isFormVisible}
+                setIsFormVisible={setIsFormVisible}
                 isTrending={isTrending}
                 setIsTrending={setIsTrending}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                currentRegion={currentRegion}
+                currentRegion={currentRegion} 
                 setCurrentRegion={setCurrentRegion}
                 currentLanguage={currentLanguage}
                 setCurrentLanguage={setCurrentLanguage}
@@ -68,6 +73,8 @@ function App() {
                 searchState={searchState}
                 setSearchState={setSearchState}
                 setUserSelections={setUserSelections}
+                isSearchbarOpen={isSearchbarOpen}
+                setIsSearchbarOpen={setIsSearchbarOpen}
             />
             <main>
                 <Gallery
@@ -78,17 +85,18 @@ function App() {
                     currentLanguage={currentLanguage}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
-                    isDropdownVisible={isDropdownVisible}
+                    isFormVisible={isFormVisible}
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
                     searchState={searchState}
+                    isSearchbarOpen={isSearchbarOpen}
                 />
             </main>
             <Form
                 setUserSelections={setUserSelections}
-                isDropdownVisible={isDropdownVisible}
+                isFormVisible={isFormVisible}
                 setIsTrending={setIsTrending}
-                setIsDropdownVisible={setIsDropdownVisible}
+                setIsFormVisible={setIsFormVisible}
                 currentRegion={currentRegion}
                 setCurrentRegion={setCurrentRegion}
                 currentLanguage={currentLanguage}

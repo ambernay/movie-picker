@@ -5,8 +5,8 @@ import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
 
 function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
-     setCurrentPage, isDropdownVisible, tvMovieToggle, currentRegion, 
-     currentLanguage, searchState }) {
+     setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
+     currentLanguage, searchState, isSearchbarOpen }) {
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -22,26 +22,33 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
     const [statusMessage, setStatusMessage] = useState(loadingMessage);
     
     // stops background scroll when using tab keys
-    const tabIndex = isDropdownVisible ? '-1' : '0';
+    const tabIndex = isFormVisible ? '-1' : '0';
 
     useEffect(() => {
-        MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage,
-             userSelections, searchState).then(result => {
+        if (!isSearchbarOpen && !isFormVisible) {
             setStatusMessage(loadingMessage);
-
-            let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-            // list of user selections for 'no results' message
-            let messageArr = userSelections[2]?.join(' / ');
-            setTotalPages(result.totalPages);
-            setMoviesToDisplay(result.movieResults);
-            // message for no results
-            if (!result.movieResults && isTrending){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
-            else if (!result.movieResults && !isTrending){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
-            else if (result.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
-        });
+            MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage,
+                userSelections, searchState).then(result => {
+                    // list of user selections for 'no results' message
+                    let messageArr = userSelections[2]?.join(' / ');
+                    let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
+                
+                if (result) {
+                    setTotalPages(result?.totalPages);
+                    setMoviesToDisplay(result?.movieResults);
+                    // message for no results
+                    if (result?.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
+                }
+                else {
+                    // message for no results
+                    if (isTrending){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
+                    else if (!isTrending){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
+                }
+            });
+        }
     }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion,
-         currentLanguage, tvMovieToggle, searchState, setTotalPages, 
-         setMoviesToDisplay]);
+         currentLanguage, tvMovieToggle, searchState, isFormVisible, isSearchbarOpen,
+         setTotalPages, setMoviesToDisplay]);
 
     return (
         <>
@@ -87,6 +94,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                 moviesArrayLength={moviesToDisplay?.length}
                 totalPages={totalPages}
                 currentTranslation={currentTranslation}
+                isFormVisible={isFormVisible}
             />
         </>
     )

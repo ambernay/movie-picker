@@ -1,19 +1,11 @@
 import { memo } from 'react';
 import { FilmIcon, TvIcon } from '../Icons';
 
-function ToggleButton({ tvMovieToggle, setTvMovieToggle, setCurrentPage, iconDescription }) {
-
-    const handleTvMovieToggle = () => {
-        if (tvMovieToggle === 'movie') {
-            setTvMovieToggle('tv');
-        } else {
-            setTvMovieToggle('movie');
-        }
-        setCurrentPage(1);
-    }
+function ToggleButton({ handleTvMovieToggle, tvMovieToggle, iconDescription }) {
 
     return (
-        <button type='button' id={tvMovieToggle === 'movie' ? "movie-option" : "tv-option"} className="toggle-button-container" onClick={handleTvMovieToggle}>
+        <button type='button' id={tvMovieToggle === 'movie' ? "movie-option" : "tv-option"} 
+        className="toggle-button-container" onClick={handleTvMovieToggle}>
             <span className="slider"></span>
             <figure className="toggle-left movie-icon">
                 <FilmIcon />

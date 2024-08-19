@@ -26,7 +26,7 @@ const ProviderListApiCall = async (currentLanguage, currentRegion, displayAmount
     const key = `${langCode}/${regionCode}` 
 
     if (!providerListPromises.hasOwnProperty(key)) {
-        const providerListURL = `.netlify/functions/get-provider-list?language=${langCode}&regionCode=${regionCode}&displayAmount=${displayAmount}`;
+        const providerListURL = `.netlify/functions/get-provider-list?language=${langCode}&regionCode=${regionCode}`;
 
         providerListPromises[key] = fetch(providerListURL)
             .then(res => {
@@ -82,7 +82,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
- 
+
     let key = isTrending ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {

@@ -365,16 +365,26 @@ img {
     --dropdownHeight: 2.2rem;
     --formBottomHeight: 5.5rem;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
+    --fieldsetContainerHeight: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
     --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + var(--regionDropdownMargin)));
     --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
     --sortByListWidth: 55%;
+    /* provider fieldset */
+    --providerFieldsetPadding: 4px;
+    --providerInputWidth: 100px;
+    --providerLabelHeight: 62px;
+    --providerButtonHeight: calc(var(--providerLabelHeight) + 10px);
+    --moreProvidersButtonHeight: 1.6rem;
     /* other */
     --bottomNavHeight: 2.55rem;
     --switchWidth: 85px;
-    --providerFieldsetPadding: 4px;
     --searchInputHeight: 1.5rem;
-    --searchFormContainerHeight: calc(var(--searchInputHeight) * 3);
+    --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
+    --decade-slider-height: 25px;
+    --slider-timeline-height: 2px;
+    --fieldsetMinHeight: 92px;
+    --fielsetPadding: 15px;
     /* #endregion - sizes */
 }
 
@@ -430,7 +440,6 @@ p,
 select {
     font-size: 0.8rem;
 }
-
 /* #endregion - fonts and sizes */
 
 .make-display-none {
@@ -674,11 +683,13 @@ li:focus {
     display: flex;
     justify-content: space-between;
     width: var(--dropdownLabelWidth);
-    border: none;
+    border: 1px solid var(--midAccent);
+    border: 1px solid var(--midAccentOpacity);
+
 }
 
-.header-region .label-container.open-menu {
-    background-color: var(--midAccent);
+.region-list.header-region .label-container.open-menu {
+    background-color: var(--lightAccent);
     color: var(--darkNeutral);
 } 
 
@@ -714,21 +725,41 @@ li:focus {
     justify-content: flex-end;
 }
 
-.input-container {
+.search-container:hover .search-icon-container,
+.search-container:active .search-icon-container,
+.search-container:focus .search-icon-container {
+    background-color: var(--backgroundColor);
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.searchbar-form {
     display: flex;
     position: absolute;
     top: var(--headerMargin);
     right: 0;
+    flex-direction: column;
     width: 100%;
     height: var(--searchFormContainerHeight);
     align-items: center;
     justify-content: center;
     background: var(--darkNeutral);
     border-top: 2px solid var(--lightAccent);
+    padding: 20px 0;
     z-index: 1;
 }
 
-.input-container input {
+.searchbar-form section {
+    display: flex;
+    width: var(--galleryItemMinWidth);
+    justify-content: center;
+}
+
+.searchbar-input-container {
+    margin-bottom: 15px;
+}
+
+.searchbar-form input {
     --inputPadding: 4px;
     background: var(--lightAccent);
     color: var(--darkNeutral);
@@ -739,9 +770,27 @@ li:focus {
     border-radius: 0;
 }
 
-.input-container input::placeholder {
+.searchbar-form input::placeholder {
     color: var(--backgroundColorDesat);
     font-size: 1rem;
+}
+
+.searchbar-selections-container {
+    flex-direction: column;
+}
+
+.searchbar-selections-container .toggle-button-container {
+    border: 2px groove var(--lightAccent);
+}
+
+.searchbar-selections-container .toggle-button-container svg {
+    width: 1.5rem;
+}
+
+.search-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search-container svg {
@@ -751,7 +800,7 @@ li:focus {
 
 .search-button, .search-container, .toggle-button-container, 
 .find-movie-button, .dropdown-menu .select, .dropdown-menu label, 
-.hover-animation {
+.hover-animation, .provider-buttons label {
     cursor: pointer;
 }
 
@@ -769,7 +818,6 @@ li:focus {
     fill: var(--lightAccent);
     width: 1.2rem;
 }
-
 /* #endregion - search bar */
 
 /* #endregion - subheading dropdown */
@@ -845,7 +893,7 @@ button:focus svg {
     position: relative;
     min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
-    border-radius: 5px;
+    border-radius: 6px;
     justify-content: space-around;
     align-self: center;
     padding: 0;
@@ -855,7 +903,7 @@ button:focus svg {
     display: flex;
     position: absolute;
     background-color: var(--backgroundColor);
-    border-radius: 10%;
+    border-radius: 3px;
     width: 43%;
     height: 81%;
     top: 10%;
@@ -885,7 +933,7 @@ button:focus svg {
     height: 1.6rem;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
-    z-index: 10;
+    z-index: 1;
 }
 
 #movie-option .tv-icon svg,
@@ -1064,19 +1112,12 @@ ul li .info-container {
 .eye-icon, .info-icon {
     display: flex;
     position: relative;
+    height: var(--movieInfoIconSize);
     width: var(--movieInfoIconSize);
     align-items: center;
     align-self: flex-start;
     justify-content: center;
     padding: 14px 0;
-}
-
-.eye-icon {
-    height: 23px;
-}
-
-.info-icon {
-    height: var(--movieInfoIconSize);
 }
 
 .eye-icon svg,
@@ -1093,12 +1134,9 @@ ul li .info-container {
     stroke: var(--movieInfoIconColor);
 }
 
-.movie-info-container .heading-container:hover,
-.movie-info-container .info-icon-container:hover,
-.movie-info-container .heading-container:active,
-.movie-info-container .info-icon-container:active,
-.movie-info-container .heading-container:focus,
-.movie-info-container .info-icon-container:focus {
+.movie-info-container .info-icon-container > *:hover,
+.movie-info-container .info-icon-container > *:active,
+.movie-info-container .info-icon-container > *:focus {
     --movieInfoIconColor: var(--lightAccent);
     cursor: pointer;
 }
@@ -1167,13 +1205,57 @@ ul li .info-container {
     border: solid var(--lightAccent) 1px;
 }
 
+.more-providers-button {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--moreProvidersButtonHeight);
+    justify-content: center;
+    background-color: var(--midAccent);
+    opacity: 0.7;
+    
+}
+
+.more-providers-button:not(.disabled):hover,
+.more-providers-button:not(.disabled):active {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.more-providers-button figure {
+    display: flex;
+    align-items: center;
+}
+
+.more-providers-button svg {
+    fill: var(--darkNeutral);
+    align-self: center;
+    width: 1.5rem;
+}
+
+.more-providers-button:focus svg {
+    border: 1px dashed var(--lightAccent);
+}
+
+.more-providers-button.disabled svg {
+    opacity: 0.2;
+}
+
 .icon-message-container,
-.error-message-container {
+.error-message-container, 
+fieldset .error-message-container {
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin: 0;
+}
+
+fieldset .error-message-container {
+    height: 100%;
 }
 
 .icon-message-container {
@@ -1247,7 +1329,7 @@ a:focus {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
+    height: var(--fieldsetContainerHeight);
     width: var(--formWidth);
     border-top: 1px solid var(--lightAccent);
     padding-top: 15px;
@@ -1280,40 +1362,172 @@ legend {
 /* fieldset */
 fieldset {
     display: flex;
-    flex-wrap: wrap;
-    column-gap: 5px;
+    position: relative;
+    flex-direction: column;
     color: var(--lightAccent);
     width: 99%;
-    flex: 1 1 30%;
     justify-content: flex-start;
     margin-bottom: 10px;
     /* overflow: scroll; */
 }
 
+.genre-fieldset {
+    flex: 1 1 30%;
+}
+
+.decade-fieldset {
+    min-height: var(--fieldsetMinHeight);
+    height: 30%;
+    justify-content: center;
+}
+
 .providers-fieldset {
+    padding-bottom: 5px;
+    height: calc((100px * 3) + var(--moreProvidersButtonHeight));
+}
+
+.genre-buttons-list {
+    grid-template-columns: repeat(auto-fill, 175px);
+}
+
+.provider-list-container {
+    grid-template-columns: repeat(auto-fill, 100px);
+    min-height: var(--fieldsetMinHeight);
+    height: calc(var(--providerButtonHeight) * 3 - var(--fielsetPadding));
+    margin-bottom: var(--moreProvidersButtonHeight);
+}
+
+.provider-list-container, .genre-buttons-list {
+    display: grid;
+    position: relative;
+    gap: 5px;
+    width: 100%;
     justify-content: space-between;
+    padding-bottom: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .radio-button-container {
     display: flex;
     column-gap: 5px;
-}
-
-.genre-buttons {
-    flex: 0 0 190px;
-}
-
-.decade-buttons {
-    flex: 0 0 120px;
-}
-
-.provider-buttons {
-    flex: 0 0 100px;
-    justify-content: center;
     align-items: center;
 }
 
+/* #region - decade slider */
+
+.decade-slider-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: var(--decade-slider-height);
+    align-items: center;
+}
+
+ 
+.decade-slider-container:hover .decade-slider,
+.decade-slider-container:active .decade-slider,
+.decade-slider-container:focus .decade-slider {
+    opacity: 1;
+  }
+
+.decade-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: var(--slider-timeline-height);
+    margin-bottom: 5px;
+    background: var(--lightAccent);
+    outline: none;
+    opacity: 0.8;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    z-index: 0;
+  }
+
+  #startRange, #endRange {
+    position: absolute;
+    top: calc((var(--decade-slider-height) / 2) - var(--slider-timeline-height));
+    left: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  /* doesn't work when webkit and moz are combined */
+  
+  #startRange::-webkit-slider-thumb , #endRange::-webkit-slider-thumb {
+    visibility: visible;
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--decade-slider-height);
+    height: var(--decade-slider-height);
+    background: var(--backgroundColor);
+    border-radius: 3px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  #startRange::-moz-range-thumb , #endRange::-moz-range-thumb {
+    visibility: visible;
+    width: var(--decade-slider-height);
+    height: var(--decade-slider-height);
+    background: var(--backgroundColor);
+    border-radius: 3px;
+    cursor: pointer;
+    z-index: 1;
+  }
+    /* #region - slider timeline, disabled thumbs */
+
+    #slider-timeline {
+        visibility: visible;
+        z-index: 0;
+    }
+
+    #slider-timeline::-webkit-slider-thumb {
+        display: none;
+    }
+
+    #slider-timeline::-moz-range-thumb {
+        display: none;
+    }
+    /* #endregion - slider timeline, disabled thumbs */
+
+
+  .range-label-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: var(--midAccent);
+  }
+  /* #endregion - decade slider */
+
+.provider-buttons {
+    max-height: var(--providerLabelHeight);
+    align-items: center;
+    border: solid 1px transparent;
+}
+
+.provider-buttons:hover,
+.provider-buttons:active,
+.provider-buttons:focus {
+    border: solid 1px var(--lightAccent);
+}
+
+.provider-buttons label {
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.provider-buttons img {
+    height: 100%;
+    width: var(--providerLabelHeight);
+}
+
 fieldset label {
+    display: flex;
+    align-items: center;
     align-self: center;
 }
 
@@ -1325,9 +1539,13 @@ input[type="checkbox"] {
 
 /* x button */
 .x-button {
+    display: flex;
     position: absolute;
     top: 0.8%;
     right: 3%;
+    width: 20px;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .lines {
@@ -1401,7 +1619,13 @@ input[type="checkbox"] {
 .region-list.header-region .label-container {
     position: absolute;
     right: calc(((100% - var(--wrapperWidth)) / 2) + var(--searchIconWidth));
-    margin: 2px;
+    margin: 4px;
+}
+
+.dropdown-menu:hover .label-container,
+.dropdown-menu:active .label-container,
+.dropdown-menu:focus .label-container {
+    border: 1px solid var(--midAccent);
 }
 
 .dropdown-menu.sort-by {
@@ -1435,6 +1659,11 @@ input[type="checkbox"] {
 
 /* #region - dropdown arrows */
 
+.header-region .label-container::before, 
+.header-region .label-container::after {
+    right: calc(var(--size) - 3px);
+}
+
 .label-container::before,
 .label-container::after {
     --size: 0.3rem;
@@ -1450,12 +1679,12 @@ input[type="checkbox"] {
 
 .label-container::before {
     border-bottom: var(--size) solid var(--backgroundColor);
-    top: 20%;
+    top: 18%;
 }
 
 .label-container::after {
     border-top: var(--size) solid var(--backgroundColor);
-    bottom: 20%;
+    bottom: 18%;
 }
 
 /* #endregion - dropdown arrows */
@@ -1547,7 +1776,7 @@ input[type="checkbox"] {
     /* width: calc(100% - (var(--galleryItemPadding) * 2)); */
     width: 100%;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 1px var(--galleryItemPadding);
     background-color: var(--midAccent);
 }
@@ -1593,6 +1822,11 @@ input[type="checkbox"] {
     .main-title-container {
         justify-content: flex-start;
     }
+
+    .dropdown-menu.sort-by {
+        align-items: center;
+        --sortByListWidth: 100%;
+    }
 }
 
 @media(max-width: 740px) {
@@ -1612,7 +1846,7 @@ input[type="checkbox"] {
     :root {
         --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
         --mainHeaderFontSize: calc(1.3rem + 1vw);
-        --galleryItemMinWidth: 40dvh;
+        --galleryItemMinWidth: 76dvw;
     }
     /* #endregion - variables */
 
@@ -1632,17 +1866,13 @@ input[type="checkbox"] {
         height: 20px;
         width: 3px;
     }
-
-    .dropdown-menu.sort-by {
-        align-items: center;
-        --sortByListWidth: 100%;
-    }
 }
 
 
 @media(max-width: 460px) {
     :root {
         --smallTextSize: calc(0.8rem + 0.8dvh);
+        --formBottomHeight: 5.8rem;
     }
 
     .wrapper {
@@ -1691,6 +1921,14 @@ input[type="checkbox"] {
     .header-region .select-container {
         /* centered */
         left: calc(50% - (var(--regionDropdownWidth) / 2));  
+    }
+
+    .sort-by, .sort-by .label-container {
+        height: fit-content;
+    }
+
+    .genre-buttons-list {
+        grid-template-columns: repeat(auto-fill, 190px);
     }
 }
 

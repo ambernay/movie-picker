@@ -1,14 +1,33 @@
 import { useState, useEffect, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
-function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, currentLanguage, sectionLabel, currentTranslation }) {
+function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, 
+    currentLanguage, sectionLabel, currentTranslation, isFormVisible, 
+    screenSize }) {
+    
+    const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
+    const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
+    const [genreStatusMessage, setGenreStatusMessage] = useState(`${loadingMessage}...`);
 
     const [genreList, setGenreList] = useState([]);
 
     // caching genre lists by media type and language
     useEffect(() => {
-        GenreListApiCall(tvMovieToggle, currentLanguage).then(result => setGenreList(result));
-    }, [tvMovieToggle, currentLanguage, setGenreList]);
+        if (isFormVisible) {
+            GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
+                if (result) {
+                    setGenreList(result);
+                }
+                else {
+                    setGenreStatusMessage(
+                        `${currentTranslation.status_messages.failed_to_load} 
+                        ${currentTranslation.section_labels.genre}`
+                    );
+                }
+                
+            });
+        }
+    }, [tvMovieToggle, currentLanguage, isFormVisible, setGenreList, setGenreStatusMessage]);
 
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
@@ -21,22 +40,27 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, currentLanguag
     return (
         <fieldset className='genre-fieldset'>
             <legend id="genre">{sectionLabel}:</legend>
-            {genreList.length > 0 ? genreList.map((genre) => {
-                return (
-                    <div className="radio-button-container genre-buttons" key={genre.id}>
-                        <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
-                        <label htmlFor={genre.id}>{genre.name}</label>
-                    </div>
-                )
-            })
+            {genreList?.length > 0 ? 
+                <ul className='genre-buttons-list'>
+                    {genreList.map((genre) => {
+                        // hyphenate the longer words if no whitespace and no existing hyphens
+                        if(genre.name.length > 11 && genre.name.indexOf(' ') < 0 && genre.name.indexOf('-') < 0 && screenSize !== 'narrowScreen') {
+                            genre.name = `${genre.name.substring(0, genre.name.length / 2)}-${genre.name.substring(genre.name.length / 2, genre.length)}`;
+                        }
+                        return (
+                            <li className="radio-button-container genre-buttons" key={genre.id}>
+                                <input onChange={handleChange} type="checkbox" id={genre.id} value={genre.name} name="genre" tabIndex='0'></input>
+                                <label htmlFor={genre.id}>{genre.name}</label>
+                            </li>
+                        )
+                    })}
+                </ul>
                 :
                 <div className="error-message-container">
-                    <h4>{
-                        `${currentTranslation.status_messages.failed_to_load} 
-                        ${currentTranslation.section_labels.genre}`}
-                    </h4>
+                    <h4>{`${genreStatusMessage} `}</h4>
                 </div>
             }
+           
         </fieldset>
     )
 }
