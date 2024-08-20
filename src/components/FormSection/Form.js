@@ -6,6 +6,7 @@ import { TransObj } from '../TranslationObjects.js';
 import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
+import CertificationDropdown from './Dropdowns/CertificationDropdown.js';
 
 function Form({ setUserSelections, setIsTrending, setIsFormVisible, 
     isFormVisible, currentRegion, currentLanguage, setCurrentRegion, 
@@ -169,6 +170,8 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                                 <figcaption className="sr-only">{currentTranslation['sr-only'].close_menu}</figcaption>
                             </figure>
                         </button>
+
+                        <CertificationDropdown/>
 
                         <a href="#genre" tabIndex='0'>{formLabels.genre}</a>
                         <a href="#decade" tabIndex='0'>{formLabels.decade}</a>

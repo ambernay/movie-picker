@@ -370,6 +370,7 @@ img {
     --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
     --sortByListWidth: 55%;
+    --filterIconWidth: 35px;
     /* provider fieldset */
     --providerFieldsetPadding: 4px;
     --providerInputWidth: 100px;
@@ -1219,7 +1220,9 @@ ul li .info-container {
 }
 
 .more-providers-button:not(.disabled):hover,
-.more-providers-button:not(.disabled):active {
+.more-providers-button:not(.disabled):active,
+.filter-button:not(.disabled):hover,
+.filter-button:not(.disabled):active {
     opacity: 1;
     cursor: pointer;
 }
@@ -1567,6 +1570,43 @@ input[type="checkbox"] {
     -moz-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+/* filter button */
+.filter-section {
+    display: flex;
+    position: absolute;
+    top: 0.5%;
+    left: 3%;
+    width: var(--filterIconWidth);
+    justify-content: center;
+}
+
+.filter-button {
+    opacity: 0.8;
+}
+
+.filter-button, .filter-button svg {
+    width: inherit;
+}
+
+.certification-form {
+    display: flex;
+    position: absolute;
+    top: calc(var(--filterIconWidth) + 5px);
+    left: 3.4%;
+    width: 90px;
+    background-color: var(--lightAccent);
+    z-index: 1;
+}
+.certification-buttons-list {
+    width: 100%;
+    color: var(--darkNeutral);
+}
+
+.certification-buttons-list li:hover {
+    background-color: var(--midAccent);
+    color: var(--darkNeutral);
+}
+
 
 .modal {
     display: flex;
