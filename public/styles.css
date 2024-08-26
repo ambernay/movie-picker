@@ -1012,8 +1012,8 @@ main {
     flex: 1;
     min-width: var(--galleryItemMinWidth);
     width: max-content;
-    max-width: min-content;
-    min-height: calc(var(--galleryItemMinWidth) * 1.6);
+    max-width: calc(100dvh / 2.4);
+    /* min-height: calc(var(--galleryItemMinWidth) * 1.6); */
     padding: var(--galleryItemPadding);
 }
 
@@ -1846,7 +1846,7 @@ input[type="checkbox"] {
     :root {
         --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
         --mainHeaderFontSize: calc(1.3rem + 1vw);
-        --galleryItemMinWidth: 76dvw;
+        /* --galleryItemMinWidth: 76dvw; */
     }
     /* #endregion - variables */
 
@@ -1873,6 +1873,7 @@ input[type="checkbox"] {
     :root {
         --smallTextSize: calc(0.8rem + 0.8dvh);
         --formBottomHeight: 5.8rem;
+        --galleryItemMinWidth: 33dvh;
     }
 
     .wrapper {
@@ -1882,12 +1883,6 @@ input[type="checkbox"] {
     header h1 {
         font-size: 1.6rem;
     }
-    /* #region - to fit gallery items on phone screen */
-    
-    .gallery-container {
-        padding: 1.5dvh;
-    }
-    /* #endregion - to fit gallery items on phone screen */
 
     /* #region - when region moves next to x-button on mobile */
     .region-list.form-region {
