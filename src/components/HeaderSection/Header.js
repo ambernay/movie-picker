@@ -3,7 +3,7 @@ import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
 import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown.js';
 import SearchBar from './SearchBar';
-import { LeftArrowIcon } from '../Icons';
+import { LeftArrowIcon, RoomIcon } from '../Icons';
 import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isFormVisible, setIsFormVisible, 
@@ -75,6 +75,11 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 screenSize={screenSize}
                                 currentTranslation={currentTranslation}
                             />
+                            <figure className='room-icon'>
+                                {/* <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption> */}
+                                <RoomIcon/>
+                            </figure>
+                            
                         </div>
                     </div>
                 </div>{/* wrapper */}

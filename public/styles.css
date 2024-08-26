@@ -603,6 +603,10 @@ li:focus {
     align-items: center;
 }
 
+.room-icon svg{
+    width: 25px;
+}
+
 .find-movie-button {
     display: flex;
     height: 100%;
@@ -665,10 +669,15 @@ li:focus {
 }
 
 .language-list.header-region {
+    --labelFontSize: 0.8rem;
+    height: calc(var(--labelFontSize)* 1.3);
+    align-items: end;
+    align-self: flex-start;
     background: none;
 }
 
 .language-list.header-region .label-container {
+    --dropdownLabelWidth: 2.2rem;
     color: var(--darkNeutral);
 }
 
@@ -1659,14 +1668,20 @@ input[type="checkbox"] {
 
 /* #region - dropdown arrows */
 
-.header-region .label-container::before, 
-.header-region .label-container::after {
+.region-list .label-container::before, 
+.region-list .label-container::after {
+    --size: 0.3rem;
     right: calc(var(--size) - 3px);
+}
+
+.language-list .label-container::before, 
+.language-list .label-container::after {
+    --size: 0.2rem;
+    right: calc(var(--size) - 2px);
 }
 
 .label-container::before,
 .label-container::after {
-    --size: 0.3rem;
     display: flex;
     position: absolute;
     content: "";
