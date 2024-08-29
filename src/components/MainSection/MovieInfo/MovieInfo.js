@@ -10,12 +10,20 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
     
     const iconDescription = currentTranslation['sr-only'];
 
+    function handleInfoState(iconState) {
+        if (infoState === 'overview') {
+            setInfoState(iconState);
+        }else {
+            setInfoState('overview')
+        }
+    }
+
     return (
         <>
             <div className='movie-info-container'>
                 <div className={infoState === 'overview' ? 'overview' 
                 : infoState === 'more-info' || 'provider-info' ? 'more-info' : 'hidden'}>
-                    <section className='heading-container' onClick={() => setInfoState('provider-info')}>
+                    <section className='heading-container'>
                         <h4>{movieTitle}</h4>
                     </section>
                     {infoState === 'overview' ?
@@ -45,12 +53,12 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                     }
                     <section className='info-icon-container'>
                         <figure title={iconDescription.more_info} className="info-icon"
-                        onClick={() => setInfoState('more-info')}>
+                        onClick={() => handleInfoState('more-info')}>
                             <InfoIcon />
                             <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
                         </figure>
                         <figure title={iconDescription.viewing_options} className="eye-icon"
-                        onClick={() => setInfoState('provider-info')}>
+                        onClick={() => handleInfoState('provider-info')}>
                             <EyeIcon />
                             <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
                         </figure>
