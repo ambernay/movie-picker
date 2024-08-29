@@ -69,17 +69,16 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 tvMovieToggle={tvMovieToggle}
                                 iconDescription={iconDescription}
                             />
+                             <figure className='room-icon'>
+                                {/* <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption> */}
+                                <RoomIcon/>
+                            </figure>
                              <LanguageDropdown
                                 currentLanguage={currentLanguage}
                                 setCurrentLanguage={setCurrentLanguage}
                                 screenSize={screenSize}
                                 currentTranslation={currentTranslation}
                             />
-                            <figure className='room-icon'>
-                                {/* <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption> */}
-                                <RoomIcon/>
-                            </figure>
-                            
                         </div>
                     </div>
                 </div>{/* wrapper */}

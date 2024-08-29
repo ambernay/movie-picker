@@ -340,6 +340,7 @@ img {
     --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 1.8rem;
     --labelFontSize: 1rem;
+    --roomIconSize: 32px;
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
@@ -394,8 +395,9 @@ img {
 .main-title-container {
     display: flex;
     flex-direction: row;
-    width: calc(100% - (var(--toggleDropdownContainerWidth) + 4vw));
-    justify-content: space-between;
+    /* width: calc(100% - (var(--toggleDropdownContainerWidth) + 4vw)); */
+    width: calc(100% - 195px);
+    justify-content: flex-start;
     align-items: center;
     text-align: start;
 }
@@ -597,14 +599,22 @@ li:focus {
 
 .header-buttons-container {
     display: flex;
-    width: var(--toggleDropdownContainerWidth);
+    /* width: var(--toggleDropdownContainerWidth); */
+    width: 195px;
     height: calc(var(--headerHeight) / 1.2);
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
+    justify-content: space-between;
     align-items: center;
 }
 
-.room-icon svg{
-    width: 25px;
+.room-icon {
+    background-color: var(--backgroundColorDesat);
+    margin: 0 15px;
+}
+
+.room-icon, .room-icon svg {
+    width: var(--roomIconSize);
+    height: var(--roomIconSize);
 }
 
 .find-movie-button {
@@ -694,7 +704,6 @@ li:focus {
     width: var(--dropdownLabelWidth);
     border: 1px solid var(--midAccent);
     border: 1px solid var(--midAccentOpacity);
-
 }
 
 .region-list.header-region .label-container.open-menu {
@@ -1613,7 +1622,7 @@ input[type="checkbox"] {
 .dropdown-menu {
     display: flex;
     flex-direction: column;
-    background: var(--darkNeutral);
+    background: none;
     height: var(--subHeaderHeight);
     width: var(--formWidth);
     justify-content: center;
@@ -1832,10 +1841,6 @@ input[type="checkbox"] {
 
     .find-movie-text{
         display: none;
-    }
-
-    .main-title-container {
-        justify-content: flex-start;
     }
 
     .dropdown-menu.sort-by {
