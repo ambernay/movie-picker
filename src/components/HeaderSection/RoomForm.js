@@ -13,14 +13,14 @@ function RoomForm({ headerModalState, setHeaderModalState }){
     }
 
     return(
-        <section className='room-form-container'>
+        <section className='room-section-container'>
+            <button type='button'className='room-icon-button'>
+                <figure>
+                    {/* <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption> */}
+                    <RoomIcon/>
+                </figure>
+            </button>
             <div className='wrapper'>
-                <button type='button'className='room-icon'>
-                    <figure>
-                        {/* <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption> */}
-                        <RoomIcon/>
-                    </figure>
-                </button>
                 <form className={formClass}>
                     <button type='button'>Create Room</button>
                     <button type='button'>Join Room</button>

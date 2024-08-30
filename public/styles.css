@@ -340,7 +340,6 @@ img {
     --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 1.8rem;
     --labelFontSize: 1rem;
-    --roomIconSize: 32px;
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
@@ -355,6 +354,7 @@ img {
     --dropdownLabelWidth: 2.6rem;
     --narrow-dropdown-width: 55px;
     --toggleDropdownContainerWidth: calc(var(--switchWidth) + (var(--narrow-dropdown-width) + 5px));
+    --toggleButtonHeight: 1.6rem;
     /* gallery */
     --galleryItemMinWidth: 14rem;
     --galleryItemPadding: 10px;
@@ -386,6 +386,7 @@ img {
     --slider-timeline-height: 2px;
     --fieldsetMinHeight: 92px;
     --fielsetPadding: 15px;
+    --buttonRadius: 6px;
     /* #endregion - sizes */
 }
 
@@ -454,6 +455,10 @@ select {
 
 .disabled {
     opacity: 0.2;
+}
+
+figure {
+    display: flex;
 }
 
 /* #region - header */
@@ -607,14 +612,22 @@ li:focus {
     align-items: center;
 }
 
-.room-icon {
-    background-color: var(--backgroundColorDesat);
+.room-section-container {
+    display: flex;
+    width: var(--toggleButtonHeight);
+    height: var(--toggleButtonHeight);
     margin: 0 15px;
 }
 
-.room-icon, .room-icon svg {
-    width: var(--roomIconSize);
-    height: var(--roomIconSize);
+.room-icon-button {
+    background-color: var(--backgroundColorDesat);
+    border-radius: var(--buttonRadius);
+    padding: 0;
+}
+
+.room-icon-button, .room-icon-button svg {
+    width: inherit;
+    height: inherit;
 }
 
 .find-movie-button {
@@ -808,7 +821,8 @@ li:focus {
     width: 1.5rem;
 }
 
-.search-icon-button, .search-icon-button figure {
+.search-icon-button, .search-icon-button figure,
+.room-icon-button, .room-icon-button figure {
     display: flex;
     height: inherit;
     width: inherit;
@@ -915,8 +929,9 @@ button:focus svg {
     display: flex;
     position: relative;
     min-width: var(--switchWidth);
+    height: var(--toggleButtonHeight);
     background-color: var(--darkNeutral);
-    border-radius: 6px;
+    border-radius: var(--buttonRadius);
     justify-content: space-around;
     align-self: center;
     padding: 0;
@@ -951,9 +966,8 @@ button:focus svg {
 }
 
 .toggle-button-container svg {
-    height: 93%;
     /* for safari */
-    height: 1.6rem;
+    height: inherit;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
     z-index: 1;
