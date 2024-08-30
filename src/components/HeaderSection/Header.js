@@ -73,6 +73,8 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                             <RoomForm
                                 headerModalState={headerModalState}
                                 setHeaderModalState={setHeaderModalState}
+                                isFormVisible={isFormVisible}
+                                setIsFormVisible={setIsFormVisible}
                             />
                              <LanguageDropdown
                                 currentLanguage={currentLanguage}
