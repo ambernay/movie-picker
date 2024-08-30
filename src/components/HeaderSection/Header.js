@@ -3,6 +3,7 @@ import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
 import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown.js';
 import SearchBar from './SearchBar';
+import RoomForm from './RoomForm.js';
 import { LeftArrowIcon, RoomIcon } from '../Icons';
 import { TransObj } from '../TranslationObjects.js';
 
@@ -10,7 +11,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
     isTrending, setIsTrending, currentPage, setCurrentPage, currentRegion, 
     setCurrentRegion, currentLanguage, setCurrentLanguage, tvMovieToggle, 
     setTvMovieToggle, screenSize, searchState, setSearchState, 
-    setUserSelections, isSearchbarOpen, setIsSearchbarOpen }) {
+    setUserSelections, headerModalState, setHeaderModalState }) {
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const iconDescription = currentTranslation['sr-only'];
@@ -25,7 +26,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
         if (!isTrending) {
             setIsTrending(true);
             setIsFormVisible(false);
-            setIsSearchbarOpen(false);
+            setHeaderModalState(false);
             setCurrentPage(1);
         }
     }
@@ -117,11 +118,15 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 currentLanguage={currentLanguage}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
-                                isSearchbarOpen={isSearchbarOpen}
-                                setIsSearchbarOpen={setIsSearchbarOpen}
+                                headerModalState={headerModalState}
+                                setHeaderModalState={setHeaderModalState}
                                 isFormVisible={isFormVisible}
                                 setIsFormVisible={setIsFormVisible}
                                 handleTvMovieToggle={handleTvMovieToggle}
+                            />
+                            <RoomForm
+                                headerModalState={headerModalState}
+                                setHeaderModalState={setHeaderModalState}
                             />
                         </div>
                     </div>{/* wrapper */}

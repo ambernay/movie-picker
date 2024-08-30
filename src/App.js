@@ -9,7 +9,7 @@ function App() {
     const [isTrending, setIsTrending] = useState(true);
     const [userSelections, setUserSelections] = useState('');
     const [isFormVisible, setIsFormVisible] = useState(false);
-    const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
+    const [headerModalState, setHeaderModalState] = useState('hidden');
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
     const [searchState, setSearchState] = useState('none');
@@ -48,7 +48,7 @@ function App() {
         (!isFormVisible && document.activeElement !== headerRegionDropdown) ? 
         setIsFormVisible(true) : setIsFormVisible(false);
 
-        if (isSearchbarOpen) { setIsSearchbarOpen(false);}
+        if (headerModalState) { setHeaderModalState(false);}
 
         return false;
     }
@@ -73,8 +73,8 @@ function App() {
                 searchState={searchState}
                 setSearchState={setSearchState}
                 setUserSelections={setUserSelections}
-                isSearchbarOpen={isSearchbarOpen}
-                setIsSearchbarOpen={setIsSearchbarOpen}
+                headerModalState={headerModalState}
+                setHeaderModalState={setHeaderModalState}
             />
             <main>
                 <Gallery
@@ -89,7 +89,7 @@ function App() {
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
                     searchState={searchState}
-                    isSearchbarOpen={isSearchbarOpen}
+                    headerModalState={headerModalState}
                 />
             </main>
             <Form
