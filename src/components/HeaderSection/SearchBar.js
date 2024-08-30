@@ -63,11 +63,16 @@ function SearchBar({ handleTvMovieToggle, searchState, setSearchState, tvMovieTo
    
     return (
         <section className='search-container' >
-            <div className='wrapper'>
-                <figure className={'search-icon-container'} onClick={handleIconClick}>
+            <button type='button'
+            className='search-icon-button' 
+            onClick={handleIconClick}
+            >
+                <figure >
                     <MagnifyerIcon />
                     <figcaption className='sr-only'>{iconDescription.search_bar}</figcaption>
                 </figure>
+            </button>
+                <div className='wrapper'>
                 <form className={inputClass} onSubmit={handleSubmit}>
                     <section className='searchbar-input-container'>
                         <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>

@@ -353,7 +353,6 @@ img {
     --subHeadingMargin: 4px;
     --mainHeaderFontSize: 2.2rem;
     --dropdownLabelWidth: 2.6rem;
-    --searchIconWidth: 1.5rem;
     --narrow-dropdown-width: 55px;
     --toggleDropdownContainerWidth: calc(var(--switchWidth) + (var(--narrow-dropdown-width) + 5px));
     /* gallery */
@@ -370,6 +369,7 @@ img {
     --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + var(--regionDropdownMargin)));
     --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
+    --dropdownLabelHeight: calc(var(--labelFontSize)* 1.3);
     --sortByListWidth: 55%;
     /* provider fieldset */
     --providerFieldsetPadding: 4px;
@@ -680,7 +680,7 @@ li:focus {
 
 .language-list.header-region {
     --labelFontSize: 0.8rem;
-    height: calc(var(--labelFontSize)* 1.3);
+    height: var(--dropdownLabelHeight);
     align-items: end;
     align-self: flex-start;
     background: none;
@@ -739,13 +739,16 @@ li:focus {
 
 .search-container {
     display: flex;
-    width: var(--searchIconWidth);
-    justify-content: flex-end;
+    width: var(--dropdownLabelHeight);
+    height: var(--dropdownLabelHeight);
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
 }
 
-.search-container:hover .search-icon-container,
-.search-container:active .search-icon-container,
-.search-container:focus .search-icon-container {
+.search-container:hover .search-icon-button,
+.search-container:active .search-icon-button,
+.search-container:focus .search-icon-button {
     background-color: var(--backgroundColor);
     border-radius: 4px;
     padding: 1px;
@@ -805,8 +808,10 @@ li:focus {
     width: 1.5rem;
 }
 
-.search-icon-container {
+.search-icon-button, .search-icon-button figure {
     display: flex;
+    height: inherit;
+    width: inherit;
     justify-content: center;
     align-items: center;
 }
@@ -1636,7 +1641,7 @@ input[type="checkbox"] {
 
 .region-list.header-region .label-container {
     position: absolute;
-    right: calc(((100% - var(--wrapperWidth)) / 2) + var(--searchIconWidth));
+    right: calc(((100% - var(--wrapperWidth)) / 2) + var(--dropdownLabelHeight) + 5px);
     margin: 4px;
 }
 
