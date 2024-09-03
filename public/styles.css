@@ -809,7 +809,8 @@ li:focus {
     border-radius: var(--buttonRadius);
 }
 
-.searchbar-form input {
+.searchbar-form input,
+.room-form input {
     --inputPadding: 4px;
     background: var(--lightAccent);
     color: var(--darkNeutral);
@@ -820,7 +821,8 @@ li:focus {
     border-radius: 0;
 }
 
-.searchbar-form input::placeholder {
+.searchbar-form input::placeholder,
+.room-form input::placeholder {
     color: var(--backgroundColorDesat);
     font-size: 1rem;
 }

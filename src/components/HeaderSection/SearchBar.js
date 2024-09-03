@@ -76,7 +76,8 @@ function SearchBar({ handleTvMovieToggle, searchState, setSearchState, tvMovieTo
                 <form className={inputClass} onSubmit={handleSubmit}>
                     <section className='searchbar-input-container'>
                         <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
-                        <input
+                        <input 
+                            type='text'
                             placeholder={`${placeholder}...`}
                             name={'movie search'}
                             value={newValue}
