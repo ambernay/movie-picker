@@ -620,14 +620,19 @@ li:focus {
 }
 
 .room-icon-button {
-    background-color: var(--backgroundColorDesat);
+    background-color: var(--backgroundColor);
     border-radius: var(--buttonRadius);
     padding: 0;
 }
 
-.room-icon-button, .room-icon-button svg {
-    width: inherit;
-    height: inherit;
+.room-icon-button figure {
+    padding: 2px 0 0 0.5px;
+}
+
+.room-icon-button svg {
+    fill: var(--darkNeutral);
+    width: 90%;
+    height: 90%;
 }
 
 .find-movie-button {
@@ -898,6 +903,10 @@ button:focus svg {
 
 .load-button-container button:active svg {
     fill: var(--darkAccentOpacity);
+}
+
+.room-icon-button:hover svg{
+    fill: var(--lightAccent);
 }
 
 .disabled-button {
