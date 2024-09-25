@@ -11,7 +11,7 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
     const iconDescription = currentTranslation['sr-only'];
 
     function handleInfoState(iconState) {
-        if (infoState === 'overview') {
+        if (infoState !== iconState) {
             setInfoState(iconState);
         }else {
             setInfoState('overview')
