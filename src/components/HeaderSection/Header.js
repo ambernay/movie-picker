@@ -75,6 +75,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                 setHeaderModalState={setHeaderModalState}
                                 isFormVisible={isFormVisible}
                                 setIsFormVisible={setIsFormVisible}
+                                currentTranslation={currentTranslation}
                             />
                              <LanguageDropdown
                                 currentLanguage={currentLanguage}

@@ -1,9 +1,9 @@
 import { useState, memo, useRef } from 'react';
 import RoomFormSections from './RoomFormSections.js';
-import { RoomIcon } from '../Icons';
+import { RoomIcon, CopyIcon } from '../Icons';
 
 function RoomForm({ headerModalState, setHeaderModalState, isFormVisible, 
-    setIsFormVisible }){
+    setIsFormVisible, currentTranslation }){
 
     const roomInputRef = useRef(null);
 
@@ -13,7 +13,8 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
     const [roomID, setRoomID] = useState('');
     
     const formClass = headerModalState === 'room-form' ? 'room-form' : 'hidden';
-    const sectionClass = roomState === 'none' ? 'room-form-button-container' : 'hidden';
+    const failedMessage = `${currentTranslation.status_messages.failed_to_load}`;
+    const sectionClass = roomState === 'none' ? 'room-form-section' : 'hidden';
 
     const handleRoomIcon = (e) => {
         setRoomState('none');
@@ -21,11 +22,11 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
         if (headerModalState === 'room-form') {setHeaderModalState('hidden');}
         else {setHeaderModalState('room-form');}
         if (isFormVisible) {setIsFormVisible(false)};
-        console.log(headerModalState);
     }
 
     const handleJoinButton = (e) => {
         setRoomState('join');
+        console.log(roomState);
     }
 
     const handleCreateButton = (e) => {
@@ -33,10 +34,9 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
             setRoomState('create');
         }else if (roomState === 'create') {
             setRoomName(newValue);
-            setRoomID(roomName + Date.now());
-            setRoomState('room code');
+            setRoomID(newValue + Date.now());
+            setRoomState('room-code');
             console.log(roomID);
-            console.log('create room');
         }  
     }
 
@@ -52,12 +52,12 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
             </button>
             <div className='wrapper'>
                 <form className={formClass}>
+                <section className={headerModalState === 'room-form' ? 'room-form-section' : 'hidden'}>
                 {roomState === 'none' ?
-
-                    <section className={roomState === 'none' ? 'room-form-button-container' : 'hidden'}>
+                    <>
                         <button type='button' className='room-form-buttons' onClick={handleCreateButton}>Create Room</button>
                         <button type='button' className='room-form-buttons' onClick={handleJoinButton}>Join Room</button>
-                    </section>
+                    </>
 
                     : roomState === 'create' ?
                     <RoomFormSections
@@ -69,11 +69,23 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
                         newValue={newValue}
                         setNewValue={setNewValue}
                     />
+                    : roomState === 'create' ?
+                    <div className='room-code-section'>
+                        <h5 className='room-code'>Login code:</h5>
+                        <div className='room-code-container'>
+                            <h5 className='room-code' >{roomID}</h5>
+                            <figure>
+                                {/* <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption> */}
+                                <CopyIcon/>
+                            </figure>
+                        </div>
+                    </div>
                     :
-                        <h4>{roomID}</h4>
+                    <h4 className='error-message'>{failedMessage}</h4>
                 }
+                </section>
 
-                    {/* <section className={roomState === 'join' ? 'room-form-button-container' : 'hidden'}>
+                    {/* <section className={roomState === 'join' ? 'room-form-section' : 'hidden'}>
                         <label name={'join button'} className={'sr-only'}>Add room number</label>
                         <input 
                             type='text'
@@ -87,7 +99,7 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
                         <button type='button' className='room-form-buttons' onClick={handleJoinButton}>Join Room</button>
                     </section>
 
-                    <section className={roomState === 'create' ? 'room-form-button-container' : 'hidden'}>
+                    <section className={roomState === 'create' ? 'room-form-section' : 'hidden'}>
                         <label name={'join button'} className={'sr-only'}>Choose room name</label>
                         <input 
                             type='text'

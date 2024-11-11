@@ -18,11 +18,11 @@ function RoomFormSections ({ headerModalState, roomState,
     }
 
     const sectionInfo = {
-        inputLabel: roomState === 'create' ? 'Choose room name' : 'Add room number',
-        placeholderText: roomState === 'create' ? 'Choose room name' : 'room #',
-        nameLabel: roomState === 'create' ? 'create button' : 'join button',
-        buttonText: roomState === 'create' ? 'Create Room' : 'Join Room',
-        handlerFunction: roomState === 'create' ? handleCreateButton : handleJoinButton
+        inputLabel: roomState === 'create' ? 'Choose room name' : 'join' ? 'Add room number' : none,
+        placeholderText: roomState === 'create' ? 'Choose room name' : 'join' ? 'room #' : none,
+        nameLabel: roomState === 'create' ? 'create button' : 'join' ? 'join button' : none,
+        buttonText: roomState === 'create' ? 'Create Room' : 'join' ? 'Join Room' : none,
+        handlerFunction: roomState === 'create' ? handleCreateButton : 'join' ? handleJoinButton : none
     }
 
     // const sectionInfo = () => {
@@ -43,7 +43,7 @@ function RoomFormSections ({ headerModalState, roomState,
     // }
 
     return (
-        <section className={roomState !== 'none' ? 'room-form-button-container' : 'hidden'}>
+        <>
             <label name={sectionInfo.nameLabel} className={'sr-only'}>{sectionInfo.inputLabel}</label>
             <input 
                 type='text'
@@ -55,7 +55,7 @@ function RoomFormSections ({ headerModalState, roomState,
                 ref={roomInputRef}>
             </input>
             <button type='button' className='room-form-buttons' onClick={sectionInfo.handlerFunction}>{sectionInfo.buttonText}</button>
-        </section>
+        </>
     )
 }
 
