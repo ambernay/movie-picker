@@ -1,36 +1,41 @@
-import { useState, useRef, memo, useEffect } from 'react';
+import { useState, memo, useRef } from 'react';
+import RoomFormSections from './RoomFormSections.js';
 import { RoomIcon } from '../Icons';
 
-function RoomForm({ headerModalState, setHeaderModalState, isFormVisible, setIsFormVisible }){
-    const joinInput = useRef(null);
-    
-    const [roomState, setRoomState] = useState('none');
+function RoomForm({ headerModalState, setHeaderModalState, isFormVisible, 
+    setIsFormVisible }){
+
+    const roomInputRef = useRef(null);
+
     const [newValue, setNewValue] = useState('');
-    const roomChoice = 'none';
+    const [roomState, setRoomState] = useState('none');
+    const [roomName, setRoomName] = useState('');
+    const [roomID, setRoomID] = useState('');
     
     const formClass = headerModalState === 'room-form' ? 'room-form' : 'hidden';
     const sectionClass = roomState === 'none' ? 'room-form-button-container' : 'hidden';
 
-    // sets focus when window opens
-    useEffect(() => {
-        if (headerModalState && joinInput.current) {
-            joinInput.current.focus();
-        }
-    }, [roomState]);
-
     const handleRoomIcon = (e) => {
+        setRoomState('none');
+        setNewValue('');
         if (headerModalState === 'room-form') {setHeaderModalState('hidden');}
         else {setHeaderModalState('room-form');}
         if (isFormVisible) {setIsFormVisible(false)};
+        console.log(roomState)
     }
 
     const handleJoinButton = (e) => {
         setRoomState('join');
-        joinInput.current.focus();
     }
 
-    const handleInput = (e) => {
-        setNewValue(e.target.value);
+    const handleCreateButton = (e) => {
+        if (roomState !== 'create') {
+            setRoomState('create');
+        }else if (roomState === 'create') {
+            setRoomName(newValue);
+            setRoomID(roomName + Date.now());
+            console.log(roomID);
+        }  
     }
 
     return(
@@ -45,12 +50,24 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible, setIsF
             </button>
             <div className='wrapper'>
                 <form className={formClass}>
+                {roomState === 'none' ?
+
                     <section className={roomState === 'none' ? 'room-form-button-container' : 'hidden'}>
-                        <button type='button' className='room-form-buttons'>Create Room</button>
+                        <button type='button' className='room-form-buttons' onClick={handleCreateButton}>Create Room</button>
                         <button type='button' className='room-form-buttons' onClick={handleJoinButton}>Join Room</button>
                     </section>
 
-                    <section className={roomState === 'join' ? 'room-form-button-container' : 'hidden'}>
+                    :<RoomFormSections
+                        roomInputRef={roomInputRef}
+                        headerModalState={headerModalState} 
+                        roomState={roomState}
+                        handleCreateButton={handleCreateButton}
+                        handleJoinButton={handleJoinButton}
+                        newValue={newValue}
+                        setNewValue={setNewValue}
+                    />}
+
+                    {/* <section className={roomState === 'join' ? 'room-form-button-container' : 'hidden'}>
                         <label name={'join button'} className={'sr-only'}>Add room number</label>
                         <input 
                             type='text'
@@ -59,10 +76,24 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible, setIsF
                             value={newValue}
                             onChange={handleInput}
                             onFocus={(e) => e.target.select()}
-                            ref={joinInput}>
+                            ref={roomInput}>
                         </input>
                         <button type='button' className='room-form-buttons' onClick={handleJoinButton}>Join Room</button>
                     </section>
+
+                    <section className={roomState === 'create' ? 'room-form-button-container' : 'hidden'}>
+                        <label name={'join button'} className={'sr-only'}>Choose room name</label>
+                        <input 
+                            type='text'
+                            placeholder='choose room name'
+                            name={'create button'}
+                            value={newValue}
+                            onChange={handleInput}
+                            onFocus={(e) => e.target.select()}
+                            ref={roomInput}>
+                        </input>
+                        <button type='button' className='room-form-buttons' onClick={handleCreateButton}>Create Room</button>
+                    </section> */}
                 </form>
             </div>
         </section>
