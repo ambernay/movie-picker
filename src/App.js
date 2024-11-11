@@ -48,7 +48,7 @@ function App() {
         (!isFormVisible && document.activeElement !== headerRegionDropdown) ? 
         setIsFormVisible(true) : setIsFormVisible(false);
 
-        if (headerModalState) { setHeaderModalState(false);}
+        if (headerModalState !== 'hidden') { setHeaderModalState('hidden');}
 
         return false;
     }

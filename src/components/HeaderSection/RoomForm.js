@@ -21,7 +21,7 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
         if (headerModalState === 'room-form') {setHeaderModalState('hidden');}
         else {setHeaderModalState('room-form');}
         if (isFormVisible) {setIsFormVisible(false)};
-        console.log(roomState)
+        console.log(headerModalState);
     }
 
     const handleJoinButton = (e) => {
@@ -34,7 +34,9 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
         }else if (roomState === 'create') {
             setRoomName(newValue);
             setRoomID(roomName + Date.now());
+            setRoomState('room code');
             console.log(roomID);
+            console.log('create room');
         }  
     }
 
@@ -57,7 +59,8 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
                         <button type='button' className='room-form-buttons' onClick={handleJoinButton}>Join Room</button>
                     </section>
 
-                    :<RoomFormSections
+                    : roomState === 'create' ?
+                    <RoomFormSections
                         roomInputRef={roomInputRef}
                         headerModalState={headerModalState} 
                         roomState={roomState}
@@ -65,7 +68,10 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
                         handleJoinButton={handleJoinButton}
                         newValue={newValue}
                         setNewValue={setNewValue}
-                    />}
+                    />
+                    :
+                        <h4>{roomID}</h4>
+                }
 
                     {/* <section className={roomState === 'join' ? 'room-form-button-container' : 'hidden'}>
                         <label name={'join button'} className={'sr-only'}>Add room number</label>
