@@ -42,6 +42,13 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
         }  
     }
 
+    function handleCopyToClipboard() {
+        let tooltip = document.getElementById('copyToolTip');
+        tooltip.innerHTML = `Copied:<br/>Room ID`;
+
+        navigator.clipboard.writeText(roomID);   
+    }
+
     return(
         <section className='room-section-container'>
             <button type='button'
@@ -76,8 +83,8 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
                         <h5 className='room-code'>Login code:</h5>
                         <div className='room-code-container'>
                             <h5 className='room-code' >{roomID}</h5>
-                            <figure className='tooltip'>
-                                <figcaption className="tooltip-text" id='myToolTip'>Copy to clipboard</figcaption>
+                            <figure className='tooltip' onClick={handleCopyToClipboard}>
+                                <figcaption className="tooltip-text" id='copyToolTip'>Copy to clipboard</figcaption>
                                 <CopyIcon/>
                             </figure>
                         </div>
