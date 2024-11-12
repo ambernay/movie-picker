@@ -11,6 +11,7 @@ function RoomFormSections ({ headerModalState, roomState,
         if (headerModalState && roomInputRef.current) {
             roomInputRef.current.focus();
         }
+        console.log(roomState);
     }, [roomState]);
 
     const handleInput = (e) => {

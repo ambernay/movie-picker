@@ -25,8 +25,10 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
     }
 
     const handleJoinButton = (e) => {
-        setRoomState('join');
-        console.log(roomState);
+        if (roomState !== 'join') {
+            setRoomState('join');
+        }
+        // console.log(roomState);
     }
 
     const handleCreateButton = (e) => {
@@ -59,7 +61,7 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
                         <button type='button' className='room-form-buttons' onClick={handleJoinButton}>Join Room</button>
                     </>
 
-                    : roomState === 'create' ?
+                    : roomState === 'create' || roomState === 'join' ?
                     <RoomFormSections
                         roomInputRef={roomInputRef}
                         headerModalState={headerModalState} 
@@ -69,13 +71,13 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
                         newValue={newValue}
                         setNewValue={setNewValue}
                     />
-                    : roomState === 'create' ?
+                    : roomState === 'room-code' ?
                     <div className='room-code-section'>
                         <h5 className='room-code'>Login code:</h5>
                         <div className='room-code-container'>
                             <h5 className='room-code' >{roomID}</h5>
-                            <figure>
-                                {/* <figcaption className="sr-only">{iconDescription.back_arrow}</figcaption> */}
+                            <figure className='tooltip'>
+                                <figcaption className="tooltip-text" id='myToolTip'>Copy to clipboard</figcaption>
                                 <CopyIcon/>
                             </figure>
                         </div>

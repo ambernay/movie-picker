@@ -427,7 +427,8 @@ p,
 input,
 label,
 div,
-select {
+select,
+.tooltip {
     font-family: var(--mainFont);
 }
 
@@ -825,6 +826,7 @@ li:focus {
     height: 70%;
     justify-content: center;
     align-items: center;
+    background-color: var(--darkNeutral);
 }
 
 .room-code-container h5 {
@@ -855,6 +857,47 @@ li:focus {
 .room-form-section svg:focus {
     stroke: var(--midAccent);
 }
+
+/* #region - clipboard tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltip-text {
+    visibility: hidden;
+    width: 140px;
+    background-color: var(--darkAccent);
+    color: var(--lightAccent);
+    font-size: 0.8rem;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--darkAccent) transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+/* #endregion - clipboard tooltip */
 
 .room-form-buttons {
     display: flex;
