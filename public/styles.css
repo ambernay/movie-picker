@@ -816,7 +816,7 @@ li:focus {
     background-color: var(--midAccent);
 }
 
-.room-form-section h5 {
+.room-form-section .room-code {
     color: var(--darkNeutral);
 }
 
@@ -829,7 +829,10 @@ li:focus {
     background-color: var(--darkNeutral);
 }
 
-.room-code-container h5 {
+.room-code-container .room-code {
+    /* full width - icon size - padding and icon left margin */
+    width: calc(100% - 1rem - 15px);
+    word-wrap:break-word;
     color: var(--lightAccent);
 }
 

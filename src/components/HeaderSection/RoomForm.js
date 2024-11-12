@@ -35,10 +35,13 @@ function RoomForm({ headerModalState, setHeaderModalState, isFormVisible,
         if (roomState !== 'create') {
             setRoomState('create');
         }else if (roomState === 'create') {
+            let idString = newValue.split(' ');
+            let lastWord = idString[idString.length -1];
+            let trimmedLastWord = lastWord.substring(lastWord.length -10, lastWord.length)
+            
             setRoomName(newValue);
-            setRoomID(newValue + Date.now());
+            setRoomID(trimmedLastWord + Date.now());
             setRoomState('room-code');
-            console.log(roomID);
         }  
     }
 

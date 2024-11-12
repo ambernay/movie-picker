@@ -26,29 +26,13 @@ function RoomFormSections ({ headerModalState, roomState,
         handlerFunction: roomState === 'create' ? handleCreateButton : 'join' ? handleJoinButton : none
     }
 
-    // const sectionInfo = () => {
-    //     if(roomState === 'create') {
-    //         return({
-    //             inputLabel: 'Choose room name',
-    //             placeholderText: 'Choose room name',
-    //             nameLabel: 'create button',
-    //             buttonText: 'Create Room'
-    //         })
-    //     }else if (roomState === 'join') {
-    //         inputLabel = 'Add room number';
-    //         placeholderText =  'room #';
-    //         nameLabel = 'join button';
-    //         buttonText = 'Join Room';
-    //     }
-
-    // }
-
     return (
         <>
             <label name={sectionInfo.nameLabel} className={'sr-only'}>{sectionInfo.inputLabel}</label>
             <input 
                 type='text'
                 placeholder={sectionInfo.placeholderText}
+                maxLength={23}
                 name={sectionInfo.nameLabel}
                 value={newValue}
                 onChange={handleInput}
