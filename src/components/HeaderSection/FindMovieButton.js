@@ -20,7 +20,7 @@ function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle, currentTra
                     <span> {capFirstChar(mediaType)} </span>
                 </h2>
             </span>
-            <figure>
+            <figure className="fade-pulse">
                 <UpDownArrowIcon
                     arrowClass={arrowClass}
                 />

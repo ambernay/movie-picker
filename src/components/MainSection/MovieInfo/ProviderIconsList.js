@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useState, useEffect } from 'react';
-import { ProviderIconsApiCall } from '../../MovieApiCache.js';
+import { ProviderPosterApiCall } from '../../MovieApiCache.js';
 
 function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTranslation }) {
 
@@ -10,7 +10,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
     const sectionLabel = currentTranslation.provider_options;
 
     useEffect(() => {
-        ProviderIconsApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
+        ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
             if (!result || Object.keys(result).length < 1) {
                 setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
                 return;
@@ -78,7 +78,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
         }
 
         result = { ...result, ...mergedBuyRentArr };
-
+        console.log(result);
         return result;
     }
 

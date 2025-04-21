@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from "react";
-import { ProviderListApiCall } from '../../MovieApiCache';
+import { ProviderFormListApiCall } from '../../MovieApiCache';
 import { UpDownArrowIcon } from '../../Icons.js';
 
 function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
@@ -27,7 +27,7 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
             const fieldsetWidth = Math.round(providerListEl?.clientWidth);
             let newDisplaySet = Math.floor((fieldsetWidth / 105)) * 3;
 
-            ProviderListApiCall(currentLanguage, currentRegion).then(result => {
+            ProviderFormListApiCall(currentLanguage, currentRegion).then(result => {
                 if (result) {
                     const sortedList = result.results?.sort((a, b) => a.display_priorities.currentRegion);
                     setCurrentNumDisplaySets(1);

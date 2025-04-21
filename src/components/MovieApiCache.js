@@ -19,23 +19,23 @@ const RegionApiCall = async (currentLanguage) => {
     return regionsPromise[key];
 }
 
-let providerListPromises = {};
-const ProviderListApiCall = async (currentLanguage, currentRegion, displayAmount) => {
+let providerFormListPromises = {};
+const ProviderFormListApiCall = async (currentLanguage, currentRegion, displayAmount) => {
     const langCode = currentLanguage[0].toLowerCase();
     const regionCode = currentRegion[0];
     const key = `${langCode}/${regionCode}` 
 
-    if (!providerListPromises.hasOwnProperty(key)) {
+    if (!providerFormListPromises.hasOwnProperty(key)) {
         const providerListURL = `.netlify/functions/get-provider-list?language=${langCode}&regionCode=${regionCode}`;
 
-        providerListPromises[key] = fetch(providerListURL)
+        providerFormListPromises[key] = fetch(providerListURL)
             .then(res => {
                 return res.json();
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
             })
     }
-    return providerListPromises[key];
+    return providerFormListPromises[key];
 }
 
 let genreListPromises = {};
@@ -57,16 +57,17 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
     return genreListPromises[key];
 }
 
-let providerIconPromises = {};
-const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion) => {
+// providers for each individual movie
+let providerPosterPromises = {};
+const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
     const regionCode = currentRegion[0];
     const key = `${movieID}/${regionCode}`;
 
-    if (!providerIconPromises.hasOwnProperty(key)) {
+    if (!providerPosterPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
         const viewingOptionsURL = `.netlify/functions/get-viewing-options?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
 
-        providerIconPromises[key] = fetch(viewingOptionsURL)
+        providerPosterPromises[key] = fetch(viewingOptionsURL)
             .then(res => {
                 return res.json();
             })
@@ -74,7 +75,7 @@ const ProviderIconsApiCall = async (tvOrMovie, movieID, currentRegion) => {
                 console.log('Failed to load provider icons', err);
             })
     }
-    return providerIconPromises[key];
+    return providerPosterPromises[key];
 }
 
 let getMoviePromises = {};
@@ -141,5 +142,5 @@ const GeoLocation = async () => {
 }
 
 
-export { RegionApiCall, ProviderListApiCall, GenreListApiCall, 
-    ProviderIconsApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation }
+export { RegionApiCall, ProviderFormListApiCall, GenreListApiCall, 
+    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation }

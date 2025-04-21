@@ -613,7 +613,7 @@ li:focus {
 .find-movie-button svg {
     fill: var(--darkAccent);
     align-self: center;
-    width: 1.5rem;
+    width: var(--mainHeaderFontSize);
 }
 
 .arrow-up {
@@ -880,6 +880,28 @@ button:focus svg {
     text-align: center;
     color: var(--darkNeutral);
 }
+/* #region - fade animation */
+    /* runs on figure only when button is not: hovered, active, focused */
+    .find-movie-button:not(:hover, :active, :focus) .fade-pulse {
+        opacity: 1;
+        animation-name: fadePulse;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in;
+        animation-duration: 3.5s;
+    }
+
+    @keyframes fadePulse {
+        0% {
+            opacity: 0.3;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.3;
+        }
+    }
+/* #endregion - fade animation */
 
 /* toggle switch */
 /* #region - toggle switch */
@@ -1904,7 +1926,7 @@ input[type="checkbox"] {
 
     .find-movie-button {
         display: flex;
-        width: 17%;
+        /* width: 17%; */
         justify-content: flex-end;
         align-self: end;
         padding: 0;
