@@ -14,7 +14,7 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
         if (infoState !== iconState) {
             setInfoState(iconState);
         }else {
-            setInfoState('overview')
+            setInfoState('overview');
         }
     }
 
@@ -52,16 +52,20 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                         : null
                     }
                     <section className='info-icon-container'>
-                        <figure title={iconDescription.more_info} className="info-icon"
-                        onClick={() => handleInfoState('more-info')}>
-                            <InfoIcon />
-                            <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
-                        </figure>
-                        <figure title={iconDescription.viewing_options} className="eye-icon"
-                        onClick={() => handleInfoState('provider-info')}>
-                            <EyeIcon />
-                            <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
-                        </figure>
+                        <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}>
+                            <figure title={iconDescription.more_info} className="info-icon"
+                            onClick={() => handleInfoState('more-info')}>
+                                <InfoIcon />
+                                <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
+                            </figure>
+                        </button>
+                        <button className={`${infoState === 'provider-info' ? 'button-down' : 'button-up'}`}>
+                            <figure title={iconDescription.viewing_options} className= "info-icon"
+                            onClick={() => handleInfoState('provider-info')}>
+                                <EyeIcon />
+                                <figcaption className="sr-only">{iconDescription.eye_icon}</figcaption>
+                            </figure>
+                        </button>
                     </section>
                 </div>
             </div>
