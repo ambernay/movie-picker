@@ -79,7 +79,9 @@ const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage, userSelections, searchState) => {
+const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage, 
+    userSelections, searchState) => {
+        console.log(userSelections, 'blah');
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
@@ -90,11 +92,13 @@ const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage
         const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
         const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
         const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
+        const personURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&language=${langCode}&searchValue=${userSelections}&searchState=${searchState}`;
 
         let url;
         if (isTrending) {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
         else if(searchState === 'searchBar') {url = searchBarURL}
+        else if (searchState === 'person') {url = personURL}
  
         getMoviePromises[key] = fetch(url)
             .then(res => {
@@ -126,6 +130,25 @@ const MovieInfoApiCall = async (movieID, tvOrMovie) => {
     return movieInfoPromise[key];
 }
 
+let personInfoPromise = {};
+const PersonInfoApiCall = async (personID) => {
+    
+    const key = personID;
+   
+    if (!personInfoPromise.hasOwnProperty(key)) {
+        const personInfoAPI = `/.netlify/functions/get-person-info?personID=${personID}`;
+
+        personInfoPromise[key] = fetch(personInfoAPI)
+            .then(res => {
+                return res.json();
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
+    return personInfoPromise[key];
+}
+
 const GeoLocation = async () => {
 
     const geoLocation = `/.netlify/functions/get-geo-location`;
@@ -143,4 +166,5 @@ const GeoLocation = async () => {
 
 
 export { RegionApiCall, ProviderFormListApiCall, GenreListApiCall, 
-    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation }
+    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, PersonInfoApiCall,
+    GeoLocation }

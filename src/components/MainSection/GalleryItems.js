@@ -3,7 +3,7 @@ import MovieInfo from './MovieInfo/MovieInfo.js';
 
 function GalleryItems({ movieID, releaseDate, movieTitle, overview, imagePath, 
     audienceRating, tabIndex, tvMovieToggle, currentRegion, 
-    currentTranslation }) {
+    currentTranslation, setSearchState, setUserSelections }) {
 
     const [infoState, setInfoState] = useState('hidden');
 
@@ -38,6 +38,8 @@ function GalleryItems({ movieID, releaseDate, movieTitle, overview, imagePath,
                 infoState={infoState}
                 setInfoState={setInfoState}
                 currentTranslation={currentTranslation}
+                setSearchState={setSearchState}
+                setUserSelections={setUserSelections}
             />
         </li>
     )

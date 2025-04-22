@@ -89,7 +89,10 @@ function App() {
                     tvMovieToggle={tvMovieToggle}
                     setTvMovieToggle={setTvMovieToggle}
                     searchState={searchState}
+                    setSearchState={setSearchState}
                     isSearchbarOpen={isSearchbarOpen}
+                    setUserSelections={setUserSelections}
+
                 />
             </main>
             <Form

@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 
 import { MovieInfoApiCall } from '../../MovieApiCache.js';
 
-function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation }) {
+function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
+    setSearchState, setUserSelections}) {
 
     const [moreInfoData, setMoreInfoData] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
@@ -35,13 +36,6 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation }) 
                 moreInfoObj.Release_Date = [releaseDate];
             }
 
-            // const moreInfoObj = {
-            //     ...(cast && cast.length > 0) && {Cast: cast},
-            //     ...(directing && directing.length > 0) && {Directing: directing},
-            //     ...(screenWriting && screenWriting.length > 0) && {Screenplay: screenWriting},
-            //     ...(releaseDate) && {Release_Date: [releaseDate]}
-            // }
-
             setMoreInfoData(moreInfoObj);
             if (Object.keys(moreInfoObj).length < 1) setFetchStatus(`${currentTranslation.status_messages.no_results}`)
         });
@@ -49,6 +43,12 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation }) 
 
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function handlePersonClick(personId) {
+        setSearchState('person');
+        setUserSelections(880);
+        console.log(typeof(`${personId}`));
     }
 
     return (
@@ -82,7 +82,7 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation }) 
                                     : `${movieID}/${key.credit_id}`;
                                     
                                     return (
-                                        <li key={listKey} id={key.id}>
+                                        <li key={listKey} id={key.id} onClick={() => handlePersonClick(key.id)}>
                                             {key.name || key}
                                         </li>
                                     )

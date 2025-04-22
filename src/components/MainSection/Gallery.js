@@ -6,7 +6,7 @@ import { TransObj } from '../TranslationObjects.js';
 
 function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
-     currentLanguage, searchState, isSearchbarOpen }) {
+     currentLanguage, searchState, setSearchState, isSearchbarOpen, setUserSelections }) {
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -32,7 +32,7 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                     // list of user selections for 'no results' message
                     let messageArr = userSelections[2]?.join(' / ');
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-                
+                    console.log(userSelections);
                 if (result) {
                     setTotalPages(result?.totalPages);
                     setMoviesToDisplay(result?.movieResults);
@@ -81,6 +81,8 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                                         tvMovieToggle={tvMovieToggle}
                                         currentRegion={currentRegion}
                                         currentTranslation={currentTranslation}
+                                        setSearchState={setSearchState}
+                                        setUserSelections={setUserSelections}
                                     />
                                 )
                             })}
