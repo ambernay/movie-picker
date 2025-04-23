@@ -28,7 +28,6 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
             if (directing && directing.length > 0){
                 moreInfoObj.Directing = directing;
             }
-
             if (screenWriting && screenWriting.length > 0){
                 moreInfoObj.ScreenPlay = screenWriting;
             }
@@ -47,7 +46,7 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
 
     function handlePersonClick(personId) {
         setSearchState('person');
-        setUserSelections(880);
+        setUserSelections(`${880}`);
         console.log(typeof(`${personId}`));
     }
 

@@ -6,13 +6,13 @@ import Form from './components/FormSection/Form.js';
 
 function App() {
 
-    const [isTrending, setIsTrending] = useState(true);
+    // const [isTrending, setIsTrending] = useState(true);
     const [userSelections, setUserSelections] = useState('');
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
-    const [searchState, setSearchState] = useState('none');
+    const [searchState, setSearchState] = useState('trending');
     // [region-code, native-name]
     const [currentRegion, setCurrentRegion] = useState(null);
     // default language from navigator
@@ -21,7 +21,7 @@ function App() {
         ? [navigator.language.substring(0,2), navigator.language]
         : ['en', 'en-US'];
     const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage);
-  
+        
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
         if(window.innerWidth <= 460 && window.innerHeight > 400) return 'narrowScreen'; 
@@ -59,8 +59,6 @@ function App() {
                 handleDropdown={handleDropdown}
                 isFormVisible={isFormVisible}
                 setIsFormVisible={setIsFormVisible}
-                isTrending={isTrending}
-                setIsTrending={setIsTrending}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 currentRegion={currentRegion} 
@@ -79,7 +77,6 @@ function App() {
             <main>
                 <Gallery
                     userSelections={userSelections}
-                    isTrending={isTrending}
                     currentRegion={currentRegion}
                     setCurrentRegion={setCurrentRegion}
                     currentLanguage={currentLanguage}
@@ -98,7 +95,6 @@ function App() {
             <Form
                 setUserSelections={setUserSelections}
                 isFormVisible={isFormVisible}
-                setIsTrending={setIsTrending}
                 setIsFormVisible={setIsFormVisible}
                 currentRegion={currentRegion}
                 setCurrentRegion={setCurrentRegion}

@@ -79,23 +79,24 @@ const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage, 
+const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage, 
     userSelections, searchState) => {
         console.log(userSelections, 'blah');
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
 
-    let key = isTrending ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
+    // let isTrending = searchState === 'trending' ? true : false;
+    let key = searchState === 'trending' ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
-        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
-        const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
-        const personURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&language=${langCode}&searchValue=${userSelections}&searchState=${searchState}`;
+        const defaultURL = `.netlify/functions/get-gallery?isTrending=true&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
+        const formURL = `.netlify/functions/get-gallery?isTrending=false&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
+        const searchBarURL = `.netlify/functions/get-gallery?isTrending=false&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
+        const personURL = `.netlify/functions/get-gallery?isTrending=false&language=${langCode}&searchValue=${userSelections}&searchState=${searchState}`;
 
         let url;
-        if (isTrending) {url = defaultURL}
+        if (searchState === 'trending') {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
         else if(searchState === 'searchBar') {url = searchBarURL}
         else if (searchState === 'person') {url = personURL}
@@ -130,25 +131,6 @@ const MovieInfoApiCall = async (movieID, tvOrMovie) => {
     return movieInfoPromise[key];
 }
 
-let personInfoPromise = {};
-const PersonInfoApiCall = async (personID) => {
-    
-    const key = personID;
-   
-    if (!personInfoPromise.hasOwnProperty(key)) {
-        const personInfoAPI = `/.netlify/functions/get-person-info?personID=${personID}`;
-
-        personInfoPromise[key] = fetch(personInfoAPI)
-            .then(res => {
-                return res.json();
-            })
-            .catch((err) => {
-                console.error(err);
-            })
-    }
-    return personInfoPromise[key];
-}
-
 const GeoLocation = async () => {
 
     const geoLocation = `/.netlify/functions/get-geo-location`;
@@ -166,5 +148,4 @@ const GeoLocation = async () => {
 
 
 export { RegionApiCall, ProviderFormListApiCall, GenreListApiCall, 
-    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, PersonInfoApiCall,
-    GeoLocation }
+    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation }

@@ -4,7 +4,7 @@ import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
 
-function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
+function Gallery({ userSelections, searchBarQuery, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
      currentLanguage, searchState, setSearchState, isSearchbarOpen, setUserSelections }) {
 
@@ -27,10 +27,11 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
     useEffect(() => {
         if (!isSearchbarOpen && !isFormVisible) {
             setStatusMessage(loadingMessage);
-            MoviesApiCall(currentPage, tvMovieToggle, isTrending, currentLanguage,
+            MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
                 userSelections, searchState).then(result => {
                     // list of user selections for 'no results' message
-                    let messageArr = userSelections[2]?.join(' / ');
+                    // let messageArr = userSelections[2]?.join(' / ');
+                    let messageArr = 'oops';
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
                     console.log(userSelections);
                 if (result) {
@@ -41,12 +42,12 @@ function Gallery({ isTrending, userSelections, searchBarQuery, currentPage,
                 }
                 else {
                     // message for no results
-                    if (isTrending){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
-                    else if (!isTrending){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
+                    if (searchState === 'trending'){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
+                    else if (searchState !== 'trending'){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
                 }
             });
         }
-    }, [isTrending, userSelections, searchBarQuery, currentPage, currentRegion,
+    }, [userSelections, searchBarQuery, currentPage, currentRegion,
          currentLanguage, tvMovieToggle, searchState, isFormVisible, isSearchbarOpen,
          setTotalPages, setMoviesToDisplay]);
 

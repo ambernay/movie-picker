@@ -7,7 +7,7 @@ import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
-function Form({ setUserSelections, setIsTrending, setIsFormVisible, 
+function Form({ setUserSelections, setIsFormVisible, 
     isFormVisible, currentRegion, currentLanguage, setCurrentRegion, 
     currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, 
     setSearchState }) {
@@ -49,7 +49,7 @@ function Form({ setUserSelections, setIsTrending, setIsFormVisible,
 
         if (genres.length > 0 || startDate || endDate || providers.length > 0) {
             setIsFormVisible(false);
-            setIsTrending(false);
+            // setIsTrending(false);
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
