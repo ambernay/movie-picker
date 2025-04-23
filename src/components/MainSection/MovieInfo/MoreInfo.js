@@ -44,10 +44,11 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    function handlePersonClick(personId) {
+    function handlePersonClick(personId, personName) {
+        const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
         setSearchState('person');
-        setUserSelections(`${880}`);
-        console.log(typeof(`${personId}`));
+        setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
+        console.log(personId, personName);
     }
 
     return (
@@ -81,7 +82,7 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
                                     : `${movieID}/${key.credit_id}`;
                                     
                                     return (
-                                        <li key={listKey} id={key.id} onClick={() => handlePersonClick(key.id)}>
+                                        <li key={listKey} id={key.id} onClick={() => handlePersonClick(key.id, key.name)}>
                                             {key.name || key}
                                         </li>
                                     )

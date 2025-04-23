@@ -5,8 +5,7 @@ import { TransObj } from '../TranslationObjects.js';
 
 function SearchBar({ handleTvMovieToggle, searchState, setSearchState, 
     tvMovieToggle, setUserSelections, currentLanguage, currentPage, 
-    setCurrentPage, isSearchbarOpen, setIsSearchbarOpen, isFormVisible, 
-    setIsFormVisible }) {
+    setCurrentPage, isSearchbarOpen, setIsSearchbarOpen, isFormVisible, setIsFormVisible }) {
 
     const [newValue, setNewValue] = useState('');
 

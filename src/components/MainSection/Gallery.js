@@ -30,10 +30,9 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
             MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
                 userSelections, searchState).then(result => {
                     // list of user selections for 'no results' message
-                    // let messageArr = userSelections[2]?.join(' / ');
-                    let messageArr = 'oops';
+                    let messageArr = userSelections[2]?.join(' / ');
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-                    console.log(userSelections);
+                    console.log(result);
                 if (result) {
                     setTotalPages(result?.totalPages);
                     setMoviesToDisplay(result?.movieResults);

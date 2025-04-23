@@ -20,8 +20,27 @@ const handler = async (event) => {
 
     try{
         const { data } = await axios.get(url)
-        let apiResults = { movieResults: data.results, totalPages: data.total_pages }
-      
+        console.log(data.cast ? data.cast.length : 'no');
+
+        let apiResults = { 
+            movieResults: data.results? data.results : data.cast, 
+            totalPages: data.total_pages ? data.total_pages : 
+            data.cast.length > 20 ? Math.ceil(data.cast.length/20) : 1
+        }
+        
+        // const apiResults = function(data, searchState){
+        
+        //     if(searchState === 'person') {
+        //         return ({
+        //             movieResults: data.cast, 
+        //             totalPages: data.cast.length > 20 ? data.cast.length/20 : 1
+        //         })
+        //     }
+        //     else {
+        //         return ({ movieResults: data.results, totalPages: data.total_pages })
+        //     }
+        // };
+        console.log(apiResults);
         return {
             statusCode: 200,
             body: JSON.stringify(apiResults)
