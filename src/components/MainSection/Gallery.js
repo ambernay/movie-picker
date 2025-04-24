@@ -3,6 +3,8 @@ import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
+import { MoviesToDisplayContext } from '../Context.js';
+
 
 function Gallery({ userSelections, searchBarQuery, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
@@ -24,6 +26,15 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
 
+    function removeDuplicateIds(movieResults, key) {
+        return movieResults.reduce((accumulator, current) => {
+            if (!accumulator.find(item => item[key] === current[key])) {
+              accumulator.push(current);
+            }
+            return accumulator;
+          }, []);
+    } 
+
     useEffect(() => {
         if (!isSearchbarOpen && !isFormVisible) {
             setStatusMessage(loadingMessage);
@@ -34,8 +45,10 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
                     console.log(result);
                 if (result) {
+                    console.log(result, removeDuplicateIds(result.movieResults, 'id'));
                     setTotalPages(result?.totalPages);
-                    setMoviesToDisplay(result?.movieResults);
+                    setMoviesToDisplay(removeDuplicateIds(result.movieResults, 'id'));
+                    // console.log(moviesToDisplay);
                     // message for no results
                     if (result?.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
                 }
@@ -67,6 +80,7 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                                 const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
 
                                 return (
+                                <MoviesToDisplayContext.Provider value={moviesToDisplay}>
                                     <GalleryItems
                                         key={movie.id}
                                         tabIndex={tabIndex}
@@ -84,6 +98,7 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                                         setSearchState={setSearchState}
                                         setUserSelections={setUserSelections}
                                     />
+                                </MoviesToDisplayContext.Provider>
                                 )
                             })}
                         </ul>

@@ -1,13 +1,16 @@
 import { memo } from 'react';
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useContext } from 'react';
 import { MovieInfoApiCall } from '../../MovieApiCache.js';
+import { MoviesToDisplayContext } from '../../Context.js';
 
 function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
     setSearchState, setUserSelections}) {
 
     const [moreInfoData, setMoreInfoData] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
+    const [personSearchState, setPersonSearchState] = useState([]);
+
+    const galleryInfo = useContext(MoviesToDisplayContext);
 
     useEffect (() => {
         MovieInfoApiCall(movieID, tvMovieToggle).then(result => {
@@ -16,10 +19,10 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
                 setFetchStatus(`${currentTranslation.status_messages.no_results}`);
                 return;
             }
-
+            console.log(galleryInfo[0].character);
             const cast = result?.cast?.slice(0, 5);
             const directing = result?.crew?.filter((item) => item.job === 'Director');
-            const screenWriting = result?.crew?.filter((item) => item.job === 'Screenplay')
+            const screenWriting = result?.crew?.filter((item) => item.job === 'Screenplay');
 
             const moreInfoObj = {}
             if (cast && cast.length > 0) {
@@ -34,6 +37,13 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
             if (releaseDate){
                 moreInfoObj.Release_Date = [releaseDate];
             }
+            // for person search
+            // if (character){
+            //     moreInfoObj.Actor_Name = character;
+            // }
+            // if (job){
+            //     moreInfoObj.Crew_Credit = job;
+            // }
 
             setMoreInfoData(moreInfoObj);
             if (Object.keys(moreInfoObj).length < 1) setFetchStatus(`${currentTranslation.status_messages.no_results}`)
@@ -47,6 +57,7 @@ function MovieInfo({ movieID, releaseDate, tvMovieToggle, currentTranslation,
     function handlePersonClick(personId, personName) {
         const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
         setSearchState('person');
+        setPersonSearchState([personName, personId]);
         setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
         console.log(personId, personName);
     }

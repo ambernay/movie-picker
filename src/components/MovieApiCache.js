@@ -81,7 +81,6 @@ const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
 let getMoviePromises = {};
 const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage, 
     userSelections, searchState) => {
-        console.log(userSelections[0], 'blah');
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
@@ -89,10 +88,10 @@ const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage,
     let key = searchState === 'trending' ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `.netlify/functions/get-gallery?isTrending=true&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
-        const formURL = `.netlify/functions/get-gallery?isTrending=false&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
-        const searchBarURL = `.netlify/functions/get-gallery?isTrending=false&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
-        const personURL = `.netlify/functions/get-gallery?isTrending=false&language=${langCode}&page=${currentPage}&searchValue=${userSelections[0]}&searchState=${searchState}`;
+        const defaultURL = `.netlify/functions/get-gallery?searchState=${searchState}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
+        const formURL = `.netlify/functions/get-gallery?searchState=${searchState}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}`;
+        const searchBarURL = `.netlify/functions/get-gallery?searchState=${searchState}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}`;
+        const personURL = `.netlify/functions/get-gallery?searchState=${searchState}&language=${langCode}&page=${currentPage}&searchValue=${userSelections[0]}`;
 
         let url;
         if (searchState === 'trending') {url = defaultURL}
