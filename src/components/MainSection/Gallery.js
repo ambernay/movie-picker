@@ -3,8 +3,6 @@ import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
-import { MoviesToDisplayContext } from '../Context.js';
-
 
 function Gallery({ userSelections, searchBarQuery, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
@@ -42,13 +40,12 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                 userSelections, searchState).then(result => {
                     // list of user selections for 'no results' message
                     let messageArr = userSelections[2]?.join(' / ');
-                    let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';
-                    console.log(result);
+                    let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';  
+
                 if (result) {
-                    console.log(result, removeDuplicateIds(result.movieResults, 'id'));
+                    console.log(result.movieResults);
                     setTotalPages(result?.totalPages);
                     setMoviesToDisplay(removeDuplicateIds(result.movieResults, 'id'));
-                    // console.log(moviesToDisplay);
                     // message for no results
                     if (result?.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
                 }
@@ -80,7 +77,6 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                                 const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
 
                                 return (
-                                <MoviesToDisplayContext.Provider value={moviesToDisplay}>
                                     <GalleryItems
                                         key={movie.id}
                                         tabIndex={tabIndex}
@@ -90,15 +86,19 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                                             "No description available"}
                                         imagePath={imagePath}
                                         audienceRating={(movie.vote_average)?.toFixed(1)}
-                                        movieID={movie.id}
-                                        releaseDate={movie.release_date ? movie.release_date : undefined}
-                                        tvMovieToggle={tvMovieToggle}
-                                        currentRegion={currentRegion}
-                                        currentTranslation={currentTranslation}
-                                        setSearchState={setSearchState}
-                                        setUserSelections={setUserSelections}
+                                        galleryPropsObj={
+                                            {
+                                                movieID: movie.id,
+                                                releaseDate: movie.release_date || undefined,
+                                                character: movie.character || undefined,
+                                                crewCredits: movie.job || undefined,
+                                                currentTranslation: currentTranslation,
+                                                tvMovieToggle: tvMovieToggle,
+                                                setUserSelections: setUserSelections,
+                                                setSearchState: setSearchState
+                                            }
+                                        }
                                     />
-                                </MoviesToDisplayContext.Provider>
                                 )
                             })}
                         </ul>

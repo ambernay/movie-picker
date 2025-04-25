@@ -5,8 +5,11 @@ import MoreInfo from './MoreInfo.js';
 
 import { EyeIcon, InfoIcon } from '../../Icons.js';
 
-function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, currentRegion, 
-    infoState, setInfoState, currentTranslation, setSearchState, setUserSelections }) {
+function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
+    infoState, setInfoState }) {
+
+    const { movieID, releaseDate, character, crewCredits, currentTranslation, 
+        tvMovieToggle, setUserSelections, setSearchState } = galleryPropsObj;
     
     const iconDescription = currentTranslation['sr-only'];
 
@@ -44,13 +47,8 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                     {infoState === 'more-info' ?
                         /* only renders and fetches icons onclick */
                         <MoreInfo
-                            movieID={movieID}
-                            releaseDate={releaseDate}
-                            tvMovieToggle={tvMovieToggle}
-                            currentTranslation={currentTranslation}
-                            setSearchState={setSearchState}
-                            setUserSelections={setUserSelections}
-                            />
+                            galleryPropsObj={galleryPropsObj}
+                        />
                         : null
                     }
                     <section className='info-icon-container'>

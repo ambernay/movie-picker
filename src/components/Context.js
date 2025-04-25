@@ -1,3 +1,7 @@
 import { createContext } from "react";
 
-export const MoviesToDisplayContext = createContext({});
+const MovieInfoObjContext  = createContext({});
+
+const UserSelectionsContext = createContext('');
+
+export { MovieInfoObjContext , UserSelectionsContext }

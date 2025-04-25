@@ -17,6 +17,7 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
             GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
                 if (result) {
                     setGenreList(result);
+                    console.log(result);
                 }
                 else {
                     setGenreStatusMessage(
@@ -24,7 +25,6 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
                         ${currentTranslation.section_labels.genre}`
                     );
                 }
-                
             });
         }
     }, [tvMovieToggle, currentLanguage, isFormVisible, setGenreList, setGenreStatusMessage]);
