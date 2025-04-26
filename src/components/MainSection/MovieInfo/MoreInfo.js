@@ -6,11 +6,11 @@ function MoreInfo({ galleryPropsObj }) {
 
     const [moreInfoData, setMoreInfoData] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
-    const [personSearchState, setPersonSearchState] = useState([]);
+    // const [personSearchState, setPersonSearchState] = useState([]);
 
     const { movieID, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
-        setUserSelections, setSearchState } = galleryPropsObj;
+        setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
 
     let genreNamesList = function (genreIds, genreApiList) {
         return (genreIds.map(key => genreApiList.find(item => item.id === key)))
@@ -55,7 +55,8 @@ function MoreInfo({ galleryPropsObj }) {
             if(genreIds){
                 moreInfoObj.Genre_Ids = genreNamesList;
             }
-            
+            console.log(personSearchState);
+
             setMoreInfoData(moreInfoObj);
             if (Object.keys(moreInfoObj).length < 1) setFetchStatus(`${currentTranslation.status_messages.no_results}`)
         });
@@ -70,19 +71,17 @@ function MoreInfo({ galleryPropsObj }) {
         });
     }, [tvMovieToggle, currentLanguage, genreIds]);
 
-    function handlePersonClick(personId, personName) {
-        const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
-        setSearchState('person');
-        setPersonSearchState([capFirstChar(personName), personId]);
-        setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
-        console.log(personId, personName);
-    }
-
-    // function findGenreNamesById(genreIds, genreApiList) {
-    //     return (genreIds.map(key => genreApiList.find(item => item.id === key)))
-    //     return (a.map(key => b.find(item => item.id === key)))
-
-    // }
+    const handlePersonClick = async (personId, personName) => {
+        try {
+            const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
+            setSearchState('person');
+            // setPersonSearchState([capFirstChar(personName), personId])
+            setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
+            console.log(personSearchState);
+        }catch(error){
+            console.error("An error occured:", error);
+        }
+    }   
 
     return (
         <>
@@ -101,8 +100,8 @@ function MoreInfo({ galleryPropsObj }) {
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
                 : key === "Genre_Ids" ? "Genres"
-                : key === "Character_Name" ? 'Character'
-                : key === "Crew_Credits" ? 'Crew Credits'
+                : key === "Character_Name" ? `${personSearchState[1]} as:`
+                : key === "Crew_Credits" ? `${personSearchState[1]} - Crew Credits:`
                 : key;
      
                 return (

@@ -4,9 +4,9 @@ import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
 
-function Gallery({ userSelections, searchBarQuery, currentPage,
+function Gallery({ userSelections, setUserSelections, searchBarQuery, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
-     currentLanguage, searchState, setSearchState, isSearchbarOpen, setUserSelections }) {
+     currentLanguage, searchState, setSearchState, isSearchbarOpen }) {
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -20,6 +20,7 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState(loadingMessage);
+    const [personSearchState, setPersonSearchState] = useState([]);
     
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
@@ -34,8 +35,12 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
     } 
 
     useEffect(() => {
+        // #region re-saving state on person search as element unmounts
+        if (searchState === 'person') {setPersonSearchState(userSelections[2])}
+        // #endregion re-saving state on person search as element unmounts
         if (!isSearchbarOpen && !isFormVisible) {
             setStatusMessage(loadingMessage);
+        
             MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
                 userSelections, searchState).then(result => {
                     // list of user selections for 'no results' message
@@ -96,7 +101,8 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                                                 currentTranslation: currentTranslation,
                                                 tvMovieToggle: tvMovieToggle,
                                                 setUserSelections: setUserSelections,
-                                                setSearchState: setSearchState
+                                                setSearchState: setSearchState,
+                                                personSearchState:personSearchState
                                             }
                                         }
                                     />

@@ -10,7 +10,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
 
     const { movieID, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
-        setUserSelections, setSearchState } = galleryPropsObj;
+        setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
     
     const iconDescription = currentTranslation['sr-only'];
 

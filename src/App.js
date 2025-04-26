@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { UserSelectionsContext } from './components/Context.js';
 import { LanguagesObj } from './components/TranslationObjects.js';
 import Header from './components/HeaderSection/Header.js';
 import Gallery from './components/MainSection/Gallery.js';
@@ -74,6 +75,7 @@ function App() {
                 isSearchbarOpen={isSearchbarOpen}
                 setIsSearchbarOpen={setIsSearchbarOpen}
             />
+            <UserSelectionsContext.Provider></UserSelectionsContext.Provider>
             <main>
                 <Gallery
                     userSelections={userSelections}
