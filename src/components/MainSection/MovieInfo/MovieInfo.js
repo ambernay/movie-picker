@@ -8,8 +8,9 @@ import { EyeIcon, InfoIcon } from '../../Icons.js';
 function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
     infoState, setInfoState }) {
 
-    const { movieID, releaseDate, character, crewCredits, currentTranslation, 
-        tvMovieToggle, setUserSelections, setSearchState } = galleryPropsObj;
+    const { movieID, genreIds, releaseDate, character, crewCredits, 
+        currentLanguage, currentTranslation, tvMovieToggle, 
+        setUserSelections, setSearchState } = galleryPropsObj;
     
     const iconDescription = currentTranslation['sr-only'];
 

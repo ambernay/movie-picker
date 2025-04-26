@@ -1,15 +1,22 @@
 import { memo } from 'react';
 import { useState, useEffect } from 'react';
-import { MovieInfoApiCall } from '../../MovieApiCache.js';
+import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
 
-function MoreInfo({ galleryPropsObj, }) {
+function MoreInfo({ galleryPropsObj }) {
 
     const [moreInfoData, setMoreInfoData] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
+    const [genreNamesList, setGenreNamesList] = useState([]);
+
     const [personSearchState, setPersonSearchState] = useState([]);
 
-    const { movieID, releaseDate, character, crewCredits, currentTranslation, 
-        tvMovieToggle, setUserSelections, setSearchState } = galleryPropsObj;
+    const { movieID, genreIds, releaseDate, character, crewCredits, 
+        currentLanguage, currentTranslation, tvMovieToggle, 
+        setUserSelections, setSearchState } = galleryPropsObj;
+
+    const capFirstChar = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     useEffect (() => {
         MovieInfoApiCall(movieID, tvMovieToggle).then(result => {
@@ -43,15 +50,24 @@ function MoreInfo({ galleryPropsObj, }) {
             if (releaseDate){
                 moreInfoObj.Release_Date = [releaseDate];
             }
+            if(genreIds){
+                moreInfoObj.Genre_Ids = genreIds;
+            }
         
             setMoreInfoData(moreInfoObj);
             if (Object.keys(moreInfoObj).length < 1) setFetchStatus(`${currentTranslation.status_messages.no_results}`)
         });
     },[setMoreInfoData])
 
-    const capFirstChar = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+    // need to match genres id
+    useEffect(() => {
+        GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
+            if (result) {
+                console.log(result);
+                setGenreNamesList(findGenreNamesById(genreIds, result));
+            }
+        });
+    }, [setGenreNamesList]);
 
     function handlePersonClick(personId, personName) {
         const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
@@ -59,6 +75,10 @@ function MoreInfo({ galleryPropsObj, }) {
         setPersonSearchState([capFirstChar(personName), personId]);
         setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
         console.log(personId, personName);
+    }
+
+    function findGenreNamesById(genreIds, genreNamesList) {
+        return (genreIds.map(key => genreNamesList.find(item => item.id === key)))
     }
 
     return (
@@ -77,6 +97,7 @@ function MoreInfo({ galleryPropsObj, }) {
                 : key === "Directing" ? capFirstChar(currentTranslation.movie_info.directing)
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
+                : key === "Genre_Ids" ? "Genres"
                 : key === "Character_Name" ? 'Character'
                 : key === "Crew_Credits" ? 'Crew Credits'
                 : key;

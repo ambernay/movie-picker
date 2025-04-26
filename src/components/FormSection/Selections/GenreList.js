@@ -17,7 +17,6 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
             GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
                 if (result) {
                     setGenreList(result);
-                    console.log(result);
                 }
                 else {
                     setGenreStatusMessage(

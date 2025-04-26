@@ -43,7 +43,6 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';  
 
                 if (result) {
-                    console.log(result.movieResults);
                     setTotalPages(result?.totalPages);
                     setMoviesToDisplay(removeDuplicateIds(result.movieResults, 'id'));
                     // message for no results
@@ -89,9 +88,11 @@ function Gallery({ userSelections, searchBarQuery, currentPage,
                                         galleryPropsObj={
                                             {
                                                 movieID: movie.id,
+                                                genreIds: movie.genre_ids || undefined,
                                                 releaseDate: movie.release_date || undefined,
                                                 character: movie.character || undefined,
                                                 crewCredits: movie.job || undefined,
+                                                currentLanguage: currentLanguage,
                                                 currentTranslation: currentTranslation,
                                                 tvMovieToggle: tvMovieToggle,
                                                 setUserSelections: setUserSelections,
