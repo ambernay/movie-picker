@@ -6,13 +6,15 @@ function MoreInfo({ galleryPropsObj }) {
 
     const [moreInfoData, setMoreInfoData] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
-    const [genreNamesList, setGenreNamesList] = useState([]);
-
     const [personSearchState, setPersonSearchState] = useState([]);
 
     const { movieID, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState } = galleryPropsObj;
+
+    let genreNamesList = function (genreIds, genreApiList) {
+        return (genreIds.map(key => genreApiList.find(item => item.id === key)))
+    };
 
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -51,23 +53,22 @@ function MoreInfo({ galleryPropsObj }) {
                 moreInfoObj.Release_Date = [releaseDate];
             }
             if(genreIds){
-                moreInfoObj.Genre_Ids = genreIds;
+                moreInfoObj.Genre_Ids = genreNamesList;
             }
-        
+            
             setMoreInfoData(moreInfoObj);
             if (Object.keys(moreInfoObj).length < 1) setFetchStatus(`${currentTranslation.status_messages.no_results}`)
         });
-    },[setMoreInfoData])
+    },[movieID, tvMovieToggle, currentTranslation, setMoreInfoData, setFetchStatus])
 
     // need to match genres id
     useEffect(() => {
         GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
             if (result) {
-                console.log(result);
-                setGenreNamesList(findGenreNamesById(genreIds, result));
+                genreNamesList = genreNamesList(genreIds, result);
             }
         });
-    }, [setGenreNamesList]);
+    }, [tvMovieToggle, currentLanguage, genreIds]);
 
     function handlePersonClick(personId, personName) {
         const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
@@ -77,9 +78,11 @@ function MoreInfo({ galleryPropsObj }) {
         console.log(personId, personName);
     }
 
-    function findGenreNamesById(genreIds, genreNamesList) {
-        return (genreIds.map(key => genreNamesList.find(item => item.id === key)))
-    }
+    // function findGenreNamesById(genreIds, genreApiList) {
+    //     return (genreIds.map(key => genreApiList.find(item => item.id === key)))
+    //     return (a.map(key => b.find(item => item.id === key)))
+
+    // }
 
     return (
         <>
@@ -113,7 +116,7 @@ function MoreInfo({ galleryPropsObj }) {
                                     
                                     const listKey = typeof(key) === typeof({}) 
                                     ?`${movieID}/${key.id}` : `${movieID}/${key}`;
-
+                                    
                                     return (
                                         <li key={listKey} id={key.id} onClick={() => handlePersonClick(key.id, key.name)}>
                                             {key.name || key}
