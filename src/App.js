@@ -75,7 +75,6 @@ function App() {
                 isSearchbarOpen={isSearchbarOpen}
                 setIsSearchbarOpen={setIsSearchbarOpen}
             />
-            <UserSelectionsContext.Provider></UserSelectionsContext.Provider>
             <main>
                 <Gallery
                     userSelections={userSelections}

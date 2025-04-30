@@ -1,10 +1,11 @@
 import { memo } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use, Suspense } from 'react';
 import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
+import { TransObj } from '../../TranslationObjects.js';
 
 function MoreInfo({ galleryPropsObj }) {
 
-    const [moreInfoData, setMoreInfoData] = useState({});
+    // const [infoDataStateObj, setinfoStateDataObj] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
     // const [personSearchState, setPersonSearchState] = useState([]);
 
@@ -12,86 +13,73 @@ function MoreInfo({ galleryPropsObj }) {
         currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
 
-    let genreNamesList = function (genreIds, genreApiList) {
-        return (genreIds.map(key => genreApiList.find(item => item.id === key)))
-    };
-
+    let infoDataObj = {};
+    // const genres = use(GenreListApiCall(tvMovieToggle, currentLanguage));
+    const movieInfo = use(MovieInfoApiCall(movieID, tvMovieToggle));
+    // console.log(movieInfo);
+    
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    // console.log(capFirstChar(currentTranslation.section_labels.genre))
+
     useEffect (() => {
-        MovieInfoApiCall(movieID, tvMovieToggle).then(result => {
-            
-            if (!result || Object.keys(result).length < 1) {
-                setFetchStatus(`${currentTranslation.status_messages.no_results}`);
-                return;
-            }
-            const cast = result?.cast?.slice(0, 5);
-            const directing = result?.crew?.filter((item) => item.job === 'Director');
-            const screenWriting = result?.crew?.filter((item) => item.job === 'Screenplay');
-            
-            const moreInfoObj = {}
         // #region for person search
-            if (character){
-                moreInfoObj.Character_Name = [character];
-            }
-            if (crewCredits){
-                moreInfoObj.Crew_Credits = [crewCredits];
-            }
-        // #endregion for person search
-            if (cast && cast.length > 0) {
-                moreInfoObj.Cast = cast;
-            }
-            if (directing && directing.length > 0){
-                moreInfoObj.Directing = directing;
-            }
-            if (screenWriting && screenWriting.length > 0){
-                moreInfoObj.ScreenPlay = screenWriting;
-            }
-            if (releaseDate){
-                moreInfoObj.Release_Date = [releaseDate];
-            }
-            if(genreIds){
-                moreInfoObj.Genre_Ids = genreNamesList;
-            }
-            console.log(personSearchState);
-
-            setMoreInfoData(moreInfoObj);
-            if (Object.keys(moreInfoObj).length < 1) setFetchStatus(`${currentTranslation.status_messages.no_results}`)
-        });
-    },[movieID, tvMovieToggle, currentTranslation, setMoreInfoData, setFetchStatus])
-
-    // need to match genres id
-    useEffect(() => {
-        GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
-            if (result) {
-                genreNamesList = genreNamesList(genreIds, result);
-            }
-        });
-    }, [tvMovieToggle, currentLanguage, genreIds]);
-
-    const handlePersonClick = async (personId, personName) => {
-        try {
-            const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
-            setSearchState('person');
-            // setPersonSearchState([capFirstChar(personName), personId])
-            setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
-            console.log(personSearchState);
-        }catch(error){
-            console.error("An error occured:", error);
+        if (character){
+            infoDataObj.Character_Name = [character];
         }
+        if (crewCredits){
+            infoDataObj.Crew_Credits = [crewCredits];
+        }
+        // #endregion for person search
+        if (releaseDate){
+            infoDataObj.Release_Date = [releaseDate];
+        }
+
+        // if (movieInfo) {
+        //     const cast = movieInfo?.cast?.slice(0, 5);
+        //     const directing = movieInfo?.crew?.filter((item) => item.job === 'Director');
+        //     const screenWriting = movieInfo?.crew?.filter((item) => item.job === 'Screenplay');
+            
+        //     if (cast && cast.length > 0) {
+        //         infoDataObj.Cast = cast;
+        //     }
+        //     if (directing && directing.length > 0){
+        //         infoDataObj.Directing = directing;
+        //     }
+        //     if (screenWriting && screenWriting.length > 0){
+        //         infoDataObj.ScreenPlay = screenWriting;
+        //     }
+        // }
+        if (genreIds && genres) {    
+            let genreNamesArray = genreIds.map(key => genres.find(item => item.id === key))
+            infoDataObj.Genre_Ids = genreNamesArray;
+        }
+
+        if (Object.keys(infoDataObj).length < 1) {
+            setFetchStatus(`${currentTranslation.status_messages.no_results}`);
+            return;
+        }
+    },[setFetchStatus])
+
+    function handlePersonClick(personId, personName) {
+        const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
+        setSearchState('person');
+        // setPersonSearchState([capFirstChar(personName), personId])
+        setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
+        // console.log(personSearchState);
     }   
 
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
-            
-            {Object.keys(moreInfoData)?.length < 1 ? 
+        <Suspense fallback={<h2>Loading...</h2>}>
+            {Object.keys(infoDataObj)?.length < 1 ? 
                 <div className='icon-message-container'>
                     <h4>{fetchStatus}</h4>
                 </div>
-            : Object.keys(moreInfoData).map((key) => {
+            : Object.keys(infoDataObj).map((key) => {
                 // create lists
                 const listKey = key + '/' + movieID;
                 
@@ -99,7 +87,7 @@ function MoreInfo({ galleryPropsObj }) {
                 : key === "Directing" ? capFirstChar(currentTranslation.movie_info.directing)
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
-                : key === "Genre_Ids" ? "Genres"
+                : key === "Genre_Ids" ? 'Genre'
                 : key === "Character_Name" ? `${personSearchState[1]} as:`
                 : key === "Crew_Credits" ? `${personSearchState[1]} - Crew Credits:`
                 : key;
@@ -111,8 +99,8 @@ function MoreInfo({ galleryPropsObj }) {
                             <legend>{legendTitle}</legend>
                             <ul className='movie-info-list'>
                                 {/* create list name items */}
-                                { moreInfoData[key]?.map((key) => {
-                                    
+                                { infoDataObj[key]?.map((key) => {
+                             
                                     const listKey = typeof(key) === typeof({}) 
                                     ?`${movieID}/${key.id}` : `${movieID}/${key}`;
                                     
@@ -129,6 +117,7 @@ function MoreInfo({ galleryPropsObj }) {
                 )
             }) 
             }
+        </Suspense>
         </ul>
         </>
     )
