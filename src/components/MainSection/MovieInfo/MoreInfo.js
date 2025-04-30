@@ -14,17 +14,17 @@ function MoreInfo({ galleryPropsObj }) {
         setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
 
     let infoDataObj = {};
-    // const genres = use(GenreListApiCall(tvMovieToggle, currentLanguage));
+    const genres = use(GenreListApiCall(tvMovieToggle, currentLanguage));
     const movieInfo = use(MovieInfoApiCall(movieID, tvMovieToggle));
-    // console.log(movieInfo);
+    // console.log(genres);
     
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     // console.log(capFirstChar(currentTranslation.section_labels.genre))
-
-    useEffect (() => {
+    
+    // #region for populate info object
         // #region for person search
         if (character){
             infoDataObj.Character_Name = [character];
@@ -36,22 +36,21 @@ function MoreInfo({ galleryPropsObj }) {
         if (releaseDate){
             infoDataObj.Release_Date = [releaseDate];
         }
-
-        // if (movieInfo) {
-        //     const cast = movieInfo?.cast?.slice(0, 5);
-        //     const directing = movieInfo?.crew?.filter((item) => item.job === 'Director');
-        //     const screenWriting = movieInfo?.crew?.filter((item) => item.job === 'Screenplay');
+        if (movieInfo) {
+            const cast = movieInfo?.cast?.slice(0, 5);
+            const directing = movieInfo?.crew?.filter((item) => item.job === 'Director');
+            const screenWriting = movieInfo?.crew?.filter((item) => item.job === 'Screenplay');
             
-        //     if (cast && cast.length > 0) {
-        //         infoDataObj.Cast = cast;
-        //     }
-        //     if (directing && directing.length > 0){
-        //         infoDataObj.Directing = directing;
-        //     }
-        //     if (screenWriting && screenWriting.length > 0){
-        //         infoDataObj.ScreenPlay = screenWriting;
-        //     }
-        // }
+            if (cast && cast.length > 0) {
+                infoDataObj.Cast = cast;
+            }
+            if (directing && directing.length > 0){
+                infoDataObj.Directing = directing;
+            }
+            if (screenWriting && screenWriting.length > 0){
+                infoDataObj.ScreenPlay = screenWriting;
+            }
+        }
         if (genreIds && genres) {    
             let genreNamesArray = genreIds.map(key => genres.find(item => item.id === key))
             infoDataObj.Genre_Ids = genreNamesArray;
@@ -61,7 +60,8 @@ function MoreInfo({ galleryPropsObj }) {
             setFetchStatus(`${currentTranslation.status_messages.no_results}`);
             return;
         }
-    },[setFetchStatus])
+    // #endregion for populate info object
+
 
     function handlePersonClick(personId, personName) {
         const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;

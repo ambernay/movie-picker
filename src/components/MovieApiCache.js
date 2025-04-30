@@ -111,7 +111,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage,
 }
 
 let movieInfoPromise = {};
-const MovieInfoApiCall = async (movieID, tvOrMovie) => {
+const MovieInfoApiCall = (movieID, tvOrMovie) => {
     
     const key = movieID;
    
