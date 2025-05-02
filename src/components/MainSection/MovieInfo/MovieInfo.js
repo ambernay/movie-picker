@@ -1,5 +1,5 @@
 import { memo } from 'react';
-
+import { ErrorBoundary } from 'react-error-boundary';
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
@@ -22,8 +22,19 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
         }
     }
 
+    const ErrorFallback = ({error}) => {
+        console.log(error);
+        let errorStatus = `${currentTranslation.status_messages.no_results}`
+        return (
+            <div className='icon-message-container'>
+                <h4>{errorStatus}</h4>
+            </div>
+        )
+    }
+
     return (
         <>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
             <div className='movie-info-container'>
                 <div className={infoState === 'overview' ? 'overview' 
                 : infoState === 'more-info' || 'provider-info' ? 'more-info' : 'hidden'}>
@@ -70,6 +81,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                     </section>
                 </div>
             </div>
+        </ErrorBoundary>
         </>
     )
 }

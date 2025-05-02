@@ -4,13 +4,13 @@ import { ProviderPosterApiCall } from '../../MovieApiCache.js';
 
 function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTranslation }) {
 
-    const [viewingOptions, setViewingOptions] = useState();
+    const [viewingOptions, setViewingOptions] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
 
     const sectionLabel = currentTranslation.provider_options;
 
     useEffect(() => {
-        ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
+        ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion).then(result => {
             if (!result || Object.keys(result).length < 1) {
                 setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
                 return;
@@ -85,7 +85,11 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
-            {viewingOptions ? Object.keys(viewingOptions).sort().map((key) => {
+            {Object.keys(viewingOptions).length < 1 ? 
+                <div className='icon-message-container'>
+                    <h4>{fetchStatus}</h4>
+                </div>
+            :Object.keys(viewingOptions).sort().map((key) => {
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 // create lists
                 const optionKey = key + '/' + movieID;
@@ -113,10 +117,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTrans
                         </fieldset>
                     </li>
                 )
-            }) :
-                <div className='icon-message-container'>
-                    <h4>{fetchStatus}</h4>
-                </div>
+            })
             }
         </ul>
         </>

@@ -101,6 +101,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                             "No description available"}
                                         imagePath={imagePath}
                                         audienceRating={(movie.vote_average)?.toFixed(1)}
+                                        currentRegion={currentRegion}
                                         galleryPropsObj={
                                             {
                                                 movieID: movie.id,
