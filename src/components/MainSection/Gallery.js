@@ -4,7 +4,7 @@ import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
 
-function Gallery({ userSelections, setUserSelections, searchBarQuery, currentPage,
+function Gallery({ userSelections, setUserSelections, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
      currentLanguage, searchState, setSearchState, isSearchbarOpen }) {
 
@@ -25,14 +25,22 @@ function Gallery({ userSelections, setUserSelections, searchBarQuery, currentPag
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
 
-    function removeDuplicateIds(movieResults, key) {
+    function removeDuplicateIds(movieResults, id) {
         return movieResults.reduce((accumulator, current) => {
-            if (!accumulator.find(item => item[key] === current[key])) {
-              accumulator.push(current);
+
+            let movie = accumulator.find(item => item[id] === current[id]);
+
+            if (!movie) {
+                if(current.job) { current.job = [current.job]; }
+                accumulator.push(current);
+            }
+            else {
+                if(!movie.job) { movie.job = []; }
+                movie.job.push(current.job);
             }
             return accumulator;
           }, []);
-    } 
+    }  
 
     useEffect(() => {
         // #region re-saving state on person search as element unmounts
@@ -48,10 +56,13 @@ function Gallery({ userSelections, setUserSelections, searchBarQuery, currentPag
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';  
 
                 if (result) {
-                    setTotalPages(result?.totalPages);
-                    setMoviesToDisplay(removeDuplicateIds(result.movieResults, 'id'));
+                    const movieResults = searchState === 'person' ? 
+                        removeDuplicateIds(result.movieResults, 'id') : result.movieResults
+                    
+                    setTotalPages(result.totalPages);
+                    setMoviesToDisplay(movieResults);
                     // message for no results
-                    if (result?.movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
+                    if (movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
                 }
                 else {
                     // message for no results
@@ -60,9 +71,9 @@ function Gallery({ userSelections, setUserSelections, searchBarQuery, currentPag
                 }
             });
         }
-    }, [userSelections, searchBarQuery, currentPage, currentRegion,
-         currentLanguage, tvMovieToggle, searchState, isFormVisible, isSearchbarOpen,
-         setTotalPages, setMoviesToDisplay]);
+    }, [userSelections, currentPage, currentRegion, currentLanguage, 
+        tvMovieToggle, searchState, isFormVisible, isSearchbarOpen,
+        setTotalPages, setMoviesToDisplay]);
 
     return (
         <>

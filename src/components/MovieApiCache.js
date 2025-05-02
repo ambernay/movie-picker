@@ -10,10 +10,15 @@ const RegionApiCall = async (currentLanguage) => {
 
         regionsPromise[key] = fetch(regionAPI)
             .then(res => {
+                if(res.status != 200) {
+                    console.log("Genre API did not succeed");
+                    return undefined;
+                }
                 return res.json();
             })
             .catch((err) => {
                 console.error(err);
+                return undefined;
             })
     }
     return regionsPromise[key];
@@ -30,9 +35,14 @@ const ProviderFormListApiCall = async (currentLanguage, currentRegion, displayAm
 
         providerFormListPromises[key] = fetch(providerListURL)
             .then(res => {
+                if(res.status != 200) {
+                    console.log("Genre API did not succeed");
+                    return undefined;
+                }
                 return res.json();
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
+                return undefined;
             })
     }
     return providerFormListPromises[key];
@@ -45,13 +55,18 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
     const key = `${tvOrMovie}/${langCode}`;
 
     if (!genreListPromises.hasOwnProperty(key)) {
-        const genreListURL = `.netlify/functions/get-genre-list?mediaType=${tvOrMovie}&language=${langCode}&translation=${allButtonTrans}`;
+        const genreListURL = `.netlify/functions/get-genre-list?mediaType=${undefined}&language=${langCode}&translation=${allButtonTrans}`;
 
         genreListPromises[key] = fetch(genreListURL)
             .then(res => {
+                if(res.status != 200) {
+                    console.log("Genre API did not succeed");
+                    return undefined;
+                }
                 return res.json();
             }).catch((err) => {
                 console.log("Failed to fetch genres", err);
+                return undefined;
             })
     }
     return genreListPromises[key];
@@ -69,10 +84,15 @@ const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
 
         providerPosterPromises[key] = fetch(viewingOptionsURL)
             .then(res => {
+                if(res.status != 200) {
+                    console.log("Genre API did not succeed");
+                    return undefined;
+                }
                 return res.json();
             })
             .catch((err) => {
                 console.log('Failed to load provider icons', err);
+                return undefined;
             })
     }
     return providerPosterPromises[key];
@@ -101,10 +121,15 @@ const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage,
  
         getMoviePromises[key] = fetch(url)
             .then(res => {
+                if(res.status != 200) {
+                    console.log("Genre API did not succeed");
+                    return undefined;
+                }
                 return res.json();
             })
             .catch((err) => {
                 console.log('Failed to fetch Trending', err);
+                return undefined;
             })
     }
     return getMoviePromises[key];
@@ -120,10 +145,15 @@ const MovieInfoApiCall = (movieID, tvOrMovie) => {
 
         movieInfoPromise[key] = fetch(movieInfoAPI)
             .then(res => {
+                if(res.status != 200) {
+                    console.log("Genre API did not succeed");
+                    return undefined;
+                }
                 return res.json();
             })
             .catch((err) => {
                 console.error(err);
+                return undefined;
             })
     }
     return movieInfoPromise[key];
@@ -135,10 +165,15 @@ const GeoLocation = async () => {
 
     const geoLocationPromise = fetch(geoLocation)
         .then(res => {
+            if(res.status != 200) {
+                console.log("Genre API did not succeed");
+                return undefined;
+            }
             return res.json();
         })
         .catch((err) => {
             console.error(err);
+            return undefined;
         })
 
     return geoLocationPromise;

@@ -1,14 +1,10 @@
-import { memo } from 'react';
-import { useState, useEffect, use, Suspense } from 'react';
+import { memo , useState, use, Suspense } from 'react';
 import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
-import { TransObj } from '../../TranslationObjects.js';
 
 function MoreInfo({ galleryPropsObj }) {
 
-    // const [infoDataStateObj, setinfoStateDataObj] = useState({});
     const [fetchStatus, setFetchStatus] = useState('Loading...');
-    // const [personSearchState, setPersonSearchState] = useState([]);
-
+    
     const { movieID, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
@@ -16,13 +12,10 @@ function MoreInfo({ galleryPropsObj }) {
     let infoDataObj = {};
     const genres = use(GenreListApiCall(tvMovieToggle, currentLanguage));
     const movieInfo = use(MovieInfoApiCall(movieID, tvMovieToggle));
-    // console.log(genres);
     
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-
-    // console.log(capFirstChar(currentTranslation.section_labels.genre))
     
     // #region for populate info object
         // #region for person search
@@ -30,12 +23,9 @@ function MoreInfo({ galleryPropsObj }) {
             infoDataObj.Character_Name = [character];
         }
         if (crewCredits){
-            infoDataObj.Crew_Credits = [crewCredits];
+            infoDataObj.Crew_Credits = crewCredits;
         }
         // #endregion for person search
-        if (releaseDate){
-            infoDataObj.Release_Date = [releaseDate];
-        }
         if (movieInfo) {
             const cast = movieInfo?.cast?.slice(0, 5);
             const directing = movieInfo?.crew?.filter((item) => item.job === 'Director');
@@ -51,7 +41,10 @@ function MoreInfo({ galleryPropsObj }) {
                 infoDataObj.ScreenPlay = screenWriting;
             }
         }
-        if (genreIds && genres) {    
+        if (releaseDate){
+            infoDataObj.Release_Date = [releaseDate];
+        }
+        if (genreIds && genres) {  
             let genreNamesArray = genreIds.map(key => genres.find(item => item.id === key))
             infoDataObj.Genre_Ids = genreNamesArray;
         }
@@ -66,15 +59,13 @@ function MoreInfo({ galleryPropsObj }) {
     function handlePersonClick(personId, personName) {
         const searchCacheKey = `${personName.split(' ').join('_')}/${personId}`;
         setSearchState('person');
-        // setPersonSearchState([capFirstChar(personName), personId])
         setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
-        // console.log(personSearchState);
-    }   
+    }
 
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
-        <Suspense fallback={<h2>Loading...</h2>}>
+        <Suspense fallback={<h4>Loading...</h4>}>
             {Object.keys(infoDataObj)?.length < 1 ? 
                 <div className='icon-message-container'>
                     <h4>{fetchStatus}</h4>
