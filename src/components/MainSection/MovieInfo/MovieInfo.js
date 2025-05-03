@@ -7,7 +7,7 @@ import { EyeIcon, InfoIcon } from '../../Icons.js';
 function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
     infoState, setInfoState }) {
 
-    const { movieID, genreIds, releaseDate, character, crewCredits, 
+    const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
     

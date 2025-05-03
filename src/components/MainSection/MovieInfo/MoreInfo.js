@@ -28,6 +28,7 @@ function MoreInfo({ galleryPropsObj }) {
         // #endregion for person search
         if (movieInfo) {
             const cast = movieInfo?.cast?.slice(0, 5);
+            console.log(cast);
             const directing = movieInfo?.crew?.filter((item) => item.job === 'Director');
             const screenWriting = movieInfo?.crew?.filter((item) => item.job === 'Screenplay');
             
@@ -45,6 +46,7 @@ function MoreInfo({ galleryPropsObj }) {
             infoDataObj.Release_Date = [releaseDate];
         }
         if (genreIds && genres) {
+            console.log(genreIds);
             let genreNamesArray = genreIds.map(key => genres.find(item => item.id === key))
             infoDataObj.Genre_Ids = genreNamesArray;
         }
@@ -52,7 +54,7 @@ function MoreInfo({ galleryPropsObj }) {
             const mediaToDisplay = mediaType === 'movie' 
             ? capFirstChar(currentTranslation.movie) : currentTranslation.tv;
             
-            infoDataObj.Media_Type = [capFirstChar(mediaToDisplay)];
+            infoDataObj.Media_Type = [mediaToDisplay];
         }
 
         if (Object.keys(infoDataObj).length < 1) {
@@ -102,12 +104,12 @@ function MoreInfo({ galleryPropsObj }) {
                                     const listKey = typeof(key) === typeof({}) 
                                     ? (`${movieID}/${key.id}`).split(' ').join('_') 
                                     : (`${movieID}/${key}`).split(' ').join('_');
-                                    // console.log('name', key.name);
+                                  
                                     return (
-                                        <li key={listKey} id={listKey} onClick={() => {handlePersonClick(key.id, key.name)}}>
-                                            {console.log(key)}
+                                        <li key={listKey} id={listKey} 
+                                        // checks if list item is person using key.gender
+                                        onClick={() => {key.gender ? handlePersonClick(key.id, key.name) : null}}>
                                             {key.name || key}
-                                            
                                         </li>
                                     )
                                 })
