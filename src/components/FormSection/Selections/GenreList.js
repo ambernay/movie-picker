@@ -24,7 +24,6 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
                         ${currentTranslation.section_labels.genre}`
                     );
                 }
-                
             });
         }
     }, [tvMovieToggle, currentLanguage, isFormVisible, setGenreList, setGenreStatusMessage]);

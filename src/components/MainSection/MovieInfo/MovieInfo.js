@@ -1,12 +1,15 @@
 import { memo } from 'react';
-
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
 import { EyeIcon, InfoIcon } from '../../Icons.js';
 
-function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, currentRegion, 
-    infoState, setInfoState, currentTranslation }) {
+function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
+    infoState, setInfoState }) {
+
+    const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
+        currentLanguage, currentTranslation, tvMovieToggle, 
+        setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
     
     const iconDescription = currentTranslation['sr-only'];
 
@@ -44,10 +47,7 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                     {infoState === 'more-info' ?
                         /* only renders and fetches icons onclick */
                         <MoreInfo
-                            movieID={movieID}
-                            releaseDate={releaseDate}
-                            tvMovieToggle={tvMovieToggle}
-                            currentTranslation={currentTranslation}
+                            galleryPropsObj={galleryPropsObj}
                         />
                         : null
                     }

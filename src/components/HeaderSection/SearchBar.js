@@ -3,10 +3,9 @@ import { MagnifyerIcon } from '../Icons';
 import ToggleButton from './ToggleButton';
 import { TransObj } from '../TranslationObjects.js';
 
-function SearchBar({ handleTvMovieToggle, searchState, setSearchState, tvMovieToggle,
-    setTvMovieToggle, setUserSelections, setIsTrending, currentLanguage, 
-    currentPage, setCurrentPage, isSearchbarOpen, setIsSearchbarOpen, 
-    isFormVisible, setIsFormVisible }) {
+function SearchBar({ handleTvMovieToggle, searchState, setSearchState, 
+    tvMovieToggle, setUserSelections, currentLanguage, currentPage, 
+    setCurrentPage, isSearchbarOpen, setIsSearchbarOpen, isFormVisible, setIsFormVisible }) {
 
     const [newValue, setNewValue] = useState('');
 
@@ -54,7 +53,6 @@ function SearchBar({ handleTvMovieToggle, searchState, setSearchState, tvMovieTo
     const handleSubmit = (e) => {
         e.preventDefault();
         setCurrentPage(1);
-        setIsTrending(false);
         setIsSearchbarOpen(false);
         // selection query / cache key / result message
         setUserSelections([newValue, `${newValue.split(' ').join('_')}/${tvMovieToggle}`, [capitalize(newValue), capitalize(tvMovieToggle)]]);
