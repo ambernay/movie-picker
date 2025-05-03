@@ -2,10 +2,11 @@ import { memo } from 'react';
 import { useState, useEffect } from 'react';
 import { ProviderPosterApiCall } from '../../MovieApiCache.js';
 
-function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTranslation }) {
+function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, 
+    currentTranslation, capFirstChar }) {
 
     const [viewingOptions, setViewingOptions] = useState({});
-    const [fetchStatus, setFetchStatus] = useState('Loading...');
+    const [fetchStatus, setFetchStatus] = useState(capFirstChar(currentTranslation.status_messages.loading));
 
     const sectionLabel = currentTranslation.provider_options;
 

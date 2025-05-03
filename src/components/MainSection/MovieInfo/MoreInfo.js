@@ -1,21 +1,18 @@
 import { memo , useState, use, Suspense } from 'react';
 import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
 
-function MoreInfo({ galleryPropsObj }) {
+function MoreInfo({ galleryPropsObj, capFirstChar }) {
 
-    const [fetchStatus, setFetchStatus] = useState('Loading...');
-    
     const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
+
+    const [fetchStatus, setFetchStatus] = useState(capFirstChar(currentTranslation.status_messages.loading));
 
     let infoDataObj = {};
     const genres = use(GenreListApiCall(mediaType, currentLanguage));
     const movieInfo = use(MovieInfoApiCall(movieID, tvMovieToggle));
     
-    const capFirstChar = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
     
     // #region for populate info object
         // #region for person search
@@ -81,7 +78,6 @@ function MoreInfo({ galleryPropsObj }) {
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
-        <Suspense fallback={LoadingStatusMessage}>
             {Object.keys(infoDataObj)?.length < 1 ? 
                 <LoadingStatusMessage/>
             : Object.keys(infoDataObj).map((key) => {
@@ -132,7 +128,6 @@ function MoreInfo({ galleryPropsObj }) {
                 )
             }) 
             }
-        </Suspense>
         </ul>
         </>
     )

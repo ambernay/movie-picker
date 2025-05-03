@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, Suspense } from 'react';
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
@@ -13,12 +13,24 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
     
     const iconDescription = currentTranslation['sr-only'];
 
+    const capFirstChar = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     function handleInfoState(iconState) {
         if (infoState !== iconState) {
             setInfoState(iconState);
         }else {
             setInfoState('overview');
         }
+    }
+
+    const LoadingStatusMessage = () => {
+        return(
+            <div className='icon-message-container'>
+                <h4>{capFirstChar(currentTranslation.status_messages.loading)}</h4>
+            </div>
+        )
     }
 
     return (
@@ -41,15 +53,19 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                             tvMovieToggle={tvMovieToggle}
                             currentRegion={currentRegion}
                             currentTranslation={currentTranslation}
+                            capFirstChar={capFirstChar}
                         />
                         : null
                     }
                     {infoState === 'more-info' ?
                         /* only renders and fetches icons onclick */
-                        <MoreInfo
-                            galleryPropsObj={galleryPropsObj}
-                        />
-                        : null
+                        <Suspense fallback={<LoadingStatusMessage />}>
+                            <MoreInfo
+                                galleryPropsObj={galleryPropsObj}
+                                capFirstChar={capFirstChar}
+                            />
+                        </Suspense>
+                            : null
                     }
                     <section className='info-icon-container'>
                         <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}>
