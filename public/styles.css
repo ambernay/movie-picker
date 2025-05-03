@@ -583,9 +583,8 @@ header {
     cursor: pointer;
 }
 
-.radio-button-container:hover,
-.radio-button-container:active,
-.radio-button-container:focus-within {
+.radio-button-container:hover, .radio-button-container:active, .radio-button-container:focus-within,
+.info-list-links:hover, .info-list-links:active, .info-list-links:focus {
     color: var(--midAccent);
     cursor: pointer;
 }
@@ -1150,10 +1149,6 @@ ul li .info-container {
     --movieInfoIconColor: var(--lightAccent);
 }
 
-.info-icon-container .button-down svg {
-
-}
-
 .info-icon, .info-icon svg {
     width: 100%;
     height: inherit;
@@ -1213,6 +1208,10 @@ ul li .info-container {
     font-size: var(--smallTextSize);
     line-height: var(--smallTextLineheight);
     width: 100%;
+}
+
+.info-list-links {
+    text-decoration: underline;
 }
 /* for viewing options provider icons */
 .movie-info-container .movie-info-list .provider-icon-list {

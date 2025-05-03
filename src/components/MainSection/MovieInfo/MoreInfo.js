@@ -104,10 +104,10 @@ function MoreInfo({ galleryPropsObj }) {
                                     const listKey = typeof(key) === typeof({}) 
                                     ? (`${movieID}/${key.id}`).split(' ').join('_') 
                                     : (`${movieID}/${key}`).split(' ').join('_');
-                                  
+                                    
+                                    // key.gender checks if list item is person 
                                     return (
-                                        <li key={listKey} id={listKey} 
-                                        // checks if list item is person using key.gender
+                                        <li key={listKey} id={listKey} className={key.gender ? 'info-list-links' : null} 
                                             onClick={() => {key.gender ? handlePersonClick(key.id, key.name) : null}}
                                         >
                                             {/* screen reader info for links */}
