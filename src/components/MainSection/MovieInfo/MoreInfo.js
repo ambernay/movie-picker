@@ -69,15 +69,21 @@ function MoreInfo({ galleryPropsObj }) {
         setSearchState('person');
         setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
     }
+
+    const LoadingStatusMessage = () => {
+        return(
+            <div className='icon-message-container'>
+                <h4>{fetchStatus}</h4>
+            </div>
+        )
+    }
  
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
-        <Suspense fallback={<h4>Loading...</h4>}>
+        <Suspense fallback={LoadingStatusMessage}>
             {Object.keys(infoDataObj)?.length < 1 ? 
-                <div className='icon-message-container'>
-                    <h4>{fetchStatus}</h4>
-                </div>
+                <LoadingStatusMessage/>
             : Object.keys(infoDataObj).map((key) => {
                 // create lists
                 const listKey = key + '/' + movieID;
