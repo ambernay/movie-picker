@@ -15,7 +15,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
     const failedToLoad = capFirstChar(currentTranslation.status_messages.failed_to_load);
     const trending = capFirstChar(currentTranslation.trending);
-
+    const formsAreClosed = !isSearchbarOpen && !isFormVisible;
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -29,15 +29,26 @@ function Gallery({ userSelections, setUserSelections, currentPage,
         return movieResults.reduce((accumulator, current) => {
 
             let movie = accumulator.find(item => item[id] === current[id]);
-
+            // push if movie doesn't already exist in object
             if (!movie) {
+                // if key: 'job' exists change value to array
                 if(current.job) { current.job = [current.job]; }
                 accumulator.push(current);
             }
+            // if movie already exists... 
             else {
-                if(!movie.job) { movie.job = []; }
-                movie.job.push(current.job);
+                // ...add key: 'job'
+                console.log('job', current.job, current);
+                if(current.job && !movie.job) { 
+                    movie.job = [current.job]; 
+                }
+                else if (current.job && movie.job){
+                    // ...and push job info from discarded data to object
+                    movie.job.push(current.job);
+                }
+                // if(current.character) console.log(current, current.character);    
             }
+            // console.log(accumulator);
             return accumulator;
           }, []);
     }  
@@ -46,7 +57,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
         // #region re-saving state on person search as element unmounts
         if (searchState === 'person') {setPersonSearchState(userSelections[2])}
         // #endregion re-saving state on person search as element unmounts
-        if (!isSearchbarOpen && !isFormVisible) {
+        if (formsAreClosed) {
             setStatusMessage(loadingMessage);
         
             MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
@@ -57,8 +68,9 @@ function Gallery({ userSelections, setUserSelections, currentPage,
 
                 if (result) {
                     const movieResults = searchState === 'person' ? 
-                        removeDuplicateIds(result.movieResults, 'id') : result.movieResults
-                    
+                        removeDuplicateIds(result.movieResults, 'id') 
+                        : result.movieResults
+                    console.log(movieResults);
                     setTotalPages(result.totalPages);
                     setMoviesToDisplay(movieResults);
                     // message for no results
@@ -72,8 +84,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
             });
         }
     }, [userSelections, currentPage, currentRegion, currentLanguage, 
-        tvMovieToggle, searchState, isFormVisible, isSearchbarOpen,
-        setTotalPages, setMoviesToDisplay]);
+        tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>
@@ -90,7 +101,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                                 /* if image not available, use icon */
                                 const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
-
+                                console.log(movie);
                                 return (
                                     <GalleryItems
                                         key={movie.id}
@@ -105,8 +116,9 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                         galleryPropsObj={
                                             {
                                                 movieID: movie.id,
+                                                mediaType: movie.media_type || undefined,
                                                 genreIds: movie.genre_ids || undefined,
-                                                releaseDate: movie.release_date || undefined,
+                                                releaseDate: movie.release_date || movie.first_air_date || undefined,
                                                 character: movie.character || undefined,
                                                 crewCredits: movie.job || undefined,
                                                 currentLanguage: currentLanguage,

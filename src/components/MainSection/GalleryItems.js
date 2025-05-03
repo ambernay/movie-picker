@@ -19,7 +19,7 @@ function GalleryItems({ galleryPropsObj, movieTitle, overview, imagePath,
    
     return (
         // tab index default 0 and -1 when dropdown menu is open
-        <li key={galleryPropsObj.movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
+        <li key={galleryPropsObj.movieID} id={galleryPropsObj.movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
         onClick={(e) => { e.stopPropagation(); }} onMouseEnter={() => setInfoState('overview')} 
         onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave}>
             <img className={imageHeightClass} src={imagePath} alt={movieTitle} />

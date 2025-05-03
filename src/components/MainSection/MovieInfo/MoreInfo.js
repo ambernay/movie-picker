@@ -5,12 +5,12 @@ function MoreInfo({ galleryPropsObj }) {
 
     const [fetchStatus, setFetchStatus] = useState('Loading...');
     
-    const { movieID, genreIds, releaseDate, character, crewCredits, 
+    const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
 
     let infoDataObj = {};
-    const genres = use(GenreListApiCall(tvMovieToggle, currentLanguage));
+    const genres = use(GenreListApiCall(mediaType, currentLanguage));
     const movieInfo = use(MovieInfoApiCall(movieID, tvMovieToggle));
     
     const capFirstChar = (string) => {
@@ -44,9 +44,15 @@ function MoreInfo({ galleryPropsObj }) {
         if (releaseDate){
             infoDataObj.Release_Date = [releaseDate];
         }
-        if (genreIds && genres) {  
+        if (genreIds && genres) {
             let genreNamesArray = genreIds.map(key => genres.find(item => item.id === key))
             infoDataObj.Genre_Ids = genreNamesArray;
+        }
+        if (mediaType){
+            const mediaToDisplay = mediaType === 'movie' 
+            ? capFirstChar(currentTranslation.movie) : currentTranslation.tv;
+            
+            infoDataObj.Media_Type = [capFirstChar(mediaToDisplay)];
         }
 
         if (Object.keys(infoDataObj).length < 1) {
@@ -61,7 +67,7 @@ function MoreInfo({ galleryPropsObj }) {
         setSearchState('person');
         setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
     }
-
+ 
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
@@ -79,6 +85,7 @@ function MoreInfo({ galleryPropsObj }) {
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
                 : key === "Genre_Ids" ? 'Genre'
+                : key === "Media_Type" ? null
                 : key === "Character_Name" ? `${personSearchState[1]} as:`
                 : key === "Crew_Credits" ? `${personSearchState[1]} - Crew Credits:`
                 : key;
@@ -91,13 +98,16 @@ function MoreInfo({ galleryPropsObj }) {
                             <ul className='movie-info-list'>
                                 {/* create list name items */}
                                 { infoDataObj[key]?.map((key) => {
-                             
-                                    const listKey = typeof(key) === typeof({}) 
-                                    ?`${movieID}/${key.id}` : `${movieID}/${key}`;
                                     
+                                    const listKey = typeof(key) === typeof({}) 
+                                    ? (`${movieID}/${key.id}`).split(' ').join('_') 
+                                    : (`${movieID}/${key}`).split(' ').join('_');
+                                    // console.log('name', key.name);
                                     return (
-                                        <li key={listKey} id={key.id} onClick={() => handlePersonClick(key.id, key.name)}>
+                                        <li key={listKey} id={listKey} onClick={() => {handlePersonClick(key.id, key.name)}}>
+                                            {console.log(key)}
                                             {key.name || key}
+                                            
                                         </li>
                                     )
                                 })
