@@ -101,7 +101,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                                 /* if image not available, use icon */
                                 const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
-                                console.log(movie);
+                           
                                 return (
                                     <GalleryItems
                                         key={movie.id}

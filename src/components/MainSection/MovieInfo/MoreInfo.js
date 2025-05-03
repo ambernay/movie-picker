@@ -86,7 +86,7 @@ function MoreInfo({ galleryPropsObj }) {
                 : key === "Directing" ? capFirstChar(currentTranslation.movie_info.directing)
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
-                : key === "Genre_Ids" ? 'Genre'
+                : key === "Genre_Ids" ? capFirstChar(currentTranslation.section_labels.genre)
                 : key === "Media_Type" ? null
                 : key === "Character_Name" ? `${personSearchState[1]} as:`
                 : key === "Crew_Credits" ? `${personSearchState[1]} - Crew Credits:`
@@ -108,7 +108,13 @@ function MoreInfo({ galleryPropsObj }) {
                                     return (
                                         <li key={listKey} id={listKey} 
                                         // checks if list item is person using key.gender
-                                        onClick={() => {key.gender ? handlePersonClick(key.id, key.name) : null}}>
+                                            onClick={() => {key.gender ? handlePersonClick(key.id, key.name) : null}}
+                                        >
+                                            {/* screen reader info for links */}
+                                            {key.gender ? 
+                                                <span className="sr-only">{`${currentTranslation.search} ${key.name}`}</span>
+                                                : null
+                                            }
                                             {key.name || key}
                                         </li>
                                     )
