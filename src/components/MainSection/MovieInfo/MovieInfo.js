@@ -28,7 +28,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
     const LoadingStatusMessage = () => {
         return(
             <div className='icon-message-container'>
-                <h4>{capFirstChar(currentTranslation.status_messages.loading)}</h4>
+                <h4>{`${capFirstChar(currentTranslation.status_messages.loading)}...`}</h4>
             </div>
         )
     }
@@ -48,13 +48,15 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                 
                     {infoState === 'provider-info' ?
                         /* only renders and fetches icons onclick */
-                        <ProviderIconsList
-                            movieID={movieID}
-                            tvMovieToggle={tvMovieToggle}
-                            currentRegion={currentRegion}
-                            currentTranslation={currentTranslation}
-                            capFirstChar={capFirstChar}
-                        />
+                        <Suspense fallback={<LoadingStatusMessage />}>
+                            <ProviderIconsList
+                                movieID={movieID}
+                                tvMovieToggle={tvMovieToggle}
+                                currentRegion={currentRegion}
+                                currentTranslation={currentTranslation}
+                                capFirstChar={capFirstChar}
+                            />
+                        </Suspense>
                         : null
                     }
                     {infoState === 'more-info' ?

@@ -1,4 +1,4 @@
-import { memo , useState, use, Suspense } from 'react';
+import { memo, use } from 'react';
 import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
 
 function MoreInfo({ galleryPropsObj, capFirstChar }) {
@@ -6,8 +6,6 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
     const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
         currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
-
-    const [fetchStatus, setFetchStatus] = useState(capFirstChar(currentTranslation.status_messages.loading));
 
     let infoDataObj = {};
     const genres = use(GenreListApiCall(mediaType, currentLanguage));
@@ -53,11 +51,6 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
             
             infoDataObj.Media_Type = [mediaToDisplay];
         }
-
-        if (Object.keys(infoDataObj).length < 1) {
-            setFetchStatus(`${currentTranslation.status_messages.no_results}`);
-            return;
-        }
     // #endregion for populate info object
 
 
@@ -67,10 +60,10 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
         setUserSelections([personId, searchCacheKey, [personId, capFirstChar(personName)]]);
     }
 
-    const LoadingStatusMessage = () => {
+    const FailedFetchsMessage = () => {
         return(
             <div className='icon-message-container'>
-                <h4>{fetchStatus}</h4>
+                <h4>{`${currentTranslation.status_messages.no_results}`}</h4>
             </div>
         )
     }
@@ -79,7 +72,7 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
         <>
         <ul className='movie-info-list-container movie-info-middle'>
             {Object.keys(infoDataObj)?.length < 1 ? 
-                <LoadingStatusMessage/>
+                <FailedFetchsMessage/>
             : Object.keys(infoDataObj).map((key) => {
                 // create lists
                 const listKey = key + '/' + movieID;

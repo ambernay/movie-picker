@@ -70,7 +70,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     const movieResults = searchState === 'person' ? 
                         removeDuplicateIds(result.movieResults, 'id') 
                         : result.movieResults
-                    console.log(movieResults);
+                        
                     setTotalPages(result.totalPages);
                     setMoviesToDisplay(movieResults);
                     // message for no results

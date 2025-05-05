@@ -74,7 +74,7 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
 
 // providers for each individual movie
 let providerPosterPromises = {};
-const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
+const ProviderPosterApiCall = (tvOrMovie, movieID, currentRegion) => {
     const regionCode = currentRegion[0];
     const key = `${movieID}/${regionCode}`;
 
@@ -84,10 +84,10 @@ const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
 
         providerPosterPromises[key] = fetch(viewingOptionsURL)
             .then(res => {
-                // if(res.status != 200) {
-                //     console.log("Movie provider list API did not succeed");
-                //     return undefined;
-                // }
+                if(res.status != 200) {
+                    console.log("Movie provider list API did not succeed");
+                    return undefined;
+                }
                 return res.json();
             })
             .catch((err) => {
