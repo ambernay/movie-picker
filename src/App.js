@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { UserSelectionsContext } from './components/Context.js';
 import { LanguagesObj } from './components/TranslationObjects.js';
 import Header from './components/HeaderSection/Header.js';
 import Gallery from './components/MainSection/Gallery.js';
@@ -7,7 +6,6 @@ import Form from './components/FormSection/Form.js';
 
 function App() {
 
-    // const [isTrending, setIsTrending] = useState(true);
     const [userSelections, setUserSelections] = useState('');
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
@@ -93,20 +91,22 @@ function App() {
 
                 />
             </main>
-            <Form
-                setUserSelections={setUserSelections}
-                isFormVisible={isFormVisible}
-                setIsFormVisible={setIsFormVisible}
-                currentRegion={currentRegion}
-                setCurrentRegion={setCurrentRegion}
-                currentLanguage={currentLanguage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                tvMovieToggle={tvMovieToggle}
-                screenSize={screenSize}
-                searchState={searchState}
-                setSearchState={setSearchState}
-            />
+            {isFormVisible ?
+                <Form
+                    setUserSelections={setUserSelections}
+                    isFormVisible={isFormVisible}
+                    setIsFormVisible={setIsFormVisible}
+                    currentRegion={currentRegion}
+                    setCurrentRegion={setCurrentRegion}
+                    currentLanguage={currentLanguage}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    tvMovieToggle={tvMovieToggle}
+                    screenSize={screenSize}
+                    searchState={searchState}
+                    setSearchState={setSearchState}
+                />
+            : null}
         </>
     );
 }

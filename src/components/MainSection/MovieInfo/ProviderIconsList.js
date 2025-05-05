@@ -1,26 +1,13 @@
-import { memo } from 'react';
-import { useState, useEffect } from 'react';
+import { memo, use } from 'react';
 import { ProviderPosterApiCall } from '../../MovieApiCache.js';
 
 function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, 
     currentTranslation, capFirstChar }) {
 
-    const [viewingOptions, setViewingOptions] = useState({});
-    const [fetchStatus, setFetchStatus] = useState(capFirstChar(currentTranslation.status_messages.loading));
-
     const sectionLabel = currentTranslation.provider_options;
 
-    useEffect(() => {
-        ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion).then(result => {
-            if (!result || Object.keys(result).length < 1) {
-                setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
-                return;
-            }
-            setViewingOptions(filteredViewingOptions(result));
-        });
-
-    }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])
-
+    const viewingOptionsResults = use(ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion));
+ console.log(viewingOptionsResults);
     const filteredKey = (key) => {
         switch (key) {
             case 'flatrate' || 'stream':
@@ -79,14 +66,15 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         }
 
         result = { ...result, ...mergedBuyRentArr };
-        console.log(result);
         return result;
     }
 
-    const LoadingStatusMessage = () => {
+    let viewingOptions = filteredViewingOptions(viewingOptionsResults);
+
+    const FailedFetchsMessage = () => {
         return(
             <div className='icon-message-container'>
-                <h4>{fetchStatus}</h4>
+                <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
             </div>
         )
     }
@@ -95,7 +83,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         <>
         <ul className='movie-info-list-container movie-info-middle'>
             {Object.keys(viewingOptions).length < 1 ? 
-                <LoadingStatusMessage />
+                <FailedFetchsMessage />
             :Object.keys(viewingOptions).sort().map((key) => {
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 // create lists
@@ -110,7 +98,9 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
                                     return (
-                                        <li className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null} key={iconKey}>
+                                        <li key={iconKey} title={key.provider_name}
+                                            className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
+                                        >
                                             {(key.logo_path === 'N/A') ?
                                                 <h4>{key.logo_path}</h4>
                                                 :
