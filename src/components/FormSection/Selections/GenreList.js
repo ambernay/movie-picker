@@ -1,32 +1,10 @@
-import { useState, useEffect, memo } from 'react';
+import { use, memo } from 'react';
 import { GenreListApiCall } from '../../MovieApiCache';
 
 function GenreList({ setGenres, setIsValidRequest, tvMovieToggle, 
-    currentLanguage, sectionLabel, currentTranslation, isFormVisible, 
-    screenSize }) {
-    
-    const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
-    const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
-    const [genreStatusMessage, setGenreStatusMessage] = useState(`${loadingMessage}...`);
-
-    const [genreList, setGenreList] = useState([]);
-
-    // caching genre lists by media type and language
-    useEffect(() => {
-        if (isFormVisible) {
-            GenreListApiCall(tvMovieToggle, currentLanguage).then(result => {
-                if (result) {
-                    setGenreList(result);
-                }
-                else {
-                    setGenreStatusMessage(
-                        `${currentTranslation.status_messages.failed_to_load} 
-                        ${currentTranslation.section_labels.genre}`
-                    );
-                }
-            });
-        }
-    }, [tvMovieToggle, currentLanguage, isFormVisible, setGenreList, setGenreStatusMessage]);
+    currentLanguage, currentTranslation, sectionLabel, screenSize }) {
+        
+    const genreList = use(GenreListApiCall(tvMovieToggle, currentLanguage));
 
     const handleChange = (e) => {
         let newValue = [e.target.value, e.target.id];
@@ -34,6 +12,16 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
         if (e.target.checked) setGenres(pre => [...pre, newValue]);
         else if (!e.target.checked) setGenres(pre => pre.filter(item => item[1] !== newValue[1]))
         setIsValidRequest(true);
+    }
+
+    const FailedStatusMessage = () => {
+        return (
+            <div className="error-message-container">
+                <h4>{`${currentTranslation.status_messages.failed_to_load} 
+                        ${currentTranslation.section_labels.genre}`    
+                }</h4>
+            </div>
+        )
     }
 
     return (
@@ -55,9 +43,7 @@ function GenreList({ setGenres, setIsValidRequest, tvMovieToggle,
                     })}
                 </ul>
                 :
-                <div className="error-message-container">
-                    <h4>{`${genreStatusMessage} `}</h4>
-                </div>
+                <FailedStatusMessage />
             }
            
         </fieldset>

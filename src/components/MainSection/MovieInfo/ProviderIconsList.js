@@ -74,7 +74,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
     const FailedFetchsMessage = () => {
         return(
             <div className='icon-message-container'>
-                <h4>{`${currentTranslation.status_messages.failed_to_load}`}</h4>
+                <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
             </div>
         )
     }

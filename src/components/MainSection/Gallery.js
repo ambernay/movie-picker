@@ -38,7 +38,6 @@ function Gallery({ userSelections, setUserSelections, currentPage,
             // if movie already exists... 
             else {
                 // ...add key: 'job'
-                console.log('job', current.job, current);
                 if(current.job && !movie.job) { 
                     movie.job = [current.job]; 
                 }
