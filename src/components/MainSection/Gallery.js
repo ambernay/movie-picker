@@ -37,8 +37,11 @@ function Gallery({ userSelections, setUserSelections, currentPage,
             }
             // if movie already exists... 
             else {
+                // ...and character is present in current, add to existing movie
+                if (current.character && !movie.character){
+                    movie.character = current.character;
+                }
                 // ...add key: 'job'
-                console.log('job', current.job, current);
                 if(current.job && !movie.job) { 
                     movie.job = [current.job]; 
                 }
@@ -46,9 +49,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     // ...and push job info from discarded data to object
                     movie.job.push(current.job);
                 }
-                // if(current.character) console.log(current, current.character);    
             }
-            // console.log(accumulator);
             return accumulator;
           }, []);
     }  
@@ -70,7 +71,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     const movieResults = searchState === 'person' ? 
                         removeDuplicateIds(result.movieResults, 'id') 
                         : result.movieResults
-                    console.log(movieResults);
+                        
                     setTotalPages(result.totalPages);
                     setMoviesToDisplay(movieResults);
                     // message for no results
