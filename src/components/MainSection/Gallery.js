@@ -37,6 +37,10 @@ function Gallery({ userSelections, setUserSelections, currentPage,
             }
             // if movie already exists... 
             else {
+                // ...and character is present in current, add to existing movie
+                if (current.character && !movie.character){
+                    movie.character = current.character;
+                }
                 // ...add key: 'job'
                 if(current.job && !movie.job) { 
                     movie.job = [current.job]; 
@@ -45,9 +49,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     // ...and push job info from discarded data to object
                     movie.job.push(current.job);
                 }
-                // if(current.character) console.log(current, current.character);    
             }
-            // console.log(accumulator);
             return accumulator;
           }, []);
     }  

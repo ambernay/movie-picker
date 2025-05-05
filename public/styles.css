@@ -383,7 +383,7 @@ img {
     --searchFormContainerHeight: calc(var(--searchInputHeight) * 5);
     --decade-slider-height: 25px;
     --slider-timeline-height: 2px;
-    --fieldsetMinHeight: 92px;
+    --fieldsetMinHeight: 95px;
     --fielsetPadding: 15px;
     /* #endregion - sizes */
 }

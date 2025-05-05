@@ -97,14 +97,13 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
                                     const listKey = typeof(key) === typeof({}) 
                                     ? (`${movieID}/${key.id}`).split(' ').join('_') 
                                     : (`${movieID}/${key}`).split(' ').join('_');
-                                    
-                                    // key.gender checks if list item is person 
+                                    // typeof(key.gender) checks if list item is person - (typeof = num because 0 returns false)
                                     return (
-                                        <li key={listKey} id={listKey} className={key.gender ? 'info-list-links' : null} 
-                                            onClick={() => {key.gender ? handlePersonClick(key.id, key.name) : null}}
+                                        <li key={listKey} id={listKey} className={typeof(key.gender) ? 'info-list-links' : null} 
+                                            onClick={() => {typeof(key.gender) ? handlePersonClick(key.id, key.name) : null}}
                                         >
                                             {/* screen reader info for links */}
-                                            {key.gender ? 
+                                            {typeof(key.gender) ? 
                                                 <span className="sr-only">{`${currentTranslation.search} ${key.name}`}</span>
                                                 : null
                                             }
