@@ -1841,8 +1841,9 @@ input[type="checkbox"] {
 
 .scroll-load {
     display: flex;
-    /* position: absolute;
-    bottom: 0; */
+    height: calc(var(--bottomNavHeight) + var(--paddingGap));
+    justify-content: center;
+    align-items: end;
 }
 /* #endregion - load buttons */
 
