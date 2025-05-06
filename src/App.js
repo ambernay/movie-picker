@@ -23,10 +23,10 @@ function App() {
         
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
-        if(window.innerWidth <= 460 && window.innerHeight > 400) return 'narrowScreen'; 
+        if(window.innerWidth <= 460 && window.innerHeight > 400) { return 'narrowScreen';} 
         // 740 matches css media query
-        else if ((window.innerWidth > 460 && window.innerWidth <= 990) && window.innerHeight > 400) return 'midScreen';
-        else if (window.innerWidth > 990 && window.innerHeight > 400) return 'wideScreen';
+        else if ((window.innerWidth > 460 && window.innerWidth <= 990) && window.innerHeight > 400) { return 'midScreen';}
+        else if (window.innerWidth > 990 && window.innerHeight > 400) { return 'wideScreen';};
     }
     // screen size state for for toggle button
     const [screenSize, setScreenSize] = useState(evaluateScreenSize());
@@ -34,7 +34,7 @@ function App() {
     // evaluates screen size on load
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
-    }, []);
+    }, [setScreenSize]);
    
     // stop background scroll when form is visible
     useEffect(() => {
@@ -88,7 +88,7 @@ function App() {
                     setSearchState={setSearchState}
                     isSearchbarOpen={isSearchbarOpen}
                     setUserSelections={setUserSelections}
-
+                    screenSize={screenSize}
                 />
             </main>
             {isFormVisible ?

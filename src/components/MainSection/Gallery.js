@@ -6,7 +6,8 @@ import { TransObj } from '../TranslationObjects.js';
 
 function Gallery({ userSelections, setUserSelections, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
-     currentLanguage, searchState, setSearchState, isSearchbarOpen }) {
+     currentLanguage, searchState, setSearchState, isSearchbarOpen,
+     screenSize }) {
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -137,14 +138,16 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     </div>/* gallery container */
                 }
             </div>{/* wrapper */}
-            <LoadMore
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                moviesArrayLength={moviesToDisplay?.length}
-                totalPages={totalPages}
-                currentTranslation={currentTranslation}
-                isFormVisible={isFormVisible}
-            />
+            {screenSize !== 'narrowScreen' ?
+                <LoadMore
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    moviesArrayLength={moviesToDisplay?.length}
+                    totalPages={totalPages}
+                    currentTranslation={currentTranslation}
+                    isFormVisible={isFormVisible}
+                />
+            : null}
         </>
     )
 }
