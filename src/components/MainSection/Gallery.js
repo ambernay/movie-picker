@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
@@ -8,6 +8,8 @@ function Gallery({ userSelections, setUserSelections, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
      currentLanguage, searchState, setSearchState, isSearchbarOpen,
      screenSize }) {
+
+    const loadContainerRef = useRef();
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -25,6 +27,21 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
+    
+    // continuous load on phones
+    useEffect(() => {
+        if(screenSize === 'narrowScreen' && loadContainerRef.current){
+            const observer = new IntersectionObserver((entries) => {
+                const entry = entries[0];
+                
+                if(entry.isIntersecting) {setCurrentPage(prevPage => prevPage + 1);}
+               
+            }, {root: null,rootMargin: '0px',threshold: 0
+            });
+            observer.observe(loadContainerRef.current);
+            return () => observer.disconnect();
+        }
+    },[loadContainerRef.current])
 
     function removeDuplicateIds(movieResults, id) {
         return movieResults.reduce((accumulator, current) => {
@@ -74,7 +91,13 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                         : result.movieResults
                     
                     setTotalPages(result.totalPages);
-                    setMoviesToDisplay(movieResults);
+                    // for continuous load on phones
+                    if(currentPage > 1 && screenSize === 'narrowScreen'){
+                        const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
+                        setMoviesToDisplay(multiPageGallery);
+                    }
+                    else{setMoviesToDisplay(movieResults);}
+
                     // message for no results
                     if (movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
                 }
@@ -135,10 +158,15 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                 )
                             })}
                         </ul>
+                        {(screenSize === 'narrowScreen' && searchState !== 'person') ?
+                            <div ref={loadContainerRef} className={'scroll-load'} >
+                                <h4>Load more</h4>
+                            </div>
+                        : null}
                     </div>/* gallery container */
                 }
             </div>{/* wrapper */}
-            {screenSize !== 'narrowScreen' ?
+            {(screenSize !== 'narrowScreen' && searchState !== 'person') ?
                 <LoadMore
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}

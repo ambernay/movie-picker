@@ -1004,6 +1004,7 @@ main {
     justify-content: center;
     padding: 3dvh 0;
     margin-bottom: var(--bottomNavHeight);
+    flex-direction: column;
 }
 
 /* all gallery uls */
@@ -1836,6 +1837,12 @@ input[type="checkbox"] {
 .load-button-container svg {
     fill: var(--midAccent);
     width: 50px;
+}
+
+.scroll-load {
+    display: flex;
+    /* position: absolute;
+    bottom: 0; */
 }
 /* #endregion - load buttons */
 
