@@ -1,14 +1,21 @@
-import { memo } from 'react';
-
+import { memo, Suspense } from 'react';
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
 import { EyeIcon, InfoIcon } from '../../Icons.js';
 
-function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, currentRegion, 
-    infoState, setInfoState, currentTranslation }) {
+function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
+    infoState, setInfoState }) {
+
+    const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
+        currentLanguage, currentTranslation, tvMovieToggle, 
+        setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
     
     const iconDescription = currentTranslation['sr-only'];
+
+    const capFirstChar = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     function handleInfoState(iconState) {
         if (infoState !== iconState) {
@@ -16,6 +23,14 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
         }else {
             setInfoState('overview');
         }
+    }
+
+    const LoadingStatusMessage = () => {
+        return(
+            <div className='icon-message-container'>
+                <h4>{`${capFirstChar(currentTranslation.status_messages.loading)}...`}</h4>
+            </div>
+        )
     }
 
     return (
@@ -33,23 +48,26 @@ function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, 
                 
                     {infoState === 'provider-info' ?
                         /* only renders and fetches icons onclick */
-                        <ProviderIconsList
-                            movieID={movieID}
-                            tvMovieToggle={tvMovieToggle}
-                            currentRegion={currentRegion}
-                            currentTranslation={currentTranslation}
-                        />
+                        <Suspense fallback={<LoadingStatusMessage />}>
+                            <ProviderIconsList
+                                movieID={movieID}
+                                tvMovieToggle={tvMovieToggle}
+                                currentRegion={currentRegion}
+                                currentTranslation={currentTranslation}
+                                capFirstChar={capFirstChar}
+                            />
+                        </Suspense>
                         : null
                     }
                     {infoState === 'more-info' ?
                         /* only renders and fetches icons onclick */
-                        <MoreInfo
-                            movieID={movieID}
-                            releaseDate={releaseDate}
-                            tvMovieToggle={tvMovieToggle}
-                            currentTranslation={currentTranslation}
-                        />
-                        : null
+                        <Suspense fallback={<LoadingStatusMessage />}>
+                            <MoreInfo
+                                galleryPropsObj={galleryPropsObj}
+                                capFirstChar={capFirstChar}
+                            />
+                        </Suspense>
+                            : null
                     }
                     <section className='info-icon-container'>
                         <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}>

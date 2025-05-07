@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import GenreList from './Selections/GenreList.js';
 import DecadeSlider from './Selections/DecadeSlider.js';
 import ProviderFormList from './Selections/ProviderFormList.js';
@@ -7,7 +7,7 @@ import RegionDropdown from './Dropdowns/RegionDropdown.js';
 import SortByDropdown from './Dropdowns/SortByDropdown.js';
 import FormModal from './FormModal.js';
 
-function Form({ setUserSelections, setIsTrending, setIsFormVisible, 
+function Form({ setUserSelections, setIsFormVisible, 
     isFormVisible, currentRegion, currentLanguage, setCurrentRegion, 
     currentPage, setCurrentPage, tvMovieToggle, screenSize, searchState, 
     setSearchState }) {
@@ -49,7 +49,7 @@ function Form({ setUserSelections, setIsTrending, setIsFormVisible,
 
         if (genres.length > 0 || startDate || endDate || providers.length > 0) {
             setIsFormVisible(false);
-            setIsTrending(false);
+            // setIsTrending(false);
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
@@ -142,6 +142,22 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
 }
     // toggles form visiblity
     const formClass = isFormVisible ? "form-section" : "make-display-none";
+
+    const LoadingStatusMessage = () => {
+        <div className="error-message-container">
+            <h4>{`${capFirstChar(currentTranslation.status_messages.loading)}...`    }</h4>
+        </div>
+    }
+
+    const FailedStatusMessage = () => {
+        return (
+            <div className="error-message-container">
+                <h4>{`${currentTranslation.status_messages.failed_to_load} 
+                        ${currentTranslation.section_labels.genre}`    
+                }</h4>
+            </div>
+        )
+    }
     
     return (
         <section className={formClass}>
@@ -193,16 +209,17 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                         currentTranslation={currentTranslation}
                     />
                     <section className="fieldset-container">
+                    <Suspense fallback={<LoadingStatusMessage />}>
                         <GenreList
                             setGenres={setGenres}
                             setIsValidRequest={setIsValidRequest}
                             tvMovieToggle={tvMovieToggle}
                             currentLanguage={currentLanguage}
-                            sectionLabel={capFirstChar(formLabels.genre)}
                             currentTranslation={currentTranslation}
-                            isFormVisible={isFormVisible}
+                            sectionLabel={capFirstChar(formLabels.decade)}
                             screenSize={screenSize}
                         />
+                    </Suspense>
                         <DecadeSlider
                             setStartDate={setStartDate}
                             setEndDate={setEndDate}
