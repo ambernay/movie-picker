@@ -36,7 +36,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                 
                 if(entry.isIntersecting) {setCurrentPage(prevPage => prevPage + 1);}
                
-            }, {root: null, rootMargin: '0px', threshold: 1}
+            }, {root: null, rootMargin: '0px', threshold: 0.5}
         );
             observer.observe(loadContainerRef.current);
             return () => observer.disconnect();
@@ -92,11 +92,11 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     
                     setTotalPages(result.totalPages);
                     // for continuous load on phones
-                    // if(currentPage > 1 && screenSize === 'narrowScreen'){
-                    //     const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
-                    //     setMoviesToDisplay(multiPageGallery);
-                    // }
-                    // else{setMoviesToDisplay(movieResults);}
+                    if(currentPage > 1 && screenSize === 'narrowScreen'){
+                        const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
+                        setMoviesToDisplay(multiPageGallery);
+                    }
+                    else{setMoviesToDisplay(movieResults);}
 
                     // message for no results
                     if (movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
@@ -160,7 +160,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                         </ul>
                         {(screenSize === 'narrowScreen' && searchState !== 'person') ?
                             <div ref={loadContainerRef} className={'scroll-load'} >
-                                <h4>Load more</h4>
+                                <h4>{loadingMessage}</h4>
                             </div>
                         : null}
                     </div>/* gallery container */

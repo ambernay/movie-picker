@@ -1844,7 +1844,6 @@ input[type="checkbox"] {
     height: calc(var(--paddingGap) * 4);
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
 }
 /* #endregion - load buttons */
 
