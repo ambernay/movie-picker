@@ -1,12 +1,24 @@
-import { memo, use } from 'react';
+import { memo } from 'react';
+import { useState, useEffect } from 'react';
 import { ProviderPosterApiCall } from '../../MovieApiCache.js';
 
-function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, 
-    currentTranslation, capFirstChar }) {
+function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, currentTranslation }) {
+
+    const [viewingOptions, setViewingOptions] = useState();
+    const [fetchStatus, setFetchStatus] = useState('Loading...');
 
     const sectionLabel = currentTranslation.provider_options;
 
-    const viewingOptionsResults = use(ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion));
+    useEffect(() => {
+        ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion, setFetchStatus).then(result => {
+            if (!result || Object.keys(result).length < 1) {
+                setFetchStatus(`${currentTranslation.status_messages.failed_to_load}`);
+                return;
+            }
+            setViewingOptions(filteredViewingOptions(result));
+        });
+
+    }, [setViewingOptions, movieID, tvMovieToggle, currentRegion])
 
     const filteredKey = (key) => {
         switch (key) {
@@ -66,25 +78,14 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         }
 
         result = { ...result, ...mergedBuyRentArr };
+        console.log(result);
         return result;
-    }
-
-    let viewingOptions = filteredViewingOptions(viewingOptionsResults);
-
-    const FailedFetchsMessage = () => {
-        return(
-            <div className='icon-message-container'>
-                <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
-            </div>
-        )
     }
 
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
-            {Object.keys(viewingOptions).length < 1 ? 
-                <FailedFetchsMessage />
-            :Object.keys(viewingOptions).sort().map((key) => {
+            {viewingOptions ? Object.keys(viewingOptions).sort().map((key) => {
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 // create lists
                 const optionKey = key + '/' + movieID;
@@ -98,9 +99,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
                                     return (
-                                        <li key={iconKey} title={key.provider_name}
-                                            className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
-                                        >
+                                        <li className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null} key={iconKey}>
                                             {(key.logo_path === 'N/A') ?
                                                 <h4>{key.logo_path}</h4>
                                                 :
@@ -114,7 +113,10 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                         </fieldset>
                     </li>
                 )
-            })
+            }) :
+                <div className='icon-message-container'>
+                    <h4>{fetchStatus}</h4>
+                </div>
             }
         </ul>
         </>
