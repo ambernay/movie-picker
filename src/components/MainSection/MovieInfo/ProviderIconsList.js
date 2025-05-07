@@ -7,7 +7,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
     const sectionLabel = currentTranslation.provider_options;
 
     const viewingOptionsResults = use(ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion));
- console.log(viewingOptionsResults);
+
     const filteredKey = (key) => {
         switch (key) {
             case 'flatrate' || 'stream':

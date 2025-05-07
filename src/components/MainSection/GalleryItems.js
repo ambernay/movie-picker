@@ -10,7 +10,7 @@ function GalleryItems({ galleryPropsObj, movieTitle, overview, imagePath,
 
     let rating = audienceRating > 0 ? audienceRating : "N/A";
 
-    let truncatedTitle = (movieTitle.length > 35) ? (movieTitle.slice(0, 35) + "...") : movieTitle;
+    // let truncatedTitle = (movieTitle.length > 35) ? (movieTitle.slice(0, 35) + "...") : movieTitle;
 
     const handleMouseLeave = () => {
         // blurs active element to allow hover out
