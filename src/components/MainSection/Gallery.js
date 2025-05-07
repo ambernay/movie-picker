@@ -15,7 +15,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
 
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const noResults = capFirstChar(currentTranslation.status_messages.no_results);
-    const loadingMessage = capFirstChar(currentTranslation.status_messages.loading);
+    const loadingMessage = `${capFirstChar(currentTranslation.status_messages.loading)}...`;
     const failedToLoad = capFirstChar(currentTranslation.status_messages.failed_to_load);
     const trending = capFirstChar(currentTranslation.trending);
     const formsAreClosed = !isSearchbarOpen && !isFormVisible;
@@ -36,8 +36,8 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                 
                 if(entry.isIntersecting) {setCurrentPage(prevPage => prevPage + 1);}
                
-            }, {root: null,rootMargin: '0px',threshold: 0
-            });
+            }, {root: null, rootMargin: '0px', threshold: 1}
+        );
             observer.observe(loadContainerRef.current);
             return () => observer.disconnect();
         }
@@ -92,11 +92,11 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     
                     setTotalPages(result.totalPages);
                     // for continuous load on phones
-                    if(currentPage > 1 && screenSize === 'narrowScreen'){
-                        const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
-                        setMoviesToDisplay(multiPageGallery);
-                    }
-                    else{setMoviesToDisplay(movieResults);}
+                    // if(currentPage > 1 && screenSize === 'narrowScreen'){
+                    //     const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
+                    //     setMoviesToDisplay(multiPageGallery);
+                    // }
+                    // else{setMoviesToDisplay(movieResults);}
 
                     // message for no results
                     if (movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};

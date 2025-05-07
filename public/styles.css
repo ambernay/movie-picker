@@ -1841,9 +1841,10 @@ input[type="checkbox"] {
 
 .scroll-load {
     display: flex;
-    height: calc(var(--bottomNavHeight) + var(--paddingGap));
+    height: calc(var(--paddingGap) * 4);
     justify-content: center;
-    align-items: end;
+    align-items: center;
+    background-color: aquamarine;
 }
 /* #endregion - load buttons */
 
@@ -1913,12 +1914,13 @@ input[type="checkbox"] {
     }
 }
 
-
+/* switch to mobile mode with auto load */
 @media(max-width: 460px) {
     :root {
         --smallTextSize: calc(0.8rem + 0.8dvh);
         --formBottomHeight: 5.8rem;
         --galleryItemMinWidth: 33dvh;
+        --bottomNavHeight: 0px;
     }
 
     .wrapper {
