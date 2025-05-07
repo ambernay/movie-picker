@@ -1,21 +1,14 @@
-import { memo, Suspense } from 'react';
+import { memo } from 'react';
+
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
 import { EyeIcon, InfoIcon } from '../../Icons.js';
 
-function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
-    infoState, setInfoState }) {
-
-    const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
-        currentLanguage, currentTranslation, tvMovieToggle, 
-        setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
+function MovieInfo({ movieTitle, overview, tvMovieToggle, movieID, releaseDate, currentRegion, 
+    infoState, setInfoState, currentTranslation }) {
     
     const iconDescription = currentTranslation['sr-only'];
-
-    const capFirstChar = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
 
     function handleInfoState(iconState) {
         if (infoState !== iconState) {
@@ -23,14 +16,6 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
         }else {
             setInfoState('overview');
         }
-    }
-
-    const LoadingStatusMessage = () => {
-        return(
-            <div className='icon-message-container'>
-                <h4>{`${capFirstChar(currentTranslation.status_messages.loading)}...`}</h4>
-            </div>
-        )
     }
 
     return (
@@ -48,26 +33,23 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                 
                     {infoState === 'provider-info' ?
                         /* only renders and fetches icons onclick */
-                        <Suspense fallback={<LoadingStatusMessage />}>
-                            <ProviderIconsList
-                                movieID={movieID}
-                                tvMovieToggle={tvMovieToggle}
-                                currentRegion={currentRegion}
-                                currentTranslation={currentTranslation}
-                                capFirstChar={capFirstChar}
-                            />
-                        </Suspense>
+                        <ProviderIconsList
+                            movieID={movieID}
+                            tvMovieToggle={tvMovieToggle}
+                            currentRegion={currentRegion}
+                            currentTranslation={currentTranslation}
+                        />
                         : null
                     }
                     {infoState === 'more-info' ?
                         /* only renders and fetches icons onclick */
-                        <Suspense fallback={<LoadingStatusMessage />}>
-                            <MoreInfo
-                                galleryPropsObj={galleryPropsObj}
-                                capFirstChar={capFirstChar}
-                            />
-                        </Suspense>
-                            : null
+                        <MoreInfo
+                            movieID={movieID}
+                            releaseDate={releaseDate}
+                            tvMovieToggle={tvMovieToggle}
+                            currentTranslation={currentTranslation}
+                        />
+                        : null
                     }
                     <section className='info-icon-container'>
                         <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}>

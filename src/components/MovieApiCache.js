@@ -10,15 +10,10 @@ const RegionApiCall = async (currentLanguage) => {
 
         regionsPromise[key] = fetch(regionAPI)
             .then(res => {
-                if(res.status != 200) {
-                    console.log("Regions API did not succeed");
-                    return undefined;
-                }
                 return res.json();
             })
             .catch((err) => {
                 console.error(err);
-                return undefined;
             })
     }
     return regionsPromise[key];
@@ -35,14 +30,9 @@ const ProviderFormListApiCall = async (currentLanguage, currentRegion, displayAm
 
         providerFormListPromises[key] = fetch(providerListURL)
             .then(res => {
-                if(res.status != 200) {
-                    console.log("Provider list API did not succeed");
-                    return undefined;
-                }
                 return res.json();
             }).catch((err) => {
                 console.error("Failed to fetch provider options", err);
-                return undefined;
             })
     }
     return providerFormListPromises[key];
@@ -59,14 +49,9 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
 
         genreListPromises[key] = fetch(genreListURL)
             .then(res => {
-                if(res.status != 200) {
-                    console.log("Genre API did not succeed");
-                    return undefined;
-                }
                 return res.json();
             }).catch((err) => {
                 console.log("Failed to fetch genres", err);
-                return undefined;
             })
     }
     return genreListPromises[key];
@@ -74,7 +59,7 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
 
 // providers for each individual movie
 let providerPosterPromises = {};
-const ProviderPosterApiCall = (tvOrMovie, movieID, currentRegion) => {
+const ProviderPosterApiCall = async (tvOrMovie, movieID, currentRegion) => {
     const regionCode = currentRegion[0];
     const key = `${movieID}/${regionCode}`;
 
@@ -84,59 +69,46 @@ const ProviderPosterApiCall = (tvOrMovie, movieID, currentRegion) => {
 
         providerPosterPromises[key] = fetch(viewingOptionsURL)
             .then(res => {
-                if(res.status != 200) {
-                    console.log("Movie provider list API did not succeed");
-                    return undefined;
-                }
                 return res.json();
             })
             .catch((err) => {
                 console.log('Failed to load provider icons', err);
-                return undefined;
             })
     }
     return providerPosterPromises[key];
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage, 
-    userSelections, searchState) => {
+const MoviesApiCall = async (currentPage, tvOrMovie, isTrending, currentLanguage, userSelections, searchState) => {
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
     const urlCacheKey = userSelections[1];
 
-    let key = searchState === 'trending' ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
+    let key = isTrending ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 
     if (!getMoviePromises.hasOwnProperty(key)) {
-        const defaultURL = `.netlify/functions/get-gallery?searchState=${searchState}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
-        const formURL = `.netlify/functions/get-gallery?searchState=${searchState}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}`;
-        const searchBarURL = `.netlify/functions/get-gallery?searchState=${searchState}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}`;
-        const personURL = `.netlify/functions/get-gallery?searchState=${searchState}&language=${langCode}&page=${currentPage}&searchValue=${userSelections[0]}`;
+        const defaultURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}`;
+        const formURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&selectionsQueryString=${selectionsQueryString}&searchState=${searchState}`;
+        const searchBarURL = `.netlify/functions/get-gallery?isTrending=${isTrending}&mediaType=${tvOrMovie}&page=${currentPage}&language=${langCode}&searchValue=${selectionsQueryString}&searchState=${searchState}`;
 
         let url;
-        if (searchState === 'trending') {url = defaultURL}
+        if (isTrending) {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
         else if(searchState === 'searchBar') {url = searchBarURL}
-        else if (searchState === 'person') {url = personURL}
  
         getMoviePromises[key] = fetch(url)
             .then(res => {
-                if(res.status != 200) {
-                    console.log("Movie API did not succeed");
-                    return undefined;
-                }
                 return res.json();
             })
             .catch((err) => {
                 console.log('Failed to fetch Trending', err);
-                return undefined;
             })
     }
     return getMoviePromises[key];
 }
 
 let movieInfoPromise = {};
-const MovieInfoApiCall = (movieID, tvOrMovie) => {
+const MovieInfoApiCall = async (movieID, tvOrMovie) => {
     
     const key = movieID;
    
@@ -145,15 +117,10 @@ const MovieInfoApiCall = (movieID, tvOrMovie) => {
 
         movieInfoPromise[key] = fetch(movieInfoAPI)
             .then(res => {
-                if(res.status != 200) {
-                    console.log("Movie Info API did not succeed");
-                    return undefined;
-                }
                 return res.json();
             })
             .catch((err) => {
                 console.error(err);
-                return undefined;
             })
     }
     return movieInfoPromise[key];
@@ -165,15 +132,10 @@ const GeoLocation = async () => {
 
     const geoLocationPromise = fetch(geoLocation)
         .then(res => {
-            if(res.status != 200) {
-                console.log("Geo location API did not succeed");
-                return undefined;
-            }
             return res.json();
         })
         .catch((err) => {
             console.error(err);
-            return undefined;
         })
 
     return geoLocationPromise;
