@@ -1922,6 +1922,8 @@ input[type="checkbox"] {
         --formBottomHeight: 5.8rem;
         --galleryItemMinWidth: 33dvh;
         --bottomNavHeight: 0px;
+        --galleryVerticlePadding: 4dvh;
+        --paddingGap: 20px;
     }
 
     .wrapper {
@@ -1978,7 +1980,6 @@ input[type="checkbox"] {
 @media(max-width: 340px) {
     :root {
         --toggleDropdownContainerWidth: calc(var(--switchWidth) + 5px);
-
     }
 
     .main-heading .heading-container {

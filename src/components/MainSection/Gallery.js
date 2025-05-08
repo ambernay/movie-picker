@@ -109,7 +109,6 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     setTotalPages(result.totalPages);
                     // for continuous load on phones
                     if(autoLoadMode){
-                        console.log(moviesToDisplay, result.movieResults)
                         const multiPageGallery = removeDuplicateIds([...moviesToDisplay, ...result.movieResults], 'id');
 
                         setMoviesToDisplay(multiPageGallery);
