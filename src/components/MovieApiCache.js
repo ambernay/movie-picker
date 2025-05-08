@@ -103,7 +103,7 @@ const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage,
     userSelections, searchState) => {
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
-    const urlCacheKey = userSelections[1];
+    const urlCacheKey = `${userSelections[1]}/${currentPage}`;
 
     let key = searchState === 'trending' ? `Trending/${tvOrMovie}/${langCode}/${currentPage}` : `${urlCacheKey}`;
 

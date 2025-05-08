@@ -49,7 +49,6 @@ function Form({ setUserSelections, setIsFormVisible,
 
         if (genres.length > 0 || startDate || endDate || providers.length > 0) {
             setIsFormVisible(false);
-            // setIsTrending(false);
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
@@ -128,7 +127,7 @@ const UserSelectionURL = (currentPage, tvOrMovie, sortOption, currentRegion,
     const selectionsQueryString = turnSelectionsObjectToQueryString(storeUserSelections);
    
     selectionsForMessage.push(regionNativeName); 
-    cacheKeyArr.push(`${sortOption}`, `${regionCode}`, `${langCode}`, `${currentPage}`);
+    cacheKeyArr.push(`${sortOption}`, `${regionCode}`, `${langCode}`);
 
     return [selectionsQueryString, cacheKeyArr?.join('/'), selectionsForMessage];
 }
@@ -147,16 +146,6 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
         <div className="error-message-container">
             <h4>{`${capFirstChar(currentTranslation.status_messages.loading)}...`    }</h4>
         </div>
-    }
-
-    const FailedStatusMessage = () => {
-        return (
-            <div className="error-message-container">
-                <h4>{`${currentTranslation.status_messages.failed_to_load} 
-                        ${currentTranslation.section_labels.genre}`    
-                }</h4>
-            </div>
-        )
     }
     
     return (

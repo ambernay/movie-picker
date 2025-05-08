@@ -21,6 +21,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     const formsAreClosed = !isSearchbarOpen && !isFormVisible;
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
+    const [multiPageGallery, setMultiPageGallery]= useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState(loadingMessage);
     const [personSearchState, setPersonSearchState] = useState([]);
@@ -92,7 +93,8 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     
                     setTotalPages(result.totalPages);
                     // for continuous load on phones
-                    if(currentPage > 1 && screenSize === 'narrowScreen'){
+                    if(searchState !== 'person' && currentPage > 1 && screenSize === 'narrowScreen'){
+                        console.log("loading...");
                         const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
                         setMoviesToDisplay(multiPageGallery);
                     }
