@@ -52,29 +52,37 @@ function Gallery({ userSelections, setUserSelections, currentPage,
         return movieResults.reduce((accumulator, current) => {
 
             let movie = accumulator.find(item => item[id] === current[id]);
-            // push if movie doesn't already exist in object
-            if (!movie) {
-                // if key: 'job' exists change value to array
-                if(current.job) { current.job = [current.job]; }
+
+            //  #region for person search duplicates
+            if(searchState === 'person') {
+                // push if movie doesn't already exist in object
+                if (!movie) {
+                    // if key: 'job' exists change value to array
+                    if(current.job) { current.job = [current.job]; }
+                    accumulator.push(current);
+                }
+                // if movie already exists... 
+                else {
+                    // ...and character is present in current, add to existing movie
+                    if (current.character && !movie.character){
+                        movie.character = current.character;
+                    }
+                    // ...add key: 'job'
+                    if(current.job && !movie.job) { 
+                        movie.job = [current.job]; 
+                    }
+                    else if (current.job && movie.job){
+                        // ...and push job info from discarded data to object
+                        movie.job.push(current.job);
+                    }
+                }
+            }
+            //  #endregion for person search duplicates
+            else if (!movie) {
                 accumulator.push(current);
             }
-            // if movie already exists... 
-            else {
-                // ...and character is present in current, add to existing movie
-                if (current.character && !movie.character){
-                    movie.character = current.character;
-                }
-                // ...add key: 'job'
-                if(current.job && !movie.job) { 
-                    movie.job = [current.job]; 
-                }
-                else if (current.job && movie.job){
-                    // ...and push job info from discarded data to object
-                    movie.job.push(current.job);
-                }
-            }
             return accumulator;
-          }, []);
+        }, []);
     }  
 
     useEffect(() => {
@@ -101,7 +109,9 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     setTotalPages(result.totalPages);
                     // for continuous load on phones
                     if(autoLoadMode){
-                        const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
+                        console.log(moviesToDisplay, result.movieResults)
+                        const multiPageGallery = removeDuplicateIds([...moviesToDisplay, ...result.movieResults], 'id');
+
                         setMoviesToDisplay(multiPageGallery);
                         // scroll to top on fresh load
                         if(multiPageGallery.length < 20){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
