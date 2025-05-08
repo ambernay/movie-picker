@@ -9,7 +9,8 @@ function Gallery({ userSelections, setUserSelections, currentPage,
      currentLanguage, searchState, setSearchState, isSearchbarOpen,
      screenSize }) {
 
-    const loadContainerRef = useRef();
+    const firstElementRef = useRef(null);
+    const loadContainerRef = useRef(null);
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -21,13 +22,16 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     const formsAreClosed = !isSearchbarOpen && !isFormVisible;
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
-    const [multiPageGallery, setMultiPageGallery]= useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [statusMessage, setStatusMessage] = useState(loadingMessage);
     const [personSearchState, setPersonSearchState] = useState([]);
     
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
+    const autoLoadMode = searchState !== 'person' && currentPage > 1 && screenSize === 'narrowScreen';
+
+    // scroll back to top when new gallery loads - (offset to wait for page load)
+    // setTimeout(() => window.scrollTo(0, 0), 100);
     
     // continuous load on phones
     useEffect(() => {
@@ -74,6 +78,9 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     }  
 
     useEffect(() => {
+        // scroll to top unless on autoLoadMode
+        if(!autoLoadMode){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
+       
         // #region re-saving state on person search as element unmounts
         if (searchState === 'person') {setPersonSearchState(userSelections[2])}
         // #endregion re-saving state on person search as element unmounts
@@ -93,10 +100,11 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     
                     setTotalPages(result.totalPages);
                     // for continuous load on phones
-                    if(searchState !== 'person' && currentPage > 1 && screenSize === 'narrowScreen'){
-                        console.log("loading...");
+                    if(autoLoadMode){
                         const multiPageGallery = [...moviesToDisplay, ...result.movieResults];
                         setMoviesToDisplay(multiPageGallery);
+                        // scroll to top on fresh load
+                        if(multiPageGallery.length < 20){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
                     }
                     else{setMoviesToDisplay(movieResults);}
 
@@ -124,7 +132,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                 ) :
                     <div className="gallery-container">
                         <ul className='gallery-list-container'>
-                            {moviesToDisplay?.map((movie) => {
+                            {moviesToDisplay?.map((movie, index) => {
                                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                                 /* if image not available, use icon */
                                 const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
@@ -132,6 +140,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                 return (
                                     <GalleryItems
                                         key={movie.id}
+                                        itemRef={index === 0 ? firstElementRef : null}
                                         tabIndex={tabIndex}
                                         movieTitle={movie.title || movie.name}
                                         overview={

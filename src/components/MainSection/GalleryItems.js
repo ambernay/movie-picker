@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import MovieInfo from './MovieInfo/MovieInfo.js';
 
-function GalleryItems({ galleryPropsObj, movieTitle, overview, imagePath, 
+function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePath, 
     audienceRating, tabIndex, currentRegion }) {
 
     const [infoState, setInfoState] = useState('hidden');
@@ -19,7 +19,7 @@ function GalleryItems({ galleryPropsObj, movieTitle, overview, imagePath,
    
     return (
         // tab index default 0 and -1 when dropdown menu is open
-        <li key={galleryPropsObj.movieID} id={galleryPropsObj.movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
+        <li key={galleryPropsObj.movieID} ref={itemRef} id={galleryPropsObj.movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
         onClick={(e) => { e.stopPropagation(); }} onMouseEnter={() => setInfoState('overview')} 
         onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave}>
             <img className={imageHeightClass} src={imagePath} alt={movieTitle} />

@@ -52,9 +52,7 @@ function Form({ setUserSelections, setIsFormVisible,
             setIsValidRequest(true);
             // resets page to 1 - runs only when genre is defined
             setCurrentPage(1);
-            // scroll back to top when new gallery loads - (offset to wait for page load)
-            setTimeout(() => window.scrollTo(0, 0), 100);
-
+        
             setUserSelections(UserSelectionURL(currentPage, tvMovieToggle, 
                 sortOption, currentRegion, currentLanguage, startDate, endDate, 
                 providers, genres));

@@ -358,6 +358,7 @@ img {
     /* gallery */
     --galleryItemMinWidth: 14rem;
     --galleryItemPadding: 10px;
+    --galleryVerticlePadding: 3dvh;
     /* form */
     --formWidth: 96%;
     --formHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
@@ -1002,7 +1003,7 @@ main {
 .gallery-container {
     display: flex;
     justify-content: center;
-    padding: 3dvh 0;
+    padding: var(--galleryVerticlePadding) 0;
     margin-bottom: var(--bottomNavHeight);
     flex-direction: column;
 }
@@ -1033,6 +1034,7 @@ main {
     max-width: calc(100dvw / 4);
     /* min-height: calc(var(--galleryItemMinWidth) * 1.6); */
     padding: var(--galleryItemPadding);
+    scroll-margin-top: var(--galleryVerticlePadding);
 }
 
 .gallery-container h3,
@@ -2003,13 +2005,11 @@ input[type="checkbox"] {
     :root {
         --galleryItemTitleSize: 1rem;
         --movieInfoIconSize: 1.6rem;
-    }
-
-    .gallery-container {
-        padding: 1dvh;
+        --galleryVerticlePadding: 1dvh;
     }
 
     .info-container h3 {
+        line-clamp: 1;
         -webkit-line-clamp: 1;
     }
 }
