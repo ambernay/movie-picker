@@ -35,7 +35,6 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
     }
 
     const handleTvMovieToggle = () => {
-        // if (isFormVisible) {setIsFormVisible(false)};
 
         if (tvMovieToggle === 'movie') {
             setTvMovieToggle('tv');
