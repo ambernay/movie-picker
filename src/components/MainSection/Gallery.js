@@ -31,9 +31,6 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     const autoLoadMode = searchState !== 'person'  && screenSize === 'narrowScreen';
     const activeList =  currentPage < totalPages;
 
-    // scroll back to top when new gallery loads - (offset to wait for page load)
-    // setTimeout(() => window.scrollTo(0, 0), 100);
-    console.log(autoLoadMode, activeList);
     // continuous load on phones
     useEffect(() => {
         if(autoLoadMode && activeList && loadContainerRef.current){
@@ -192,7 +189,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     </div>/* gallery container */
                 }
             </div>{/* wrapper */}
-            {(!autoLoadMode) ?
+            {(!autoLoadMode && searchState !== 'person') ?
                 <LoadMore
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
