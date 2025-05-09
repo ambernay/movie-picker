@@ -73,7 +73,7 @@ function App() {
                 isSearchbarOpen={isSearchbarOpen}
                 setIsSearchbarOpen={setIsSearchbarOpen}
             />
-            <main>
+            <main className={searchState}>
                 <Gallery
                     userSelections={userSelections}
                     currentRegion={currentRegion}
