@@ -1922,7 +1922,7 @@ input[type="checkbox"] {
         --formBottomHeight: 5.8rem;
         --galleryItemMinWidth: 33dvh;
         --bottomNavHeight: 0px;
-        --galleryVerticlePadding: 4dvh;
+        --galleryVerticlePadding: 3dvh;
         --paddingGap: 20px;
     }
 
@@ -2007,7 +2007,8 @@ input[type="checkbox"] {
     :root {
         --galleryItemTitleSize: 1rem;
         --movieInfoIconSize: 1.6rem;
-        --galleryVerticlePadding: 1dvh;
+        --galleryVerticlePadding: 2dvh;
+        --paddingGap: 20px;
     }
 
     .info-container h3 {
