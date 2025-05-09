@@ -28,14 +28,15 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
-    const autoLoadMode = searchState !== 'person' && currentPage > 1 && screenSize === 'narrowScreen';
+    const autoLoadMode = searchState !== 'person'  && screenSize === 'narrowScreen';
+    const activeList =  currentPage < totalPages;
 
     // scroll back to top when new gallery loads - (offset to wait for page load)
     // setTimeout(() => window.scrollTo(0, 0), 100);
-    
+    console.log(autoLoadMode, activeList);
     // continuous load on phones
     useEffect(() => {
-        if(screenSize === 'narrowScreen' && loadContainerRef.current){
+        if(autoLoadMode && activeList && loadContainerRef.current){
             const observer = new IntersectionObserver((entries) => {
                 const entry = entries[0];
                 
@@ -87,7 +88,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
 
     useEffect(() => {
         // scroll to top unless on autoLoadMode
-        if(!autoLoadMode){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
+        if(currentPage === 1 || !autoLoadMode){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
        
         // #region re-saving state on person search as element unmounts
         if (searchState === 'person') {setPersonSearchState(userSelections[2])}
@@ -108,7 +109,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     
                     setTotalPages(result.totalPages);
                     // for continuous load on phones
-                    if(autoLoadMode){
+                    if(autoLoadMode && (currentPage > 1 && currentPage <= totalPages)){
                         const multiPageGallery = removeDuplicateIds([...moviesToDisplay, ...result.movieResults], 'id');
 
                         setMoviesToDisplay(multiPageGallery);
@@ -178,15 +179,20 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                 )
                             })}
                         </ul>
-                        {(screenSize === 'narrowScreen' && searchState !== 'person') ?
+                        {(autoLoadMode && activeList) ?
                             <div ref={loadContainerRef} className={'scroll-load'} >
                                 <h4>{loadingMessage}</h4>
+                                <h4>{`${currentPage} / ${totalPages}`}</h4>
+                            </div>
+                        : (autoLoadMode) ?
+                            <div className={'gallery-end-list'} >
+                                <h4>{`${currentPage} / ${totalPages}`}</h4>
                             </div>
                         : null}
                     </div>/* gallery container */
                 }
             </div>{/* wrapper */}
-            {(screenSize !== 'narrowScreen' && searchState !== 'person') ?
+            {(!autoLoadMode) ?
                 <LoadMore
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}

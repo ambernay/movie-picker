@@ -11,7 +11,7 @@ const handler = async (event) => {
     const formURL = `${baseURL}/discover/${mediaType}?${apiKey}&${selectionsQueryString}&page=${page}&include_adult=false`;
     const searchBarURL = `${baseURL}/search/${mediaType}?query=${searchValue}&${apiKey}&language=${language}&page=${page}&include_adult=false`;
     const personURL = `${baseURL}/person/${searchValue}/combined_credits?${apiKey}&language=${language}&page=${page}&include_adult=false`;
-    console.log(searchState);
+    
     let url;
         if (searchState === 'trending') {url = defaultURL}
         else if (searchState === 'formSearch'){url = formURL}
