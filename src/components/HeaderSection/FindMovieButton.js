@@ -16,7 +16,7 @@ function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle,
     return (
         <button type='button' className="find-movie-button" title={buttonHeading}
         onClick={handleDropdown} >
-            <span className="hover-animation find-movie-text">
+            <span className="find-movie-text">
                 <h2>{(screenSize === 'midScreen' && fullHeadingLength <= 10) 
                     || (screenSize === 'wideScreen') ? 
                     capFirstChar(currentTranslation.find) 
