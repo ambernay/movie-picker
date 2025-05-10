@@ -614,10 +614,6 @@ li:focus {
     padding: 5px;
 }
 
-.find-movie-button:hover {
-    border: 2px inset var(--darkNeutral);
-}
-
 .find-movie-button svg {
     fill: var(--darkAccent);
     align-self: center;
@@ -831,6 +827,11 @@ li:focus {
 /* #endregion - subheading dropdown */
 
 /* hover */
+.find-movie-button:hover,
+.find-movie-button:active {
+    border: 2px inset var(--darkNeutral);
+}
+
 .find-movie-button:hover h2,
 .find-movie-button:active h2 {
     color: var(--darkAccent);
@@ -1874,6 +1875,12 @@ input[type="checkbox"] {
 
     .wrapper {
         --wrapperWidth: 85%;
+    }
+
+    .find-movie-button, 
+    .find-movie-button:hover, 
+    .find-movie-button:active {
+        border: none;
     }
 
     .find-movie-text{
