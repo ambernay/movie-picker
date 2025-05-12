@@ -888,22 +888,26 @@ li:focus {
 /* #region - fade animation */
     /* runs on figure only when button is not: hovered, active, focused */
     .find-movie-button:not(:hover, :active, :focus) .fade-pulse {
-        opacity: 1;
+        display: flex;
+        position: relative;
         animation-name: fadePulse;
         animation-iteration-count: infinite;
         animation-timing-function: ease-in;
-        animation-duration: 3.5s;
+        animation-duration: 2s;
     }
 
     @keyframes fadePulse {
         0% {
-            opacity: 0.4;
+            opacity: 0.5;
+            top: 0px;
         }
         50% {
             opacity: 1;
+            top: 5px;
         }
         100% {
-            opacity: 0.4;
+            opacity: 0.5;
+            top: 0px;
         }
     }
 /* #endregion - fade animation */
