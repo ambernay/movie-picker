@@ -96,7 +96,7 @@ function SearchBar({ handleTvMovieToggle, searchState, setSearchState,
                 </form>
                 
                 <div className={emptyModalClass}
-                onClick={() => {setIsSearchbarOpen(false)}}>
+                    onClick={() => {setIsSearchbarOpen(false)}}>
                 </div>
             </div>
         </div>

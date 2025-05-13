@@ -14,8 +14,6 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
     setTvMovieToggle, screenSize, searchState, setSearchState, 
     setUserSelections, isSearchbarOpen, setIsSearchbarOpen }) {
 
-    const [wasFormButtonClicked, setWasFormButtonClicked] = useState(false);
-
     const currentTranslation = TransObj[currentLanguage[0]];
     const iconDescription = currentTranslation['sr-only'];
   
@@ -55,7 +53,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                     <div className="heading-container">
                         <div className='main-title-container'>
                             <button type='button' className="main-title"
-                                onClick={(e) => { handleDropdown(); setWasFormButtonClicked(true); e.stopPropagation(); }}>
+                                onClick={(e) => { handleDropdown(); e.stopPropagation(); }}>
                                     Movie Picker
                             </button>
                                 <FindMovieButton
@@ -64,7 +62,6 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                     tvMovieToggle={tvMovieToggle}
                                     currentTranslation={currentTranslation}
                                     screenSize={screenSize}
-                                    wasFormButtonClicked={wasFormButtonClicked}
                                 />
                         </div>
                         <div className="header-buttons-container">

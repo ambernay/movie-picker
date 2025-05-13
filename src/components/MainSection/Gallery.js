@@ -19,7 +19,6 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     const loadingMessage = `${capFirstChar(currentTranslation.status_messages.loading)}...`;
     const failedToLoad = capFirstChar(currentTranslation.status_messages.failed_to_load);
     const trending = capFirstChar(currentTranslation.trending);
-    const formsAreClosed = !isSearchbarOpen && !isFormVisible;
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -90,7 +89,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
         // #region re-saving state on person search as element unmounts
         if (searchState === 'person') {setPersonSearchState(userSelections[2])}
         // #endregion re-saving state on person search as element unmounts
-        if (formsAreClosed) {
+        if (!isSearchbarOpen) {
             setStatusMessage(loadingMessage);
         
             MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
@@ -126,7 +125,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
             });
         }
     }, [userSelections, currentPage, currentRegion, currentLanguage, 
-        tvMovieToggle, searchState, setTotalPages, setMoviesToDisplay]);
+        tvMovieToggle, searchState, isSearchbarOpen, setTotalPages, setMoviesToDisplay]);
 
     return (
         <>
