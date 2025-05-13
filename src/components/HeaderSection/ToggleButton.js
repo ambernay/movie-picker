@@ -1,10 +1,13 @@
 import { memo } from 'react';
 import { FilmIcon, TvIcon } from '../Icons';
 
-function ToggleButton({ handleTvMovieToggle, tvMovieToggle, iconDescription }) {
+function ToggleButton({ handleTvMovieToggle, tvMovieToggle, currentTranslation }) {
+    
+    const iconDescription = currentTranslation['sr-only'];
+    const toggleTooltip = `${currentTranslation.movies} or ${currentTranslation.tv_series}`
 
     return (
-        <button type='button' id={tvMovieToggle === 'movie' ? "movie-option" : "tv-option"} 
+        <button type='button' title={toggleTooltip} id={tvMovieToggle === 'movie' ? "movie-option" : "tv-option"} 
         className="toggle-button-container" onClick={handleTvMovieToggle}>
             <span className="slider"></span>
             <figure className="toggle-left movie-icon">

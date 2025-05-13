@@ -608,10 +608,7 @@ li:focus {
     height: 100%;
     justify-content: center;
     align-items: center;
-    border: 2px inset var(--darkNeutralOpacity);
-    border-radius: 6px;
     column-gap: 8px;
-    padding: 5px;
 }
 
 .find-movie-button svg {
@@ -903,7 +900,7 @@ li:focus {
         }
         50% {
             opacity: 1;
-            top: 5px;
+            top: 8px;
         }
         100% {
             opacity: 0.5;
@@ -1888,7 +1885,6 @@ input[type="checkbox"] {
     .find-movie-button, 
     .find-movie-button:hover, 
     .find-movie-button:active {
-        border: none;
         justify-content: flex-start;
         padding: 8px;
     }
@@ -1947,7 +1943,6 @@ input[type="checkbox"] {
     .find-movie-button, 
     .find-movie-button:hover, 
     .find-movie-button:active {
-        border: none;
         width: calc(var(--mainHeaderFontSize) / 1.2);
         justify-content: flex-start;
         padding: 8px;

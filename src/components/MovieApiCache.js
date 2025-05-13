@@ -179,6 +179,5 @@ const GeoLocation = async () => {
     return geoLocationPromise;
 }
 
-
 export { RegionApiCall, ProviderFormListApiCall, GenreListApiCall, 
-    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation }
+    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation}

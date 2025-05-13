@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import ToggleButton from './ToggleButton';
 import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
@@ -12,7 +14,9 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
     setTvMovieToggle, screenSize, searchState, setSearchState, 
     setUserSelections, isSearchbarOpen, setIsSearchbarOpen }) {
 
-    const currentTranslation = TransObj[`${currentLanguage[0]}`];
+    const [wasFormButtonClicked, setWasFormButtonClicked] = useState(false);
+
+    const currentTranslation = TransObj[currentLanguage[0]];
     const iconDescription = currentTranslation['sr-only'];
   
     // toggle visibility and orientation of arrow image
@@ -51,7 +55,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                     <div className="heading-container">
                         <div className='main-title-container'>
                             <button type='button' className="main-title"
-                                onClick={(e) => { handleDropdown(); e.stopPropagation(); }}>
+                                onClick={(e) => { handleDropdown(); setWasFormButtonClicked(true); e.stopPropagation(); }}>
                                     Movie Picker
                             </button>
                                 <FindMovieButton
@@ -60,13 +64,14 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                                     tvMovieToggle={tvMovieToggle}
                                     currentTranslation={currentTranslation}
                                     screenSize={screenSize}
+                                    wasFormButtonClicked={wasFormButtonClicked}
                                 />
                         </div>
                         <div className="header-buttons-container">
                             <ToggleButton
                                 handleTvMovieToggle={handleTvMovieToggle}
                                 tvMovieToggle={tvMovieToggle}
-                                iconDescription={iconDescription}
+                                currentTranslation={currentTranslation}
                             />
                              <LanguageDropdown
                                 currentLanguage={currentLanguage}

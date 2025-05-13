@@ -90,7 +90,7 @@ function SearchBar({ handleTvMovieToggle, searchState, setSearchState,
                         <ToggleButton
                             handleTvMovieToggle={handleTvMovieToggle}
                             tvMovieToggle={tvMovieToggle}
-                            iconDescription={iconDescription}
+                            currentTranslation={currentTranslation}
                         />
                     </section> 
                 </form>

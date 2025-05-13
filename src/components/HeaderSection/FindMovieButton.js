@@ -1,13 +1,14 @@
 import { UpDownArrowIcon } from '../Icons'
 
 function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle, 
-    currentTranslation, screenSize }) {
+    currentTranslation, screenSize, wasFormButtonClicked }) {
     
     const upArrow = currentTranslation['sr-only'].up_arrow;
     const downArrow = currentTranslation['sr-only'].down_arrow;
     const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
     const buttonHeading = `${currentTranslation.find} ${mediaType}`;
     const fullHeadingLength = buttonHeading.length;
+    const animationClass = !wasFormButtonClicked ? 'fade-pulse' : null;
     
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -24,7 +25,7 @@ function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle,
                     <span> {capFirstChar(mediaType)} </span>
                 </h2>
             </span>
-            <figure className="fade-pulse">
+            <figure className={animationClass}>
                 <UpDownArrowIcon
                     arrowClass={arrowClass}
                 />

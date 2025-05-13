@@ -35,12 +35,6 @@ function App() {
     useEffect(() => {
         window.addEventListener('resize', () => setScreenSize(evaluateScreenSize()));
     }, [setScreenSize]);
-   
-    // stop background scroll when form is visible
-    useEffect(() => {
-        const bodyEl = document.querySelector('body');
-        isFormVisible ? bodyEl.classList.add('stop-scroll') : bodyEl.classList.remove('stop-scroll');
-    }, [isFormVisible]);
 
     const handleDropdown = (e) => {
         const headerRegionDropdown = document.querySelector('.header-region');
