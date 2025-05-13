@@ -824,11 +824,6 @@ li:focus {
 /* #endregion - subheading dropdown */
 
 /* hover */
-.find-movie-button:hover,
-.find-movie-button:active {
-    border: 2px inset var(--darkNeutral);
-}
-
 .find-movie-button:hover h2,
 .find-movie-button:active h2 {
     color: var(--darkAccent);
@@ -884,16 +879,16 @@ li:focus {
 }
 /* #region - fade animation */
     /* runs on figure only when button is not: hovered, active, focused */
-    .find-movie-button:not(:hover, :active, :focus) .fade-pulse {
+    .find-movie-button:not(:hover, :active, :focus) .fade-bounce {
         display: flex;
         position: relative;
-        animation-name: fadePulse;
+        animation-name: fadebounce;
         animation-iteration-count: infinite;
         animation-timing-function: ease-in;
         animation-duration: 2s;
     }
 
-    @keyframes fadePulse {
+    @keyframes fadebounce {
         0% {
             opacity: 0.5;
             top: 0px;

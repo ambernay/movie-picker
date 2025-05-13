@@ -8,15 +8,17 @@ function FindMovieButton({ handleDropdown, arrowClass, tvMovieToggle,
     const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
     const buttonHeading = `${currentTranslation.find} ${mediaType}`;
     const fullHeadingLength = buttonHeading.length;
-    const animationClass = !wasFormButtonClicked ? 'fade-pulse' : null;
+    const animationClass = !JSON.parse(localStorage.getItem('did-open-form')) 
+        ? 'fade-bounce' : null;
     
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     return (
-        <button type='button' className="find-movie-button" title={buttonHeading}
-        onClick={handleDropdown} >
+        <button type='button' className= "find-movie-button"
+            title={buttonHeading} onClick={handleDropdown} 
+        >
             <span className="find-movie-text">
                 <h2>{(screenSize === 'midScreen' && fullHeadingLength <= 10) 
                     || (screenSize === 'wideScreen') ? 
