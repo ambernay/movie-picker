@@ -43,6 +43,24 @@ function Form({ setUserSelections, setIsFormVisible,
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    const saveProvidersToLocalStorage = (userChoices) => {
+        
+        const preferredProviders = JSON.parse(localStorage.getItem('preferredProviders'));
+        
+        if(!preferredProviders) { 
+            localStorage.setItem('preferredProviders', JSON.stringify(userChoices)); 
+        }
+        else {
+            userChoices.forEach(provider => {
+                if (!JSON.stringify(preferredProviders).includes(JSON.stringify(provider))) {
+                    preferredProviders.push(provider);
+                }
+            })
+            localStorage.setItem('preferredProviders', JSON.stringify(preferredProviders));  
+        }
+        console.log(preferredProviders);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitAttempted(true);
@@ -57,6 +75,8 @@ function Form({ setUserSelections, setIsFormVisible,
                 sortOption, currentRegion, currentLanguage, startDate, endDate, 
                 providers, genres));
             setSearchState('formSearch');
+
+            if (providers.length > 0) { saveProvidersToLocalStorage(providers) }
         } 
     }
 

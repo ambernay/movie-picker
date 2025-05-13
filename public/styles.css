@@ -1000,6 +1000,7 @@ main.person {
     scrollbar-width: auto;
     scrollbar-color: var(--darkAccent);
 }
+
 /* #endregion scrollbar for person search */
 .main-wrapper {
     position: absolute;

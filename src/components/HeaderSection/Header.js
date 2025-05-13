@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import ToggleButton from './ToggleButton';
 import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
