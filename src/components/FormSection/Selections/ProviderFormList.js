@@ -19,6 +19,22 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
 
     const listContainer = document.querySelector('.provider-list-container');
 
+    const sortByUserPreferences = (unsortedList, regionCode) => {
+        
+        const userPreferences = JSON.parse(localStorage.getItem('preferredProviders'));
+        
+        if(userPreferences){
+            userPreferences.forEach((preference) => {
+                let preferenceId = Number(preference[1]);
+                let userPriority = unsortedList.find(provider => provider.provider_id === preferenceId);
+                userPriority.display_priorities[`${regionCode}`] = -1;
+            })
+        }
+        let sortByRegionPriorities = unsortedList.sort((a, b) => a.display_priorities[`${regionCode}`] - b.display_priorities[`${regionCode}`])
+
+        return sortByRegionPriorities;
+    }
+    
     useEffect(() => {
         const providerListEl = document.querySelector('.provider-list-container');
         
@@ -29,7 +45,8 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
 
             ProviderFormListApiCall(currentLanguage, currentRegion).then(result => {
                 if (result) {
-                    const sortedList = result.results?.sort((a, b) => a.display_priorities.currentRegion);
+                    const sortedList = sortByUserPreferences(result.results, currentRegion[0]);
+                    
                     setCurrentNumDisplaySets(1);
                     // full list of providers
                     setProviderFormList(sortedList);
