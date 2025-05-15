@@ -92,21 +92,21 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
         const baseURL = 'https://media.themoviedb.org/t/p/original';
         const providerURL = `${baseURL}${logoId}`;
-        console.log(logoPath, logoId, justWatchLink, providerURL);
-        const justWatchInfo = ProviderLinkInfoCall(movieID, justWatchLink).then(result => {
-            
+        
+        ProviderLinkInfoCall(movieID, justWatchLink).then(result => {
+            // converting data to iterable html
             const html = result;
             const tempElement = document.createElement('div');
             tempElement.innerHTML = html;
+            // HTMLCollection of elements matching clicked element
             const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
-            console.log(providerIcons);
-                // Convert HTMLCollection to an array for easier manipulation
+            // Convert HTMLCollection to an array for easier manipulation
             const elementsArray = Array.from(providerIcons);
-
+            // find first element in array that has an href
             const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
             const justWatchLink = selectedIcon.parentElement.href;
-            console.log(justWatchLink);
-            return justWatchLink;
+            
+            window.open(justWatchLink, '_blank');
         });
     }
 
