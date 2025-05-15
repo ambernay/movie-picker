@@ -6,7 +6,7 @@ const handler = async (event) => {
  
     try{
         const { data } = await axios.get(justWatchLink);
-        
+
         return {
             statusCode: 200,
             body: JSON.stringify(data)
