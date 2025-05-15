@@ -1,5 +1,5 @@
 import { memo, use } from 'react';
-import { ProviderPosterApiCall } from '../../MovieApiCache.js';
+import { ProviderPosterApiCall, ProviderLinkInfoCall } from '../../MovieApiCache.js';
 
 function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, 
     currentTranslation, capFirstChar }) {
@@ -7,7 +7,8 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
     const sectionLabel = currentTranslation.provider_options;
 
     const viewingOptionsResults = use(ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion));
-
+    const justWatchLink = viewingOptionsResults.link;
+    
     const filteredKey = (key) => {
         switch (key) {
             case 'flatrate' || 'stream':
@@ -29,44 +30,46 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         
         return key;
     }
-
+    
     const filteredViewingOptions = (result) => {
-        delete result.link;
+        let newObj = {...result}
+        
+        delete (newObj.link);
+        
+        const hasBuy = Object.keys(newObj).includes('buy');
+        const hasRent = Object.keys(newObj).includes('rent');
+        if (!hasBuy || !hasRent) { return newObj; }
 
-        const hasBuy = Object.keys(result).includes('buy');
-        const hasRent = Object.keys(result).includes('rent');
-        if (!hasBuy || !hasRent) { return result; }
+        const buyImages = newObj.buy?.map(i => i.logo_path) || [];
+        const rentImages = newObj.rent?.map(i => i.logo_path) || [];
 
-        const buyImages = result.buy?.map(i => i.logo_path) || [];
-        const rentImages = result.rent?.map(i => i.logo_path) || [];
-
-        // if buy and rent have same item merge into buy/rent array
+        // if buy and rent have same item, merge into buy/rent array
         const mergedBuyRentArr = {
-            buy: result.buy?.filter(i => !rentImages.includes(i.logo_path)) || [],
-            rent: result.rent?.filter(i => !buyImages.includes(i.logo_path)) || [],
-            buy_rent: result.buy?.filter(i => rentImages.includes(i.logo_path)) || [],
+            buy: newObj.buy?.filter(i => !rentImages.includes(i.logo_path)) || [],
+            rent: newObj.rent?.filter(i => !buyImages.includes(i.logo_path)) || [],
+            buy_rent: newObj.buy?.filter(i => rentImages.includes(i.logo_path)) || []
         }
         // if merged array not empty replace viewing options and delete duplicates
         if (mergedBuyRentArr.buy_rent.length > 0) {
-            result.buy_rent = mergedBuyRentArr.buy_rent;
-            delete result.buy;
-            delete result.rent;
+            newObj.buy_rent = mergedBuyRentArr.buy_rent;
+            delete newObj.buy;
+            delete newObj.rent;
         }
 
         if (mergedBuyRentArr.buy.length > 0) {
-            result.buy = mergedBuyRentArr.buy;
+            newObj.buy = mergedBuyRentArr.buy;
         } else {
             delete mergedBuyRentArr.buy;
         }
 
         if (mergedBuyRentArr.rent.length > 0) {
-            result.rent = mergedBuyRentArr.rent;
+            newObj.rent = mergedBuyRentArr.rent;
         } else {
             delete mergedBuyRentArr.rent;
         }
-
-        result = { ...result, ...mergedBuyRentArr };
-        return result;
+       
+        newObj = { ...newObj, ...mergedBuyRentArr };
+        return newObj;
     }
 
     let viewingOptions = filteredViewingOptions(viewingOptionsResults);
@@ -79,6 +82,16 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         )
     }
 
+    const linkToProvider = (e) => {
+        const logoPath = e.target.closest('img').src;
+        const justWatchInfo = ProviderLinkInfoCall(movieID, justWatchLink).then(result => {
+            console.log(result);
+            return result;
+        });
+
+        console.log(justWatchInfo);
+    }
+
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
@@ -89,7 +102,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                 // create lists
                 const optionKey = key + '/' + movieID;
                 return (
-                    <li key={optionKey}>
+                    <li key={optionKey} onClick={linkToProvider}>
                         <fieldset className='movie-info-list-fieldsets'>
                             <legend>{filteredKey(key)}</legend>
                             <ul className='movie-info-list'>

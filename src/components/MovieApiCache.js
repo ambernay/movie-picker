@@ -25,7 +25,7 @@ const RegionApiCall = async (currentLanguage) => {
 }
 
 let providerFormListPromises = {};
-const ProviderFormListApiCall = async (currentLanguage, currentRegion, displayAmount) => {
+const ProviderFormListApiCall = async (currentLanguage, currentRegion) => {
     const langCode = currentLanguage[0].toLowerCase();
     const regionCode = currentRegion[0];
     const key = `${langCode}/${regionCode}` 
@@ -159,6 +159,31 @@ const MovieInfoApiCall = (movieID, tvOrMovie) => {
     return movieInfoPromise[key];
 }
 
+let providerLinkInfo = {};
+const ProviderLinkInfoCall = (movieID, justWatchLink) => {
+    
+    const key = movieID;
+   
+    if (!providerLinkInfo.hasOwnProperty(key)) {
+       
+        const justWatchData = `/.netlify/functions/get-justwatch?justWatchLink=${justWatchLink}`;
+
+        providerLinkInfo[key] = fetch(justWatchData)
+            .then(res => {
+                if(res.status != 200) {
+                    console.log("JustWatch link did not succeed");
+                    return undefined;
+                }
+                return res.json();
+            })
+            .catch((err) => {
+                console.error(err);
+                return undefined;
+            })
+    }
+    return providerLinkInfo[key];
+}
+
 const GeoLocation = async () => {
 
     const geoLocation = `/.netlify/functions/get-geo-location`;
@@ -180,4 +205,5 @@ const GeoLocation = async () => {
 }
 
 export { RegionApiCall, ProviderFormListApiCall, GenreListApiCall, 
-    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, GeoLocation}
+    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, ProviderLinkInfoCall,
+    GeoLocation}
