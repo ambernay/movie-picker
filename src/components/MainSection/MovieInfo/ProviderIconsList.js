@@ -82,11 +82,6 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         )
     }
 
-    function getElementWithChild(parent, childSelector) {
-        const child = parent.querySelector(childSelector);
-        return child ? parent : null;
-    }
-
     const linkToProvider = (e) => {
         const logoPath = e.target.closest('img').src;
         const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
@@ -104,12 +99,16 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
             const elementsArray = Array.from(providerIcons);
             // find first element in array that has an href
             const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
-            const justWatchLink = selectedIcon.parentElement.href;
+            const redirectLink = selectedIcon.parentElement.href;
+            const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
+            // disney has different last index and double encoded
+            const disneyURL = decodeURIComponent(redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('%26')));
+            const finalURL = redirectLink.lastIndexOf('disneyplus') !== -1 
+                ? disneyURL : defaultURL
             
-            window.open(justWatchLink, '_blank');
+            window.open(decodeURIComponent(finalURL), '_blank');
         });
     }
-
     return (
         <>
         <ul className='movie-info-list-container movie-info-middle'>
