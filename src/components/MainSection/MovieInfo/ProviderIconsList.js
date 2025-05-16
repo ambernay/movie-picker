@@ -83,6 +83,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
     }
 
     const linkToProvider = (e) => {
+        const providerName = e.target.closest('li').title;
         const logoPath = e.target.closest('img').src;
         const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
         const baseURL = 'https://media.themoviedb.org/t/p/original';
@@ -101,10 +102,15 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
             const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
             const redirectLink = selectedIcon.parentElement.href;
             const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
-            // disney has different last index and double encoded
+            
             const disneyURL = decodeURIComponent(redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('%26')));
-            const finalURL = redirectLink.lastIndexOf('disneyplus') !== -1 
-                ? disneyURL : defaultURL
+            // disney has different last index and double encoded
+            const finalURL = providerName === 'Disney Plus' ? disneyURL
+                // justwatch needs no alteration
+                : providerName === 'JustWatchTV' ? redirectLink
+                : defaultURL
+
+            console.log(providerName, redirectLink, finalURL);
             
             window.open(decodeURIComponent(finalURL), '_blank');
         });
@@ -119,7 +125,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                 // create lists
                 const optionKey = key + '/' + movieID;
                 return (
-                    <li key={optionKey} onClick={linkToProvider}>
+                    <li key={optionKey}>
                         <fieldset className='movie-info-list-fieldsets'>
                             <legend>{filteredKey(key)}</legend>
                             <ul className='movie-info-list'>
@@ -128,7 +134,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
                                     return (
-                                        <li key={iconKey} title={key.provider_name}
+                                        <li key={iconKey} title={key.provider_name} onClick={linkToProvider}
                                             className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
                                         >
                                             {(key.logo_path === 'N/A') ?
