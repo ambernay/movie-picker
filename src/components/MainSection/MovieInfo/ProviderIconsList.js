@@ -7,7 +7,8 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
     const sectionLabel = currentTranslation.provider_options;
 
     const viewingOptionsResults = use(ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion));
-    const justWatchLink = viewingOptionsResults.link;
+    const TMDBMovieLink = viewingOptionsResults.link;
+    console.log(TMDBMovieLink);
     
     const filteredKey = (key) => {
         switch (key) {
@@ -89,7 +90,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
         const baseURL = 'https://media.themoviedb.org/t/p/original';
         const providerURL = `${baseURL}${logoId}`;
         
-        ProviderLinkInfoCall(movieID, justWatchLink).then(result => {
+        ProviderLinkInfoCall(movieID, TMDBMovieLink).then(result => {
             // converting data to iterable html
             const html = result;
             const tempElement = document.createElement('div');
@@ -110,8 +111,8 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                 : providerName === 'JustWatchTV' ? redirectLink
                 : defaultURL
 
-            console.log(providerName, redirectLink, finalURL);
-            
+            console.log(providerName, redirectLink, decodeURIComponent(finalURL));
+            // window.open(redirectLink, '_blank');
             window.open(decodeURIComponent(finalURL), '_blank');
         });
     }
@@ -134,7 +135,7 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
                                     return (
-                                        <li key={iconKey} title={key.provider_name} onClick={linkToProvider}
+                                        <li key={iconKey} title={key.provider_name} onClick={TMDBMovieLink ? linkToProvider : null}
                                             className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
                                         >
                                             {(key.logo_path === 'N/A') ?
