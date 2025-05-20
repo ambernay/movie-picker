@@ -104,7 +104,10 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
                                             {(key.logo_path === 'N/A') ?
                                                 <h4>{key.logo_path}</h4>
                                                 :
-                                                <img className='provider-icons' src={imageURL + key.logo_path} alt={key.provider_name} />
+                                                <img className='provider-icons' 
+                                                    src={imageURL + key.logo_path}
+                                                    alt={key.provider_name}   
+                                                />
                                             }
                                         </li>
                                     )

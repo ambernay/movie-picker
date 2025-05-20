@@ -77,4 +77,5 @@ function InfoIcon() {
     )
 }
 
-export { LeftArrowIcon, RightArrowIcon, UpDownArrowIcon, EyeIcon, FilmIcon, TvIcon, MagnifyerIcon, MagnifyerButtonIcon, InfoIcon }
+export { LeftArrowIcon, RightArrowIcon, UpDownArrowIcon, EyeIcon, 
+    FilmIcon, TvIcon, MagnifyerIcon, MagnifyerButtonIcon, InfoIcon }

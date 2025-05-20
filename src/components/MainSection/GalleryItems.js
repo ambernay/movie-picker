@@ -16,13 +16,19 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
         // blurs active element to allow hover out
         if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
     }
+
+    const imageError = (e) => {
+        imageHeightClass = "placeholder-image";
+        e.target.src = "../assets/icons/tv-outline.svg";
+    }
    
     return (
         // tab index default 0 and -1 when dropdown menu is open
         <li key={galleryPropsObj.movieID} ref={itemRef} id={galleryPropsObj.movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
         onClick={(e) => { e.stopPropagation(); }} onMouseEnter={() => setInfoState('overview')} 
         onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave}>
-            <img className={imageHeightClass} src={imagePath} alt={movieTitle} />
+            <img className={imageHeightClass} src={imagePath} 
+                onError={imageError} alt={movieTitle} />
             <div className="info-container">
                 <h3>{movieTitle}</h3>
                 <p className="rating">{rating}</p>

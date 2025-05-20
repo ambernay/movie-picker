@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
+import { TvIcon } from '../Icons.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
 
