@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
-import { TvIcon } from '../Icons.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
 import { TransObj } from '../TranslationObjects.js';
 
@@ -142,7 +141,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                             {moviesToDisplay?.map((movie, index) => {
                                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                                 /* if image not available, use icon */
-                                const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : "../assets/icons/tv-outline.svg";
+                                const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : null;
                            
                                 return (
                                     <GalleryItems

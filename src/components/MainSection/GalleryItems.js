@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import MovieInfo from './MovieInfo/MovieInfo.js';
+import { TvOutlineIcon } from '../Icons.js';
+
+// (failed)net::ERR_CERT_COMMON_NAME_INVALID
 
 function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePath, 
     audienceRating, tabIndex, currentRegion }) {
 
     const [infoState, setInfoState] = useState('hidden');
-
-    let imageHeightClass = imagePath === "../assets/icons/tv-outline.svg" ? "placeholder-image" : '';
 
     let rating = audienceRating > 0 ? audienceRating : "N/A";
 
@@ -21,14 +22,31 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
         imageHeightClass = "placeholder-image";
         e.target.src = "../assets/icons/tv-outline.svg";
     }
+
+    
+    
+    const ImageComponent = () => {
+        if (imagePath) {
+            return (
+                <img src={imagePath} onError={imageError} alt={movieTitle} />
+            )
+        }
+        else {
+            return(
+                <figure>
+                    <TvOutlineIcon />
+                    <figcaption className="sr-only">{galleryPropsObj.currentTranslation['sr-only'].tv_icon}</figcaption>
+                </figure>
+            )
+        }
+    }
    
     return (
         // tab index default 0 and -1 when dropdown menu is open
         <li key={galleryPropsObj.movieID} ref={itemRef} id={galleryPropsObj.movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
         onClick={(e) => { e.stopPropagation(); }} onMouseEnter={() => setInfoState('overview')} 
         onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave}>
-            <img className={imageHeightClass} src={imagePath} 
-                onError={imageError} alt={movieTitle} />
+            <ImageComponent />
             <div className="info-container">
                 <h3>{movieTitle}</h3>
                 <p className="rating">{rating}</p>

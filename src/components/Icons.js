@@ -39,6 +39,15 @@ function TvIcon() {
     )
 }
 
+function TvOutlineIcon() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <rect x="32" y="96" width="448" height="272" rx="32.14" ry="32.14" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M128 416h256"/>
+        </svg>
+    )
+}
+
 function EyeIcon() {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -78,4 +87,4 @@ function InfoIcon() {
 }
 
 export { LeftArrowIcon, RightArrowIcon, UpDownArrowIcon, EyeIcon, 
-    FilmIcon, TvIcon, MagnifyerIcon, MagnifyerButtonIcon, InfoIcon }
+    FilmIcon, TvIcon, TvOutlineIcon, MagnifyerIcon, MagnifyerButtonIcon, InfoIcon }
