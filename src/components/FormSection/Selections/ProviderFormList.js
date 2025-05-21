@@ -22,12 +22,16 @@ function ProviderFormList({ setProviders, setIsValidRequest, sectionLabel,
     const sortByUserPreferences = (unsortedList, regionCode) => {
         
         const userPreferences = JSON.parse(localStorage.getItem('preferredProviders'));
-        
+        let priorityNumber = -1;
+        // localStorage.clear();
         if(userPreferences){
             userPreferences.forEach((preference) => {
                 let preferenceId = Number(preference[1]);
                 let userPriority = unsortedList.find(provider => provider.provider_id === preferenceId);
-                userPriority.display_priorities[`${regionCode}`] = -1;
+                // change default priority numbers to descending negative numbers 
+                userPriority.display_priorities[`${regionCode}`] = priorityNumber;
+                priorityNumber = priorityNumber - 1;
+                console.log(userPreferences, userPriority);
             })
         }
         let sortByRegionPriorities = unsortedList.sort((a, b) => a.display_priorities[`${regionCode}`] - b.display_priorities[`${regionCode}`])

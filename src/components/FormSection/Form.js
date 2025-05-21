@@ -42,7 +42,7 @@ function Form({ setUserSelections, setIsFormVisible,
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-
+    
     const saveProvidersToLocalStorage = (userChoices) => {
         
         const preferredProviders = JSON.parse(localStorage.getItem('preferredProviders'));
@@ -51,14 +51,20 @@ function Form({ setUserSelections, setIsFormVisible,
             localStorage.setItem('preferredProviders', JSON.stringify(userChoices)); 
         }
         else {
-            userChoices.forEach(provider => {
-                if (!JSON.stringify(preferredProviders).includes(JSON.stringify(provider))) {
+            userChoices.forEach((provider, index) => {
+                const existsInArray = JSON.stringify(preferredProviders).includes(JSON.stringify(provider));
+                if (!existsInArray) {
                     preferredProviders.push(provider);
+                }
+                else if (existsInArray){
+                    console.log(preferredProviders, JSON.stringify(preferredProviders), preferredProviders.indexOf(JSON.stringify(provider)));
+                    // delete preferredProviders[index];
+                    // preferredProviders.push(provider);
+
                 }
             })
             localStorage.setItem('preferredProviders', JSON.stringify(preferredProviders));  
         }
-        console.log(preferredProviders);
     }
 
     const handleSubmit = (e) => {

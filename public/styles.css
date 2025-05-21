@@ -1051,12 +1051,12 @@ main.person {
     line-height: var(--galleryItemTitleSize + 0.1rem);
 }
 
-li img {
-    background: var(--midAccent);
-}
-
 li .placeholder-image {
-    height: 75%;
+    display: flex;
+    background: var(--midAccent);
+    min-height: calc(var(--galleryItemMinWidth) * 1.5);
+    align-items: center;
+    padding: 10px;
 }
 
 ul li .info-container {

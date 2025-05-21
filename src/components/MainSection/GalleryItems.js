@@ -18,22 +18,13 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
         if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
     }
 
-    const imageError = (e) => {
-        imageHeightClass = "placeholder-image";
-        e.target.src = "../assets/icons/tv-outline.svg";
-    }
-
-    
-    
     const ImageComponent = () => {
         if (imagePath) {
-            return (
-                <img src={imagePath} onError={imageError} alt={movieTitle} />
-            )
+            return (<img src={imagePath} alt={movieTitle} />)
         }
         else {
             return(
-                <figure>
+                <figure className='placeholder-image'>
                     <TvOutlineIcon />
                     <figcaption className="sr-only">{galleryPropsObj.currentTranslation['sr-only'].tv_icon}</figcaption>
                 </figure>
