@@ -46,24 +46,37 @@ function Form({ setUserSelections, setIsFormVisible,
     const saveProvidersToLocalStorage = (userChoices) => {
         
         const preferredProviders = JSON.parse(localStorage.getItem('preferredProviders'));
-        
-        if(!preferredProviders) { 
-            localStorage.setItem('preferredProviders', JSON.stringify(userChoices)); 
+        // if array does not exist in local storage
+        if(!preferredProviders){
+            let newItemsArr = [];
+            // push each item in userChoices 
+            userChoices.forEach((choice) => {
+                // change array into object and push to new array
+                newItemsArr.push({name: choice[0], id: choice[1]});
+            })
+            // then add new array to local storage
+            localStorage.setItem('preferredProviders', JSON.stringify(newItemsArr));
         }
-        else {
-            userChoices.forEach((provider, index) => {
-                const existsInArray = JSON.stringify(preferredProviders).includes(JSON.stringify(provider));
-                if (!existsInArray) {
-                    preferredProviders.push(provider);
+        // if preferences exists in local storage
+        else if(preferredProviders) {
+            userChoices.forEach((choice) => {
+                // for each userChoice item, change array item into object 
+                let newChoice = {name: choice[0], id: choice[1]};
+                // try to find index of item if exists in storage
+                const choiceIndex = preferredProviders.findIndex((item, index) => {
+                    if (item.id === newChoice.id) return index;
+                })
+                if (!choiceIndex || choiceIndex === -1) {
+                    // if item doesn't exist, push it (goes to end of list)
+                    preferredProviders.push(newChoice);
                 }
-                else if (existsInArray){
-                    console.log(preferredProviders, JSON.stringify(preferredProviders), preferredProviders.indexOf(JSON.stringify(provider)));
-                    // delete preferredProviders[index];
-                    // preferredProviders.push(provider);
-
+                else if (choiceIndex && choiceIndex !== -1) {
+                    // if item does exist, remove, then push to end
+                    preferredProviders.splice(choiceIndex, 1);
+                    preferredProviders.push(newChoice);
                 }
             })
-            localStorage.setItem('preferredProviders', JSON.stringify(preferredProviders));  
+            localStorage.setItem('preferredProviders', JSON.stringify(preferredProviders));   
         }
     }
 

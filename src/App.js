@@ -43,7 +43,7 @@ function App() {
 
         if (isSearchbarOpen) { setIsSearchbarOpen(false);}
 
-        localStorage.setItem('did-open-form', JSON.stringify('hello'));
+        localStorage.setItem('did-open-form', JSON.stringify('true'));
 
         return false;
     }
