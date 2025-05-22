@@ -3,14 +3,14 @@ import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
 
 function MoreInfo({ galleryPropsObj, capFirstChar }) {
 
-    const { movieID, mediaType, genreIds, releaseDate, character, crewCredits, 
-        currentLanguage, currentTranslation, tvMovieToggle, 
-        setUserSelections, setSearchState, personSearchState } = galleryPropsObj;
+    const { movieID, mediaType, originalLanguage, originCountryArr, genreIds, 
+        releaseDate, character, crewCredits, currentLanguage, currentTranslation, 
+        tvMovieToggle, setUserSelections, setSearchState, personSearchState 
+    } = galleryPropsObj;
 
     let infoDataObj = {};
     const genres = use(GenreListApiCall(mediaType, currentLanguage));
     const movieInfo = use(MovieInfoApiCall(movieID, tvMovieToggle));
-    
     
     // #region for populate info object
         // #region for person search
@@ -47,7 +47,13 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
             const mediaToDisplay = mediaType === 'movie' 
             ? capFirstChar(currentTranslation.movie) : currentTranslation.tv;
             
-            infoDataObj.Media_Type = [mediaToDisplay];
+            infoDataObj.EmptyLabel = [mediaToDisplay];
+        }
+        if (originalLanguage) {
+            infoDataObj.Languages = [originalLanguage.toUpperCase() ]; 
+        }
+        if (originCountryArr) {
+            infoDataObj.Regions = originCountryArr; 
         }
     // #endregion for populate info object
 
@@ -80,7 +86,9 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
                 : key === "Genre_Ids" ? capFirstChar(currentTranslation.section_labels.genre)
-                : key === "Media_Type" ? null
+                : key === "EmptyLabel" ? null
+                : key === "Languages" ? capFirstChar(currentTranslation.section_labels.languages)
+                : key === "Regions" ? capFirstChar(currentTranslation.section_labels.regions)
                 : key === "Character_Name" ? `${personSearchState[1]} as:`
                 : key === "Crew_Credits" ? `${personSearchState[1]} - Crew Credits:`
                 : key;
