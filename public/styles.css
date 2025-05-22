@@ -1053,10 +1053,14 @@ main.person {
 
 li .placeholder-image {
     display: flex;
-    background: var(--midAccent);
     min-height: calc(var(--galleryItemMinWidth) * 1.5);
     align-items: center;
+    background: var(--midAccent);
     padding: 10px;
+}
+
+li .placeholder-image svg {
+    align-self: center;
 }
 
 ul li .info-container {
@@ -1273,6 +1277,7 @@ ul li .info-container {
     width: 100%;
     height: var(--moreProvidersButtonHeight);
     justify-content: center;
+    align-items: center;
     background-color: var(--midAccent);
     opacity: 0.7;
     
@@ -2070,13 +2075,17 @@ input[type="checkbox"] {
     :root {
         --galleryItemTitleSize: 1rem;
         --movieInfoIconSize: 1.6rem;
-        --galleryVerticlePadding: 2dvh;
-        --paddingGap: 20px;
+        --paddingGap: 15px;
+        --formBottomHeight: 4.5rem;
     }
 
     .info-container h3 {
         line-clamp: 1;
         -webkit-line-clamp: 1;
+    }
+
+    .form-button-container {
+        margin-bottom: 10px; 
     }
 }
 
