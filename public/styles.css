@@ -1232,6 +1232,24 @@ ul li .info-container {
     margin: 2px;
 }
 
+.movie-info-container .movie-info-list .provider-icon-list:hover,
+.movie-info-container .movie-info-list .provider-icon-list:active,
+.movie-info-container .movie-info-list .provider-icon-list:focus{
+    box-shadow: inset 0 0 15px var(--lightAccent);
+    -webkit-box-shadow: inset 0 0 15px var(--lightAccent);
+}
+
+.movie-info-container .movie-info-list .provider-icon-list img:hover,
+.movie-info-container .movie-info-list .provider-icon-list img:active,
+.movie-info-container .movie-info-list .provider-icon-list img:focus{
+    box-shadow: 0 0 15px var(--lightAccent);
+    -webkit-box-shadow: 0 0 15px var(--lightAccent);
+}
+
+.movie-info-container .movie-info-list .provider-icon-list img:active {
+    opacity: 0.6;
+}
+
 .movie-info-list-fieldsets {
     justify-content: center;
     margin: 5px calc(var(--providerFieldsetPadding) / 2);
