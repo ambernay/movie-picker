@@ -2,7 +2,7 @@ import { memo, Suspense } from 'react';
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
-import { EyeIcon, InfoIcon } from '../../Icons.js';
+import { EyeIcon, InfoIcon, TvIcon } from '../../Icons.js';
 
 function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
     infoState, setInfoState }) {
@@ -33,7 +33,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
             </div>
         )
     }
-
+    
     const InfoComponent = () => {
         if (infoState === 'overview') { return <p className='movie-info-middle'>{overview}</p>}
         else if (infoState === 'provider-info') {
@@ -69,6 +69,12 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                 : infoState === 'more-info' || 'provider-info' ? 'more-info' : 'hidden'}>
                     <section className='heading-container'>
                         <h4>{movieTitle}</h4>
+                        <div className="info-heading-icon">
+                            <figure title={iconDescription.more_info} className="info-icon">
+                                <TvIcon />
+                                <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
+                            </figure>
+                        </div>
                     </section>
                     <InfoComponent/>
                     <section className='info-icon-container'>

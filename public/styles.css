@@ -1133,7 +1133,7 @@ ul li .info-container {
     position: sticky;
     bottom: 100%;
     left: 0;
-    align-items: flex-end;
+    align-items: start;
     background-color: var(--midAccent);
     padding: 5px;
 }
@@ -1142,6 +1142,13 @@ ul li .info-container {
     width: 80%;
 }
 
+.movie-info-container .heading-container .info-heading-icon {
+    display: flex;
+    position: relative;
+    width: var(--movieInfoIconSize);
+    padding: 0;
+}
+ 
 .info-icon-container button {
     display: flex;
     position: relative;
@@ -1151,8 +1158,11 @@ ul li .info-container {
     align-self: center;
     justify-content: center;
     padding: 0;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 25%;
+}
+
+.info-icon-container button {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .info-icon-container .button-up {
