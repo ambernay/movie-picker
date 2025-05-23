@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import MovieInfo from './MovieInfo/MovieInfo.js';
 import { TvOutlineIcon } from '../Icons.js';
 
@@ -18,7 +18,8 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
         if (document.activeElement !== document.querySelector('.header-region')) { document.activeElement.blur(); }
     }
 
-    const ImageComponent = () => {
+    // useCallback prevents component from re-rendering
+    const ImageComponent = useCallback(() => {
         if (imagePath) {
             return (<img src={imagePath} alt={movieTitle} />)
         }
@@ -30,7 +31,7 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
                 </figure>
             )
         }
-    }
+    },[])
    
     return (
         // tab index default 0 and -1 when dropdown menu is open

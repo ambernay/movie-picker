@@ -34,6 +34,34 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
         )
     }
 
+    const InfoComponent = () => {
+        if (infoState === 'overview') { return <p className='movie-info-middle'>{overview}</p>}
+        else if (infoState === 'provider-info') {
+            return (
+                /* only renders and fetches icons onclick */
+                <Suspense fallback={<LoadingStatusMessage />}>
+                    <ProviderIconsList
+                        movieID={movieID}
+                        tvMovieToggle={tvMovieToggle}
+                        currentRegion={currentRegion}
+                        currentTranslation={currentTranslation}
+                        capFirstChar={capFirstChar}
+                    />
+                </Suspense>
+            )
+        }
+        else if (infoState === 'more-info') {
+            return (
+                <Suspense fallback={<LoadingStatusMessage />}>
+                    <MoreInfo
+                        galleryPropsObj={galleryPropsObj}
+                        capFirstChar={capFirstChar}
+                    />
+                </Suspense>
+            )
+        }
+    }
+
     return (
         <>
             <div className='movie-info-container'>
@@ -42,34 +70,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                     <section className='heading-container'>
                         <h4>{movieTitle}</h4>
                     </section>
-                    {infoState === 'overview' ?
-                        <p className='movie-info-middle'>{overview}</p>
-                        : null
-                    }
-                
-                    {infoState === 'provider-info' ?
-                        /* only renders and fetches icons onclick */
-                        <Suspense fallback={<LoadingStatusMessage />}>
-                            <ProviderIconsList
-                                movieID={movieID}
-                                tvMovieToggle={tvMovieToggle}
-                                currentRegion={currentRegion}
-                                currentTranslation={currentTranslation}
-                                capFirstChar={capFirstChar}
-                            />
-                        </Suspense>
-                        : null
-                    }
-                    {infoState === 'more-info' ?
-                        /* only renders and fetches icons onclick */
-                        <Suspense fallback={<LoadingStatusMessage />}>
-                            <MoreInfo
-                                galleryPropsObj={galleryPropsObj}
-                                capFirstChar={capFirstChar}
-                            />
-                        </Suspense>
-                            : null
-                    }
+                    <InfoComponent/>
                     <section className='info-icon-container'>
                         <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}>
                             <figure title={iconDescription.more_info} className="info-icon"
