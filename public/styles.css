@@ -914,12 +914,13 @@ li:focus {
 .toggle-button-container {
     display: flex;
     position: relative;
+    height: 1.6rem;
     min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
     border-radius: 6px;
     justify-content: space-around;
     align-self: center;
-    padding: 0;
+    padding: 3px 1px;
 }
 
 .slider {
@@ -953,7 +954,7 @@ li:focus {
 .toggle-button-container svg {
     height: 93%;
     /* for safari */
-    height: 1.6rem;
+    width: 1.6rem;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
     z-index: 1;
@@ -1142,11 +1143,10 @@ ul li .info-container {
     width: 80%;
 }
 
-.movie-info-container .heading-container .info-heading-icon {
-    display: flex;
-    position: relative;
-    width: var(--movieInfoIconSize);
-    padding: 0;
+.movie-info-container .heading-container .info-heading-icon svg{
+    height: var(--galleryItemTitleSize);
+    margin: 1px 4px 0 0 ;
+    background: none;
 }
  
 .info-icon-container button {

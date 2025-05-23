@@ -40,7 +40,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
         : iconDescription.tv_icon;
         
         return (
-            <figure title={iconDescription.more_info} className="info-icon">
+            <figure title={iconDescription} className="info-icon">
                 <IconName />
                 <figcaption className="sr-only">{iconDescription}</figcaption>
             </figure>
