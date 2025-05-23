@@ -914,12 +914,13 @@ li:focus {
 .toggle-button-container {
     display: flex;
     position: relative;
+    height: 1.6rem;
     min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
     border-radius: 6px;
     justify-content: space-around;
     align-self: center;
-    padding: 0;
+    padding: 3px 1px;
 }
 
 .slider {
@@ -953,7 +954,7 @@ li:focus {
 .toggle-button-container svg {
     height: 93%;
     /* for safari */
-    height: 1.6rem;
+    width: 1.6rem;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
     z-index: 1;
@@ -1133,7 +1134,7 @@ ul li .info-container {
     position: sticky;
     bottom: 100%;
     left: 0;
-    align-items: flex-end;
+    align-items: start;
     background-color: var(--midAccent);
     padding: 5px;
 }
@@ -1142,6 +1143,12 @@ ul li .info-container {
     width: 80%;
 }
 
+.movie-info-container .heading-container .info-heading-icon svg{
+    height: var(--galleryItemTitleSize);
+    margin: 1px 4px 0 0 ;
+    background: none;
+}
+ 
 .info-icon-container button {
     display: flex;
     position: relative;
@@ -1151,8 +1158,11 @@ ul li .info-container {
     align-self: center;
     justify-content: center;
     padding: 0;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 25%;
+}
+
+.info-icon-container button {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .info-icon-container .button-up {

@@ -2,7 +2,7 @@ import { memo, Suspense } from 'react';
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
-import { EyeIcon, InfoIcon } from '../../Icons.js';
+import { EyeIcon, InfoIcon, TvIcon, FilmIcon } from '../../Icons.js';
 
 function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
     infoState, setInfoState }) {
@@ -12,7 +12,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
         currentTranslation, tvMovieToggle, setUserSelections, 
         setSearchState, personSearchState } = galleryPropsObj;
     
-    const iconDescription = currentTranslation['sr-only'];
+    let iconDescription = currentTranslation['sr-only'];
 
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -34,6 +34,19 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
         )
     }
 
+    const IconComponent = ({ mediaType }) => {
+        const IconName = mediaType === 'movie' ? FilmIcon : TvIcon;
+        iconDescription = mediaType === 'movie' ? iconDescription.film_icon 
+        : iconDescription.tv_icon;
+        
+        return (
+            <figure title={iconDescription} className="info-icon">
+                <IconName />
+                <figcaption className="sr-only">{iconDescription}</figcaption>
+            </figure>
+        )
+    }
+    
     const InfoComponent = () => {
         if (infoState === 'overview') { return <p className='movie-info-middle'>{overview}</p>}
         else if (infoState === 'provider-info') {
@@ -69,6 +82,9 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                 : infoState === 'more-info' || 'provider-info' ? 'more-info' : 'hidden'}>
                     <section className='heading-container'>
                         <h4>{movieTitle}</h4>
+                        <div className="info-heading-icon">
+                            <IconComponent mediaType={mediaType}/>
+                        </div>
                     </section>
                     <InfoComponent/>
                     <section className='info-icon-container'>
