@@ -43,12 +43,6 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
             let genreNamesArray = genreIds.map(key => genres.find(item => item.id === key))
             infoDataObj.Genre_Ids = genreNamesArray;
         }
-        if (mediaType){
-            const mediaToDisplay = mediaType === 'movie' 
-            ? capFirstChar(currentTranslation.movie) : currentTranslation.tv;
-            
-            infoDataObj.EmptyLabel = [mediaToDisplay];
-        }
         if (originalLanguage) {
             infoDataObj.Languages = [originalLanguage.toUpperCase() ]; 
         }
@@ -86,7 +80,6 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
                 : key === "ScreenPlay" ? capFirstChar(currentTranslation.movie_info.screenplay)
                 : key === "Release_Date" ? capFirstChar(currentTranslation.movie_info.release_date)
                 : key === "Genre_Ids" ? capFirstChar(currentTranslation.section_labels.genre)
-                : key === "EmptyLabel" ? null
                 : key === "Languages" ? capFirstChar(currentTranslation.section_labels.languages)
                 : key === "Regions" ? capFirstChar(currentTranslation.section_labels.regions)
                 : key === "Character_Name" ? `${personSearchState[1]} as:`

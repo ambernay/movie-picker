@@ -2,7 +2,7 @@ import { memo, Suspense } from 'react';
 import ProviderIconsList from './ProviderIconsList.js';
 import MoreInfo from './MoreInfo.js';
 
-import { EyeIcon, InfoIcon, TvIcon } from '../../Icons.js';
+import { EyeIcon, InfoIcon, TvIcon, FilmIcon } from '../../Icons.js';
 
 function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion, 
     infoState, setInfoState }) {
@@ -12,7 +12,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
         currentTranslation, tvMovieToggle, setUserSelections, 
         setSearchState, personSearchState } = galleryPropsObj;
     
-    const iconDescription = currentTranslation['sr-only'];
+    let iconDescription = currentTranslation['sr-only'];
 
     const capFirstChar = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -31,6 +31,19 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
             <div className='icon-message-container'>
                 <h4>{`${capFirstChar(currentTranslation.status_messages.loading)}...`}</h4>
             </div>
+        )
+    }
+
+    const IconComponent = ({ mediaType }) => {
+        const IconName = mediaType === 'movie' ? FilmIcon : TvIcon;
+        iconDescription = mediaType === 'movie' ? iconDescription.film_icon 
+        : iconDescription.tv_icon;
+        
+        return (
+            <figure title={iconDescription.more_info} className="info-icon">
+                <IconName />
+                <figcaption className="sr-only">{iconDescription}</figcaption>
+            </figure>
         )
     }
     
@@ -70,10 +83,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                     <section className='heading-container'>
                         <h4>{movieTitle}</h4>
                         <div className="info-heading-icon">
-                            <figure title={iconDescription.more_info} className="info-icon">
-                                <TvIcon />
-                                <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
-                            </figure>
+                            <IconComponent mediaType={mediaType}/>
                         </div>
                     </section>
                     <InfoComponent/>
