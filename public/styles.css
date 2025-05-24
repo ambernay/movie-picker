@@ -340,6 +340,7 @@ img {
     --smallTextLineheight: calc(var(--smallTextSize) * 1.2);
     --movieInfoIconSize: 2rem;
     --labelFontSize: 1rem;
+    --toggleButtonHeight: 1.6rem;
     /* #region - sizes */
     /* main */
     --mainHeight: calc(100dvh - var(--headerMargin));
@@ -914,13 +915,13 @@ li:focus {
 .toggle-button-container {
     display: flex;
     position: relative;
-    height: 1.6rem;
+    height: var(--toggleButtonHeight);
     min-width: var(--switchWidth);
     background-color: var(--darkNeutral);
     border-radius: 6px;
     justify-content: space-around;
     align-self: center;
-    padding: 3px 1px;
+    padding: 1px 1px 0px 1px;
 }
 
 .slider {
@@ -952,9 +953,7 @@ li:focus {
 }
 
 .toggle-button-container svg {
-    height: 93%;
-    /* for safari */
-    width: 1.6rem;
+    width: calc(var(--toggleButtonHeight) - 0.1rem);
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
     z-index: 1;
@@ -1141,6 +1140,10 @@ ul li .info-container {
 
 .movie-info-container .heading-container h4 {
     width: 80%;
+}
+
+.movie-info-container .heading-container .info-heading-icon {
+    width: 10%;
 }
 
 .movie-info-container .heading-container .info-heading-icon svg{
