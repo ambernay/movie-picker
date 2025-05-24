@@ -1,5 +1,5 @@
 import { memo, Suspense } from 'react';
-import ProviderIconsList from './ProviderIconsList.js';
+import ProviderIconsList from './ViewingOptions.js';
 import MoreInfo from './MoreInfo.js';
 
 import { EyeIcon, InfoIcon, TvIcon, FilmIcon } from '../../Icons.js';

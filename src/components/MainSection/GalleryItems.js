@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import MovieInfo from './MovieInfo/MovieInfo.js';
+import MovieInfoContainer from './MovieInfo/MovieInfoContainer.js';
 import { TvOutlineIcon } from '../Icons.js';
 
 // (failed)net::ERR_CERT_COMMON_NAME_INVALID
@@ -43,7 +43,7 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
                 <h3>{movieTitle}</h3>
                 <p className="rating">{rating}</p>
             </div>
-            <MovieInfo
+            <MovieInfoContainer
                 overview={overview}
                 galleryPropsObj={galleryPropsObj}
                 currentRegion={currentRegion}

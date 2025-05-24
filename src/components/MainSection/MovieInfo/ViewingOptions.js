@@ -1,14 +1,13 @@
 import { memo, use } from 'react';
-import { ProviderPosterApiCall, ProviderLinkInfoCall } from '../../MovieApiCache.js';
+import { ViewingOptionsApiCall, ProviderLinkInfoCall } from '../../MovieApiCache.js';
 
-function ProviderIconsList({ movieID, tvMovieToggle, currentRegion, 
+function ViewingOptions({ movieID, tvMovieToggle, currentRegion, 
     currentTranslation, capFirstChar }) {
 
     const sectionLabel = currentTranslation.provider_options;
 
-    const viewingOptionsResults = use(ProviderPosterApiCall(tvMovieToggle, movieID, currentRegion));
+    const viewingOptionsResults = use(ViewingOptionsApiCall(tvMovieToggle, movieID, currentRegion));
     const TMDBMovieLink = viewingOptionsResults.link;
-    console.log(TMDBMovieLink);
     
     const filteredKey = (key) => {
         switch (key) {
@@ -161,4 +160,4 @@ function ProviderIconsList({ movieID, tvMovieToggle, currentRegion,
     )
 }
 
-export default memo(ProviderIconsList);
+export default memo(ViewingOptions);

@@ -73,16 +73,16 @@ const GenreListApiCall = (tvOrMovie, currentLanguage) => {
 }
 
 // providers for each individual movie
-let providerPosterPromises = {};
-const ProviderPosterApiCall = (tvOrMovie, movieID, currentRegion) => {
+let viewingOptionsPromises = {};
+const ViewingOptionsApiCall = (tvOrMovie, movieID, currentRegion) => {
     const regionCode = currentRegion[0];
     const key = `${movieID}/${regionCode}`;
 
-    if (!providerPosterPromises.hasOwnProperty(key)) {
+    if (!viewingOptionsPromises.hasOwnProperty(key)) {
         // there is no way to filter by region (https://www.themoviedb.org/talk/643dbcf75f4b7304e2fe7f2a)
         const viewingOptionsURL = `.netlify/functions/get-viewing-options?mediaType=${tvOrMovie}&id=${movieID}&regionCode=${regionCode}`;
 
-        providerPosterPromises[key] = fetch(viewingOptionsURL)
+        viewingOptionsPromises[key] = fetch(viewingOptionsURL)
             .then(res => {
                 if(res.status != 200) {
                     console.log("Movie provider list API did not succeed");
@@ -95,7 +95,7 @@ const ProviderPosterApiCall = (tvOrMovie, movieID, currentRegion) => {
                 return undefined;
             })
     }
-    return providerPosterPromises[key];
+    return viewingOptionsPromises[key];
 }
 
 let getMoviePromises = {};
@@ -205,5 +205,5 @@ const GeoLocation = async () => {
 }
 
 export { RegionApiCall, ProviderFormListApiCall, GenreListApiCall, 
-    ProviderPosterApiCall, MoviesApiCall, MovieInfoApiCall, ProviderLinkInfoCall,
+    ViewingOptionsApiCall, MoviesApiCall, MovieInfoApiCall, ProviderLinkInfoCall,
     GeoLocation}
