@@ -97,7 +97,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                     // list of user selections for 'no results' message
                     let messageArr = userSelections[2]?.join(' / ');
                     let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';  
-console.log(result)
+
                 if (result) {
                     const movieResults = searchState === 'person' ? 
                         removeDuplicateIds(result.movieResults, 'id') 

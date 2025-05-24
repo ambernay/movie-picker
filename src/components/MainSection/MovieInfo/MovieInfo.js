@@ -36,11 +36,14 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
 
     const IconComponent = ({ mediaType }) => {
         const IconName = mediaType === 'movie' ? FilmIcon : TvIcon;
+        const tooltip = mediaType === 'movie' ? currentTranslation.movie 
+        : currentTranslation.tv;
+        
         iconDescription = mediaType === 'movie' ? iconDescription.film_icon 
         : iconDescription.tv_icon;
         
         return (
-            <figure title={iconDescription} className="info-icon">
+            <figure title={tooltip} className="info-icon">
                 <IconName />
                 <figcaption className="sr-only">{iconDescription}</figcaption>
             </figure>
@@ -83,7 +86,7 @@ function MovieInfo({ movieTitle, overview, galleryPropsObj, currentRegion,
                     <section className='heading-container'>
                         <h4>{movieTitle}</h4>
                         <div className="info-heading-icon">
-                            <IconComponent mediaType={mediaType}/>
+                            <IconComponent mediaType={mediaType || tvMovieToggle}/>
                         </div>
                     </section>
                     <InfoComponent/>
