@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, use, memo, Suspense } from 'react';
-import { useInView } from 'react-hook-inview';
+// import { useInView } from 'react-hook-inview';
+import { useInView } from "react-intersection-observer";
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
@@ -34,17 +35,15 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     const moviePromiseResults = use(MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
         userSelections, searchState));
 
-    const [loadContainerRef, inView] = useInView({
+    const {ref: loadContainerRef, inView} = useInView({
         threshold: 0.8, // Trigger when % of the element is visible
-        once: true, // Trigger only once
+        triggerOnce: true, // Trigger only once
     });
     
-    useEffect(() => {
-        if(inView && activeList){
-            {setCurrentPage(prevPage => prevPage + 1);}
-            console.log(currentPage, totalPages);
-        }
-    }, [inView]);
+    if(inView && activeList){
+        setCurrentPage(prevPage => prevPage + 1);
+        console.log(currentPage, totalPages);
+    }
 
     // continuous load on phones
     // useEffect(() => {
@@ -159,7 +158,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     return (
         <>
             <div className='wrapper main-wrapper'>
-                <Suspense fallback={LoadingStatusMessage}>
+                <Suspense fallback={<div>If you see me, call 555</div>}>
                     {/* only renders on empty page */}
                     {!moviesToDisplay || (moviesToDisplay.length < 1) ? (
                         <div className="message-container">
