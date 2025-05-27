@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, memo } from 'react';
+import { useState, useRef, useEffect, use, memo, Suspense } from 'react';
+import { useInView } from 'react-hook-inview';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
@@ -10,7 +11,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
      screenSize }) {
 
     const firstElementRef = useRef(null);
-    const loadContainerRef = useRef(null);
+    // const loadContainerRef = useRef(null);
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -28,22 +29,39 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
     const autoLoadMode = searchState !== 'person'  && screenSize === 'narrowScreen';
-    const activeList =  currentPage < totalPages;
+    const activeList =  (currentPage < totalPages) && (totalPages !== 1 );
+    
+    const moviePromiseResults = use(MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
+        userSelections, searchState));
+
+    const [loadContainerRef, inView] = useInView({
+        threshold: 0.8, // Trigger when % of the element is visible
+        once: true, // Trigger only once
+    });
+    
+    useEffect(() => {
+        if(inView && activeList){
+            {setCurrentPage(prevPage => prevPage + 1);}
+            console.log(currentPage, totalPages);
+        }
+    }, [inView]);
 
     // continuous load on phones
-    useEffect(() => {
-        if(autoLoadMode && activeList && loadContainerRef.current){
-            const observer = new IntersectionObserver((entries) => {
-                const entry = entries[0];
-                
-                if(entry.isIntersecting) {setCurrentPage(prevPage => prevPage + 1);}
+    // useEffect(() => {
+    //     console.log(activeList, currentPage, totalPages);
+    //     if(autoLoadMode && activeList && loadContainerRef.current){
+    //         // observer: api asynchronously observes changes in target elements
+    //         const observer = new IntersectionObserver((entries) => {
+    //             const entry = entries[0];
+    //             if(entry.isIntersecting) 
+    //                 {setCurrentPage(prevPage => prevPage + 1);}
                
-            }, {root: null, rootMargin: '0px', threshold: 0.5}
-        );
-            observer.observe(loadContainerRef.current);
-            return () => observer.disconnect();
-        }
-    },[loadContainerRef.current])
+    //         }, {root: null, rootMargin: '0px', threshold: 0.5}
+    //     );
+    //         observer.observe(loadContainerRef.current);
+    //         return () => observer.disconnect();
+    //     }
+    // },[loadContainerRef.current])
 
     function removeDuplicateIds(movieResults, id) {
         return movieResults.reduce((accumulator, current) => {
@@ -81,7 +99,6 @@ function Gallery({ userSelections, setUserSelections, currentPage,
             return accumulator;
         }, []);
     }  
-
     useEffect(() => {
         // scroll to top unless on autoLoadMode
         if(currentPage === 1 || !autoLoadMode){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
@@ -91,104 +108,109 @@ function Gallery({ userSelections, setUserSelections, currentPage,
         // #endregion re-saving state on person search as element unmounts
         if (!isSearchbarOpen) {
             setStatusMessage(loadingMessage);
-        
-            MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
-                userSelections, searchState).then(result => {
-                    // list of user selections for 'no results' message
-                    let messageArr = userSelections[2]?.join(' / ');
-                    let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';  
+    
+            // list of user selections for 'no results' message
+            let messageArr = userSelections[2]?.join(' / ');
+            let mediaType = tvMovieToggle === 'movie' ? 'movies' : 'TV shows';  
 
-                if (result) {
-                    const movieResults = searchState === 'person' ? 
-                        removeDuplicateIds(result.movieResults, 'id') 
-                        : result.movieResults
-                    
-                    setTotalPages(result.totalPages);
-                    // for continuous load on phones
-                    if(autoLoadMode && (currentPage > 1 && currentPage <= totalPages)){
-                        const multiPageGallery = removeDuplicateIds([...moviesToDisplay, ...result.movieResults], 'id');
+            if (moviePromiseResults) {
+                const movieResults = searchState === 'person' ? 
+                    removeDuplicateIds(moviePromiseResults.movieResults, 'id') 
+                    : moviePromiseResults.movieResults
+                
+                setTotalPages(moviePromiseResults.totalPages);
+                // for continuous load on phones
+                if(autoLoadMode && (currentPage > 1 && currentPage <= totalPages)){
+                    const multiPageGallery = removeDuplicateIds([...moviesToDisplay, ...moviePromiseResults.movieResults], 'id');
 
-                        setMoviesToDisplay(multiPageGallery);
-                        // scroll to top on fresh load
-                        if(multiPageGallery.length < 20){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
-                    }
-                    else{setMoviesToDisplay(movieResults);}
-
-                    // message for no results
-                    if (movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
+                    setMoviesToDisplay(multiPageGallery);
+                    // scroll to top on fresh load
+                    if(multiPageGallery.length < 20){firstElementRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });}
                 }
-                else {
-                    // message for no results
-                    if (searchState === 'trending'){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
-                    else if (searchState !== 'trending'){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
-                }
-            });
+                else{setMoviesToDisplay(movieResults);}
+
+                // message for no results
+                if (movieResults < 1) {setStatusMessage(`${noResults}:\n\n${messageArr}`)};
+            }
+            else {
+                // message for no results
+                if (searchState === 'trending'){setStatusMessage(`${failedToLoad} ${trending} ${mediaType}`)}
+                else if (searchState !== 'trending'){setStatusMessage(`${failedToLoad}:\n\n${messageArr}`)}
+            }
         }
     }, [userSelections, currentPage, currentRegion, currentLanguage, 
         tvMovieToggle, searchState, isSearchbarOpen, setTotalPages, setMoviesToDisplay]);
 
+    const LoadingStatusMessage = () => {
+        return (
+            (autoLoadMode && activeList) ?
+            <div ref={loadContainerRef} className={'scroll-load'} >
+                <h4>{loadingMessage}</h4>
+                <h4>{`${currentPage} / ${totalPages}`}</h4>
+            </div>
+            : (autoLoadMode) ?
+                <div className={'gallery-end-list'} >
+                    <h4>{`${currentPage} / ${totalPages}`}</h4>
+                </div>
+            : null
+        )
+    }
+
     return (
         <>
             <div className='wrapper main-wrapper'>
-                {/* only renders on empty page */}
-                {!moviesToDisplay || (moviesToDisplay.length < 1) ? (
-                    <div className="message-container">
-                        <h3>{statusMessage}</h3>
-                    </div>
-                ) :
-                    <div className="gallery-container">
-                        <ul className='gallery-list-container'>
-                            {moviesToDisplay?.map((movie, index) => {
-                                const imageURL = 'https://image.tmdb.org/t/p/w500';
-                                /* if image not available, use icon */
-                                const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : null;
-                           
-                                return (
-                                    <GalleryItems
-                                        key={movie.id}
-                                        itemRef={index === 0 ? firstElementRef : null}
-                                        tabIndex={tabIndex}
-                                        movieTitle={movie.title || movie.name}
-                                        overview={
-                                            movie.overview ||
-                                            "No description available"}
-                                        imagePath={imagePath}
-                                        audienceRating={(movie.vote_average)?.toFixed(1)}
-                                        currentRegion={currentRegion}
-                                        galleryPropsObj={
-                                            {
-                                                movieID: movie.id,
-                                                mediaType: movie.media_type || undefined,
-                                                originalLanguage: movie.original_language || undefined,
-                                                originCountryArr: movie.origin_country || undefined,
-                                                genreIds: movie.genre_ids || undefined,
-                                                releaseDate: movie.release_date || movie.first_air_date || undefined,
-                                                character: movie.character || undefined,
-                                                crewCredits: movie.job || undefined,
-                                                currentLanguage: currentLanguage,
-                                                currentTranslation: currentTranslation,
-                                                tvMovieToggle: tvMovieToggle,
-                                                setUserSelections: setUserSelections,
-                                                setSearchState: setSearchState,
-                                                personSearchState:personSearchState
+                <Suspense fallback={LoadingStatusMessage}>
+                    {/* only renders on empty page */}
+                    {!moviesToDisplay || (moviesToDisplay.length < 1) ? (
+                        <div className="message-container">
+                            <h3>{statusMessage}</h3>
+                        </div>
+                    ) :
+                        <div className="gallery-container">
+                            <ul className='gallery-list-container'>
+                                {moviesToDisplay?.map((movie, index) => {
+                                    const imageURL = 'https://image.tmdb.org/t/p/w500';
+                                    /* if image not available, use icon */
+                                    const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : null;
+                            
+                                    return (
+                                        <GalleryItems
+                                            key={movie.id}
+                                            itemRef={index === 0 ? firstElementRef : null}
+                                            tabIndex={tabIndex}
+                                            movieTitle={movie.title || movie.name}
+                                            overview={
+                                                movie.overview ||
+                                                "No description available"}
+                                            imagePath={imagePath}
+                                            audienceRating={(movie.vote_average)?.toFixed(1)}
+                                            currentRegion={currentRegion}
+                                            galleryPropsObj={
+                                                {
+                                                    movieID: movie.id,
+                                                    mediaType: movie.media_type || undefined,
+                                                    originalLanguage: movie.original_language || undefined,
+                                                    originCountryArr: movie.origin_country || undefined,
+                                                    genreIds: movie.genre_ids || undefined,
+                                                    releaseDate: movie.release_date || movie.first_air_date || undefined,
+                                                    character: movie.character || undefined,
+                                                    crewCredits: movie.job || undefined,
+                                                    currentLanguage: currentLanguage,
+                                                    currentTranslation: currentTranslation,
+                                                    tvMovieToggle: tvMovieToggle,
+                                                    setUserSelections: setUserSelections,
+                                                    setSearchState: setSearchState,
+                                                    personSearchState:personSearchState
+                                                }
                                             }
-                                        }
-                                    />
-                                )
-                            })}
-                        </ul>
-                        {(autoLoadMode && activeList) ?
-                            <div ref={loadContainerRef} className={'scroll-load'} >
-                                <h4>{loadingMessage}</h4>
-                                <h4>{`${currentPage} / ${totalPages}`}</h4>
-                            </div>
-                        : (autoLoadMode) ?
-                            <div className={'gallery-end-list'} >
-                                <h4>{`${currentPage} / ${totalPages}`}</h4>
-                            </div>
-                        : null}
-                    </div>/* gallery container */
-                }
+                                        />
+                                    )
+                                })}
+                            </ul>
+                            <LoadingStatusMessage />
+                        </div>/* gallery container */
+                    }
+                </Suspense>
             </div>{/* wrapper */}
             {(!autoLoadMode && searchState !== 'person') ?
                 <LoadMore

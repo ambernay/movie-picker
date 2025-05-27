@@ -99,7 +99,7 @@ const ViewingOptionsApiCall = (tvOrMovie, movieID, currentRegion) => {
 }
 
 let getMoviePromises = {};
-const MoviesApiCall = async (currentPage, tvOrMovie, currentLanguage, 
+const MoviesApiCall = (currentPage, tvOrMovie, currentLanguage, 
     userSelections, searchState) => {
     const langCode = currentLanguage[0];
     const selectionsQueryString = encodeURIComponent(userSelections[0]);
