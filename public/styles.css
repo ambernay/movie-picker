@@ -1838,6 +1838,12 @@ input[type="checkbox"] {
     display: none;
 }
 
+.autoLoadRef {
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+}
+
 .dropdown-menu .select li:hover {
     background-color: var(--dropdownHoverColor);
 }
