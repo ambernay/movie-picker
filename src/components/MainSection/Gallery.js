@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, use, memo, Suspense } from 'react';
 import { useInView } from "react-intersection-observer";
+import {isMobile} from 'react-device-detect';
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
 import { MoviesApiCall } from '../MovieApiCache.js';
@@ -7,8 +8,7 @@ import { TransObj } from '../TranslationObjects.js';
 
 function Gallery({ userSelections, setUserSelections, currentPage,
      setCurrentPage, isFormVisible, tvMovieToggle, currentRegion, 
-     currentLanguage, searchState, setSearchState, isSearchbarOpen,
-     screenSize }) {
+     currentLanguage, searchState, setSearchState, isSearchbarOpen }) {
 
     const firstElementRef = useRef(null);
 
@@ -27,7 +27,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     
     // stops background scroll when using tab keys
     const tabIndex = isFormVisible ? '-1' : '0';
-    const autoLoadMode = searchState !== 'person'  && screenSize === 'narrowScreen';
+    const autoLoadMode = isMobile && searchState !== 'person';
     const activeList = (currentPage < totalPages) && (totalPages !== 1 );
     
     const moviePromiseResults = use(MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
@@ -125,7 +125,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
         if (!moviesToDisplay || (moviesToDisplay.length < 1)) {
             return(
                 <div className="message-container">
-                    <h3>{statusMessage}</h3>
+                    <h4>{statusMessage}</h4>
                 </div>
             )
         }

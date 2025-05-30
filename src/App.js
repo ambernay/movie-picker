@@ -84,7 +84,6 @@ function App() {
                     setSearchState={setSearchState}
                     isSearchbarOpen={isSearchbarOpen}
                     setUserSelections={setUserSelections}
-                    screenSize={screenSize}
                 />
             </main>
             {isFormVisible ?

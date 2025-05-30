@@ -2005,7 +2005,6 @@ input[type="checkbox"] {
         --smallTextSize: calc(0.8rem + 0.8dvh);
         --formBottomHeight: 5.8rem;
         --galleryItemMinWidth: 33dvh;
-        --bottomNavHeight: 0px;
         --galleryVerticlePadding: 3dvh;
         --paddingGap: 20px;
     }
