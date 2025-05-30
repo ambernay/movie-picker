@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, use, memo, Suspense } from 'react';
-// import { useInView } from 'react-hook-inview';
 import { useInView } from "react-intersection-observer";
 import GalleryItems from './GalleryItems.js';
 import LoadMore from './LoadMore.js';
@@ -12,7 +11,6 @@ function Gallery({ userSelections, setUserSelections, currentPage,
      screenSize }) {
 
     const firstElementRef = useRef(null);
-    // const loadContainerRef = useRef(null);
 
     const capFirstChar = (string) => {return string.charAt(0).toUpperCase() + string.slice(1);}
 
@@ -31,51 +29,19 @@ function Gallery({ userSelections, setUserSelections, currentPage,
     const tabIndex = isFormVisible ? '-1' : '0';
     const autoLoadMode = searchState !== 'person'  && screenSize === 'narrowScreen';
     const activeList = (currentPage < totalPages) && (totalPages !== 1 );
-    let autoLoadRefClass = 'autoLoadRef';
     
     const moviePromiseResults = use(MoviesApiCall(currentPage, tvMovieToggle, currentLanguage,
         userSelections, searchState));
 
     const {ref: loadContainerRef, inView} = useInView({
         threshold: 0.8, // Trigger when % of the element is visible
-        // triggerOnce: true, // Trigger only once
     });
 
     useEffect(() => {
         if(inView && activeList){
             setCurrentPage(prevPage => prevPage + 1);
-
-            console.log(currentPage, totalPages);
         }
     },[inView])
-    
-    // continuous load on phones
-    // useEffect(() => {
-    //     const lastPageSeen = currentPage;
-    //     if(autoLoadMode && activeList && loadContainerRef.current){
-    //         console.log(activeList, currentPage, totalPages);
-    //         // observer: api asynchronously observes changes in target elements
-    //         const observer = new IntersectionObserver((entries) => {
-    //             const entry = entries[0];
-    //             if(entry.isIntersecting) {
-    //                 setCurrentPage(prevPage => { prevPage + 1});
-    //                 // Stop observing the element after the first intersection
-    //                 observer.unobserve(entry.target);
-    //                 // makes target display: none
-    //                 //autoLoadRefClass = 'hidden';
-    //             }
-               
-    //         }, {root: null, rootMargin: '0px', threshold: 0}
-    //     );
-    //         observer.observe(loadContainerRef.current);
-    //         // Cleanup function to disconnect the observer when the component unmounts
-    //         return () => {
-    //             if (loadContainerRef.current) {
-    //                 observer.unobserve(loadContainerRef.current);
-    //             }
-    //         }
-    //     }
-    // },[loadContainerRef.current])
 
     function removeDuplicateIds(movieResults, id) {
         return movieResults.reduce((accumulator, current) => {
