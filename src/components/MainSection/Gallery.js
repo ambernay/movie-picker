@@ -122,74 +122,77 @@ function Gallery({ userSelections, setUserSelections, currentPage,
         tvMovieToggle, searchState, isSearchbarOpen, setTotalPages, setMoviesToDisplay]);
 
     const LoadingStatusMessage = () => {
-        return (
-            (autoLoadMode && activeList) ?
-            <div ref={loadContainerRef} className={'scroll-load'} >
-                <h4>{loadingMessage}</h4>
-                <h4>{`${currentPage} / ${totalPages}`}</h4>
-            </div>
-            : (autoLoadMode) ?
+        if (!moviesToDisplay || (moviesToDisplay.length < 1)) {
+            return(
+                <div className="message-container">
+                    <h3>{statusMessage}</h3>
+                </div>
+            )
+        }
+        else if (autoLoadMode && activeList) {
+            return (
+                <div ref={loadContainerRef} className={'scroll-load'} >
+                    <h4>{loadingMessage}</h4>
+                    <h4>{`${currentPage} / ${totalPages}`}</h4>
+                </div>
+            )
+        } 
+        else if (autoLoadMode) {
+            return (
                 <div className={'gallery-end-list'} >
                     <h4>{`${currentPage} / ${totalPages}`}</h4>
                 </div>
-            : null
-        )
+            )
+        }
     }
 
     return (
         <>
             <div className='wrapper main-wrapper'>
-                <Suspense fallback={<div>If you see me, call 555</div>}>
-                    {/* only renders on empty page */}
-                    {!moviesToDisplay || (moviesToDisplay.length < 1) ? (
-                        <div className="message-container">
-                            <h3>{statusMessage}</h3>
-                        </div>
-                    ) :
-                        <div className="gallery-container">
-                            <ul className='gallery-list-container'>
-                                {moviesToDisplay?.map((movie, index) => {
-                                    const imageURL = 'https://image.tmdb.org/t/p/w500';
-                                    /* if image not available, use icon */
-                                    const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : null;
-                            
-                                    return (
-                                        <GalleryItems
-                                            key={movie.id}
-                                            itemRef={index === 0 ? firstElementRef : null}
-                                            tabIndex={tabIndex}
-                                            movieTitle={movie.title || movie.name}
-                                            overview={
-                                                movie.overview ||
-                                                "No description available"}
-                                            imagePath={imagePath}
-                                            audienceRating={(movie.vote_average)?.toFixed(1)}
-                                            currentRegion={currentRegion}
-                                            galleryPropsObj={
-                                                {
-                                                    movieID: movie.id,
-                                                    mediaType: movie.media_type || undefined,
-                                                    originalLanguage: movie.original_language || undefined,
-                                                    originCountryArr: movie.origin_country || undefined,
-                                                    genreIds: movie.genre_ids || undefined,
-                                                    releaseDate: movie.release_date || movie.first_air_date || undefined,
-                                                    character: movie.character || undefined,
-                                                    crewCredits: movie.job || undefined,
-                                                    currentLanguage: currentLanguage,
-                                                    currentTranslation: currentTranslation,
-                                                    tvMovieToggle: tvMovieToggle,
-                                                    setUserSelections: setUserSelections,
-                                                    setSearchState: setSearchState,
-                                                    personSearchState:personSearchState
-                                                }
+                <Suspense fallback={<LoadingStatusMessage/>}>
+                    <div className="gallery-container">
+                        <ul className='gallery-list-container'>
+                            {moviesToDisplay?.map((movie, index) => {
+                                const imageURL = 'https://image.tmdb.org/t/p/w500';
+                                /* if image not available, use icon */
+                                const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : null;
+                        
+                                return (
+                                    <GalleryItems
+                                        key={movie.id}
+                                        itemRef={index === 0 ? firstElementRef : null}
+                                        tabIndex={tabIndex}
+                                        movieTitle={movie.title || movie.name}
+                                        overview={
+                                            movie.overview ||
+                                            "No description available"}
+                                        imagePath={imagePath}
+                                        audienceRating={(movie.vote_average)?.toFixed(1)}
+                                        currentRegion={currentRegion}
+                                        galleryPropsObj={
+                                            {
+                                                movieID: movie.id,
+                                                mediaType: movie.media_type || undefined,
+                                                originalLanguage: movie.original_language || undefined,
+                                                originCountryArr: movie.origin_country || undefined,
+                                                genreIds: movie.genre_ids || undefined,
+                                                releaseDate: movie.release_date || movie.first_air_date || undefined,
+                                                character: movie.character || undefined,
+                                                crewCredits: movie.job || undefined,
+                                                currentLanguage: currentLanguage,
+                                                currentTranslation: currentTranslation,
+                                                tvMovieToggle: tvMovieToggle,
+                                                setUserSelections: setUserSelections,
+                                                setSearchState: setSearchState,
+                                                personSearchState:personSearchState
                                             }
-                                        />
-                                    )
-                                })}
-                            </ul>
-                            {LoadingStatusMessage()}
-                        </div>/* gallery container */
-                    }
+                                        }
+                                    />
+                                )
+                            })}
+                        </ul>
+                        {LoadingStatusMessage()}
+                    </div>
                 </Suspense>
             </div>{/* wrapper */}
             {(!autoLoadMode && searchState !== 'person') ?
