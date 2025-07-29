@@ -668,17 +668,23 @@ li:focus {
 }
 
 .language-list.header-region {
+    --subHeaderHeight: 0.8rem;
     background: none;
+    align-self: baseline;
 }
 
 .language-list.header-region .label-container {
+    --dropdownLabelWidth: 2rem;
     color: var(--darkNeutral);
+    font-size: calc(var(--subHeaderHeight) - 0.1rem);
+    height: calc(var(--subHeaderHeight) + 0.2rem);
 }
 
 .region-list.header-region,
 .language-list.header-region {
     width: var(--narrow-dropdown-width);
     margin-left: 5px;
+    align-items: end;
 }
 
 .region-list.header-region .label-container,
@@ -1717,7 +1723,7 @@ input[type="checkbox"] {
     align-items: center;
     text-align: center;
     font-size: var(--labelFontSize);
-    padding: 3px;
+    padding: 4px 3px 3px 3px;
     border: solid 1px var(--lightAccent);
     color: var(--lightAccent);
     padding-right: 1rem;
@@ -1738,6 +1744,12 @@ input[type="checkbox"] {
 .header-region .label-container::before, 
 .header-region .label-container::after {
     right: calc(var(--size) - 3px);
+}
+
+.language-list .label-container::before, 
+.language-list .label-container::after {
+    --size: 0.2rem;
+    margin-right: 2px;
 }
 
 .label-container::before,
@@ -2072,9 +2084,15 @@ input[type="checkbox"] {
     }
 
     .heading-container .header-buttons-container {
+        width: inherit;
         flex-direction: column-reverse;
         justify-content: space-between;
         align-items: flex-end;
+    }
+
+    .language-list.header-region {
+        align-self: end;
+        margin-left: 0;
     }
 
     .toggle-button-container {
