@@ -6,7 +6,7 @@ import { TvOutlineIcon } from '../Icons.js';
 
 function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePath, 
     audienceRating, tabIndex, currentRegion }) {
-
+        
     const [infoState, setInfoState] = useState('hidden');
 
     let rating = audienceRating > 0 ? audienceRating : "N/A";
