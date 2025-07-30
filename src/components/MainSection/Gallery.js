@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, use, memo, Suspense } from 'react';
+import { useState, useRef, useEffect, use, useMemo, memo, Suspense } from 'react';
 import { useInView } from "react-intersection-observer";
 import {isMobile} from 'react-device-detect';
 import GalleryItems from './GalleryItems.js';
@@ -148,23 +148,26 @@ function Gallery({ userSelections, setUserSelections, currentPage,
 
     // functions are auto-memoized, so object will not trigger a needless rerender
     const createGalleryPropsObj = (movie) => {
-        return {
-            movieID: movie.id,
-            mediaType: movie.media_type || undefined,
-            originalLanguage: movie.original_language || undefined,
-            originCountryArr: movie.origin_country || undefined,
-            genreIds: movie.genre_ids || undefined,
-            releaseDate: movie.release_date || movie.first_air_date || undefined,
-            character: movie.character || undefined,
-            crewCredits: movie.job || undefined,
-            currentLanguage: currentLanguage,
-            currentTranslation: currentTranslation,
-            tvMovieToggle: tvMovieToggle,
-            setUserSelections: setUserSelections,
-            setSearchState: setSearchState,
-            personSearchState:personSearchState
-        }
+        console.log(movie);
     }
+    // const createGalleryPropsObj = (movie) => {
+    //     return {
+    //         movieID: movie.id,
+    //         mediaType: movie.media_type || undefined,
+    //         originalLanguage: movie.original_language || undefined,
+    //         originCountryArr: movie.origin_country || undefined,
+    //         genreIds: movie.genre_ids || undefined,
+    //         releaseDate: movie.release_date || movie.first_air_date || undefined,
+    //         character: movie.character || undefined,
+    //         crewCredits: movie.job || undefined,
+    //         currentLanguage: currentLanguage,
+    //         currentTranslation: currentTranslation,
+    //         tvMovieToggle: tvMovieToggle,
+    //         setUserSelections: setUserSelections,
+    //         setSearchState: setSearchState,
+    //         personSearchState:personSearchState
+    //     }
+    // }
 
     return (
         <>
@@ -176,6 +179,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                                 /* if image not available, use icon */
                                 const imagePath = movie.poster_path ? (imageURL + movie.poster_path) : null;
+                                const memoizedGalleryObj = useMemo(() => createGalleryPropsObj(movie), [movie]);
                                
                                 return (
                                     <GalleryItems
@@ -189,7 +193,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                         imagePath={imagePath}
                                         audienceRating={(movie.vote_average)?.toFixed(1)}
                                         currentRegion={currentRegion}
-                                        galleryPropsObj={createGalleryPropsObj(movie)}
+                                        galleryPropsObj={createGalleryPropsObj}
                                     />
                                 )
                             })}

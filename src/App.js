@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { LanguagesObj } from './components/TranslationObjects.js';
+import { ErrorBoundary } from "react-error-boundary";
+import { LanguagesObj, TransObj } from './components/TranslationObjects.js';
 import Header from './components/HeaderSection/Header.js';
 import Gallery from './components/MainSection/Gallery.js';
 import Form from './components/FormSection/Form.js';
@@ -20,6 +21,7 @@ function App() {
         ? [navigator.language.substring(0,2), navigator.language]
         : ['en', 'en-US'];
     const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage);
+    // const currentTranslation = TransObj[`${currentLanguage[0]}`];
         
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up
@@ -48,6 +50,14 @@ function App() {
         return false;
     }
 
+    const GalleryErrorDefault = () => {
+        return (
+            <div className="message-container">
+                <h4>{`${TransObj[`${currentLanguage[0]}`].status_messages.no_results}`}</h4>
+            </div>
+        )
+    }
+
     return (
         <>
             <Header
@@ -70,6 +80,8 @@ function App() {
                 setIsSearchbarOpen={setIsSearchbarOpen}
             />
             <main className={searchState}>
+            
+            <ErrorBoundary fallback={<GalleryErrorDefault/>}>
                 <Gallery
                     userSelections={userSelections}
                     currentRegion={currentRegion}
@@ -85,6 +97,7 @@ function App() {
                     isSearchbarOpen={isSearchbarOpen}
                     setUserSelections={setUserSelections}
                 />
+            </ErrorBoundary>
             </main>
             {isFormVisible ?
                 <Form
