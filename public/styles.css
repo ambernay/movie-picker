@@ -476,8 +476,9 @@ header {
 }
 
 .main-heading .heading-container {
-    align-items: end;
-    padding: 10px 0;
+    height: var(--headerHeight);
+    align-items: center;
+    justify-content: space-between;
 }
 
 .heading-container {
@@ -1686,7 +1687,6 @@ input[type="checkbox"] {
 .dropdown-menu {
     display: flex;
     flex-direction: column;
-    background: var(--darkNeutral);
     height: var(--subHeaderHeight);
     width: var(--formWidth);
     justify-content: center;
@@ -1963,18 +1963,10 @@ input[type="checkbox"] {
 }
 
 @media(max-width: 700px) {
-    .gallery-items {
-        max-width: calc(100dvh / 2.4);
-    }
-}
-
-@media(max-width: 565px) {
-
     /* #region - variables */
     :root {
         --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
         --mainHeaderFontSize: calc(1.3rem + 1vw);
-        /* --galleryItemMinWidth: 76dvw; */
     }
     /* #endregion - variables */
 
@@ -1987,6 +1979,31 @@ input[type="checkbox"] {
     .main-title-container {
         align-items: end;
     }
+
+    /* #region - right side header */
+    .heading-container .header-buttons-container {
+        width: inherit;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .language-list.header-region {
+        align-self: end;
+        margin-left: 0;
+    }
+
+    .toggle-button-container {
+        align-self: flex-start;
+    }
+    /* #endregion - right side header */
+
+    .gallery-items {
+        max-width: calc(100dvh / 2.4);
+    }
+}
+
+@media(max-width: 565px) {
 
     .find-movie-button, 
     .find-movie-button:hover, 
@@ -2076,27 +2093,6 @@ input[type="checkbox"] {
 @media(max-width: 340px) {
     :root {
         --toggleDropdownContainerWidth: calc(var(--switchWidth) + 5px);
-
-    }
-
-    .main-heading .heading-container {
-        align-items: center;
-    }
-
-    .heading-container .header-buttons-container {
-        width: inherit;
-        flex-direction: column-reverse;
-        justify-content: space-between;
-        align-items: flex-end;
-    }
-
-    .language-list.header-region {
-        align-self: end;
-        margin-left: 0;
-    }
-
-    .toggle-button-container {
-        align-self: flex-start;
     }
 
     .form-nav a {
