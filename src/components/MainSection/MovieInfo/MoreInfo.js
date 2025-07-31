@@ -1,12 +1,14 @@
 import { memo, use } from 'react';
 import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
 
-function MoreInfo({ galleryPropsObj, capFirstChar }) {
+function MoreInfo({ galleryPropsObj, movieInfoObj, capFirstChar }) {
 
-    const { movieID, mediaType, originalLanguage, originCountryArr, genreIds, 
-        releaseDate, character, crewCredits, currentLanguage, currentTranslation, 
-        tvMovieToggle, setUserSelections, setSearchState, personSearchState 
-    } = galleryPropsObj;
+    const { currentLanguage, currentTranslation, tvMovieToggle, setUserSelections, 
+        setSearchState, personSearchState } = galleryPropsObj;
+
+    const { id: movieID, media_type: mediaType, original_language: originalLanguage,
+        origin_country: originCountryArr, genre_ids: genreIds, release_date: releaseDate, 
+        first_air_date: airDate, character, job: crewCredits } = movieInfoObj
 
     let infoDataObj = {};
     const genres = use(GenreListApiCall(mediaType, currentLanguage));
@@ -15,6 +17,7 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
     // #region for populate info object
         // #region for person search
         if (character){
+            //  array used for mapping
             infoDataObj.Character_Name = [character];
         }
         if (crewCredits){
@@ -36,14 +39,16 @@ function MoreInfo({ galleryPropsObj, capFirstChar }) {
                 infoDataObj.ScreenPlay = screenWriting;
             }
         }
-        if (releaseDate){
-            infoDataObj.Release_Date = [releaseDate];
+        if (releaseDate || airDate){
+            //  array used for mapping
+            infoDataObj.Release_Date = [releaseDate || airDate];
         }
         if (genreIds && genres) {
             let genreNamesArray = genreIds.map(key => genres.find(item => item.id === key))
             infoDataObj.Genre_Ids = genreNamesArray;
         }
         if (originalLanguage) {
+            //  array used for mapping
             infoDataObj.Languages = [originalLanguage.toUpperCase() ]; 
         }
         if (originCountryArr) {

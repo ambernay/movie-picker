@@ -21,7 +21,6 @@ function App() {
         ? [navigator.language.substring(0,2), navigator.language]
         : ['en', 'en-US'];
     const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage);
-    // const currentTranslation = TransObj[`${currentLanguage[0]}`];
         
     function evaluateScreenSize() {
         // height has to be lower to allow for search bar pop-up

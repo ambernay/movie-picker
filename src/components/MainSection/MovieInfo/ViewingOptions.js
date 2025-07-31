@@ -110,7 +110,6 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
                 : providerName === 'JustWatchTV' ? redirectLink
                 : defaultURL
 
-            console.log(providerName, redirectLink, decodeURIComponent(finalURL));
             // window.open(redirectLink, '_blank');
             window.open(decodeURIComponent(finalURL), '_blank');
         });
