@@ -2119,6 +2119,21 @@ input[type="checkbox"] {
     }
 }
 
+/* removes hover styles for provider links on touch screens */
+@media (hover: none) {
+
+    .movie-info-container .movie-info-list .provider-icon-list:hover {
+        box-shadow: inset 0 0 15px var(--lightAccent);
+        -webkit-box-shadow: inset 0 0 15px var(--lightAccent);
+    }
+
+    .movie-info-container .movie-info-list .provider-icon-list img:hover {
+        box-shadow: 0 0 15px var(--lightAccent);
+        -webkit-box-shadow: 0 0 15px var(--lightAccent);
+    }
+
+}
+
 /* Safari 11+ */
 
 @media not all and (min-resolution:.001dpcm) {
