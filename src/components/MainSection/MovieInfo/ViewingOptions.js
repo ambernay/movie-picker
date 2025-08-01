@@ -133,7 +133,8 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
                                     return (
-                                        <li key={iconKey} title={key.provider_name} onClick={TMDBMovieLink ? linkToProvider : null}
+                                        <li key={iconKey} title={key.provider_name} 
+                                            onClick={TMDBMovieLink ? linkToProvider : null}
                                             className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
                                         >
                                             {(key.logo_path === 'N/A') ?
