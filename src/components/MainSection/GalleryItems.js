@@ -2,10 +2,7 @@ import { useState, useCallback } from 'react';
 import MovieInfoContainer from './MovieInfo/MovieInfoContainer.js';
 import { TvOutlineIcon } from '../Icons.js';
 
-// (failed)net::ERR_CERT_COMMON_NAME_INVALID
-
-function GalleryItems({  itemRef, tabIndex, currentRegion, 
-    galleryPropsObj, movieInfoObj}) {
+function GalleryItems({  itemRef, tabIndex, galleryPropsObj, movieInfoObj}) {
         
     const [infoState, setInfoState] = useState('hidden');
 
@@ -53,7 +50,6 @@ function GalleryItems({  itemRef, tabIndex, currentRegion,
             <MovieInfoContainer
                 galleryPropsObj={galleryPropsObj}
                 movieInfoObj={movieInfoObj}
-                currentRegion={currentRegion}
                 infoState={infoState}
                 setInfoState={setInfoState}
             />

@@ -148,6 +148,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
 
     const createGalleryPropsObj = useMemo(() => {
         return {
+            currentRegion: currentRegion,
             currentLanguage: currentLanguage,
             currentTranslation: currentTranslation,
             tvMovieToggle: tvMovieToggle,
@@ -171,7 +172,6 @@ function Gallery({ userSelections, setUserSelections, currentPage,
                                         key={movie.id}
                                         itemRef={index === 0 ? firstElementRef : null}
                                         tabIndex={tabIndex}
-                                        currentRegion={currentRegion}
                                         galleryPropsObj={createGalleryPropsObj}
                                         movieInfoObj={movie}
                                     />
