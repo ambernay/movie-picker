@@ -4,7 +4,7 @@ import { ViewingOptionsApiCall, ProviderLinkInfoCall } from '../../MovieApiCache
 function ViewingOptions({ movieID, galleryPropsObj, capFirstChar, LoadingStatusMessage  }) {
 
     const { currentRegion, currentTranslation, tvMovieToggle } = galleryPropsObj;
-
+    
     const sectionLabel = currentTranslation.provider_options;
 
     const viewingOptionsResults = use(ViewingOptionsApiCall(tvMovieToggle, movieID, currentRegion));

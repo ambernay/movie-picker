@@ -156,7 +156,7 @@ function Gallery({ userSelections, setUserSelections, currentPage,
             setSearchState: setSearchState,
             personSearchState: personSearchState
         }
-    },[currentLanguage, currentTranslation, tvMovieToggle, 
+    },[currentRegion, currentLanguage, currentTranslation, tvMovieToggle, 
         setUserSelections, setSearchState, personSearchState])
 
     return (
