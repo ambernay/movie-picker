@@ -114,10 +114,11 @@ function MoreInfo({ galleryPropsObj, movieInfoObj, capFirstChar , LoadingStatusM
                                         >
                                             {/* screen reader info for links */}
                                             {isPerson ? 
-                                                <span className="sr-only">{`${currentTranslation.search} ${key.name}`}</span>
-                                                : null
+                                                <a>{key.name || key}</a>
+                                                : 
+                                                <span>{key.name || key}</span>
                                             }
-                                            {key.name || key}
+                                            
                                         </li>
                                     )
                                 })

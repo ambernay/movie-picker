@@ -417,7 +417,7 @@ h3,
 h4,
 legend,
 button,
-a {
+.form-nav a {
     font-family: var(--headingFont);
     word-wrap: break-word;
 }
@@ -434,10 +434,6 @@ select {
 
 h3 {
     line-height: 1.4rem;
-}
-
-a {
-    font-size: 1rem;
 }
 
 p,
@@ -1398,6 +1394,7 @@ fieldset .error-message-container {
 }
 
 .form-nav a {
+    font-size: 1rem;
     color: var(--midAccent);
 }
 
