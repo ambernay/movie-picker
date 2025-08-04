@@ -1,7 +1,7 @@
-import { memo, use } from 'react';
+import { memo, use, Suspense } from 'react';
 import { MovieInfoApiCall, GenreListApiCall } from '../../MovieApiCache.js';
 
-function MoreInfo({ galleryPropsObj, movieInfoObj, capFirstChar }) {
+function MoreInfo({ galleryPropsObj, movieInfoObj, capFirstChar , LoadingStatusMessage}) {
 
     const { currentLanguage, currentTranslation, tvMovieToggle, setUserSelections, 
         setSearchState, personSearchState } = galleryPropsObj;
@@ -73,6 +73,7 @@ function MoreInfo({ galleryPropsObj, movieInfoObj, capFirstChar }) {
  
     return (
         <>
+        <Suspense fallback={<LoadingStatusMessage />}>
         <ul className='movie-info-list-container movie-info-middle'>
             {Object.keys(infoDataObj)?.length < 1 ? 
                 <FailedFetchsMessage/>
@@ -128,6 +129,7 @@ function MoreInfo({ galleryPropsObj, movieInfoObj, capFirstChar }) {
             }) 
             }
         </ul>
+        </Suspense>
         </>
     )
 }

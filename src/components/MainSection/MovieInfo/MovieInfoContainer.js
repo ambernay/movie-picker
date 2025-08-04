@@ -62,6 +62,7 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, currentRegion, infoState, se
                         currentRegion={currentRegion}
                         currentTranslation={currentTranslation}
                         capFirstChar={capFirstChar}
+                        LoadingStatusMessage={LoadingStatusMessage}
                     />
                 </Suspense>
             )

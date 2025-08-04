@@ -1,13 +1,14 @@
-import { memo, use } from 'react';
+import { memo, use, Suspense } from 'react';
 import { ViewingOptionsApiCall, ProviderLinkInfoCall } from '../../MovieApiCache.js';
 
 function ViewingOptions({ movieID, tvMovieToggle, currentRegion, 
-    currentTranslation, capFirstChar }) {
+    currentTranslation, capFirstChar, LoadingStatusMessage  }) {
 
     const sectionLabel = currentTranslation.provider_options;
 
     const viewingOptionsResults = use(ViewingOptionsApiCall(tvMovieToggle, movieID, currentRegion));
     const TMDBMovieLink = viewingOptionsResults.link;
+    const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
     
     const filteredKey = (key) => {
         switch (key) {
@@ -74,6 +75,36 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
 
     let viewingOptions = filteredViewingOptions(viewingOptionsResults);
 
+    const linkToProvider = (key, justWatchPage) => {
+        const providerName = key.provider_name;
+        const logoPath = key.logo_path;
+        const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
+        const baseURL = 'https://media.themoviedb.org/t/p/original';
+        const providerURL = `${baseURL}${logoId}`;
+        
+        // converting data to iterable html
+        const html = justWatchPage;
+        const tempElement = document.createElement('div');
+        tempElement.innerHTML = html;
+        // HTMLCollection of elements matching clicked element
+        const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
+        // Convert HTMLCollection to an array for easier manipulation
+        const elementsArray = Array.from(providerIcons);
+        // find first element in array that has an href
+        const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
+        const redirectLink = selectedIcon.parentElement.href;
+        const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
+        
+        const disneyURL = decodeURIComponent(redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('%26')));
+        // disney has different last index and double encoded
+        const finalURL = providerName === 'Disney Plus' ? disneyURL
+            // justwatch needs no alteration
+            : providerName === 'JustWatchTV' ? redirectLink
+            : defaultURL
+
+        return decodeURIComponent(finalURL);
+    }
+
     const FailedFetchsMessage = () => {
         return(
             <div className='icon-message-container'>
@@ -82,40 +113,9 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
         )
     }
 
-    const linkToProvider = (e) => {
-        const providerName = e.target.closest('li').title;
-        const logoPath = e.target.closest('img').src;
-        const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
-        const baseURL = 'https://media.themoviedb.org/t/p/original';
-        const providerURL = `${baseURL}${logoId}`;
-        
-        ProviderLinkInfoCall(movieID, TMDBMovieLink).then(result => {
-            // converting data to iterable html
-            const html = result;
-            const tempElement = document.createElement('div');
-            tempElement.innerHTML = html;
-            // HTMLCollection of elements matching clicked element
-            const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
-            // Convert HTMLCollection to an array for easier manipulation
-            const elementsArray = Array.from(providerIcons);
-            // find first element in array that has an href
-            const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
-            const redirectLink = selectedIcon.parentElement.href;
-            const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
-            
-            const disneyURL = decodeURIComponent(redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('%26')));
-            // disney has different last index and double encoded
-            const finalURL = providerName === 'Disney Plus' ? disneyURL
-                // justwatch needs no alteration
-                : providerName === 'JustWatchTV' ? redirectLink
-                : defaultURL
-
-            // window.open(redirectLink, '_blank');
-            window.open(decodeURIComponent(finalURL), '_blank');
-        });
-    }
     return (
         <>
+        <Suspense fallback={<LoadingStatusMessage />}>
         <ul className='movie-info-list-container movie-info-middle'>
             {Object.keys(viewingOptions).length < 1 ? 
                 <FailedFetchsMessage />
@@ -134,17 +134,18 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
 
                                     return (
                                         <li key={iconKey} title={key.provider_name} 
-                                            onClick={TMDBMovieLink ? linkToProvider : null}
                                             className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
                                         >
-                                            {(key.logo_path === 'N/A') ?
-                                                <h4>{key.logo_path}</h4>
-                                                :
-                                                <img className='provider-icons' 
-                                                    src={imageURL + key.logo_path}
-                                                    alt={key.provider_name}   
-                                                />
-                                            }
+                                            <a href={`${linkToProvider(key, justWatchPage)}`} target="_blank">
+                                                {(key.logo_path === 'N/A') ?
+                                                    <h4>{key.logo_path}</h4>
+                                                    :
+                                                    <img className='provider-icons' 
+                                                        src={imageURL + key.logo_path}
+                                                        alt={key.provider_name}   
+                                                    />
+                                                }
+                                            </a>
                                         </li>
                                     )
                                 })
@@ -156,6 +157,7 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
             })
             }
         </ul>
+        </Suspense>
         </>
     )
 }
