@@ -11,8 +11,6 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
     const viewingOptionsResults = use(ViewingOptionsApiCall(tvMovieToggle, movieID, currentRegion));
     const TMDBMovieLink = viewingOptionsResults.link;
     const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
-    console.log('viewing options', viewingOptionsResults);
-    console.log('justWatchPage', justWatchPage)
     
     const filteredKey = (key) => {
         switch (key) {
@@ -111,6 +109,7 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
         }
         else {
             const deadLink = 'justWatchPage.com';
+            return deadLink;
         }
     }
 
@@ -145,16 +144,16 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
                                         <li key={iconKey} title={key.provider_name} 
                                             className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
                                         >
-                                            <a href={`${linkToProvider(key, justWatchPage)}`} target="_blank">
-                                                {(key.logo_path === 'N/A') ?
-                                                    <h4>{key.logo_path}</h4>
-                                                    :
+                                            {(key.logo_path === 'N/A') ?
+                                                <h4>{key.logo_path}</h4>
+                                                :
+                                                <a href={`${linkToProvider(key, justWatchPage)}`} target="_blank">
                                                     <img className='provider-icons' 
                                                         src={imageURL + key.logo_path}
                                                         alt={key.provider_name}   
                                                     />
-                                                }
-                                            </a>
+                                                </a>
+                                            }
                                         </li>
                                     )
                                 })
