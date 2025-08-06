@@ -11,6 +11,8 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
     const viewingOptionsResults = use(ViewingOptionsApiCall(tvMovieToggle, movieID, currentRegion));
     const TMDBMovieLink = viewingOptionsResults.link;
     const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
+    console.log('viewing options', viewingOptionsResults);
+    console.log('justWatchPage', justWatchPage)
     
     const filteredKey = (key) => {
         switch (key) {
@@ -84,27 +86,32 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
         const baseURL = 'https://media.themoviedb.org/t/p/original';
         const providerURL = `${baseURL}${logoId}`;
         
-        // converting data to iterable html
-        const html = justWatchPage;
-        const tempElement = document.createElement('div');
-        tempElement.innerHTML = html;
-        // HTMLCollection of elements matching clicked element
-        const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
-        // Convert HTMLCollection to an array for easier manipulation
-        const elementsArray = Array.from(providerIcons);
-        // find first element in array that has an href
-        const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
-        const redirectLink = selectedIcon.parentElement.href;
-        const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
-        
-        const disneyURL = decodeURIComponent(redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('%26')));
-        // disney has different last index and double encoded
-        const finalURL = providerName === 'Disney Plus' ? disneyURL
-            // justwatch needs no alteration
-            : providerName === 'JustWatchTV' ? redirectLink
-            : defaultURL
+        if (TMDBMovieLink) {
+            // converting data to iterable html
+            const html = justWatchPage;
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = html;
+            // HTMLCollection of elements matching clicked element
+            const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
+            // Convert HTMLCollection to an array for easier manipulation
+            const elementsArray = Array.from(providerIcons);
+            // find first element in array that has an href
+            const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
+            const redirectLink = selectedIcon.parentElement.href;
+            const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
+            
+            const disneyURL = decodeURIComponent(redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('%26')));
+            // disney has different last index and double encoded
+            const finalURL = providerName === 'Disney Plus' ? disneyURL
+                // justwatch needs no alteration
+                : providerName === 'JustWatchTV' ? redirectLink
+                : defaultURL
 
-        return decodeURIComponent(finalURL);
+            return decodeURIComponent(finalURL);
+        }
+        else {
+            const deadLink = 'justWatchPage.com';
+        }
     }
 
     const FailedFetchsMessage = () => {
