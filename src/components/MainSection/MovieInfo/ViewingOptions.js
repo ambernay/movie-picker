@@ -1,9 +1,10 @@
 import { memo, use, Suspense } from 'react';
 import { ViewingOptionsApiCall, ProviderLinkInfoCall } from '../../MovieApiCache.js';
 
-function ViewingOptions({ movieID, galleryPropsObj, capFirstChar, LoadingStatusMessage  }) {
+function ViewingOptions({ movieID, currentRegion, galleryPropsObj, 
+    capFirstChar, LoadingStatusMessage  }) {
 
-    const { currentRegion, currentTranslation, tvMovieToggle } = galleryPropsObj;
+    const { currentTranslation, tvMovieToggle } = galleryPropsObj;
     
     const sectionLabel = currentTranslation.provider_options;
 

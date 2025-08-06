@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import MovieInfoContainer from './MovieInfo/MovieInfoContainer.js';
 import { TvOutlineIcon } from '../Icons.js';
 
-function GalleryItems({  itemRef, tabIndex, galleryPropsObj, movieInfoObj}) {
+function GalleryItems({  itemRef, tabIndex, currentRegion, galleryPropsObj, movieInfoObj}) {
         
     const [infoState, setInfoState] = useState('hidden');
 
@@ -50,6 +50,7 @@ function GalleryItems({  itemRef, tabIndex, galleryPropsObj, movieInfoObj}) {
             <MovieInfoContainer
                 galleryPropsObj={galleryPropsObj}
                 movieInfoObj={movieInfoObj}
+                currentRegion={currentRegion}
                 infoState={infoState}
                 setInfoState={setInfoState}
             />

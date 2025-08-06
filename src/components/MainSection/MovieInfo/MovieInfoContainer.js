@@ -4,7 +4,8 @@ import MoreInfo from './MoreInfo.js';
 
 import { EyeIcon, InfoIcon, TvIcon, FilmIcon } from '../../Icons.js';
 
-function MovieInfo({ galleryPropsObj, movieInfoObj, infoState, setInfoState }) {
+function MovieInfo({ galleryPropsObj, movieInfoObj, infoState, 
+    setInfoState, currentRegion }) {
 
     const { currentTranslation, tvMovieToggle } = galleryPropsObj;
 
@@ -58,6 +59,7 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState, setInfoState }) {
                 <Suspense fallback={<LoadingStatusMessage />}>
                     <ProviderIconsList
                         movieID={movieID}
+                        currentRegion={currentRegion}
                         galleryPropsObj={galleryPropsObj}
                         capFirstChar={capFirstChar}
                         LoadingStatusMessage={LoadingStatusMessage}
