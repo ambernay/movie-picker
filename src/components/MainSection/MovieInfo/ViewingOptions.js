@@ -1,13 +1,16 @@
-import { memo, use } from 'react';
+import { memo, use, Suspense } from 'react';
 import { ViewingOptionsApiCall, ProviderLinkInfoCall } from '../../MovieApiCache.js';
 
-function ViewingOptions({ movieID, tvMovieToggle, currentRegion, 
-    currentTranslation, capFirstChar }) {
+function ViewingOptions({ movieID, currentRegion, galleryPropsObj, 
+    capFirstChar, LoadingStatusMessage  }) {
 
+    const { currentTranslation, tvMovieToggle } = galleryPropsObj;
+    
     const sectionLabel = currentTranslation.provider_options;
 
     const viewingOptionsResults = use(ViewingOptionsApiCall(tvMovieToggle, movieID, currentRegion));
     const TMDBMovieLink = viewingOptionsResults.link;
+    const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
     
     const filteredKey = (key) => {
         switch (key) {
@@ -74,24 +77,16 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
 
     let viewingOptions = filteredViewingOptions(viewingOptionsResults);
 
-    const FailedFetchsMessage = () => {
-        return(
-            <div className='icon-message-container'>
-                <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
-            </div>
-        )
-    }
-
-    const linkToProvider = (e) => {
-        const providerName = e.target.closest('li').title;
-        const logoPath = e.target.closest('img').src;
+    const linkToProvider = (key, justWatchPage) => {
+        const providerName = key.provider_name;
+        const logoPath = key.logo_path;
         const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
         const baseURL = 'https://media.themoviedb.org/t/p/original';
         const providerURL = `${baseURL}${logoId}`;
         
-        ProviderLinkInfoCall(movieID, TMDBMovieLink).then(result => {
+        if (TMDBMovieLink) {
             // converting data to iterable html
-            const html = result;
+            const html = justWatchPage;
             const tempElement = document.createElement('div');
             tempElement.innerHTML = html;
             // HTMLCollection of elements matching clicked element
@@ -110,13 +105,25 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
                 : providerName === 'JustWatchTV' ? redirectLink
                 : defaultURL
 
-            console.log(providerName, redirectLink, decodeURIComponent(finalURL));
-            // window.open(redirectLink, '_blank');
-            window.open(decodeURIComponent(finalURL), '_blank');
-        });
+            return decodeURIComponent(finalURL);
+        }
+        else {
+            const deadLink = 'justWatchPage.com';
+            return deadLink;
+        }
     }
+
+    const FailedFetchsMessage = () => {
+        return(
+            <div className='icon-message-container'>
+                <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
+            </div>
+        )
+    }
+
     return (
         <>
+        <Suspense fallback={<LoadingStatusMessage />}>
         <ul className='movie-info-list-container movie-info-middle'>
             {Object.keys(viewingOptions).length < 1 ? 
                 <FailedFetchsMessage />
@@ -134,16 +141,18 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
 
                                     return (
-                                        <li key={iconKey} title={key.provider_name} onClick={TMDBMovieLink ? linkToProvider : null}
+                                        <li key={iconKey} title={key.provider_name} 
                                             className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
                                         >
                                             {(key.logo_path === 'N/A') ?
                                                 <h4>{key.logo_path}</h4>
                                                 :
-                                                <img className='provider-icons' 
-                                                    src={imageURL + key.logo_path}
-                                                    alt={key.provider_name}   
-                                                />
+                                                <a href={`${linkToProvider(key, justWatchPage)}`} target="_blank">
+                                                    <img className='provider-icons' 
+                                                        src={imageURL + key.logo_path}
+                                                        alt={key.provider_name}   
+                                                    />
+                                                </a>
                                             }
                                         </li>
                                     )
@@ -156,6 +165,7 @@ function ViewingOptions({ movieID, tvMovieToggle, currentRegion,
             })
             }
         </ul>
+        </Suspense>
         </>
     )
 }

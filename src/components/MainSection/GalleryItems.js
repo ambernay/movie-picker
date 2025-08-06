@@ -2,15 +2,19 @@ import { useState, useCallback } from 'react';
 import MovieInfoContainer from './MovieInfo/MovieInfoContainer.js';
 import { TvOutlineIcon } from '../Icons.js';
 
-// (failed)net::ERR_CERT_COMMON_NAME_INVALID
-
-function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePath, 
-    audienceRating, tabIndex, currentRegion }) {
+function GalleryItems({  itemRef, tabIndex, currentRegion, galleryPropsObj, movieInfoObj}) {
         
     const [infoState, setInfoState] = useState('hidden');
 
-    let rating = audienceRating > 0 ? audienceRating : "N/A";
+    const { id: movieID, title: movieTitle, name: movieName,
+        poster_path: posterPath, vote_average: audienceRating } = movieInfoObj
 
+    const imageURL = 'https://image.tmdb.org/t/p/w500';
+    /* if image not available, use icon */
+    const imagePath = posterPath ? (imageURL + posterPath) : null;
+        
+    let rating = audienceRating?.toFixed(1) > 0 ? audienceRating?.toFixed(1) : "N/A";
+       
     // let truncatedTitle = (movieTitle.length > 35) ? (movieTitle.slice(0, 35) + "...") : movieTitle;
 
     const handleMouseLeave = () => {
@@ -21,7 +25,7 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
     // useCallback prevents component from re-rendering
     const ImageComponent = useCallback(() => {
         if (imagePath) {
-            return (<img src={imagePath} alt={movieTitle} />)
+            return (<img src={imagePath} alt={movieTitle || movieName} />)
         }
         else {
             return(
@@ -35,19 +39,18 @@ function GalleryItems({  itemRef, galleryPropsObj, movieTitle, overview, imagePa
    
     return (
         // tab index default 0 and -1 when dropdown menu is open
-        <li key={galleryPropsObj.movieID} ref={itemRef} id={galleryPropsObj.movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
+        <li key={movieID} ref={itemRef} id={movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
         onClick={(e) => { e.stopPropagation(); }} onMouseEnter={() => setInfoState('overview')} 
-        onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave}>
+        onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave} >
             <ImageComponent />
             <div className="info-container">
-                <h3>{movieTitle}</h3>
+                <h3>{movieTitle || movieName}</h3>
                 <p className="rating">{rating}</p>
             </div>
             <MovieInfoContainer
-                overview={overview}
                 galleryPropsObj={galleryPropsObj}
+                movieInfoObj={movieInfoObj}
                 currentRegion={currentRegion}
-                movieTitle={movieTitle}
                 infoState={infoState}
                 setInfoState={setInfoState}
             />

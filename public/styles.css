@@ -288,6 +288,7 @@ button,
 input,
 textarea,
 select {
+    display: flex;
     background: none;
     border: none;
     text-decoration: none;
@@ -416,7 +417,7 @@ h3,
 h4,
 legend,
 button,
-a {
+.form-nav a {
     font-family: var(--headingFont);
     word-wrap: break-word;
 }
@@ -433,10 +434,6 @@ select {
 
 h3 {
     line-height: 1.4rem;
-}
-
-a {
-    font-size: 1rem;
 }
 
 p,
@@ -476,8 +473,9 @@ header {
 }
 
 .main-heading .heading-container {
-    align-items: end;
-    padding: 10px 0;
+    height: var(--headerHeight);
+    align-items: center;
+    justify-content: space-between;
 }
 
 .heading-container {
@@ -668,17 +666,23 @@ li:focus {
 }
 
 .language-list.header-region {
+    --subHeaderHeight: 0.8rem;
     background: none;
+    align-self: baseline;
 }
 
 .language-list.header-region .label-container {
+    --dropdownLabelWidth: 2rem;
     color: var(--darkNeutral);
+    font-size: calc(var(--subHeaderHeight) - 0.1rem);
+    height: calc(var(--subHeaderHeight) + 0.2rem);
 }
 
 .region-list.header-region,
 .language-list.header-region {
     width: var(--narrow-dropdown-width);
     margin-left: 5px;
+    align-items: end;
 }
 
 .region-list.header-region .label-container,
@@ -1253,12 +1257,12 @@ ul li .info-container {
     -webkit-box-shadow: inset 0 0 15px var(--lightAccent);
 }
 
-.movie-info-container .movie-info-list .provider-icon-list img:hover,
+/* .movie-info-container .movie-info-list .provider-icon-list img:hover,
 .movie-info-container .movie-info-list .provider-icon-list img:active,
 .movie-info-container .movie-info-list .provider-icon-list img:focus{
     box-shadow: 0 0 15px var(--lightAccent);
     -webkit-box-shadow: 0 0 15px var(--lightAccent);
-}
+} */
 
 .movie-info-container .movie-info-list .provider-icon-list img:active {
     opacity: 0.6;
@@ -1390,6 +1394,7 @@ fieldset .error-message-container {
 }
 
 .form-nav a {
+    font-size: 1rem;
     color: var(--midAccent);
 }
 
@@ -1680,7 +1685,6 @@ input[type="checkbox"] {
 .dropdown-menu {
     display: flex;
     flex-direction: column;
-    background: var(--darkNeutral);
     height: var(--subHeaderHeight);
     width: var(--formWidth);
     justify-content: center;
@@ -1717,7 +1721,7 @@ input[type="checkbox"] {
     align-items: center;
     text-align: center;
     font-size: var(--labelFontSize);
-    padding: 3px;
+    padding: 4px 3px 3px 3px;
     border: solid 1px var(--lightAccent);
     color: var(--lightAccent);
     padding-right: 1rem;
@@ -1738,6 +1742,12 @@ input[type="checkbox"] {
 .header-region .label-container::before, 
 .header-region .label-container::after {
     right: calc(var(--size) - 3px);
+}
+
+.language-list .label-container::before, 
+.language-list .label-container::after {
+    --size: 0.2rem;
+    margin-right: 2px;
 }
 
 .label-container::before,
@@ -1951,18 +1961,10 @@ input[type="checkbox"] {
 }
 
 @media(max-width: 700px) {
-    .gallery-items {
-        max-width: calc(100dvh / 2.4);
-    }
-}
-
-@media(max-width: 565px) {
-
     /* #region - variables */
     :root {
         --headerHeight: calc(var(--mainHeaderFontSize) * 2.35);
         --mainHeaderFontSize: calc(1.3rem + 1vw);
-        /* --galleryItemMinWidth: 76dvw; */
     }
     /* #endregion - variables */
 
@@ -1975,6 +1977,31 @@ input[type="checkbox"] {
     .main-title-container {
         align-items: end;
     }
+
+    /* #region - right side header */
+    .heading-container .header-buttons-container {
+        width: inherit;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .language-list.header-region {
+        align-self: end;
+        margin-left: 0;
+    }
+
+    .toggle-button-container {
+        align-self: flex-start;
+    }
+    /* #endregion - right side header */
+
+    .gallery-items {
+        max-width: calc(100dvh / 2.4);
+    }
+}
+
+@media(max-width: 565px) {
 
     .find-movie-button, 
     .find-movie-button:hover, 
@@ -2064,21 +2091,6 @@ input[type="checkbox"] {
 @media(max-width: 340px) {
     :root {
         --toggleDropdownContainerWidth: calc(var(--switchWidth) + 5px);
-
-    }
-
-    .main-heading .heading-container {
-        align-items: center;
-    }
-
-    .heading-container .header-buttons-container {
-        flex-direction: column-reverse;
-        justify-content: space-between;
-        align-items: flex-end;
-    }
-
-    .toggle-button-container {
-        align-self: flex-start;
     }
 
     .form-nav a {
