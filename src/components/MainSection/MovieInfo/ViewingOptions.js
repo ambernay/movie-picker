@@ -57,19 +57,16 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
             delete newObj.buy;
             delete newObj.rent;
         }
-
         if (mergedBuyRentArr.buy.length > 0) {
             newObj.buy = mergedBuyRentArr.buy;
         } else {
             delete mergedBuyRentArr.buy;
         }
-
         if (mergedBuyRentArr.rent.length > 0) {
             newObj.rent = mergedBuyRentArr.rent;
         } else {
             delete mergedBuyRentArr.rent;
         }
-       
         newObj = { ...newObj, ...mergedBuyRentArr };
         return newObj;
     }
@@ -87,9 +84,8 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
             const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
 
             // converting data to iterable html
-            const html = justWatchPage;
             const tempElement = document.createElement('div');
-            tempElement.innerHTML = html;
+            tempElement.innerHTML = justWatchPage;
             // HTMLCollection of elements matching clicked element
             const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
             // Convert HTMLCollection to an array for easier manipulation
