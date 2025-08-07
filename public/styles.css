@@ -362,11 +362,13 @@ img {
     --galleryItemPadding: 10px;
     --galleryVerticlePadding: 3dvh;
     /* form */
-    --formWidth: 96%;
+    --formWidth: 100%;
     --formHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     --formNavHeight: 2.25rem;
     --dropdownHeight: 2.2rem;
     --formBottomHeight: 5.5rem;
+    --formSidePadding: 20px;
+    --formBorderAndMargin: 4px;
     --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
     --fieldsetContainerHeight: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
     --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + var(--regionDropdownMargin)));
@@ -1377,7 +1379,7 @@ fieldset .error-message-container {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    padding: 5px var(--formSidePadding);
     padding-bottom: var(--formBottomHeight);
     border-top: solid 1px var(--lightAccent);
     overflow-y: scroll;
@@ -1669,14 +1671,13 @@ input[type="checkbox"] {
     flex-direction: column-reverse;
     position: absolute;
     bottom: 0;
-    left: calc((100% - var(--formWidth)) / 2);
+    left: calc(var(--formSidePadding) + (var(--formBorderAndMargin) / 2));
     height: var(--formBottomHeight);
-    width: var(--formWidth);
+    width: calc(var(--formWidth) - (var(--formSidePadding) * 2) - var(--formBorderAndMargin));
     align-items: center;
     justify-content: space-around;
     background-color: var(--darkNeutral);
     border-top: 1px solid var(--lightAccent);
-    /* padding: 5px 0; */
 }
 
 /* #region - dropdown menus */
@@ -1711,6 +1712,7 @@ input[type="checkbox"] {
 .dropdown-menu.sort-by {
     align-items: flex-end;
     margin: 5px 0;
+    padding: 0 calc(var(--formBorderAndMargin) / 2);
 }
 
 .dropdown-menu .label-container {
@@ -1834,7 +1836,6 @@ input[type="checkbox"] {
 .sort-by .select-container.visible {
     position: absolute;
     bottom: var(--formBottomHeight);
-    right: 3%;
     height: fit-content;
     width: var(--sortByListWidth);
 }
