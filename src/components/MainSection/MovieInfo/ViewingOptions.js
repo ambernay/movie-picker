@@ -10,7 +10,6 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
 
     const viewingOptionsResults = use(ViewingOptionsApiCall(tvMovieToggle, movieID, currentRegion));
     const TMDBMovieLink = viewingOptionsResults.link;
-    const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
     
     const filteredKey = (key) => {
         switch (key) {
@@ -58,26 +57,23 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
             delete newObj.buy;
             delete newObj.rent;
         }
-
         if (mergedBuyRentArr.buy.length > 0) {
             newObj.buy = mergedBuyRentArr.buy;
         } else {
             delete mergedBuyRentArr.buy;
         }
-
         if (mergedBuyRentArr.rent.length > 0) {
             newObj.rent = mergedBuyRentArr.rent;
         } else {
             delete mergedBuyRentArr.rent;
         }
-       
         newObj = { ...newObj, ...mergedBuyRentArr };
         return newObj;
     }
 
     let viewingOptions = filteredViewingOptions(viewingOptionsResults);
 
-    const linkToProvider = (key, justWatchPage) => {
+    const linkToProvider = (key) => {
         const providerName = key.provider_name;
         const logoPath = key.logo_path;
         const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
@@ -85,10 +81,11 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
         const providerURL = `${baseURL}${logoId}`;
         
         if (TMDBMovieLink) {
+            const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
+
             // converting data to iterable html
-            const html = justWatchPage;
             const tempElement = document.createElement('div');
-            tempElement.innerHTML = html;
+            tempElement.innerHTML = justWatchPage;
             // HTMLCollection of elements matching clicked element
             const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
             // Convert HTMLCollection to an array for easier manipulation
@@ -147,7 +144,7 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
                                             {(key.logo_path === 'N/A') ?
                                                 <h4>{key.logo_path}</h4>
                                                 :
-                                                <a href={`${linkToProvider(key, justWatchPage)}`} target="_blank">
+                                                <a href={`${linkToProvider(key)}`} target="_blank">
                                                     <img className='provider-icons' 
                                                         src={imageURL + key.logo_path}
                                                         alt={key.provider_name}   
