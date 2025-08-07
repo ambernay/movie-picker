@@ -1,6 +1,7 @@
 import { useState, useEffect, memo } from 'react';
 import CustomDropdown from './CustomDropdown';
 import { RegionApiCall, GeoLocation } from '../../MovieApiCache';
+import { TransObj } from '../../TranslationObjects.js';
 
 function RegionDropdown({ positionClass, currentRegion, setCurrentRegion, 
     currentLanguage, screenSize, currentTranslation }) {
@@ -15,17 +16,18 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion,
             getDefaultRegion(result);
         });
     }, [currentLanguage, setRegionList]);
-
+    console.log(regionList);
     const getDefaultRegion = async (regionList) => {
         if (currentRegion === null) {
             // gets user region from netlify functions
             const geodata = await GeoLocation();
             
-            if (regionList.some(item => item.iso_3166_1 === geodata.countryCode)){   
+            if (regionList?.some(item => item.iso_3166_1 === geodata.countryCode)){   
                 setCurrentRegion([geodata.countryCode, geodata.countryName]);
             }
             else {
-                setCurrentRegion(['US', `United States`]);
+                const noResults = TransObj[`${currentLanguage[0]}`].status_messages.no_results;
+                setCurrentRegion(['—', '—————']);
             }
         }
         return;
@@ -63,6 +65,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion,
             handleChange={handleChange}
             errorMessage={failedMessage}
         />
+    
     )
 }
 
