@@ -84,10 +84,9 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
             const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
 
             // converting data to iterable html
-            const tempElement = document.createElement('div');
-            tempElement.innerHTML = justWatchPage;
+            const parseJustWatchPage = new DOMParser().parseFromString(justWatchPage, "text/html");
             // HTMLCollection of elements matching clicked element
-            const providerIcons = tempElement.querySelectorAll(`[src="${providerURL}"]`);
+            const providerIcons = parseJustWatchPage.querySelectorAll(`[src="${providerURL}"]`);
             // Convert HTMLCollection to an array for easier manipulation
             const elementsArray = Array.from(providerIcons);
             // find first element in array that has an href
