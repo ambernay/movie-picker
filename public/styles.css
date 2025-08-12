@@ -1439,7 +1439,7 @@ legend {
     width: fit-content;
     padding: 5px;
     margin-top: var(--subHeadingMargin);
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 /* fieldset */
@@ -1678,6 +1678,7 @@ input[type="checkbox"] {
     justify-content: space-around;
     background-color: var(--darkNeutral);
     border-top: 1px solid var(--lightAccent);
+    padding: 3px 0;
 }
 
 /* #region - dropdown menus */
@@ -1711,7 +1712,6 @@ input[type="checkbox"] {
 
 .dropdown-menu.sort-by {
     align-items: flex-end;
-    margin: 5px 0;
     padding: 0 calc(var(--formBorderAndMargin) / 2);
 }
 
@@ -1955,10 +1955,6 @@ input[type="checkbox"] {
     header figure h2 {
         display: none;
     }
-
-    .form-button-container button {
-        margin-bottom: 15px;
-    }
 }
 
 @media(max-width: 700px) {
@@ -1991,10 +1987,6 @@ input[type="checkbox"] {
         align-self: end;
         margin-left: 0;
     }
-
-    .toggle-button-container {
-        align-self: flex-start;
-    }
     /* #endregion - right side header */
 
     .gallery-items {
@@ -2004,7 +1996,7 @@ input[type="checkbox"] {
 
 @media(max-width: 565px) {
     :root {
-        --formNavHeight: 65px;
+        --formNavHeight: 70px;
     }
 
     .find-movie-button, 
@@ -2034,8 +2026,10 @@ input[type="checkbox"] {
         --galleryItemMinWidth: 33dvh;
         --galleryVerticlePadding: 3dvh;
         --paddingGap: 20px;
+        --fieldsetContainerHeight: 100%;
         /* removed --formNavHeight */
         --innerform: calc(var(--dropdownLabelHeight) + var(--formBottomHeight));
+        --formHeight: calc(100dvh - var(--headerMargin));
         --regionDropdownHeight: calc(var(--formHeight) - var(--innerform));
     }
 
@@ -2083,6 +2077,10 @@ input[type="checkbox"] {
         justify-content: space-between;
     }
 
+    .fieldset-container {
+        border: none;
+    }
+
     /* header dropdowns */
     .header-region .select-container {
         /* centered */
@@ -2120,10 +2118,6 @@ input[type="checkbox"] {
     .info-container h3 {
         line-clamp: 1;
         -webkit-line-clamp: 1;
-    }
-
-    .form-button-container {
-        margin-bottom: 10px; 
     }
 }
 
