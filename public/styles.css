@@ -362,14 +362,16 @@ img {
     --galleryItemPadding: 10px;
     --galleryVerticlePadding: 3dvh;
     /* form */
-    --formWidth: 96%;
+    --formWidth: 100%;
     --formHeight: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     --formNavHeight: 2.25rem;
-    --dropdownHeight: 2.2rem;
+    --dropdownLabelHeight: 2.2rem;
     --formBottomHeight: 5.5rem;
-    --innerform: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--formBottomHeight));
-    --fieldsetContainerHeight: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownHeight)));
-    --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform) + var(--regionDropdownMargin)));
+    --formSidePadding: 20px;
+    --formBorderAndMargin: 4px;
+    --innerform: calc(var(--formNavHeight) + var(--dropdownLabelHeight) + var(--formBottomHeight) + var(--regionDropdownMargin));
+    --fieldsetContainerHeight: calc(var(--formHeight) - (var(--formBottomHeight) + var(--formNavHeight) + var(--dropdownLabelHeight)));
+    --regionDropdownHeight: calc(var(--formHeight) - (var(--innerform)));
     --regionDropdownMargin: 5px;
     --regionDropdownWidth: 270px;
     --sortByListWidth: 55%;
@@ -1377,7 +1379,7 @@ fieldset .error-message-container {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    padding: 5px var(--formSidePadding);
     padding-bottom: var(--formBottomHeight);
     border-top: solid 1px var(--lightAccent);
     overflow-y: scroll;
@@ -1437,7 +1439,7 @@ legend {
     width: fit-content;
     padding: 5px;
     margin-top: var(--subHeadingMargin);
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 /* fieldset */
@@ -1669,14 +1671,14 @@ input[type="checkbox"] {
     flex-direction: column-reverse;
     position: absolute;
     bottom: 0;
-    left: calc((100% - var(--formWidth)) / 2);
+    left: calc(var(--formSidePadding) + (var(--formBorderAndMargin) / 2));
     height: var(--formBottomHeight);
-    width: var(--formWidth);
+    width: calc(var(--formWidth) - (var(--formSidePadding) * 2) - var(--formBorderAndMargin));
     align-items: center;
     justify-content: space-around;
     background-color: var(--darkNeutral);
     border-top: 1px solid var(--lightAccent);
-    /* padding: 5px 0; */
+    padding: 3px 0;
 }
 
 /* #region - dropdown menus */
@@ -1710,7 +1712,7 @@ input[type="checkbox"] {
 
 .dropdown-menu.sort-by {
     align-items: flex-end;
-    margin: 5px 0;
+    padding: 0 calc(var(--formBorderAndMargin) / 2);
 }
 
 .dropdown-menu .label-container {
@@ -1790,8 +1792,8 @@ input[type="checkbox"] {
 }
 
 .region-list.form-region .select-container {
-    top: calc(var(--formNavHeight) + var(--dropdownHeight) + var(--regionDropdownMargin));
-    height: var(--regionDropdownHeight);
+    top: calc(var(--formNavHeight) + var(--dropdownLabelHeight));
+    height: calc(var(--regionDropdownHeight) + var(--regionDropdownMargin));
 }
 
 .header-region .select-container {
@@ -1834,7 +1836,6 @@ input[type="checkbox"] {
 .sort-by .select-container.visible {
     position: absolute;
     bottom: var(--formBottomHeight);
-    right: 3%;
     height: fit-content;
     width: var(--sortByListWidth);
 }
@@ -1954,10 +1955,6 @@ input[type="checkbox"] {
     header figure h2 {
         display: none;
     }
-
-    .form-button-container button {
-        margin-bottom: 15px;
-    }
 }
 
 @media(max-width: 700px) {
@@ -1990,10 +1987,6 @@ input[type="checkbox"] {
         align-self: end;
         margin-left: 0;
     }
-
-    .toggle-button-container {
-        align-self: flex-start;
-    }
     /* #endregion - right side header */
 
     .gallery-items {
@@ -2002,6 +1995,9 @@ input[type="checkbox"] {
 }
 
 @media(max-width: 565px) {
+    :root {
+        --formNavHeight: 70px;
+    }
 
     .find-movie-button, 
     .find-movie-button:hover, 
@@ -2013,7 +2009,6 @@ input[type="checkbox"] {
 
     .form-nav {
         align-items: flex-end;
-        height: 65px;
         justify-content: space-between;
     }
 
@@ -2031,6 +2026,11 @@ input[type="checkbox"] {
         --galleryItemMinWidth: 33dvh;
         --galleryVerticlePadding: 3dvh;
         --paddingGap: 20px;
+        --fieldsetContainerHeight: 100%;
+        /* removed --formNavHeight */
+        --innerform: calc(var(--dropdownLabelHeight) + var(--formBottomHeight));
+        --formHeight: calc(100dvh - var(--headerMargin));
+        --regionDropdownHeight: calc(var(--formHeight) - var(--innerform));
     }
 
     .wrapper {
@@ -2045,12 +2045,16 @@ input[type="checkbox"] {
     .region-list.form-region {
         position: absolute;
         top: 0.5%;
-        left: 3%;
+        left: 0;
         margin: 0;
     }
 
     .region-list.form-region .label-container {
         width: 90px;
+    }
+
+    .region-list.form-region .select-container {
+        top: calc(var(--dropdownLabelHeight) - (var(--regionDropdownMargin) * 2));
     }
 
     .main-title-container {
@@ -2071,6 +2075,10 @@ input[type="checkbox"] {
     .result-heading-container {
         height: 100%;
         justify-content: space-between;
+    }
+
+    .fieldset-container {
+        border: none;
     }
 
     /* header dropdowns */
@@ -2110,10 +2118,6 @@ input[type="checkbox"] {
     .info-container h3 {
         line-clamp: 1;
         -webkit-line-clamp: 1;
-    }
-
-    .form-button-container {
-        margin-bottom: 10px; 
     }
 }
 
