@@ -23,7 +23,7 @@ function CustomDropdown({ listClass, selectList, currentSelectedLabel,
             <label className={isOpen ? 'label-container open-menu' : 'label-container'}>
                 {listClass === 'region-list header-region' 
                 || listClass === 'language-list header-region' ? 
-                    currentSelectedLabel.toUpperCase() 
+                    currentSelectedLabel?.toUpperCase() 
                     : currentSelectedLabel
                 }
             </label>

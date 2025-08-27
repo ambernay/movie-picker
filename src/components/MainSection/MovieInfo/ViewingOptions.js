@@ -92,6 +92,7 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
             // find first element in array that has an href
             const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
             const redirectLink = selectedIcon.parentElement.href;
+            // select only necessary portion of link
             const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
             
             const disneyURL = decodeURIComponent(redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('%26')));
