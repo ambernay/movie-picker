@@ -25,7 +25,12 @@ function Form({ setUserSelections, setIsFormVisible,
     const currentTranslation = TransObj[`${currentLanguage[0]}`];
     const formLabelTranslation = currentTranslation['section_labels'];
     const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
-  
+    const truncatedLabel = (label) => {
+        if (label.length > 10) {return (label.slice(0, 10) + "...")} 
+        else {return label;}
+    }
+// console.log((formLabels.provider.length > 10) ? (formLabels.provider.slice(0, 10) + "...") : formLabels.provider);
+    
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
         if (searchState === 'formSearch' && !isFormVisible) {
@@ -212,9 +217,9 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             </figure>
                         </button>
 
-                        <a href="#genre" tabIndex='0'>{formLabels.genre}</a>
-                        <a href="#decade" tabIndex='0'>{formLabels.decade}</a>
-                        <a href="#provider" tabIndex='0'>{formLabels.provider}</a>
+                        <a href="#genre" tabIndex='0'>{truncatedLabel(formLabels.genre)}</a>
+                        <a href="#decade" tabIndex='0'>{truncatedLabel(formLabels.decade)}</a>
+                        <a href="#provider" tabIndex='0'>{truncatedLabel(formLabels.provider)}</a>
 
                     </nav>
                     {screenSize !== 'narrowScreen' && currentRegion ?
@@ -242,7 +247,7 @@ function turnSelectionsObjectToQueryString(storeUserSelections) {
                             tvMovieToggle={tvMovieToggle}
                             currentLanguage={currentLanguage}
                             currentTranslation={currentTranslation}
-                            sectionLabel={capFirstChar(formLabels.decade)}
+                            sectionLabel={capFirstChar(formLabels.genre)}
                             screenSize={screenSize}
                         />
                     </Suspense>
