@@ -14,7 +14,8 @@ function App() {
     const [tvMovieToggle, setTvMovieToggle] = useState('movie');
     const [searchState, setSearchState] = useState('trending');
     // [region-code, native-name]
-    const [currentRegion, setCurrentRegion] = useState(null);
+    const storedRegion = [localStorage.getItem('stored-country-code'), localStorage.getItem('stored-country-name')];
+    const [currentRegion, setCurrentRegion] = useState(storedRegion);
     // default language from navigator
     const defaultLanguage = LanguagesObj.langList.some(item => 
         item.iso_639_1 === navigator.language.substring(0,2)) 

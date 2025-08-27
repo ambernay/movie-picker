@@ -17,12 +17,20 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion,
     }, [currentLanguage, setRegionList]);
    
     const getDefaultRegion = async (regionList) => {
-        if (currentRegion === null) {
-            // gets user region from netlify functions
-            const geodata = await GeoLocation();
-            
-            if (regionList?.some(item => item.iso_3166_1 === geodata.countryCode)){   
-                setCurrentRegion([geodata.countryCode, geodata.countryName]);
+        // gets user region from netlify functions
+        const geodata = await GeoLocation();
+        const geoDataArray = [geodata.countryCode, geodata.countryName];
+        // using local storage prevents needless rerender
+        const storedRegion = [localStorage.getItem('stored-country-code'), localStorage.getItem('stored-country-name')];
+        
+        if (currentRegion[0] === null || geoDataArray[0] !== storedRegion[0]) {
+        
+            if (regionList?.some(item => item.iso_3166_1 === geodata.countryCode)){
+               
+                localStorage.setItem('stored-country-code', geodata.countryCode);
+                localStorage.setItem('stored-country-name', geodata.countryName);
+  
+                setCurrentRegion(geoDataArray);
             }
             else {
                 setCurrentRegion(['—', '—————']);
