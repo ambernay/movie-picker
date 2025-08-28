@@ -26,10 +26,9 @@ function Form({ setUserSelections, setIsFormVisible,
     const formLabelTranslation = currentTranslation['section_labels'];
     const mediaType = tvMovieToggle === 'movie' ? currentTranslation.movies : currentTranslation.tv_series;
     const truncatedLabel = (label) => {
-        if (label.length > 10) {return (label.slice(0, 10) + "...")} 
+        if (label.length > 8 && screenSize === 'narrowScreen') {return (label.slice(0, 7) + "...")} 
         else {return label;}
     }
-// console.log((formLabels.provider.length > 10) ? (formLabels.provider.slice(0, 10) + "...") : formLabels.provider);
     
     // reset userSelections on dependencies on formSearch state
     useEffect(() => {
