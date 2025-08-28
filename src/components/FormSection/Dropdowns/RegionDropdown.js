@@ -7,7 +7,7 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion,
 
     const [regionList, setRegionList] = useState([]);
     const [countryCode, nativeName] = currentRegion || ['',''];
-    const failedMessage = `${currentTranslation.status_messages.failed_to_load} ${currentTranslation.section_labels.regions}`
+    const failedMessage = `${currentTranslation.status_messages.failed_to_load} ${currentTranslation.section_labels.regions}`;
     
     useEffect(() => {
         RegionApiCall(currentLanguage).then(result => {
@@ -17,13 +17,11 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion,
     }, [currentLanguage, setRegionList]);
    
     const getDefaultRegion = async (regionList) => {
-        // gets user region from netlify functions
-        const geodata = await GeoLocation();
-        const geoDataArray = [geodata.countryCode, geodata.countryName];
-        // using local storage prevents needless rerender
-        const storedRegion = [localStorage.getItem('stored-country-code'), localStorage.getItem('stored-country-name')];
         
-        if (currentRegion[0] === null || geoDataArray[0] !== storedRegion[0]) {
+        if (currentRegion[0] === null) {
+             // gets user region from netlify functions
+            const geodata = await GeoLocation();
+            const geoDataArray = [geodata.countryCode, geodata.countryName];
         
             if (regionList?.some(item => item.iso_3166_1 === geodata.countryCode)){
                
@@ -46,6 +44,8 @@ function RegionDropdown({ positionClass, currentRegion, setCurrentRegion,
     },[regionList, setCurrentRegion]);
 
     const handleChange = (e) => {
+        localStorage.setItem('stored-country-code', e.target.getAttribute('id'));
+        localStorage.setItem('stored-country-name', e.target.getAttribute('value'));
         setCurrentRegion([e.target.getAttribute('id'), e.target.getAttribute('value')]);
     }
     const chooseSelectedLabel = () => {
