@@ -2,7 +2,7 @@ import { memo, use, Suspense } from 'react';
 import { ViewingOptionsApiCall, ProviderLinkInfoCall } from '../../MovieApiCache.js';
 
 function ViewingOptions({ movieID, currentRegion, galleryPropsObj, 
-    capFirstChar, LoadingStatusMessage  }) {
+    capFirstChar, LoadingStatusMessage }) {
 
     const { currentTranslation, tvMovieToggle } = galleryPropsObj;
     
@@ -73,24 +73,7 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
 
     let viewingOptions = filteredViewingOptions(viewingOptionsResults);
 
-    const linkToProvider = (key) => {
-        const providerName = key.provider_name;
-        const logoPath = key.logo_path;
-        const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
-        const baseURL = 'https://media.themoviedb.org/t/p/original';
-        const providerURL = `${baseURL}${logoId}`;
-        
-        if (TMDBMovieLink) {
-            const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
-
-            // converting data to iterable html
-            const parseJustWatchPage = new DOMParser().parseFromString(justWatchPage, "text/html");
-            // HTMLCollection of elements matching clicked element
-            const providerIcons = parseJustWatchPage.querySelectorAll(`[src="${providerURL}"]`);
-            // Convert HTMLCollection to an array for easier manipulation
-            const elementsArray = Array.from(providerIcons);
-            // find first element in array that has an href
-            const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
+    function getProviderLink(providerName, selectedIcon) {
             const redirectLink = selectedIcon.parentElement.href;
             // select only necessary portion of link
             const defaultURL = redirectLink.substring(redirectLink.lastIndexOf('https'), redirectLink.lastIndexOf('&uct'));
@@ -103,6 +86,31 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
                 : defaultURL
 
             return decodeURIComponent(finalURL);
+    }
+
+    const linkToProvider = (key) => {
+        const providerName = key.provider_name;
+        const logoPath = key.logo_path;
+        const logoId = logoPath.substring(logoPath.lastIndexOf('/'), logoPath.length);
+        const baseURL = 'https://media.themoviedb.org/t/p/original';
+        const providerURL = `${baseURL}${logoId}`;
+        
+        if (TMDBMovieLink) {
+            const justWatchPage = use(ProviderLinkInfoCall(movieID, TMDBMovieLink));
+            
+            // converting data to iterable html
+            const parseJustWatchPage = new DOMParser().parseFromString(justWatchPage, "text/html");
+            // HTMLCollection of elements matching clicked element
+            const providerIcons = parseJustWatchPage.querySelectorAll(`[src="${providerURL}"]`);
+            // Convert HTMLCollection to an array for easier manipulation
+            const elementsArray = Array.from(providerIcons);
+            // find first element in array that has an href
+            const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
+            
+            // error handling for when icons are missing from Justwatch page
+            const errorHandledIconLink = selectedIcon ? getProviderLink(providerName, selectedIcon)
+            : TMDBMovieLink;
+            return errorHandledIconLink; 
         }
         else {
             const deadLink = 'justWatchPage.com';
@@ -136,7 +144,6 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
                                 {/* create icons */}
                                 {viewingOptions[key]?.map((key, i) => {
                                     const iconKey = i + '/' + movieID + '/' + key.provider_id + key.logo_path;
-
                                     return (
                                         <li key={iconKey} title={key.provider_name} 
                                             className={key.logo_path !== 'N/A' ? 'provider-icon-list' : null}
