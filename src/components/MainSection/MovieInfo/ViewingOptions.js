@@ -106,7 +106,6 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
             const elementsArray = Array.from(providerIcons);
             // find first element in array that has an href
             const selectedIcon = elementsArray.find(element => element.parentElement.tagName === 'A');
-            
             // error handling for when icons are missing from Justwatch page
             const errorHandledIconLink = selectedIcon ? getProviderLink(providerName, selectedIcon)
             : TMDBMovieLink;
@@ -118,7 +117,7 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
         }
     }
 
-    const FailedFetchsMessage = () => {
+    const FailedFetchMessage = () => {
         return(
             <div className='icon-message-container'>
                 <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
@@ -131,7 +130,7 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
         <Suspense fallback={<LoadingStatusMessage />}>
         <ul className='movie-info-list-container movie-info-middle'>
             {Object.keys(viewingOptions).length < 1 ? 
-                <FailedFetchsMessage />
+                <FailedFetchMessage />
             :Object.keys(viewingOptions).sort().map((key) => {
                 const imageURL = 'https://image.tmdb.org/t/p/w500';
                 // create lists
