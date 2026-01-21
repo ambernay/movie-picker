@@ -36,10 +36,19 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
         )
     }
 
-    const FailedFetchMessage = () => {
+    const FailedLoadMessage = () => {
+        let infoType = infoState === 'provider-info' ?
+            currentTranslation["sr-only"].viewing_options
+            : infoState === 'more-info' ?
+            currentTranslation["sr-only"].more_info
+            : null;
+
         return(
             <div className='icon-message-container'>
-                <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
+                <h4>{`
+                    ${capFirstChar(currentTranslation.status_messages.failed_to_load)} 
+                    ${capFirstChar(infoType)}
+                `}</h4>
             </div>
         )
     }
@@ -61,13 +70,12 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
     }
     
     const InfoComponent = () => {
-        console.log(infoState);
         if (infoState === 'overview') { return <p className='movie-info-middle'>{overview || noResults}</p>}
         else if (infoState === 'provider-info') {
             return (
                 /* only renders and fetches icons onclick */
                 <Suspense fallback={<LoadingStatusMessage />}>
-                    <ErrorBoundary fallback={<FailedFetchMessage/>}>
+                    <ErrorBoundary fallback={<FailedLoadMessage/>}>
                         <ProviderIconsList
                             movieID={movieID}
                             currentRegion={currentRegion}
@@ -82,10 +90,10 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
         else if (infoState === 'more-info') {
             return (
                 <Suspense fallback={<LoadingStatusMessage />}>
-                    <ErrorBoundary fallback={<FailedFetchMessage/>}>
+                    <ErrorBoundary fallback={<FailedLoadMessage/>}>
                         <MoreInfo
                             galleryPropsObj={galleryPropsObj}
-                            // movieInfoObj={movieInfoObj}
+                            movieInfoObj={movieInfoObj}
                             capFirstChar={capFirstChar}
                         />
                     </ErrorBoundary>
