@@ -3,7 +3,7 @@ import FindMovieButton from './FindMovieButton';
 import LanguageDropdown from '../FormSection/Dropdowns/LanguageDropdown';
 import RegionDropdown from '../FormSection/Dropdowns/RegionDropdown.js';
 import SearchBar from './SearchBar';
-import { LeftArrowIcon } from '../Icons';
+import { LeftArrowIcon, FilmCameraIcon } from '../Icons';
 import { TransObj } from '../TranslationObjects.js';
 
 function Header({ handleDropdown, isFormVisible, setIsFormVisible, 
@@ -52,7 +52,11 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                         <div className='main-title-container'>
                             <button type='button' className="main-title"
                                 onClick={(e) => { handleDropdown(); e.stopPropagation(); }}>
-                                    Movie Picker
+                                    <figure className="title-icon">
+                                        <FilmCameraIcon/>
+                                        <figcaption className="sr-only">{iconDescription.film_icon}</figcaption>
+                                    </figure>
+                                    <h1>Picker</h1>
                             </button>
                                 <FindMovieButton
                                     handleDropdown={handleDropdown}

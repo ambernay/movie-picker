@@ -407,11 +407,27 @@ img {
 }
 
 .main-title {
+    align-items: center;
+}
+
+.main-title h1{
     font-size: var(--mainHeaderFontSize);
     text-align: start;
     white-space: nowrap;
     color: var(--darkNeutral);
     padding: 0;
+}
+.title-icon {
+    width: calc(var(--mainHeaderFontSize) - 0.2rem);
+    height: alc(var(--mainHeaderFontSize) - 0.2rem);
+}
+
+.title-icon svg{
+    width: inherit;
+    height: inherit;
+    fill: var(--darkNeutral);
+    stroke: var(--darkNeutral);
+    z-index: 1;
 }
 
 h1,
