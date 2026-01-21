@@ -1,4 +1,5 @@
 import { memo, Suspense } from 'react';
+import { ErrorBoundary } from "react-error-boundary";
 import ProviderIconsList from './ViewingOptions.js';
 import MoreInfo from './MoreInfo.js';
 
@@ -35,6 +36,14 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
         )
     }
 
+    const FailedFetchMessage = () => {
+        return(
+            <div className='icon-message-container'>
+                <h4>{`${capFirstChar(currentTranslation.status_messages.failed_to_load)}`}</h4>
+            </div>
+        )
+    }
+
     const IconComponent = ({ mediaType }) => {
         const IconName = mediaType === 'movie' ? FilmIcon : TvIcon;
         const tooltip = mediaType === 'movie' ? currentTranslation.movie 
@@ -52,33 +61,39 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
     }
     
     const InfoComponent = () => {
+        console.log(infoState);
         if (infoState === 'overview') { return <p className='movie-info-middle'>{overview || noResults}</p>}
         else if (infoState === 'provider-info') {
             return (
                 /* only renders and fetches icons onclick */
                 <Suspense fallback={<LoadingStatusMessage />}>
-                    <ProviderIconsList
-                        movieID={movieID}
-                        currentRegion={currentRegion}
-                        galleryPropsObj={galleryPropsObj}
-                        capFirstChar={capFirstChar}
-                        LoadingStatusMessage={LoadingStatusMessage}
-                    />
+                    <ErrorBoundary fallback={<FailedFetchMessage/>}>
+                        <ProviderIconsList
+                            movieID={movieID}
+                            currentRegion={currentRegion}
+                            galleryPropsObj={galleryPropsObj}
+                            capFirstChar={capFirstChar}
+                            LoadingStatusMessage={LoadingStatusMessage}
+                        />
+                    </ErrorBoundary>
                 </Suspense>
             )
         }
         else if (infoState === 'more-info') {
             return (
                 <Suspense fallback={<LoadingStatusMessage />}>
-                    <MoreInfo
-                        galleryPropsObj={galleryPropsObj}
-                        movieInfoObj={movieInfoObj}
-                        capFirstChar={capFirstChar}
-                    />
+                    <ErrorBoundary fallback={<FailedFetchMessage/>}>
+                        <MoreInfo
+                            galleryPropsObj={galleryPropsObj}
+                            // movieInfoObj={movieInfoObj}
+                            capFirstChar={capFirstChar}
+                        />
+                    </ErrorBoundary>
                 </Suspense>
             )
         }
     }
+
 
     return (
         <>
@@ -91,7 +106,9 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
                             <IconComponent mediaType={mediaType || tvMovieToggle}/>
                         </div>
                     </section>
-                    <InfoComponent/>
+                    
+                    <InfoComponent />
+                    
                     <section className='info-icon-container'>
                         <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}>
                             <figure title={iconDescription.more_info} className="info-icon"
@@ -108,6 +125,7 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
                             </figure>
                         </button>
                     </section>
+                 
                 </div>
             </div>
         </>
