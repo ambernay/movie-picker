@@ -407,7 +407,8 @@ img {
 }
 
 .main-title {
-    align-items: center;
+    align-items: start;
+    padding: 0;
 }
 
 .main-title h1{
@@ -418,13 +419,13 @@ img {
     padding: 0;
 }
 .title-icon {
+    height: calc(var(--mainHeaderFontSize) - 0.2rem);
     width: calc(var(--mainHeaderFontSize) - 0.2rem);
-    height: alc(var(--mainHeaderFontSize) - 0.2rem);
 }
 
 .title-icon svg{
-    width: inherit;
     height: inherit;
+    width: inherit;
     fill: var(--darkNeutral);
     stroke: var(--darkNeutral);
     z-index: 1;
