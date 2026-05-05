@@ -36,11 +36,14 @@ function GalleryItems({  itemRef, tabIndex, currentRegion, galleryPropsObj, movi
             )
         }
     },[])
-   
+    const handleTabFocus = () => {
+        if (infoState === 'hidden') {setInfoState('overview');}
+    }
+
     return (
         // tab index default 0 and -1 when dropdown menu is open
         <li key={movieID} ref={itemRef} id={movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
-        onClick={(e) => { e.stopPropagation(); }} onFocus={() => setInfoState('overview')} onMouseEnter={() => setInfoState('overview')} 
+        onClick={(e) => { e.stopPropagation(); }} onFocus={handleTabFocus} onMouseEnter={() => setInfoState('overview')} 
         onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave} >
             <ImageComponent />
             <div className="info-container">

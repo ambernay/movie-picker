@@ -6,7 +6,7 @@ import Gallery from './components/MainSection/Gallery.js';
 import Form from './components/FormSection/Form.js';
 
 function App() {
-
+    
     const [userSelections, setUserSelections] = useState('');
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);

@@ -150,7 +150,7 @@ function ViewingOptions({ movieID, currentRegion, galleryPropsObj,
                                             {(key.logo_path === 'N/A') ?
                                                 <h4>{key.logo_path}</h4>
                                                 :
-                                                <a href={`${linkToProvider(key)}`} target="_blank">
+                                                <a href={`${linkToProvider(key)}`} target="_blank" tabIndex={0}>
                                                     <img className='provider-icons' 
                                                         src={imageURL + key.logo_path}
                                                         alt={key.provider_name}   
