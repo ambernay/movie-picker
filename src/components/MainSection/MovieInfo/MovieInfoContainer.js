@@ -101,8 +101,7 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
             )
         }
     }
-
-
+ 
     return (
         <>
             <div className='movie-info-container'>
