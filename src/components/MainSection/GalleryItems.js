@@ -3,7 +3,7 @@ import MovieInfoContainer from './MovieInfo/MovieInfoContainer.js';
 import { TvOutlineIcon } from '../Icons.js';
 
 function GalleryItems({  itemRef, tabIndex, currentRegion, galleryPropsObj, movieInfoObj}) {
-        
+    
     const [infoState, setInfoState] = useState('hidden');
 
     const { id: movieID, title: movieTitle, name: movieName,
@@ -40,7 +40,7 @@ function GalleryItems({  itemRef, tabIndex, currentRegion, galleryPropsObj, movi
     return (
         // tab index default 0 and -1 when dropdown menu is open
         <li key={movieID} ref={itemRef} id={movieID} className="gallery-items safari-only" tabIndex={tabIndex} 
-        onClick={(e) => { e.stopPropagation(); }} onMouseEnter={() => setInfoState('overview')} 
+        onClick={(e) => { e.stopPropagation(); }} onFocus={() => setInfoState('overview')} onMouseEnter={() => setInfoState('overview')} 
         onMouseLeave={handleMouseLeave} onBlur={handleMouseLeave} >
             <ImageComponent />
             <div className="info-container">

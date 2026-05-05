@@ -79,7 +79,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                 </div>{/* wrapper */}
             </section>
             <section className="sub-heading">
-                <div className="result-container">
+               
                     <div className="wrapper">
                         <div className="result-heading-container">
                             <button className="trending-button"
@@ -119,7 +119,7 @@ function Header({ handleDropdown, isFormVisible, setIsFormVisible,
                             />
                         </div>
                     </div>{/* wrapper */}
-                </div>
+                
             </section>
         </header>
     )

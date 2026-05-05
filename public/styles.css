@@ -396,6 +396,12 @@ img {
 
 /* #endregion - variables */
 
+/* #region - focus styles for tabbing */
+button:focus-visible {
+    outline: 1px solid var(--midAccent);
+}
+/* #endregion - focus styles for tabbing */
+
 /* #region - fonts and sizes */
 .main-title-container {
     display: flex;
@@ -516,7 +522,8 @@ header {
     transition: transform 0.25s ease-out;
 }
 
-.hover-animation:hover::after {
+.hover-animation:hover::after,
+.hover-animation:focus-visible::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
@@ -549,12 +556,14 @@ header {
 .hover-animation:hover,
 .hover-animation:active,
 .hover-animation:focus,
+.hover-animation:focus-visible,
 .hover-animation:focus-within,
 .heading-container:focus-within .hover-animation {
     background-position: 0 100%;
 }
 
-.main-title:hover {
+.main-title:hover,
+.main-title:focus-visible {
     color: var(--darkAccent);
     cursor: pointer;
 }
@@ -575,19 +584,21 @@ header {
 /* x button */
 .form-nav .x-button:hover .lines,
 .form-nav .x-button:active .lines,
-.form-nav .x-button:focus .lines {
+.form-nav .x-button:focus .lines
+.form-nav .x-button:focus-visible .lines {
     background: var(--lightAccent);
 }
 
 .form-bottom button:hover,
 .form-bottom button:active,
-.form-bottom button:focus {
+.form-bottom button:focus,
+.form-bottom button:focus-visible {
     background: var(--lightAccent);
     cursor: pointer;
 }
 
-.radio-button-container:hover, .radio-button-container:active, .radio-button-container:focus-within,
-.info-list-links:hover, .info-list-links:active, .info-list-links:focus {
+.radio-button-container:hover, .radio-button-container:active, .radio-button-container:focus-within, .radio-button-container:focus-visible,
+.info-list-links:hover, .info-list-links:active, .info-list-links:focus, .info-list-links:focus-visible {
     color: var(--midAccent);
     cursor: pointer;
 }
@@ -623,7 +634,7 @@ li:focus {
     transform: rotate(180deg);
 }
 
-.result-container {
+.sub-heading {
     display: flex;
     height: var(--subHeaderHeight);
     align-items: center;
@@ -648,7 +659,8 @@ li:focus {
     margin-left: -8px;
 }
 
-.trending-button:hover figure svg {
+.trending-button:hover figure svg
+.trending-button:focus-visible figure svg {
     fill: var(--backgroundColor);
 }
 
@@ -728,15 +740,16 @@ li:focus {
 
 /* #region - search bar */
 
-.search-container {
-    display: flex;
+.search-button-form {
+    position: absolute;
+    right: calc(((100% - var(--wrapperWidth)) / 2));
     width: var(--searchIconWidth);
-    justify-content: flex-end;
 }
 
 .search-container:hover .search-icon-container,
 .search-container:active .search-icon-container,
-.search-container:focus .search-icon-container {
+.search-container:focus .search-icon-container,
+.search-container:focus-visible .search-icon-container {
     background-color: var(--backgroundColor);
     border-radius: 4px;
     padding: 1px;
@@ -829,16 +842,19 @@ li:focus {
 
 /* hover */
 .find-movie-button:hover h2,
-.find-movie-button:active h2 {
+.find-movie-button:active h2,
+.find-movie-button:focus-visible h2 {
     color: var(--darkAccent);
 }
 
 .find-movie-button:hover svg,
-.find-movie-button:active svg {
+.find-movie-button:active svg,
+.find-movie-button:focus-visible svg {
     fill: var(--backgroundColor);
 }
 
-.load-button-container button:hover svg {
+.load-button-container button:hover svg,
+.load-button-container button:focus-visible svg {
     fill: var(--darkAccent);
 }
 
@@ -968,12 +984,14 @@ li:focus {
     stroke: var(--backgroundColorDesat);
 }
 
-#movie-option.toggle-button-container:hover .slider {
+#movie-option.toggle-button-container:hover .slider,
+#movie-option.toggle-button-container:focus-visible .slider {
     /* +7 from starting position */
     left: 8%;
 }
 
-#tv-option.toggle-button-container:hover .slider {
+#tv-option.toggle-button-container:hover .slider,
+#tv-option.toggle-button-container:focus-visible .slider {
     /* -7 from starting position */
     left: 48%;
 }
@@ -1194,13 +1212,18 @@ ul li .info-container {
 }
 
 .movie-info-container .info-icon-container > *:hover,
-.movie-info-container .info-icon-container > *:active {
+.movie-info-container .info-icon-container > *:active,
+.movie-info-container .info-icon-container > *:focus-visible {
     --movieInfoIconColor: var(--lightAccent);
     cursor: pointer;
 }
 
 .gallery-items:hover .movie-info-container,
-.gallery-items:active .movie-info-container {
+.gallery-items:active .movie-info-container,
+.gallery-items:focus-visible .movie-info-container,
+/* maintain overview hover while tabbing through other info elements */
+.gallery-items:has(.button-up:focus-visible) .movie-info-container,
+.gallery-items:has(.button-down:focus-visible) .movie-info-container {
     display: block;
     visibility: visible;
     max-height: calc(100% - var(--galleryItemPadding));
@@ -1254,7 +1277,9 @@ ul li .info-container {
 
 .movie-info-container .movie-info-list .provider-icon-list:hover,
 .movie-info-container .movie-info-list .provider-icon-list:active,
-.movie-info-container .movie-info-list .provider-icon-list:focus{
+.movie-info-container .movie-info-list .provider-icon-list:focus,
+.movie-info-container .movie-info-list .provider-icon-list:focus-visible {
+    
     box-shadow: inset 0 0 15px var(--lightAccent);
     -webkit-box-shadow: inset 0 0 15px var(--lightAccent);
 }
@@ -1300,7 +1325,8 @@ ul li .info-container {
 }
 
 .more-providers-button:not(.disabled):hover,
-.more-providers-button:not(.disabled):active {
+.more-providers-button:not(.disabled):active,
+.more-providers-button:not(.disabled):focus-visible {
     opacity: 1;
     cursor: pointer;
 }
@@ -1402,7 +1428,8 @@ fieldset .error-message-container {
 
 .form-nav a:hover,
 a:active,
-a:focus {
+a:focus,
+a:focus-visible {
     color: var(--lightAccent);
 }
 
@@ -1510,7 +1537,8 @@ fieldset {
  
 .decade-slider-container:hover .decade-slider,
 .decade-slider-container:active .decade-slider,
-.decade-slider-container:focus .decade-slider {
+.decade-slider-container:focus .decade-slider,
+.decade-slider-container:focus-visible .decade-slider {
     opacity: 1;
   }
 
@@ -1592,7 +1620,8 @@ fieldset {
 
 .provider-buttons:hover,
 .provider-buttons:active,
-.provider-buttons:focus {
+.provider-buttons:focus,
+.provider-buttons:focus-visible {
     border: solid 1px var(--lightAccent);
 }
 
@@ -1698,7 +1727,7 @@ input[type="checkbox"] {
     margin: 0 auto;
 }
 
-.region-list.header-region .label-container {
+.dropdown-menu.region-list.header-region {
     position: absolute;
     right: calc(((100% - var(--wrapperWidth)) / 2) + var(--searchIconWidth));
     margin: 4px;
@@ -1706,7 +1735,8 @@ input[type="checkbox"] {
 
 .dropdown-menu:hover .label-container,
 .dropdown-menu:active .label-container,
-.dropdown-menu:focus .label-container {
+.dropdown-menu:focus .label-container,
+.dropdown-menu:focus-visible .label-container {
     border: 1px solid var(--midAccent);
 }
 
@@ -1810,7 +1840,8 @@ input[type="checkbox"] {
     border-top: 2px solid var(--lightAccent);
 }
 
-.region-list.header-region .select-container li:hover {
+.region-list.header-region .select-container li:hover,
+.region-list.header-region .select-container li:focus-visible {
     color: var(--darkNeutral);
 }
 
@@ -1852,7 +1883,8 @@ input[type="checkbox"] {
     height: 1px;
 }
 
-.dropdown-menu .select li:hover {
+.dropdown-menu .select li:hover,
+.dropdown-menu .select li:focus-visible {
     background-color: var(--dropdownHoverColor);
 }
 
@@ -1931,7 +1963,8 @@ input[type="checkbox"] {
 
     .find-movie-button, 
     .find-movie-button:hover, 
-    .find-movie-button:active {
+    .find-movie-button:active,
+    .find-movie-button:focus-visible {
         justify-content: flex-start;
         padding: 8px;
     }
@@ -2001,7 +2034,8 @@ input[type="checkbox"] {
 
     .find-movie-button, 
     .find-movie-button:hover, 
-    .find-movie-button:active {
+    .find-movie-button:active,
+    .find-movie-button:focus-visible {
         width: calc(var(--mainHeaderFontSize) / 1.2);
         justify-content: flex-start;
         padding: 8px;
