@@ -44,6 +44,7 @@ function SearchBar({ handleTvMovieToggle, searchState, setSearchState,
         setNewValue(e.target.value);
     }
     const handleIconClick = (e) => {
+        e.preventDefault();
         setIsSearchbarOpen(!isSearchbarOpen);
         if (isFormVisible) {setIsFormVisible(false)};
         searchInput.current.focus();
@@ -60,46 +61,50 @@ function SearchBar({ handleTvMovieToggle, searchState, setSearchState,
     }
    
     return (
-        <div className='search-container' >
-            <div className='wrapper'>
-                <figure className={'search-icon-container'} onClick={handleIconClick}>
-                    <MagnifyerIcon />
-                    <figcaption className='sr-only'>{iconDescription.search_bar}</figcaption>
+        <>
+        <form className={'search-button-form'} onSubmit={handleIconClick}>
+            <button className='search-container'>
+                <figure className={'search-icon-container'}>
+                        <MagnifyerIcon />
+                        <figcaption className='sr-only'>{iconDescription.search_bar}</figcaption>
                 </figure>
-                <form className={inputClass} onSubmit={handleSubmit}>
-                    <section className='searchbar-input-container'>
-                        <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
-                        <input
-                            placeholder={`${placeholder}...`}
-                            name={'movie search'}
-                            value={newValue}
-                            onChange={handleInput}
-                            onFocus={(e) => e.target.select()}
-                            // onSelect={e => setEmptyModalClass('empty-modal')}
-                            ref={searchInput}>
-                        </input>
-                        <button className='search-button'>
-                            <figure className={'search-icon-container'}>
-                                <MagnifyerIcon />
-                                <figcaption className='sr-only'>{currentTranslation.search}</figcaption>
-                            </figure>
-                        </button>
-                        
-                    </section>
-                    <section className='searchbar-selections-container'>
-                        <ToggleButton
-                            handleTvMovieToggle={handleTvMovieToggle}
-                            tvMovieToggle={tvMovieToggle}
-                            currentTranslation={currentTranslation}
-                        />
-                    </section> 
-                </form>
-                
-                <div className={emptyModalClass}
-                    onClick={() => {setIsSearchbarOpen(false)}}>
-                </div>
+            </button>
+        </form>      
+        <div className='wrapper'>
+            <form className={inputClass} onSubmit={handleSubmit}>
+                <section className='searchbar-input-container'>
+                    <label name={'movie search'} className={'sr-only'}>Search movies by keyword</label>
+                    <input
+                        placeholder={`${placeholder}...`}
+                        name={'movie search'}
+                        value={newValue}
+                        onChange={handleInput}
+                        onFocus={(e) => e.target.select()}
+                        // onSelect={e => setEmptyModalClass('empty-modal')}
+                        ref={searchInput}>
+                    </input>
+                    <button className='search-button'>
+                        <figure className={'search-icon-container'}>
+                            <MagnifyerIcon />
+                            <figcaption className='sr-only'>{currentTranslation.search}</figcaption>
+                        </figure>
+                    </button>
+                    
+                </section>
+                <section className='searchbar-selections-container'>
+                    <ToggleButton
+                        handleTvMovieToggle={handleTvMovieToggle}
+                        tvMovieToggle={tvMovieToggle}
+                        currentTranslation={currentTranslation}
+                    />
+                </section> 
+            </form>
+            
+            <div className={emptyModalClass}
+                onClick={() => {setIsSearchbarOpen(false)}}>
             </div>
         </div>
+            </>
     )
 }
 

@@ -26,7 +26,7 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
         }else {
             setInfoState('overview');
         }
-    }
+    }           
 
     const LoadingStatusMessage = () => {
         return(
@@ -118,14 +118,16 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
                     <InfoComponent />
                     
                     <section className='info-icon-container'>
-                        <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}>
+                        <button className= {`${infoState === 'more-info' ? 'button-down' : 'button-up'}`}
+                            onKeyDown={(e) => {if (e.key==='Enter') {handleInfoState('more-info')}}}>
                             <figure title={iconDescription.more_info} className="info-icon"
                             onClick={() => handleInfoState('more-info')}>
                                 <InfoIcon />
                                 <figcaption className="sr-only">{iconDescription.info_icon}</figcaption>
                             </figure>
                         </button>
-                        <button className={`${infoState === 'provider-info' ? 'button-down' : 'button-up'}`}>
+                        <button className={`${infoState === 'provider-info' ? 'button-down' : 'button-up'}`}
+                        onKeyDown={(e) => {if (e.key==='Enter') {handleInfoState('provider-info')}}}>
                             <figure title={iconDescription.viewing_options} className= "info-icon"
                             onClick={() => handleInfoState('provider-info')}>
                                 <EyeIcon />
