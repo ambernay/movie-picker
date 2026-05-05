@@ -1833,7 +1833,7 @@ input[type="checkbox"] {
 }
 
 .region-list.header-region .select-container {
-    top: var(--headerMargin);
+    top: var(--subHeaderHeight);
     height: calc(100dvh - (var(--headerMargin) + var(--bottomNavHeight)));
     margin: 0;
     background-color: var(--darkNeutral);
