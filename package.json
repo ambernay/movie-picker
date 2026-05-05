@@ -20,6 +20,7 @@
     "netlify-cli": "^17.22.1"
   },
   "dependencies": {
+    "@react-aria/interactions": "^3.28.0",
     "axios": "^1.6.8",
     "react": "19.1.0",
     "react-device-detect": "^2.2.3",

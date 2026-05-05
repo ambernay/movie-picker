@@ -4,7 +4,7 @@ import { useState } from 'react';
 function CustomDropdown({ listClass, selectList, currentSelectedLabel, 
     itemID, itemValue, itemName, listHeading, handleChange, errorMessage }) {
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     const showOrHide = isOpen ? 'visible' : 'hidden';
 
