@@ -1220,10 +1220,12 @@ ul li .info-container {
 
 .gallery-items:hover .movie-info-container,
 .gallery-items:active .movie-info-container,
-.gallery-items:focus-visible .movie-info-container,
+.gallery-items:focus-visible .movie-info-container
 /* maintain overview hover while tabbing through other info elements */
-.gallery-items:has(.button-up:focus-visible) .movie-info-container,
-.gallery-items:has(.button-down:focus-visible) .movie-info-container {
+/* .gallery-items:has(.button-up:focus-visible) .movie-info-container,
+.gallery-items:has(.button-down:focus-visible) .movie-info-container, 
+.gallery-items:has(.movie-info-middle:focus-visible) .movie-info-container,
+.gallery-items:has(li a:focus-visible) .movie-info-container { */{
     display: block;
     visibility: visible;
     max-height: calc(100% - var(--galleryItemPadding));
