@@ -70,7 +70,7 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
     }
     
     const InfoComponent = () => {
-        if (infoState === 'overview') { return <p className='movie-info-middle'>{overview || noResults}</p>}
+        if (infoState === 'overview') { return <p className='movie-info-middle' >{overview || noResults}</p>}
         else if (infoState === 'provider-info') {
             return (
                 /* only renders and fetches icons onclick */
@@ -101,8 +101,7 @@ function MovieInfo({ galleryPropsObj, movieInfoObj, infoState,
             )
         }
     }
-
-
+ 
     return (
         <>
             <div className='movie-info-container'>
